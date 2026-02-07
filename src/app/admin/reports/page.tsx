@@ -28,7 +28,7 @@ export default async function AdminReportsPage() {
     .limit(200);
 
   const byType = new Map<string, Set<string>>();
-  (reports || []).forEach((r) => {
+  (reports || []).forEach((r: any) => {
     const set = byType.get(r.target_type) ?? new Set<string>();
     set.add(r.target_id);
     byType.set(r.target_type, set);
