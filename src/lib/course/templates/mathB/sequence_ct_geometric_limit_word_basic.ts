@@ -67,7 +67,7 @@ function buildBacksolveTemplate(c: LimitCase): QuestionTemplate {
   };
 }
 
-const SUM_CASES: LimitCase[] = [
+const SUM_CASES: Array<LimitCase & { a1: number }> = [
   {
     id: "seq_ct_geo_limit_1",
     title: "無限和 1",
