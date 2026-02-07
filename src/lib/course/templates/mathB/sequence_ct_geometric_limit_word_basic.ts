@@ -13,7 +13,7 @@ type LimitCase = {
   difficulty: 1 | 2 | 3;
 };
 
-function buildSumTemplate(c: LimitCase): QuestionTemplate {
+function buildSumTemplate(c: LimitCase & { a1: number }): QuestionTemplate {
   const sum = c.a1 / (1 - c.r);
   return {
     meta: {
