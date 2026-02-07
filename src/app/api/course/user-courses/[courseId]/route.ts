@@ -32,7 +32,7 @@ const UpdateSchema = z.object({
   isArchived: z.boolean().optional(),
 });
 
-export async function PUT(req: Request, { params }: { params: { courseId: string } }) {
+export async function PUT(req: Request) {
   const supabase = await supabaseServerAction();
   const { data: { user }, error } = await supabase.auth.getUser();
   if (error || !user) {
@@ -41,7 +41,7 @@ export async function PUT(req: Request, { params }: { params: { courseId: string
   const url = new URL(req.url);
   const pathParts = url.pathname.split("/").filter(Boolean);
   const lastSegment = pathParts[pathParts.length - 1] ?? "";
-  const courseId = String(lastSegment || params.courseId || "").trim();
+  const courseId = String(lastSegment || "").trim();
   const userId = String(user.id ?? "").trim();
   if (!userId || userId === "undefined" || userId === "null") {
     return NextResponse.json({ ok: false, error: "Invalid user" }, { status: 401 });
@@ -97,7 +97,7 @@ export async function PUT(req: Request, { params }: { params: { courseId: string
         details: upErr.details ?? null,
         hint: upErr.hint ?? null,
         payload: updatePayload,
-        params: { courseId, lastSegment, params: params.courseId ?? null },
+        params: { courseId, lastSegment },
       },
       { status: 500 }
     );
