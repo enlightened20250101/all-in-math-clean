@@ -9,7 +9,7 @@ export type SubQuestion = {
   id: string;
   label: string;
   answerKind: Exclude<AnswerKind, "multi">;
-  choices?: string[];
+  choices?: string[] | { id: string; label: string }[];
   placeholder?: string;
 };
 
@@ -19,7 +19,7 @@ export type QuestionGenerated = {
   statement: string; // Markdown + TeX
   answerKind: AnswerKind;
   params: QuestionParams;
-  choices?: string[];
+  choices?: string[] | { id: string; label: string }[];
   subQuestions?: SubQuestion[];
   signature?: string;
 };

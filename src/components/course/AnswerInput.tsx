@@ -11,7 +11,7 @@ type Props = {
   value: string;
   onChange: (value: string) => void;
   onErrorChange?: (error: string | null) => void;
-  choices?: string[] | null;
+  choices?: (string | { id: string; label: string })[] | null;
   placeholder?: string;
   className?: string;
 };
@@ -78,16 +78,18 @@ export default function AnswerInput({
     return (
       <div className="grid gap-2">
         {(choices ?? []).map((c) => {
-          const selected = value === c;
-          const display = getAnswerDisplay(c);
+          const valueKey = typeof c === "string" ? c : c.id;
+          const label = typeof c === "string" ? c : c.label;
+          const selected = value === valueKey;
+          const display = getAnswerDisplay(label);
           return (
             <button
-              key={c}
+              key={valueKey}
               type="button"
               className={`w-full rounded border px-3 py-2 text-left ${
                 selected ? "border-black bg-gray-50" : "bg-white"
               }`}
-              onClick={() => onChange(c)}
+              onClick={() => onChange(valueKey)}
               aria-pressed={selected}
             >
               {display.kind === "tex" ? (
