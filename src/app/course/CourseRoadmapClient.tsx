@@ -18,6 +18,12 @@ type CatalogTopic = {
   description: string;
 };
 
+type Topic = {
+  id: string;
+  title: string;
+  description: string;
+};
+
 type CatalogResponse = {
   ok: boolean;
   catalog: { courseId: string; title: string; topics: CatalogTopic[] };
