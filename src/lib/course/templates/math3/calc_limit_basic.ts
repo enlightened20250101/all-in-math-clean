@@ -232,10 +232,12 @@ $$
     },
     grade(params, userAnswer) {
       const { k } = params as DiffParams;
+      const numerator = texPoly2(1, -k, 0);
       return gradeNumeric(userAnswer, k);
     },
     explain(params) {
       const { k } = params as DiffParams;
+      const numerator = texPoly2(1, -k, 0);
       return `
 ### この問題の解説
 $$
@@ -383,6 +385,7 @@ $$
     },
     explain(params) {
       const { k } = params as DiffParams;
+      const numerator = texPoly2(1, -k, 0);
       return `
 ### この問題の解説
 $$
@@ -745,6 +748,7 @@ $$
     },
     explain(params) {
       const { k } = params as DiffParams;
+      const numerator = texPoly2(1, -k, 0);
       return `
 ### この問題の解説
 $$
