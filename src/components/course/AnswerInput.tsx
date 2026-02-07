@@ -11,7 +11,7 @@ type Props = {
   value: string;
   onChange: (value: string) => void;
   onErrorChange?: (error: string | null) => void;
-  choices?: (string | { id: string; label: string })[] | null;
+  choices?: ReadonlyArray<string | { id: string; label: string }> | null;
   placeholder?: string;
   className?: string;
 };
