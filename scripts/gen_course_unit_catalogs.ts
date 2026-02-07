@@ -82,7 +82,7 @@ function generateUnitCatalogs() {
     const base = readJson<Catalog>(basePath);
     const bySection = new Map<string, CatalogTopic[]>();
     for (const topic of base.topics) {
-      const info = topicInfo.get(topic.id);
+      const info = topicInfo.get(topic.id as TopicId);
       const section = info?.section ?? 'misc';
       const arr = bySection.get(section) ?? [];
       arr.push(topic);
