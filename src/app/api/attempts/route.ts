@@ -80,6 +80,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: false, error: parsed.error.flatten() }, { status: 400 });
   }
 
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!supabaseUrl || !supabaseKey) {
+    return NextResponse.json({ ok: false, error: "supabase_disabled" }, { status: 503 });
+  }
+
   const supabase = await await supabaseServerAction();
   const sbr = await await supabaseServerReadOnly();
   const {
