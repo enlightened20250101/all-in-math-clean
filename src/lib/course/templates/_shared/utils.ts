@@ -7,8 +7,10 @@ export function pick<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-export function gradeChoice<T>(arr: T[]): T {
-  return pick(arr);
+export function gradeChoice(userAnswer: string, correct: string) {
+  const normalized = userAnswer.trim();
+  const ok = normalized === correct;
+  return { isCorrect: ok, correctAnswer: correct };
 }
 
 export function gradeNumeric(userAnswer: string, correct: number) {
