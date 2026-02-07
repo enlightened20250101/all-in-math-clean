@@ -57,7 +57,7 @@ export default function MessagesPage() {
         .from("group_members")
         .select("group_id, user_id, profiles:profiles!group_members_user_id_fkey (display_name, avatar_url)")
         .in("group_id", dmGroupIds);
-      setMembers((mrows || []) as MemberRow[]);
+      setMembers(((mrows || []) as unknown) as MemberRow[]);
     } else {
       setMembers([]);
     }
