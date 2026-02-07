@@ -95,7 +95,7 @@ export default async function AdminReportsPage() {
             </tr>
           </thead>
           <tbody>
-            {(reports || []).map((r) => (
+            {(reports || []).map((r: any) => (
               <tr key={r.id} className="border-t">
                 <td className="px-3 py-2">{r.id}</td>
                 <td className="px-3 py-2">
