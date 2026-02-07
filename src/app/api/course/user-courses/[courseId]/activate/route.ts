@@ -4,8 +4,10 @@ import { supabaseServerAction } from "@/lib/supabaseServer";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-export async function POST(_: Request, { params }: { params: { courseId: string } }) {
-  const courseId = params.courseId;
+export async function POST(req: Request) {
+  const url = new URL(req.url);
+  const segments = url.pathname.split("/").filter(Boolean);
+  const courseId = segments[segments.length - 2];
   if (!courseId || courseId === "undefined") {
     return NextResponse.json({ ok: false, error: "courseId is missing" }, { status: 400 });
   }

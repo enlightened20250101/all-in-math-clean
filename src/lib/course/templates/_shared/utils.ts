@@ -7,6 +7,10 @@ export function pick<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
+export function gradeChoice<T>(arr: T[]): T {
+  return pick(arr);
+}
+
 export function gradeNumeric(userAnswer: string, correct: number) {
   const user = Number(userAnswer);
   const ok = !Number.isNaN(user) && user === correct;
