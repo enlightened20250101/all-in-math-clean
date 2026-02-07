@@ -3,9 +3,13 @@ import Stripe from 'stripe';
 import { cookies } from 'next/headers';
 import { createServerClient } from '@supabase/ssr';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2025-08-27.basil' });
 
 export async function POST(req: Request) {
+  const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+  if (!stripeSecretKey) {
+    return NextResponse.json({ error: "billing_disabled" }, { status: 503 });
+  }
+  const stripe = new Stripe(stripeSecretKey, { apiVersion: '2025-08-27.basil' });
   try {
     // --- Supabase: cookie ベースのSSRクライアント ---
     const cookieStore = await cookies();
