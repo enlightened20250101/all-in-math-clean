@@ -62,14 +62,14 @@ export default async function AdminReportsPage() {
   const articlesRes = articlesFetch.data;
   const threadsFromPostsRes = threadsFetch.data;
 
-  const postMap = new Map((postsRes.data || []).map((p: any) => [String(p.id), p]));
-  const commentMap = new Map((commentsRes.data || []).map((c: any) => [String(c.id), c]));
-  const threadMap = new Map((threadsRes.data || []).map((t: any) => [String(t.id), t]));
-  const threadPostMap = new Map((threadPostsRes.data || []).map((p: any) => [String(p.id), p]));
-  const threadFromPostMap = new Map((threadsFromPostsRes || []).map((t: any) => [String(t.id), t]));
-  const groupMessageMap = new Map((groupMessagesRes.data || []).map((m: any) => [String(m.id), m]));
-  const articleCommentMap = new Map((articleCommentsRes.data || []).map((c: any) => [String(c.id), c]));
-  const articleMap = new Map((articlesRes || []).map((a: any) => [String(a.id), a]));
+  const postMap: Map<string, any> = new Map((postsRes.data || []).map((p: any) => [String(p.id), p]));
+  const commentMap: Map<string, any> = new Map((commentsRes.data || []).map((c: any) => [String(c.id), c]));
+  const threadMap: Map<string, any> = new Map((threadsRes.data || []).map((t: any) => [String(t.id), t]));
+  const threadPostMap: Map<string, any> = new Map((threadPostsRes.data || []).map((p: any) => [String(p.id), p]));
+  const threadFromPostMap: Map<string, any> = new Map((threadsFromPostsRes || []).map((t: any) => [String(t.id), t]));
+  const groupMessageMap: Map<string, any> = new Map((groupMessagesRes.data || []).map((m: any) => [String(m.id), m]));
+  const articleCommentMap: Map<string, any> = new Map((articleCommentsRes.data || []).map((c: any) => [String(c.id), c]));
+  const articleMap: Map<string, any> = new Map((articlesRes || []).map((a: any) => [String(a.id), a]));
 
   return (
     <div className="max-w-5xl mx-auto px-3 sm:px-4 py-6 space-y-4">
