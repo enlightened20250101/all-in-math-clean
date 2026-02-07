@@ -1,0 +1,33 @@
+{
+  "courseId": "hs_ia_algebra",
+  "title": "高校数学IA：代数",
+  "topics": [
+    {
+      "id": "algebra_expand_basic",
+      "title": "数と式：展開（基本）",
+      "description": "分配法則・展開を、代入値で確認しながら身につける",
+      "viewCode": "centertest-algebra-expand-basic"
+    },
+    {
+      "id": "algebra_factor_basic",
+      "title": "数と式：因数分解（基本）",
+      "description": "因数分解をして、代入で確かめる",
+      "viewCode": "centertest-algebra-factor-basic"
+    },
+    {
+      "id": "algebra_linear_eq_basic",
+      "title": "数と式：一次方程式（基本）",
+      "description": "移項して解く一次方程式（整数解中心）",
+      "viewCode": "centertest-algebra-linear-eq-basic"
+    },
+    {
+      "id": "algebra_ineq_basic",
+      "title": "数と式：一次不等式（基本）",
+      "description": "一次不等式を解き、最小の整数解を答える",
+      "viewCode": "centertest-algebra-ineq-basic"
+    }
+  ],
+  "units": [
+    "math1"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "courseId": "hs_iib_identity_inequality",
+  "title": "高校数学IIB：恒等式・不等式",
+  "topics": [
+    {
+      "id": "identity_eval_basic",
+      "title": "恒等式の値（基本）",
+      "description": "恒等式に数値を代入して値を求める",
+      "viewCode": "topic-identity_eval_basic"
+    },
+    {
+      "id": "identity_coefficient_basic",
+      "title": "恒等式の係数（基本）",
+      "description": "恒等式の係数を比較して求める",
+      "viewCode": "topic-identity_coefficient_basic"
+    },
+    {
+      "id": "identity_coeff_quadratic_basic",
+      "title": "恒等式の係数比較（基本）",
+      "description": "積の係数から未知数を求める",
+      "viewCode": "topic-identity_coeff_quadratic_basic"
+    },
+    {
+      "id": "inequality_mean_basic",
+      "title": "相加相乗（基本）",
+      "description": "相加相乗平均で最小値を求める",
+      "viewCode": "topic-inequality_mean_basic"
+    },
+    {
+      "id": "inequality_sum_product_basic",
+      "title": "和と積（基本）",
+      "description": "和一定のとき積の最大を求める",
+      "viewCode": "topic-inequality_sum_product_basic"
+    },
+    {
+      "id": "inequality_amgm_basic",
+      "title": "相加相乗の差（基本）",
+      "description": "相加平均と相乗平均の差を求める",
+      "viewCode": "topic-inequality_amgm_basic"
+    }
+  ],
+  "units": [
+    "math2"
+  ]
+}

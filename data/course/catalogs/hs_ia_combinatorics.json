@@ -1,0 +1,27 @@
+{
+  "courseId": "hs_ia_combinatorics",
+  "title": "高校数学IA：場合の数",
+  "topics": [
+    {
+      "id": "combi_basic",
+      "title": "場合の数（基本）",
+      "description": "和の法則・積の法則・順列・組合せの入口",
+      "viewCode": "centertest-combi-basic"
+    },
+    {
+      "id": "combi_permutation_basic",
+      "title": "順列（基本）",
+      "description": "順列 ${}_nP_r$ を使って並べ方の数を求める",
+      "viewCode": "centertest-combi-permutation-basic"
+    },
+    {
+      "id": "combi_conditions_basic",
+      "title": "条件付きの数え上げ",
+      "description": "少なくとも・含まないなどの条件で数える",
+      "viewCode": "centertest-combi-conditions-basic"
+    }
+  ],
+  "units": [
+    "mathA"
+  ]
+}

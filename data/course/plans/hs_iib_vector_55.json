@@ -1,0 +1,27 @@
+{
+  "courseId": "hs_iib_vector",
+  "goal": 55,
+  "topicOrder": [
+    "vector_operations_basic",
+    "vector_inner_basic",
+    "vector_length_basic",
+    "vector_unit_basic",
+    "vector_parallel_basic",
+    "vector_component_basic",
+    "vector_line_point_basic",
+    "vector_orthogonal_condition_basic",
+    "vector_distance_plane_basic",
+    "vector_plane_normal_basic",
+    "vector_midpoint_basic",
+    "vector_inner_from_angle_basic",
+    "vector_section_basic",
+    "vector_space_basic",
+    "vector_distance_basic",
+    "vector_plane_basic",
+    "vector_orthogonality_basic",
+    "vector_angle_basic",
+    "vector_projection_basic",
+    "vector_line_basic",
+    "vector_area_basic"
+  ]
+}

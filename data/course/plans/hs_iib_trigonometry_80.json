@@ -1,0 +1,25 @@
+{
+  "courseId": "hs_iib_trigonometry",
+  "goal": 80,
+  "topicOrder": [
+    "trig_identities_basic",
+    "trig_identity_pythag_basic",
+    "trig_amplitude_basic",
+    "trig_phase_shift_basic",
+    "trig_vertical_shift_basic",
+    "trig_graph_range_basic",
+    "trig_graph_period_basic",
+    "trig_graph_midline_basic",
+    "trig_graph_max_basic",
+    "trig_graph_min_basic",
+    "trig_graph_intercept_basic",
+    "trig_equation_radian_basic",
+    "trig_identity_tan_basic",
+    "trig_identity_tan_relation_basic",
+    "trig_addition_basic",
+    "trig_double_angle_basic",
+    "trig_period_basic",
+    "trig_radian_basic",
+    "trig_equations_basic"
+  ]
+}

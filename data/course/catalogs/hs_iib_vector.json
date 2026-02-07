@@ -1,0 +1,141 @@
+{
+  "courseId": "hs_iib_vector",
+  "title": "高校数学IIB：ベクトル",
+  "topics": [
+    {
+      "id": "vector_operations_basic",
+      "title": "ベクトルの演算（基本）",
+      "description": "成分表示でのベクトル演算に慣れる",
+      "viewCode": "topic-vector_operations_basic"
+    },
+    {
+      "id": "vector_inner_basic",
+      "title": "内積（基本）",
+      "description": "内積の計算と直交条件を確認する",
+      "viewCode": "topic-vector_inner_basic"
+    },
+    {
+      "id": "vector_length_basic",
+      "title": "ベクトルの長さ（基本）",
+      "description": "成分表示のベクトルの長さ（長さの二乗）を求める",
+      "viewCode": "topic-vector_length_basic"
+    },
+    {
+      "id": "vector_unit_basic",
+      "title": "単位ベクトル（基本）",
+      "description": "ベクトルを長さで割って単位ベクトルにする",
+      "viewCode": "topic-vector_unit_basic"
+    },
+    {
+      "id": "vector_parallel_basic",
+      "title": "平行条件（基本）",
+      "description": "平行なベクトルの比例係数を求める",
+      "viewCode": "topic-vector_parallel_basic"
+    },
+    {
+      "id": "vector_component_basic",
+      "title": "成分（基本）",
+      "description": "ベクトルの成分を読み取る",
+      "viewCode": "topic-vector_component_basic"
+    },
+    {
+      "id": "vector_line_point_basic",
+      "title": "直線上の点（基本）",
+      "description": "パラメータから座標を求める",
+      "viewCode": "topic-vector_line_point_basic"
+    },
+    {
+      "id": "vector_orthogonal_condition_basic",
+      "title": "直交条件（基本）",
+      "description": "内積が0になる条件で未知数を求める",
+      "viewCode": "topic-vector_orthogonal_condition_basic"
+    },
+    {
+      "id": "vector_distance_plane_basic",
+      "title": "平面との距離（基本）",
+      "description": "点と平面の距離を求める",
+      "viewCode": "topic-vector_distance_plane_basic"
+    },
+    {
+      "id": "vector_plane_normal_basic",
+      "title": "法線ベクトル（基本）",
+      "description": "平面の法線ベクトルの成分を読む",
+      "viewCode": "topic-vector_plane_normal_basic"
+    },
+    {
+      "id": "vector_midpoint_basic",
+      "title": "中点（基本）",
+      "description": "2点の中点の座標を求める",
+      "viewCode": "topic-vector_midpoint_basic"
+    },
+    {
+      "id": "vector_inner_from_angle_basic",
+      "title": "内積と角（基本）",
+      "description": "大きさと角から内積を求める",
+      "viewCode": "topic-vector_inner_from_angle_basic"
+    },
+    {
+      "id": "vector_section_basic",
+      "title": "内分・外分（基本）",
+      "description": "線分の内分点・外分点の座標を求める",
+      "viewCode": "topic-vector_section_basic"
+    },
+    {
+      "id": "vector_space_basic",
+      "title": "空間ベクトル（基本）",
+      "description": "空間ベクトルの成分計算に慣れる",
+      "viewCode": "topic-vector_space_basic"
+    },
+    {
+      "id": "vector_distance_basic",
+      "title": "空間距離（基本）",
+      "description": "2点間の距離（距離の二乗）を求める",
+      "viewCode": "topic-vector_distance_basic"
+    },
+    {
+      "id": "vector_plane_basic",
+      "title": "平面の方程式（基本）",
+      "description": "法線ベクトルと通過点から平面方程式を作る",
+      "viewCode": "topic-vector_plane_basic"
+    },
+    {
+      "id": "vector_orthogonality_basic",
+      "title": "直交条件（基本）",
+      "description": "内積が0になる条件から未知数を求める",
+      "viewCode": "topic-vector_orthogonality_basic"
+    },
+    {
+      "id": "vector_angle_basic",
+      "title": "ベクトルのなす角（基本）",
+      "description": "内積から cosθ を求める",
+      "viewCode": "topic-vector_angle_basic"
+    },
+    {
+      "id": "vector_projection_basic",
+      "title": "射影（基本）",
+      "description": "射影の長さの二乗を求める",
+      "viewCode": "topic-vector_projection_basic"
+    },
+    {
+      "id": "vector_line_basic",
+      "title": "直線のパラメータ（基本）",
+      "description": "方向ベクトルを使って点を求める",
+      "viewCode": "topic-vector_line_basic"
+    },
+    {
+      "id": "vector_area_basic",
+      "title": "面積（基本）",
+      "description": "平行四辺形の面積を求める",
+      "viewCode": "topic-vector_area_basic"
+    },
+    {
+      "id": "vector_equation_basic",
+      "title": "ベクトル方程式（基本）",
+      "description": "ベクトル方程式から係数や座標を求める",
+      "viewCode": "topic-vector_equation_basic"
+    }
+  ],
+  "units": [
+    "mathB"
+  ]
+}

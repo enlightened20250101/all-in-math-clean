@@ -1,0 +1,111 @@
+{
+  "courseId": "hs_iib_calculus",
+  "title": "高校数学IIB：微積",
+  "topics": [
+    {
+      "id": "calc_derivative_basic",
+      "title": "微分の計算（基本）",
+      "description": "2次関数の導関数を用いた基本計算に取り組む",
+      "viewCode": "topic-calc_derivative_basic"
+    },
+    {
+      "id": "calc_derivative_linear_basic",
+      "title": "一次関数の微分（基本）",
+      "description": "一次関数の導関数を求める",
+      "viewCode": "topic-calc_derivative_linear_basic"
+    },
+    {
+      "id": "calc_integral_basic",
+      "title": "積分の計算（基本）",
+      "description": "1次関数の定積分を計算する基本問題に取り組む",
+      "viewCode": "topic-calc_integral_basic"
+    },
+    {
+      "id": "calc_tangent_slope_basic",
+      "title": "接線の傾き（基本）",
+      "description": "導関数を使って接線の傾きを求める",
+      "viewCode": "topic-calc_tangent_slope_basic"
+    },
+    {
+      "id": "calc_tangent_line_basic",
+      "title": "接線の式（基本）",
+      "description": "接線 $y=mx+k$ の切片を求める",
+      "viewCode": "topic-calc_tangent_line_basic"
+    },
+    {
+      "id": "calc_increasing_basic",
+      "title": "増減（基本）",
+      "description": "導関数の符号から増加・減少を判定する",
+      "viewCode": "topic-calc_increasing_basic"
+    },
+    {
+      "id": "calc_average_value_basic",
+      "title": "平均値（基本）",
+      "description": "区間での平均値を求める",
+      "viewCode": "topic-calc_average_value_basic"
+    },
+    {
+      "id": "calc_area_between_lines_basic",
+      "title": "直線間の面積（基本）",
+      "description": "平行な直線に囲まれた面積を求める",
+      "viewCode": "topic-calc_area_between_lines_basic"
+    },
+    {
+      "id": "calc_integral_linear_basic2",
+      "title": "定積分（一次関数）（基本）",
+      "description": "一次関数の定積分を計算する",
+      "viewCode": "topic-calc_integral_linear_basic2"
+    },
+    {
+      "id": "calc_area_between_parabola_basic",
+      "title": "放物線と直線の面積（基本）",
+      "description": "放物線と直線に囲まれた面積を求める",
+      "viewCode": "topic-calc_area_between_parabola_basic"
+    },
+    {
+      "id": "calc_area_under_line_basic",
+      "title": "直線下の面積（基本）",
+      "description": "直線と $x$ 軸で囲まれた面積を求める",
+      "viewCode": "topic-calc_area_under_line_basic"
+    },
+    {
+      "id": "calc_tangent_value_basic",
+      "title": "接点の座標（基本）",
+      "description": "接点の $y$ 座標を求める",
+      "viewCode": "topic-calc_tangent_value_basic"
+    },
+    {
+      "id": "calc_integral_constant_basic",
+      "title": "定数の積分（基本）",
+      "description": "定数の定積分を計算する",
+      "viewCode": "topic-calc_integral_constant_basic"
+    },
+    {
+      "id": "calc_integral_sum_basic",
+      "title": "定積分（基本）",
+      "description": "定積分の値を求める",
+      "viewCode": "topic-calc_integral_sum_basic"
+    },
+    {
+      "id": "calc_integral_quadratic_basic",
+      "title": "2次関数の積分（基本）",
+      "description": "簡単な2次関数の定積分を計算する",
+      "viewCode": "topic-calc_integral_quadratic_basic"
+    },
+    {
+      "id": "calc_extrema_basic",
+      "title": "極値（基本）",
+      "description": "導関数を用いて極値を求める",
+      "viewCode": "topic-calc_extrema_basic"
+    },
+    {
+      "id": "calc_area_basic",
+      "title": "面積（基本）",
+      "description": "非負関数の定積分で面積を求める",
+      "viewCode": "topic-calc_area_basic"
+    }
+  ],
+  "units": [
+    "math2"
+  ]
+}

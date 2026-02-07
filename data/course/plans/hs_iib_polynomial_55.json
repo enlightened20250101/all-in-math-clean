@@ -1,0 +1,14 @@
+{
+  "courseId": "hs_iib_polynomial",
+  "goal": 55,
+  "topicOrder": [
+    "poly_remainder_basic",
+    "poly_factor_k_basic",
+    "poly_value_sum_basic",
+    "poly_coeff_from_roots_basic",
+    "binomial_coeff_basic",
+    "binomial_xy_coeff_basic",
+    "binomial_value_basic",
+    "binomial_middle_coeff_basic"
+  ]
+}

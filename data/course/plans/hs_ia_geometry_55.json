@@ -1,0 +1,8 @@
+{
+  "courseId": "hs_ia_geometry",
+  "goal": 55,
+  "topicOrder": [
+    "geo_measure_right_triangle_basic",
+    "geo_sine_cosine_law_basic"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "courseId": "hs_iic_probability",
+  "goal": 65,
+  "topicOrder": [
+    "prob_binomial_expectation_basic",
+    "prob_binomial_probability_basic",
+    "prob_binomial_variance_basic",
+    "normal_distribution_basic",
+    "normal_standardization_basic",
+    "normal_backsolve_basic"
+  ]
+}

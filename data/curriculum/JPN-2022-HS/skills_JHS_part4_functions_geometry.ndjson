@@ -1,0 +1,22 @@
+{"id": "JHS.FUNC.LINE_BAS", "title": "一次関数 y=ax+b の基本（傾き・切片）", "subject": "中学校", "unit": "関数", "topic": "一次関数", "difficulty": 2, "priority": 5, "tags": ["jhs", "function", "必修"], "examples": []}
+{"id": "JHS.FUNC.LINE_GRAPH", "title": "一次関数のグラフ作成（表→点→直線）", "subject": "中学校", "unit": "関数", "topic": "一次関数", "difficulty": 2, "priority": 5, "tags": ["jhs", "function", "graph"], "examples": []}
+{"id": "JHS.FUNC.LINE_PAR_PERP", "title": "一次関数の平行・垂直条件（傾き）", "subject": "中学校", "unit": "関数", "topic": "一次関数", "difficulty": 3, "priority": 4, "tags": ["jhs", "function", "geometry"], "examples": []}
+{"id": "JHS.FUNC.LINE_INTERSECT", "title": "一次関数どうしの交点（連立と接続）", "subject": "中学校", "unit": "関数", "topic": "一次関数", "difficulty": 3, "priority": 4, "tags": ["jhs", "function", "intersection"], "examples": []}
+{"id": "JHS.FUNC.LINE_TRANS", "title": "一次関数の平行移動（切片の変化）", "subject": "中学校", "unit": "関数", "topic": "一次関数", "difficulty": 2, "priority": 3, "tags": ["jhs", "function", "transform"], "examples": []}
+{"id": "JHS.FUNC.INVERSE_BAS", "title": "反比例 y=a/x の性質（象限・漸近線）", "subject": "中学校", "unit": "関数", "topic": "反比例", "difficulty": 2, "priority": 5, "tags": ["jhs", "function", "inverse", "必修"], "examples": []}
+{"id": "JHS.FUNC.INVERSE_GRAPH", "title": "反比例のグラフ作成と定数決定", "subject": "中学校", "unit": "関数", "topic": "反比例", "difficulty": 2, "priority": 5, "tags": ["jhs", "function", "graph"], "examples": []}
+{"id": "JHS.FUNC.QUAD_INTRO", "title": "二次関数 y=ax^2（基礎形と開き）", "subject": "中学校", "unit": "関数", "topic": "二次関数入門", "difficulty": 3, "priority": 4, "tags": ["jhs", "function", "quadratic"], "examples": []}
+{"id": "JHS.FUNC.TABLE_MODEL", "title": "表・式・グラフの往復（一次・反比例）", "subject": "中学校", "unit": "関数", "topic": "統合", "difficulty": 2, "priority": 4, "tags": ["jhs", "function", "representation"], "examples": []}
+{"id": "JHS.COORD.DIST", "title": "座標平面の距離公式（直角三角形）", "subject": "中学校", "unit": "関数", "topic": "座標幾何", "difficulty": 3, "priority": 4, "tags": ["jhs", "function", "geometry"], "examples": []}
+{"id": "JHS.COORD.MID", "title": "中点の座標（平均）", "subject": "中学校", "unit": "関数", "topic": "座標幾何", "difficulty": 2, "priority": 4, "tags": ["jhs", "function", "geometry"], "examples": []}
+{"id": "JHS.GEO.CONG_DEF", "title": "三角形の合同条件（SSS,SAS,ASA）", "subject": "中学校", "unit": "図形", "topic": "合同", "difficulty": 2, "priority": 5, "tags": ["jhs", "geometry", "congruence", "必修"], "examples": []}
+{"id": "JHS.GEO.CONG_PROOF", "title": "合同を用いた証明（対応付け）", "subject": "中学校", "unit": "図形", "topic": "合同", "difficulty": 3, "priority": 4, "tags": ["jhs", "geometry", "proof"], "examples": []}
+{"id": "JHS.GEO.SIM_DEF", "title": "相似の定義と基本性質（角角/辺比）", "subject": "中学校", "unit": "図形", "topic": "相似", "difficulty": 2, "priority": 5, "tags": ["jhs", "geometry", "similarity", "必修"], "examples": []}
+{"id": "JHS.GEO.SIM_RATIO", "title": "相似比と周長・面積比", "subject": "中学校", "unit": "図形", "topic": "相似", "difficulty": 3, "priority": 4, "tags": ["jhs", "geometry", "ratio"], "examples": []}
+{"id": "JHS.GEO.PYTH", "title": "三平方の定理（直角三角形の辺関係）", "subject": "中学校", "unit": "図形", "topic": "三平方", "difficulty": 2, "priority": 5, "tags": ["jhs", "geometry", "pythagoras", "必修"], "examples": []}
+{"id": "JHS.GEO.CIRCLE_ANGLE", "title": "円周角・中心角の性質", "subject": "中学校", "unit": "図形", "topic": "円", "difficulty": 3, "priority": 4, "tags": ["jhs", "geometry", "circle"], "examples": []}
+{"id": "JHS.GEO.CIRCLE_TANGENT", "title": "接弦定理・接線の性質（入門）", "subject": "中学校", "unit": "図形", "topic": "円", "difficulty": 3, "priority": 3, "tags": ["jhs", "geometry", "circle"], "examples": []}
+{"id": "JHS.GEO.TRANS_TRANS", "title": "図形の移動：平行移動・回転・対称移動", "subject": "中学校", "unit": "図形", "topic": "図形の移動", "difficulty": 2, "priority": 4, "tags": ["jhs", "geometry", "transform"], "examples": []}
+{"id": "JHS.GEO.TRANS_SCALE", "title": "拡大縮小と相似（中心と倍率）", "subject": "中学校", "unit": "図形", "topic": "図形の移動", "difficulty": 2, "priority": 4, "tags": ["jhs", "geometry", "similarity"], "examples": []}
+{"id": "JHS.GEO.LOCUS_INTRO", "title": "軌跡の入門（距離一定・角の二等分線）", "subject": "中学校", "unit": "図形", "topic": "軌跡", "difficulty": 3, "priority": 3, "tags": ["jhs", "geometry", "locus"], "examples": []}
+{"id": "JHS.GEO.PROOF_FLOW", "title": "証明の書き方・流れ図（理由付け）", "subject": "中学校", "unit": "図形", "topic": "証明", "difficulty": 2, "priority": 4, "tags": ["jhs", "geometry", "proof"], "examples": []}

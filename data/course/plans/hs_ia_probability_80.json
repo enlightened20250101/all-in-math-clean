@@ -1,0 +1,9 @@
+{
+  "courseId": "hs_ia_probability",
+  "goal": 80,
+  "topicOrder": [
+    "prob_basic",
+    "prob_complement_basic",
+    "prob_combi_basic"
+  ]
+}

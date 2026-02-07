@@ -1,0 +1,72 @@
+{
+  "name": "math-community",
+  "private": true,
+  "version": "0.1.0",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=21.7.3 <22"
+  },
+  "scripts": {
+    "dev": "next dev --webpack -p 3000",
+    "dev:verify": "cd services/math-verify && uvicorn main:app --reload --port 8081",
+    "dev:all": "npm-run-all -p dev dev:verify",
+    "build": "next build --webpack",
+    "start": "next start",
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
+    "check:tex": "tsx scripts/check-course-tex.ts",
+    "test:tex-scan": "ts-node --transpile-only --compiler-options \"{\\\"module\\\":\\\"CommonJS\\\",\\\"moduleResolution\\\":\\\"node\\\"}\" -r tsconfig-paths/register scripts/tex-scan-course.ts",
+    "test:hs-geometry": "tsx scripts/audit-hs-geometry.ts"
+  },
+  "dependencies": {
+    "@supabase/auth-helpers-nextjs": "^0.10.0",
+    "@supabase/auth-ui-react": "0.4.7",
+    "@supabase/auth-ui-shared": "0.1.8",
+    "@supabase/ssr": "^0.7.0",
+    "@supabase/supabase-js": "^2.58.0",
+    "autoprefixer": "10.4.19",
+    "dayjs": "1.11.13",
+    "dotenv": "^17.2.2",
+    "fast-glob": "^3.3.3",
+    "html-to-image": "^1.11.13",
+    "jsxgraph": "^1.11.1",
+    "katex": "^0.16.22",
+    "mathlive": "^0.107.0",
+    "next": "^16.1.6",
+    "openai": "^5.20.1",
+    "postcss": "8.4.38",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-markdown": "^10.1.0",
+    "recharts": "^3.1.2",
+    "rehype-katex": "^7.0.0",
+    "rehype-stringify": "10.0.0",
+    "remark-gfm": "4.0.0",
+    "remark-math": "^6.0.0",
+    "remark-parse": "11.0.0",
+    "remark-rehype": "^11.1.2",
+    "slugify": "1.6.6",
+    "stripe": "^18.5.0",
+    "tailwindcss": "3.4.7",
+    "three": "^0.180.0",
+    "typescript": "5.5.4",
+    "unified": "11.0.5",
+    "zod": "^3.25.76",
+    "zod-to-json-schema": "^3.24.6"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "0.5.15",
+    "@types/node": "20.14.10",
+    "@types/react": "18.3.3",
+    "@types/react-dom": "18.3.0",
+    "@types/three": "^0.180.0",
+    "eslint": "^9.39.2",
+    "eslint-config-next": "^16.1.6",
+    "npm-run-all": "^4.1.5",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.20.6"
+  },
+  "overrides": {
+    "glob": "10.5.0"
+  }
+}

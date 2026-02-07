@@ -1,0 +1,123 @@
+{
+  "courseId": "hs_iib_trigonometry",
+  "title": "高校数学IIB：三角関数",
+  "topics": [
+    {
+      "id": "trig_identities_basic",
+      "title": "三角恒等式（基本）",
+      "description": "三角恒等式を用いた計算の基本問題に取り組む",
+      "viewCode": "topic-trig_identities_basic"
+    },
+    {
+      "id": "trig_identity_pythag_basic",
+      "title": "三角恒等式（1）（基本）",
+      "description": "sin^2+cos^2=1 を確認する",
+      "viewCode": "topic-trig_identity_pythag_basic"
+    },
+    {
+      "id": "trig_amplitude_basic",
+      "title": "振幅（基本）",
+      "description": "三角関数の振幅を求める",
+      "viewCode": "topic-trig_amplitude_basic"
+    },
+    {
+      "id": "trig_phase_shift_basic",
+      "title": "位相のずれ（基本）",
+      "description": "三角関数の位相のずれを求める",
+      "viewCode": "topic-trig_phase_shift_basic"
+    },
+    {
+      "id": "trig_vertical_shift_basic",
+      "title": "上下移動（基本）",
+      "description": "三角関数の中心線を求める",
+      "viewCode": "topic-trig_vertical_shift_basic"
+    },
+    {
+      "id": "trig_graph_range_basic",
+      "title": "値域（基本）",
+      "description": "三角関数の値域を求める",
+      "viewCode": "topic-trig_graph_range_basic"
+    },
+    {
+      "id": "trig_graph_period_basic",
+      "title": "周期（グラフ）（基本）",
+      "description": "係数つき三角関数の周期を求める",
+      "viewCode": "topic-trig_graph_period_basic"
+    },
+    {
+      "id": "trig_graph_midline_basic",
+      "title": "中心線（基本）",
+      "description": "三角関数の中心線を求める",
+      "viewCode": "topic-trig_graph_midline_basic"
+    },
+    {
+      "id": "trig_graph_max_basic",
+      "title": "最大値（基本）",
+      "description": "三角関数の最大値を求める",
+      "viewCode": "topic-trig_graph_max_basic"
+    },
+    {
+      "id": "trig_graph_min_basic",
+      "title": "最小値（基本）",
+      "description": "三角関数の最小値を求める",
+      "viewCode": "topic-trig_graph_min_basic"
+    },
+    {
+      "id": "trig_graph_intercept_basic",
+      "title": "y切片（基本）",
+      "description": "x=0 のときの値を求める",
+      "viewCode": "topic-trig_graph_intercept_basic"
+    },
+    {
+      "id": "trig_equation_radian_basic",
+      "title": "三角方程式（弧度）（基本）",
+      "description": "弧度法での基本方程式を解く",
+      "viewCode": "topic-trig_equation_radian_basic"
+    },
+    {
+      "id": "trig_identity_tan_basic",
+      "title": "tanの値（基本）",
+      "description": "基本角の tan を求める",
+      "viewCode": "topic-trig_identity_tan_basic"
+    },
+    {
+      "id": "trig_identity_tan_relation_basic",
+      "title": "tanの恒等式（基本）",
+      "description": "1+tan^2=1/cos^2 を使う",
+      "viewCode": "topic-trig_identity_tan_relation_basic"
+    },
+    {
+      "id": "trig_addition_basic",
+      "title": "加法定理（基本）",
+      "description": "加法定理で基本角の値を求める",
+      "viewCode": "topic-trig_addition_basic"
+    },
+    {
+      "id": "trig_double_angle_basic",
+      "title": "倍角（基本）",
+      "description": "倍角の値を基本角で計算する",
+      "viewCode": "topic-trig_double_angle_basic"
+    },
+    {
+      "id": "trig_period_basic",
+      "title": "周期（基本）",
+      "description": "三角関数の周期を求める",
+      "viewCode": "topic-trig_period_basic"
+    },
+    {
+      "id": "trig_radian_basic",
+      "title": "弧度法（基本）",
+      "description": "弧度法の角で値を計算する",
+      "viewCode": "topic-trig_radian_basic"
+    },
+    {
+      "id": "trig_equations_basic",
+      "title": "三角方程式（基本）",
+      "description": "0°〜360°の基本的な三角方程式を解く",
+      "viewCode": "topic-trig_equations_basic"
+    }
+  ],
+  "units": [
+    "math2"
+  ]
+}

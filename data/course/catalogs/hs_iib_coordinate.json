@@ -1,0 +1,51 @@
+{
+  "courseId": "hs_iib_coordinate",
+  "title": "高校数学IIB：座標",
+  "topics": [
+    {
+      "id": "coord_line_slope_basic",
+      "title": "直線の傾き（基本）",
+      "description": "2点から直線の傾きを求める",
+      "viewCode": "topic-coord_line_slope_basic"
+    },
+    {
+      "id": "coord_line_intercept_basic",
+      "title": "直線の切片（基本）",
+      "description": "2点を通る直線の y 切片を求める",
+      "viewCode": "topic-coord_line_intercept_basic"
+    },
+    {
+      "id": "coord_line_parallel_perp_basic",
+      "title": "平行・垂直の傾き（基本）",
+      "description": "平行・垂直な直線の傾きを求める",
+      "viewCode": "topic-coord_line_parallel_perp_basic"
+    },
+    {
+      "id": "coord_distance_point_line_basic",
+      "title": "点と直線の距離（基本）",
+      "description": "点と直線の距離を求める",
+      "viewCode": "topic-coord_distance_point_line_basic"
+    },
+    {
+      "id": "coord_circle_radius_basic",
+      "title": "円の半径（基本）",
+      "description": "中心と通る点から半径を求める",
+      "viewCode": "topic-coord_circle_radius_basic"
+    },
+    {
+      "id": "coord_circle_center_basic",
+      "title": "円の中心（基本）",
+      "description": "標準形の式から中心を読み取る",
+      "viewCode": "topic-coord_circle_center_basic"
+    },
+    {
+      "id": "coord_region_basic",
+      "title": "領域（基本）",
+      "description": "一次不等式の共通部分でできる領域を読み取る",
+      "viewCode": "topic-coord_region_basic"
+    }
+  ],
+  "units": [
+    "math2"
+  ]
+}

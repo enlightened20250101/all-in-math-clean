@@ -1,0 +1,45 @@
+{
+  "courseId": "hs_iic_probability",
+  "title": "高校数学C：確率",
+  "topics": [
+    {
+      "id": "prob_binomial_expectation_basic",
+      "title": "二項分布の期待値（基本）",
+      "description": "二項分布の期待値を求める基本問題に取り組む",
+      "viewCode": "topic-prob_binomial_expectation_basic"
+    },
+    {
+      "id": "prob_binomial_probability_basic",
+      "title": "二項分布の確率（基本）",
+      "description": "二項分布の確率 $\\binom{n}{k}p^k(1-p)^{n-k}$ を使う",
+      "viewCode": "topic-prob_binomial_probability_basic"
+    },
+    {
+      "id": "prob_binomial_variance_basic",
+      "title": "二項分布の分散（基本）",
+      "description": "二項分布の分散 $np(1-p)$ を使う基本問題に取り組む",
+      "viewCode": "topic-prob_binomial_variance_basic"
+    },
+    {
+      "id": "normal_distribution_basic",
+      "title": "正規分布の平均・分散（基本）",
+      "description": "正規分布の平均と分散を読み取る",
+      "viewCode": "topic-normal_distribution_basic"
+    },
+    {
+      "id": "normal_standardization_basic",
+      "title": "標準化（基本）",
+      "description": "正規分布の標準化で $z$ を求める",
+      "viewCode": "topic-normal_standardization_basic"
+    },
+    {
+      "id": "normal_backsolve_basic",
+      "title": "標準化の逆（基本）",
+      "description": "$z$ から $x$ を求める",
+      "viewCode": "topic-normal_backsolve_basic"
+    }
+  ],
+  "units": [
+    "mathC"
+  ]
+}

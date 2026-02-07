@@ -1,0 +1,21 @@
+{
+  "courseId": "hs_ia_logic",
+  "title": "高校数学IA：論理",
+  "topics": [
+    {
+      "id": "set_operations_basic",
+      "title": "集合の基本と演算（基本）",
+      "description": "和集合・共通部分・補集合などを学ぶ",
+      "viewCode": "centertest-set-operations-basic"
+    },
+    {
+      "id": "prop_proposition_basic",
+      "title": "命題と条件（基本）",
+      "description": "逆・裏・対偶、必要条件・十分条件を確認する",
+      "viewCode": "centertest-proposition-basic"
+    }
+  ],
+  "units": [
+    "math1"
+  ]
+}

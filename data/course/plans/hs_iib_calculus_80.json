@@ -1,0 +1,23 @@
+{
+  "courseId": "hs_iib_calculus",
+  "goal": 80,
+  "topicOrder": [
+    "calc_derivative_basic",
+    "calc_derivative_linear_basic",
+    "calc_integral_basic",
+    "calc_tangent_slope_basic",
+    "calc_tangent_line_basic",
+    "calc_increasing_basic",
+    "calc_average_value_basic",
+    "calc_area_between_lines_basic",
+    "calc_integral_linear_basic2",
+    "calc_area_between_parabola_basic",
+    "calc_area_under_line_basic",
+    "calc_tangent_value_basic",
+    "calc_integral_constant_basic",
+    "calc_integral_sum_basic",
+    "calc_integral_quadratic_basic",
+    "calc_extrema_basic",
+    "calc_area_basic"
+  ]
+}

@@ -1,0 +1,3206 @@
+// src/lib/course/writeupProblems.ts
+import type { TopicId } from "./topics";
+
+export type WriteupProblem = {
+  id: string;
+  topicId?: TopicId;
+  title: string;
+  statement: string;
+  rubric: string[];
+  solution: string;
+  level?: 1 | 2 | 3;
+};
+
+const DEFAULT_RUBRIC = [
+  "方針の提示（何を使うか）",
+  "主要式の立式",
+  "結論の明示",
+];
+
+export const WRITEUP_PROBLEMS: WriteupProblem[] = [
+  {
+    id: "writeup_quad_vertex_1",
+    topicId: "quad_graph_basic",
+    title: "二次関数の頂点",
+    statement: "二次関数 $y=ax^2+bx+c$ の頂点の座標を求めよ（$a\\neq 0$）。",
+    rubric: [
+      "平方完成を使う方針が書けている",
+      "軸 $x=-\\frac{b}{2a}$ を導いている",
+      "頂点 $( -\\frac{b}{2a}, -\\frac{b^2-4ac}{4a})$ を結論として示している",
+    ],
+    solution:
+      "平方完成して $y=a\\left(x+\\frac{b}{2a}\\right)^2-\\frac{b^2-4ac}{4a}$ より、頂点は $\\left(-\\frac{b}{2a},-\\frac{b^2-4ac}{4a}\\right)$。",
+    level: 1,
+  },
+  {
+    id: "writeup_quad_axis_1",
+    topicId: "quad_graph_basic",
+    title: "二次関数の軸",
+    statement: "二次関数 $y=ax^2+bx+c$ の軸の求め方を説明せよ。",
+    rubric: [
+      "平方完成または頂点の $x$ 座標を使うと述べている",
+      "軸が $x=-\\frac{b}{2a}$ と示している",
+      "理由を簡潔に書けている",
+    ],
+    solution:
+      "平方完成で $y=a\\left(x+\\frac{b}{2a}\\right)^2+\\cdots$ と書けるので、軸は $x=-\\frac{b}{2a}$。",
+    level: 1,
+  },
+  {
+    id: "writeup_quad_inequality_1",
+    topicId: "quad_inequality_basic",
+    title: "二次不等式の解法",
+    statement: "二次不等式 $ax^2+bx+c\\ge 0$ の解の範囲の求め方を説明せよ。",
+    rubric: [
+      "判別式で実数解の有無を確認する",
+      "因数分解または軸とグラフの形で符号を判断する",
+      "係数 $a$ の符号による場合分けが書けている",
+    ],
+    solution:
+      "判別式で実数解の有無を確認し、実数解があれば因数分解または放物線の形から符号を調べる。$a>0$ のとき外側、$a<0$ のとき内側が解になる。",
+    level: 2,
+  },
+  {
+    id: "writeup_trig_sine_cosine_law_1",
+    topicId: "geo_sine_cosine_law_basic",
+    title: "正弦定理・余弦定理の使い分け",
+    statement: "三角形の辺・角を求めるとき、正弦定理と余弦定理の使い分けを説明せよ。",
+    rubric: [
+      "正弦定理は1辺と向かい合う角が分かると使える",
+      "余弦定理は2辺とその間の角、または3辺が分かると使える",
+      "目的の量（辺 or 角）に応じて選ぶ方針が書けている",
+    ],
+    solution:
+      "正弦定理は1辺と向かい角が既知なら使える。余弦定理は2辺とその間の角、または3辺が既知なら使える。求めたい量に合わせて適用する。",
+    level: 1,
+  },
+  {
+    id: "writeup_comb_rule_1",
+    topicId: "combi_basic",
+    title: "和と積の法則",
+    statement: "場合の数の計算で「和の法則」と「積の法則」を説明せよ。",
+    rubric: [
+      "和の法則は互いに重ならない場合の合計",
+      "積の法則は順に選ぶ場合の積",
+      "具体例または簡単な式で説明している",
+    ],
+    solution:
+      "和の法則は排反な場合の合計数を足す。積の法則は順番に選ぶ操作の総数を掛け合わせる。",
+    level: 1,
+  },
+  {
+    id: "writeup_probability_1",
+    topicId: "prob_basic",
+    title: "確率の基本",
+    statement: "確率の基本式 $P=\\frac{\\text{有利な場合}}{\\text{起こりうる場合}}$ を説明し、注意点を述べよ。",
+    rubric: [
+      "起こりうる場合が同様に確からしいことに触れている",
+      "有利な場合と全体の場合を対応させている",
+      "具体例または簡単な補足がある",
+    ],
+    solution:
+      "全ての結果が同様に確からしいとき、確率は「有利な場合の数 / 全体の数」で定義する。",
+    level: 1,
+  },
+  {
+    id: "writeup_probability_sample_1",
+    topicId: "prob_basic",
+    title: "確率の標本空間",
+    statement: "標本空間と事象の関係を説明せよ。",
+    rubric: [
+      "標本空間が起こりうる全結果の集合であることを述べている",
+      "事象が標本空間の部分集合であることを述べている",
+      "確率の計算が集合として捉えられることに触れている",
+    ],
+    solution:
+      "標本空間は起こりうる全結果の集合で、事象はその部分集合。確率は部分集合の大きさの比として考える。",
+    level: 1,
+  },
+  {
+    id: "writeup_exp_log_1",
+    topicId: "exp_log_basic",
+    title: "指数・対数の関係",
+    statement: "$\\log_a b = c$ と $a^c=b$ の関係を説明せよ。",
+    rubric: [
+      "対数の定義を明確に書いている",
+      "$a>0, a\\neq 1, b>0$ の条件を言及している",
+      "指数と対数が逆関係であることを述べている",
+    ],
+    solution:
+      "$\\log_a b=c$ は $a^c=b$ を意味する。$a>0, a\\neq 1, b>0$ の条件下で指数関数と対数関数は逆関係。",
+    level: 1,
+  },
+  {
+    id: "writeup_trig_identity_1",
+    topicId: "trig_identities_basic",
+    title: "三角恒等式の利用",
+    statement: "$\\sin^2\\theta+\\cos^2\\theta=1$ をどのように式変形に利用するか説明せよ。",
+    rubric: [
+      "sin^2 または cos^2 を 1 から置き換える方針がある",
+      "式変形の目的（整理・置換）に触れている",
+      "具体的な置き換え例がある",
+    ],
+    solution:
+      "$\\sin^2\\theta=1-\\cos^2\\theta$ のように置き換えることで、式を整理して一つの関数に統一できる。",
+    level: 1,
+  },
+  {
+    id: "writeup_vector_inner_1",
+    topicId: "vector_inner_basic",
+    title: "内積と直交",
+    statement: "ベクトルの内積を使って直交条件を説明せよ。",
+    rubric: [
+      "内積の定義を式で示している",
+      "直交条件 $\\vec{a}\\cdot\\vec{b}=0$ を明記",
+      "成分表示での判断に言及している",
+    ],
+    solution:
+      "内積 $\\vec{a}\\cdot\\vec{b}=a_xb_x+a_yb_y(+a_zb_z)$。直交なら内積が0になる。",
+    level: 1,
+  },
+  {
+    id: "writeup_stats_mean_1",
+    topicId: "stats_sample_mean_basic",
+    title: "標本平均の意味",
+    statement: "標本平均の意味と、母平均との関係を説明せよ。",
+    rubric: [
+      "標本平均はデータの平均であると述べている",
+      "標本平均の期待値が母平均に等しいことに触れている",
+      "標本サイズが増えると安定する旨を述べている",
+    ],
+    solution:
+      "標本平均は観測データの平均で、期待値は母平均に一致する。標本数が増えると平均のばらつきは小さくなる。",
+    level: 1,
+  },
+  {
+    id: "writeup_integral_meaning_1",
+    topicId: "calc_integral_basic",
+    title: "定積分の意味",
+    statement: "定積分の意味を、面積との関係を含めて説明せよ。",
+    rubric: [
+      "区間での累積量として説明している",
+      "面積（符号付き）との関係に触れている",
+      "積分と微分の関係に触れていると良い",
+    ],
+    solution:
+      "定積分は区間での累積量を表し、関数が正なら面積に一致する。微分の逆操作としても理解できる。",
+    level: 1,
+  },
+  {
+    id: "writeup_sequence_sum_1",
+    topicId: "seq_arithmetic_sum_basic",
+    title: "等差数列の和の導出",
+    statement: "等差数列 $a_1, a_2, \\dots, a_n$ の和の公式をどのように導くか説明せよ。",
+    rubric: [
+      "首項と末項を組にする考えを示している",
+      "対になる和が等しいことを述べている",
+      "最終式 $S_n=\\frac{n(a_1+a_n)}{2}$ を結論として示している",
+    ],
+    solution:
+      "逆順に並べて加えると各組が $a_1+a_n$ となるので $2S_n=n(a_1+a_n)$、よって $S_n=\\frac{n(a_1+a_n)}{2}$。",
+    level: 2,
+  },
+  {
+    id: "writeup_sequence_sum_2",
+    topicId: "seq_arithmetic_sum_basic",
+    title: "等差数列の和の利用",
+    statement: "等差数列の和の公式が何に使えるか説明せよ。",
+    rubric: [
+      "多数の項の合計を効率的に計算できると述べている",
+      "初項・末項・項数を使うことを述べている",
+    ],
+    solution:
+      "項数が多い合計を一度に計算できる。初項・末項・項数を使って $S_n=\\frac{n(a_1+a_n)}{2}$ を用いる。",
+    level: 1,
+  },
+  {
+    id: "writeup_log_equation_1",
+    topicId: "exp_log_equations_basic",
+    title: "対数方程式の注意",
+    statement: "対数方程式を解くときの注意点を説明せよ。",
+    rubric: [
+      "真数条件（$>0$）に触れている",
+      "底の条件（$>0, \\neq 1$）に触れている",
+      "解の候補を条件で確認することを述べている",
+    ],
+    solution:
+      "対数は真数が正、底は正かつ1でない。方程式の解を得たら必ず条件に代入して確認する。",
+    level: 2,
+  },
+  {
+    id: "writeup_log_equation_2",
+    topicId: "exp_log_equations_basic",
+    title: "対数方程式の流れ",
+    statement: "対数方程式を解くときの一般的な流れを説明せよ。",
+    rubric: [
+      "定義域の条件を先に確認することを述べている",
+      "指数に直して解くと述べている",
+      "解の確認を述べている",
+    ],
+    solution:
+      "まず真数条件を確認し、対数を指数に直して解く。得られた解が条件を満たすか確認する。",
+    level: 2,
+  },
+  {
+    id: "writeup_trig_period_1",
+    topicId: "trig_period_basic",
+    title: "周期とグラフ",
+    statement: "三角関数の周期がグラフにどう影響するか説明せよ。",
+    rubric: [
+      "周期は同じ形が繰り返される間隔と説明している",
+      "一般形 $y=\\sin(kx)$ などの周期が $2\\pi/k$ であると述べている",
+      "グラフの圧縮・伸長に触れている",
+    ],
+    solution:
+      "周期は同じ形が繰り返される間隔。$y=\\sin(kx)$ の周期は $2\\pi/k$ で、$k$ が大きいほど横に圧縮される。",
+    level: 2,
+  },
+  {
+    id: "writeup_trig_period_2",
+    topicId: "trig_period_basic",
+    title: "周期の読み取り",
+    statement: "グラフから周期を読み取る方法を説明せよ。",
+    rubric: [
+      "同じ形が繰り返される区間を測ることを述べている",
+      "ピーク間距離など具体的に述べている",
+    ],
+    solution:
+      "グラフの同じ形が繰り返される区間の長さを測る。例えば隣り合う最大値の間隔が周期。",
+    level: 1,
+  },
+  {
+    id: "writeup_stats_ci_1",
+    topicId: "stats_confidence_interval_basic",
+    title: "信頼区間の幅",
+    statement: "信頼区間の幅が標準誤差や信頼係数とどう関係するか説明せよ。",
+    rubric: [
+      "幅が $z\\cdot\\mathrm{SE}$ に比例することを述べている",
+      "標準誤差が $\\sigma/\\sqrt{n}$ に依存することを述べている",
+      "信頼係数が大きいほど幅が広がると説明している",
+    ],
+    solution:
+      "幅は $z\\cdot\\mathrm{SE}$ に比例し、$\\mathrm{SE}=\\sigma/\\sqrt{n}$。信頼係数が高いほど $z$ が大きく、幅が広がる。",
+    level: 2,
+  },
+  {
+    id: "writeup_stats_ci_2",
+    topicId: "stats_confidence_interval_basic",
+    title: "信頼区間の解釈",
+    statement: "信頼区間の「95%」の意味を説明せよ。",
+    rubric: [
+      "同じ手続きを繰り返すと95%の区間が母平均を含むと述べている",
+      "1回の区間が95%で正しいという意味ではないと述べている",
+      "確率の解釈に触れている",
+    ],
+    solution:
+      "95%信頼区間とは、同じ方法で作った区間の95%が母平均を含むという意味で、1回の区間に95%の確率があるという意味ではない。",
+    level: 2,
+  },
+  {
+    id: "writeup_vector_projection_1",
+    topicId: "vector_projection_basic",
+    title: "射影の意味",
+    statement: "ベクトルの射影の意味を説明せよ。",
+    rubric: [
+      "片方の方向成分を取り出すことを述べている",
+      "内積を使った表式に触れている",
+      "長さや符号付き距離として説明している",
+    ],
+    solution:
+      "射影はある方向に沿った成分を取り出す操作。$\\mathrm{proj}_{\\vec{b}}\\vec{a} = \\frac{\\vec{a}\\cdot\\vec{b}}{|\\vec{b}|^2}\\vec{b}$ のように内積で表せる。",
+    level: 2,
+  },
+  {
+    id: "writeup_vector_projection_2",
+    topicId: "vector_projection_basic",
+    title: "射影と長さ",
+    statement: "射影の長さが内積で求まる理由を説明せよ。",
+    rubric: [
+      "内積が成分の大きさを表すと述べている",
+      "$\\frac{\\vec{a}\\cdot\\vec{b}}{|\\vec{b}|}$ の形に触れている",
+      "符号付き距離であることに触れている",
+    ],
+    solution:
+      "内積は $|\\vec{a}||\\vec{b}|\\cos\\theta$ で、$\\vec{b}$ 方向の成分は $|\\vec{a}|\\cos\\theta$。よって長さは $\\frac{\\vec{a}\\cdot\\vec{b}}{|\\vec{b}|}$。",
+    level: 2,
+  },
+  {
+    id: "writeup_complex_modulus_1",
+    topicId: "complex_modulus_basic",
+    title: "複素数の絶対値",
+    statement: "複素数 $z=a+bi$ の絶対値 $|z|$ の意味を説明せよ。",
+    rubric: [
+      "複素平面上の距離として説明している",
+      "$|z|=\\sqrt{a^2+b^2}$ を示している",
+      "原点からの距離であることを述べている",
+    ],
+    solution:
+      "複素数 $a+bi$ を点 $(a,b)$ とみなすと、原点からの距離なので $|z|=\\sqrt{a^2+b^2}$。",
+    level: 1,
+  },
+  {
+    id: "writeup_complex_modulus_2",
+    topicId: "complex_modulus_basic",
+    title: "絶対値の性質",
+    statement: "複素数の絶対値の性質を一つ述べ、簡単に説明せよ。",
+    rubric: [
+      "$|zw|=|z||w|$ などの性質を述べている",
+      "性質の意味を短く説明している",
+    ],
+    solution:
+      "例えば $|zw|=|z||w|$。複素数の大きさは積で掛け合わさるため、長さの性質が保たれる。",
+    level: 2,
+  },
+  {
+    id: "writeup_coord_distance_1",
+    topicId: "coord_distance_point_line_basic",
+    title: "点と直線の距離",
+    statement: "点と直線の距離の公式の考え方を説明せよ。",
+    rubric: [
+      "点から直線への垂線距離であることを述べている",
+      "一般形 $Ax+By+C=0$ を用いることを示している",
+      "距離 $\\frac{|Ax_0+By_0+C|}{\\sqrt{A^2+B^2}}$ を結論として示している",
+    ],
+    solution:
+      "直線 $Ax+By+C=0$ と点 $(x_0,y_0)$ の距離は垂線距離で、法線ベクトルを使って $\\frac{|Ax_0+By_0+C|}{\\sqrt{A^2+B^2}}$ と表せる。",
+    level: 2,
+  },
+  {
+    id: "writeup_coord_distance_2",
+    topicId: "coord_distance_point_line_basic",
+    title: "距離公式の由来",
+    statement: "点と直線の距離公式が「垂線距離」から出ることを説明せよ。",
+    rubric: [
+      "垂線を下ろす考え方を述べている",
+      "法線ベクトルに沿った成分で距離を表すことに触れている",
+      "式の形に言及している",
+    ],
+    solution:
+      "点から直線に垂線を下ろし、法線ベクトル方向の成分として距離を表すことで公式が導かれる。",
+    level: 2,
+  },
+  {
+    id: "writeup_poly_factor_1",
+    topicId: "poly_factor_k_basic",
+    title: "因数定理の説明",
+    statement: "因数定理を説明し、$x-\\alpha$ が因数となる条件を述べよ。",
+    rubric: [
+      "$f(\\alpha)=0$ と $x-\\alpha$ が因数であることの同値を述べている",
+      "多項式の因数判定に使えることを述べている",
+      "簡潔な条件としてまとめている",
+    ],
+    solution:
+      "多項式 $f(x)$ に対して $f(\\alpha)=0$ であることと $x-\\alpha$ が因数であることは同値。因数の判定に用いる。",
+    level: 2,
+  },
+  {
+    id: "writeup_binomial_middle_1",
+    topicId: "binomial_middle_coeff_basic",
+    title: "二項定理と中央項",
+    statement: "$(x+y)^n$ の中央項の意味と求め方を説明せよ。",
+    rubric: [
+      "二項定理で一般項 $\\binom{n}{k}x^{n-k}y^k$ を示している",
+      "中央項の $k$ の値を偶奇で分けて述べている",
+      "係数が $\\binom{n}{n/2}$ などになることを示している",
+    ],
+    solution:
+      "二項定理より一般項は $\\binom{n}{k}x^{n-k}y^k$。$n$ が偶数なら $k=n/2$ が中央項、係数は $\\binom{n}{n/2}$。",
+    level: 2,
+  },
+  {
+    id: "writeup_binomial_middle_2",
+    topicId: "binomial_middle_coeff_basic",
+    title: "中央項の個数",
+    statement: "中央項が1つか2つかの条件を説明せよ。",
+    rubric: [
+      "$n$ の偶奇で中央項の数が決まることを述べている",
+      "偶数なら1つ、奇数なら2つと述べている",
+    ],
+    solution:
+      "$n$ が偶数なら中央項は1つ、$n$ が奇数なら中央項は2つになる。",
+    level: 1,
+  },
+  {
+    id: "writeup_identity_coeff_1",
+    topicId: "identity_coefficient_basic",
+    title: "恒等式の係数比較",
+    statement: "恒等式を用いた係数比較の考え方を説明せよ。",
+    rubric: [
+      "恒等式は全ての $x$ で成り立つことを述べている",
+      "同次の項ごとに係数を比較することを述べている",
+      "未知数を連立で解く流れが書けている",
+    ],
+    solution:
+      "恒等式は全ての $x$ で成り立つため、同じ次数の係数を比較できる。係数の連立方程式を解いて未知数を求める。",
+    level: 2,
+  },
+  {
+    id: "writeup_prob_complement_1",
+    topicId: "prob_complement_basic",
+    title: "余事象の使い方",
+    statement: "余事象を用いるときの考え方と利点を説明せよ。",
+    rubric: [
+      "求めたい事象の反対を考えることを述べている",
+      "$P(A)=1-P(A^c)$ を明記している",
+      "直接数えにくいときに有効であることを述べている",
+    ],
+    solution:
+      "余事象 $A^c$ を考えると $P(A)=1-P(A^c)$。直接数えにくい場合でも簡単な方を数えて求められる。",
+    level: 1,
+  },
+  {
+    id: "writeup_prob_complement_2",
+    topicId: "prob_complement_basic",
+    title: "余事象の利点",
+    statement: "余事象を使うとどのように計算が楽になるか説明せよ。",
+    rubric: [
+      "直接数えにくい場合の代替になると述べている",
+      "補集合の方が数えやすいことを述べている",
+    ],
+    solution:
+      "求めたい事象が複雑でも、補集合の方が数えやすい場合が多い。$P(A)=1-P(A^c)$ を使って計算を簡単にできる。",
+    level: 1,
+  },
+  {
+    id: "writeup_trig_addition_1",
+    topicId: "trig_addition_basic",
+    title: "加法定理の使いどころ",
+    statement: "加法定理を用いる場面を説明し、具体例を挙げよ。",
+    rubric: [
+      "角の和や差が現れるときに使うことを述べている",
+      "具体的な式変形（例：$\\sin(75^\\circ)$）を挙げている",
+      "三角関数の計算を簡単にできることを述べている",
+    ],
+    solution:
+      "角の和差があるときに使い、例えば $\\sin(75^\\circ)=\\sin(45^\\circ+30^\\circ)$ として計算できる。",
+    level: 2,
+  },
+  {
+    id: "writeup_trig_addition_2",
+    topicId: "trig_addition_basic",
+    title: "加法定理と角度変換",
+    statement: "加法定理が角度変換に役立つ理由を説明せよ。",
+    rubric: [
+      "和差を積に変えることを述べている",
+      "未知角を既知角に分解できることを述べている",
+    ],
+    solution:
+      "加法定理で和差の角を既知角の組に分解でき、値が計算しやすくなる。",
+    level: 1,
+  },
+  {
+    id: "writeup_linear_ineq_1",
+    topicId: "algebra_ineq_basic",
+    title: "一次不等式の解き方",
+    statement: "一次不等式の解き方を説明し、等号の向きが変わる場面を述べよ。",
+    rubric: [
+      "移項や整理の手順を説明している",
+      "両辺に負の数を掛けると不等号が反転することを述べている",
+      "解集合の書き方に触れている",
+    ],
+    solution:
+      "不等式を移項して整理する。両辺に負の数を掛けると不等号が反転するので注意する。解は区間で表す。",
+    level: 1,
+  },
+  {
+    id: "writeup_linear_ineq_2",
+    topicId: "algebra_ineq_basic",
+    title: "解集合の表し方",
+    statement: "一次不等式の解集合の表し方を説明せよ。",
+    rubric: [
+      "区間や不等式で表すと述べている",
+      "数直線で表せることに触れている",
+    ],
+    solution:
+      "一次不等式の解集合は $x\\ge a$ のように不等式で書くか、区間表示で表す。数直線で示すこともできる。",
+    level: 1,
+  },
+  {
+    id: "writeup_set_1",
+    topicId: "set_operations_basic",
+    title: "集合の補集合と全体集合",
+    statement: "補集合と全体集合の関係を説明し、簡単な例を挙げよ。",
+    rubric: [
+      "補集合は全体集合から集合を除いたものと述べている",
+      "記号 $A^c$ や $U$ を用いている",
+      "例で具体的に示している",
+    ],
+    solution:
+      "補集合 $A^c$ は全体集合 $U$ から $A$ を除いた集合。例：$U=\\{1,2,3,4\\}, A=\\{1,2\\}$ なら $A^c=\\{3,4\\}$。",
+    level: 1,
+  },
+  {
+    id: "writeup_set_2",
+    topicId: "set_operations_basic",
+    title: "集合演算の意味",
+    statement: "和集合・共通部分の意味を説明せよ。",
+    rubric: [
+      "和集合はどちらかに含まれると述べている",
+      "共通部分は両方に含まれると述べている",
+      "記号 $A\\cup B, A\\cap B$ を示している",
+    ],
+    solution:
+      "和集合 $A\\cup B$ はどちらかに含まれる要素、共通部分 $A\\cap B$ は両方に含まれる要素の集合。",
+    level: 1,
+  },
+  {
+    id: "writeup_identity_1",
+    topicId: "identity_eval_basic",
+    title: "恒等式と方程式の違い",
+    statement: "恒等式と方程式の違いを説明せよ。",
+    rubric: [
+      "恒等式は全ての $x$ で成り立つと述べている",
+      "方程式は特定の解で成り立つと述べている",
+      "係数比較など恒等式の使い方に触れていると良い",
+    ],
+    solution:
+      "恒等式は任意の $x$ で成り立つ等式、方程式は特定の $x$（解）で成り立つ等式。恒等式では係数比較ができる。",
+    level: 1,
+  },
+  {
+    id: "writeup_identity_2",
+    topicId: "identity_eval_basic",
+    title: "恒等式の利用",
+    statement: "恒等式を利用する目的を説明せよ。",
+    rubric: [
+      "式変形や整理のために使うと述べている",
+      "係数比較や恒等変形に触れている",
+    ],
+    solution:
+      "恒等式は式変形や整理のために使う。係数比較や恒等変形の根拠として利用できる。",
+    level: 1,
+  },
+  {
+    id: "writeup_inequality_amgm_1",
+    topicId: "inequality_amgm_basic",
+    title: "相加相乗平均の使い方",
+    statement: "相加相乗平均の不等式を用いる場面を説明せよ。",
+    rubric: [
+      "非負の数に対して $\\frac{x+y}{2}\\ge\\sqrt{xy}$ を述べている",
+      "最小/最大値問題に使えることを説明している",
+      "等号成立条件に触れている",
+    ],
+    solution:
+      "非負の数に対し $\\frac{x+y}{2}\\ge\\sqrt{xy}$。和が一定のとき積の最大、積が一定のとき和の最小などで使う。等号は $x=y$。",
+    level: 2,
+  },
+  {
+    id: "writeup_inequality_amgm_2",
+    topicId: "inequality_amgm_basic",
+    title: "等号成立条件",
+    statement: "相加相乗平均の等号成立条件を説明せよ。",
+    rubric: [
+      "等号は $x=y$ のときに成り立つと述べている",
+      "非負条件に触れている",
+    ],
+    solution:
+      "相加相乗平均の等号は $x=y$ で成り立つ。非負の数が前提。",
+    level: 1,
+  },
+  {
+    id: "writeup_trig_double_1",
+    topicId: "trig_double_angle_basic",
+    title: "倍角公式の役割",
+    statement: "倍角公式を用いる理由と効果を説明せよ。",
+    rubric: [
+      "$\\sin 2x, \\cos 2x$ を $\\sin x, \\cos x$ に戻せることを述べている",
+      "角の変形や積分・方程式で役立つと述べている",
+      "公式を具体的に示している",
+    ],
+    solution:
+      "倍角公式で $\\sin2x=2\\sin x\\cos x, \\cos2x=\\cos^2x-\\sin^2x$ などに変形でき、方程式や積分で次数を下げられる。",
+    level: 2,
+  },
+  {
+    id: "writeup_exp_log_domain_1",
+    topicId: "exp_log_domain_basic",
+    title: "対数の定義域",
+    statement: "対数の定義域（真数条件）について説明せよ。",
+    rubric: [
+      "真数は正であることを述べている",
+      "底は正かつ1でないことに触れている",
+      "条件を満たすように解を確認することを述べている",
+    ],
+    solution:
+      "対数は真数が正、底は正かつ1でない必要がある。方程式の解は必ず条件を満たすか確認する。",
+    level: 1,
+  },
+  {
+    id: "writeup_coord_parallel_1",
+    topicId: "coord_line_parallel_perp_basic",
+    title: "平行・垂直の条件",
+    statement: "直線の平行・垂直条件を傾きの関係で説明せよ。",
+    rubric: [
+      "平行なら傾きが等しいと述べている",
+      "垂直なら傾きの積が $-1$ と述べている",
+      "傾きが存在しない場合の注意に触れていると良い",
+    ],
+    solution:
+      "平行なら傾きが等しい。垂直なら傾きの積が $-1$。垂直線のように傾きが定義できない場合は図形的に判断する。",
+    level: 1,
+  },
+  {
+    id: "writeup_poly_remainder_1",
+    topicId: "poly_remainder_basic",
+    title: "余りの定理",
+    statement: "余りの定理を説明し、使い方を述べよ。",
+    rubric: [
+      "$f(x)$ を $x-a$ で割った余りが $f(a)$ であることを述べている",
+      "因数定理との関係に触れている",
+      "具体的な利用場面を述べている",
+    ],
+    solution:
+      "多項式 $f(x)$ を $x-a$ で割った余りは $f(a)$。余りの計算や因数判定に使える。",
+    level: 2,
+  },
+  {
+    id: "writeup_seq_limit_1",
+    topicId: "seq_geometric_limit_basic",
+    title: "等比数列の無限和",
+    statement: "等比数列の無限和が存在する条件と公式を説明せよ。",
+    rubric: [
+      "公比の絶対値が1未満である条件を述べている",
+      "無限和 $\\frac{a}{1-r}$ を示している",
+      "収束という概念に触れている",
+    ],
+    solution:
+      "公比 $r$ の絶対値が1未満のとき無限和が収束し、和は $\\frac{a}{1-r}$ となる。",
+    level: 2,
+  },
+  {
+    id: "writeup_seq_recurrence_1",
+    topicId: "seq_recurrence_basic",
+    title: "漸化式の意味",
+    statement: "漸化式とは何か、一般項を求める意義を説明せよ。",
+    rubric: [
+      "前の項から次の項を定める関係式であると述べている",
+      "一般項があれば任意の項を直接求められると述べている",
+      "簡単な例があると良い",
+    ],
+    solution:
+      "漸化式は前の項と次の項を結ぶ関係式。一般項が求まれば第$n$項を直接計算できる。",
+    level: 1,
+  },
+  {
+    id: "writeup_stats_se_1",
+    topicId: "stats_standard_error_basic",
+    title: "標準誤差の意味",
+    statement: "標準誤差の意味と、標本数との関係を説明せよ。",
+    rubric: [
+      "標準誤差が標本平均のばらつきを表すと述べている",
+      "$\\sigma/\\sqrt{n}$ に依存することを述べている",
+      "標本数が増えると小さくなることに触れている",
+    ],
+    solution:
+      "標準誤差は標本平均のばらつきで、$\\sigma/\\sqrt{n}$ に比例する。標本数が増えるほど小さくなる。",
+    level: 1,
+  },
+  {
+    id: "writeup_stats_corr_1",
+    topicId: "stats_correlation_basic",
+    title: "相関係数の解釈",
+    statement: "相関係数の値が示す意味を説明せよ。",
+    rubric: [
+      "-1から1の範囲であることを述べている",
+      "符号が正負の相関を示すことを述べている",
+      "絶対値が強さを表すことを述べている",
+    ],
+    solution:
+      "相関係数は $-1\\le r\\le 1$。符号は正負の相関、絶対値が1に近いほど相関が強い。",
+    level: 1,
+  },
+  {
+    id: "writeup_vector_parallel_1",
+    topicId: "vector_parallel_basic",
+    title: "ベクトルの平行条件",
+    statement: "ベクトルが平行である条件を説明せよ。",
+    rubric: [
+      "一方が他方の実数倍であることを述べている",
+      "成分比が等しいことに触れている",
+      "ゼロベクトルの扱いに触れていると良い",
+    ],
+    solution:
+      "平行なら $\\vec{b}=k\\vec{a}$ と表せる。成分比が等しい。ゼロベクトルは全てと平行とみなすことが多い。",
+    level: 1,
+  },
+  {
+    id: "writeup_vector_inner_2",
+    topicId: "vector_inner_basic",
+    title: "内積と角度",
+    statement: "内積と2ベクトルのなす角の関係を説明せよ。",
+    rubric: [
+      "$\\vec{a}\\cdot\\vec{b}=|\\vec{a}||\\vec{b}|\\cos\\theta$ を述べている",
+      "角度の計算に使えることを述べている",
+      "直交条件との関連に触れている",
+    ],
+    solution:
+      "内積は $\\vec{a}\\cdot\\vec{b}=|\\vec{a}||\\vec{b}|\\cos\\theta$。角度計算に使え、$\\theta=90^\\circ$ なら0。",
+    level: 2,
+  },
+  {
+    id: "writeup_complex_arg_1",
+    topicId: "complex_argument_basic",
+    title: "偏角の意味",
+    statement: "複素数の偏角の意味を説明せよ。",
+    rubric: [
+      "原点からの角度であることを述べている",
+      "偏角が $\\arg z$ と書かれることに触れている",
+      "複素数の極形式との関係に触れていると良い",
+    ],
+    solution:
+      "偏角は複素数を原点から見た角度で $\\arg z$ と書く。極形式 $z=r(\\cos\\theta+i\\sin\\theta)$ の角度に対応する。",
+    level: 1,
+  },
+  {
+    id: "writeup_conic_circle_1",
+    topicId: "conic_circle_basic",
+    title: "円の標準形",
+    statement: "円の標準形と中心・半径の読み取り方を説明せよ。",
+    rubric: [
+      "$(x-a)^2+(y-b)^2=r^2$ の形を示している",
+      "中心 $(a,b)$ と半径 $r$ を述べている",
+      "一般形から平方完成で標準形に直すことを述べている",
+    ],
+    solution:
+      "円の標準形は $(x-a)^2+(y-b)^2=r^2$。中心は $(a,b)$、半径は $r$。一般形は平方完成して標準形に直す。",
+    level: 1,
+  },
+  {
+    id: "writeup_calc_derivative_1",
+    topicId: "calc_derivative_basic",
+    title: "微分係数の意味",
+    statement: "微分係数の意味を、接線の傾きとの関係で説明せよ。",
+    rubric: [
+      "微分係数が変化率であることを述べている",
+      "接線の傾きを表すことを述べている",
+      "極限を用いた定義に触れている",
+    ],
+    solution:
+      "微分係数は平均変化率の極限で、曲線の接線の傾きを表す。$f'(a)=\\lim_{h\\to0}\\frac{f(a+h)-f(a)}{h}$。",
+    level: 1,
+  },
+  {
+    id: "writeup_calc_tangent_1",
+    topicId: "calc_tangent_line_basic",
+    title: "接線の方程式",
+    statement: "接線の方程式を求める手順を説明せよ。",
+    rubric: [
+      "微分して傾きを求めることを述べている",
+      "点 $(a,f(a))$ を通る直線の式を用いることを述べている",
+      "式 $y-f(a)=f'(a)(x-a)$ を示している",
+    ],
+    solution:
+      "傾きは $f'(a)$。点 $(a,f(a))$ を通るので $y-f(a)=f'(a)(x-a)$。",
+    level: 2,
+  },
+  {
+    id: "writeup_integral_area_1",
+    topicId: "calc_area_basic",
+    title: "面積と定積分",
+    statement: "定積分と面積の関係を、符号付き面積の観点で説明せよ。",
+    rubric: [
+      "定積分が符号付き面積に対応することを述べている",
+      "負の部分は面積がマイナスになると述べている",
+      "必要なら区間を分けて計算することに触れている",
+    ],
+    solution:
+      "定積分は符号付き面積で、$x$軸より下の部分はマイナスとして数える。必要に応じて区間を分けて計算する。",
+    level: 2,
+  },
+  {
+    id: "writeup_prob_combi_1",
+    topicId: "prob_combi_basic",
+    title: "組合せと確率の関係",
+    statement: "確率計算で組合せを使う理由を説明せよ。",
+    rubric: [
+      "順序を区別しない場合に組合せを使うことを述べている",
+      "全体と有利な場合を数える流れを述べている",
+      "具体例に触れていると良い",
+    ],
+    solution:
+      "抽出の順序を区別しない場合は組合せで数える。全体の組合せと有利な組合せの比で確率を求める。",
+    level: 1,
+  },
+  {
+    id: "writeup_exp_log_prop_1",
+    topicId: "exp_log_property_basic",
+    title: "指数法則と対数法則",
+    statement: "指数法則と対数法則の関係を説明せよ。",
+    rubric: [
+      "指数の積・商・累乗の法則に触れている",
+      "対数の積・商・累乗の法則に触れている",
+      "互いに対応していることを述べている",
+    ],
+    solution:
+      "指数法則 $a^m a^n=a^{m+n}$ などに対応して、対数法則 $\\log_a MN=\\log_a M+\\log_a N$ が成り立つ。",
+    level: 2,
+  },
+  {
+    id: "writeup_trig_radian_1",
+    topicId: "trig_radian_basic",
+    title: "弧度法の意味",
+    statement: "弧度法の意味と、角度の測り方を説明せよ。",
+    rubric: [
+      "半径と弧の長さで角を測ることを述べている",
+      "1ラジアンの定義に触れている",
+      "度数法との関係を述べている",
+    ],
+    solution:
+      "弧度法は弧の長さ/半径で角を測る。弧長=半径のとき1ラジアン。$180^\\circ=\\pi$ラジアン。",
+    level: 1,
+  },
+  {
+    id: "writeup_coord_circle_1",
+    topicId: "coord_circle_center_basic",
+    title: "円の中心の求め方",
+    statement: "円の方程式から中心を求める方法を説明せよ。",
+    rubric: [
+      "平方完成で標準形に直すことを述べている",
+      "中心 $(a,b)$ を読み取ることを述べている",
+      "半径も同時に得られると触れている",
+    ],
+    solution:
+      "一般形を平方完成して $(x-a)^2+(y-b)^2=r^2$ に直し、中心 $(a,b)$ を読み取る。",
+    level: 1,
+  },
+  {
+    id: "writeup_vector_unit_1",
+    topicId: "vector_unit_basic",
+    title: "単位ベクトルの意味",
+    statement: "単位ベクトルの意味と求め方を説明せよ。",
+    rubric: [
+      "大きさ1のベクトルであることを述べている",
+      "元のベクトルを長さで割ることを述べている",
+      "向きを保持することに触れている",
+    ],
+    solution:
+      "単位ベクトルは大きさ1で方向を表す。$\\vec{a}$ の単位ベクトルは $\\vec{a}/|\\vec{a}|$。",
+    level: 1,
+  },
+  {
+    id: "writeup_complex_conjugate_1",
+    topicId: "complex_conjugate_basic",
+    title: "共役複素数の意味",
+    statement: "共役複素数の意味と性質を説明せよ。",
+    rubric: [
+      "共役 $\\overline{a+bi}=a-bi$ を述べている",
+      "積が実数になることを述べている",
+      "複素数平面での対称性に触れている",
+    ],
+    solution:
+      "共役は $\\overline{a+bi}=a-bi$。$z\\overline{z}=a^2+b^2$ は実数。複素平面では実軸対称。",
+    level: 1,
+  },
+  {
+    id: "writeup_exp_log_domain_2",
+    topicId: "exp_log_domain_basic",
+    title: "真数条件の確認",
+    statement: "対数の真数条件を確認する理由を説明せよ。",
+    rubric: [
+      "真数が正でないと対数が定義できないと述べている",
+      "解の候補が条件を満たすか確認する必要を述べている",
+    ],
+    solution:
+      "対数は真数が正でないと定義できない。方程式で得た解が真数条件を満たすか必ず確認する。",
+    level: 1,
+  },
+  {
+    id: "writeup_coord_parallel_2",
+    topicId: "coord_line_parallel_perp_basic",
+    title: "傾きの注意点",
+    statement: "傾きが定義できない直線の平行・垂直をどう判断するか説明せよ。",
+    rubric: [
+      "垂直線は $x=$ 定数と述べている",
+      "同じ形なら平行、水平線なら垂直関係に触れている",
+    ],
+    solution:
+      "垂直線は $x=$ 定数で、同じ形なら平行。水平線 $y=$ 定数とは互いに垂直になる。",
+    level: 2,
+  },
+  {
+    id: "writeup_poly_remainder_2",
+    topicId: "poly_remainder_basic",
+    title: "余りの定理の活用",
+    statement: "余りの定理が計算を簡単にする理由を説明せよ。",
+    rubric: [
+      "代入だけで余りが求まると述べている",
+      "割り算を避けられることに触れている",
+    ],
+    solution:
+      "$x-a$ で割った余りは $f(a)$ なので、長い割り算をせず代入だけで求められる。",
+    level: 2,
+  },
+  {
+    id: "writeup_seq_limit_2",
+    topicId: "seq_geometric_limit_basic",
+    title: "収束の直感",
+    statement: "等比数列が収束する直感的な理由を説明せよ。",
+    rubric: [
+      "公比の絶対値が1未満なら項が小さくなると述べている",
+      "無限和が一定値に近づくことに触れている",
+    ],
+    solution:
+      "|r|<1 なら項がどんどん小さくなり、部分和が一定値に近づくため収束する。",
+    level: 2,
+  },
+  {
+    id: "writeup_seq_recurrence_2",
+    topicId: "seq_recurrence_basic",
+    title: "初期条件の重要性",
+    statement: "漸化式で初期条件が必要な理由を説明せよ。",
+    rubric: [
+      "初期値がないと数列が定まらないと述べている",
+      "具体的な例に触れていると良い",
+    ],
+    solution:
+      "漸化式は関係だけなので、初期値がないと数列が一意に定まらない。",
+    level: 1,
+  },
+  {
+    id: "writeup_stats_se_2",
+    topicId: "stats_standard_error_basic",
+    title: "標準誤差と精度",
+    statement: "標準誤差が小さいことの意味を説明せよ。",
+    rubric: [
+      "標本平均のばらつきが小さいと述べている",
+      "推定の精度が高いことに触れている",
+    ],
+    solution:
+      "標準誤差が小さいほど標本平均のばらつきが小さく、推定の精度が高い。",
+    level: 1,
+  },
+  {
+    id: "writeup_stats_corr_2",
+    topicId: "stats_correlation_basic",
+    title: "相関と因果",
+    statement: "相関が因果関係を意味しない理由を説明せよ。",
+    rubric: [
+      "相関は関係の強さであり原因を示さないと述べている",
+      "他の要因の影響に触れている",
+    ],
+    solution:
+      "相関は一緒に変化する傾向を示すだけで、原因を示さない。第三の要因が影響する場合もある。",
+    level: 2,
+  },
+  {
+    id: "writeup_vector_parallel_2",
+    topicId: "vector_parallel_basic",
+    title: "成分比の条件",
+    statement: "成分比から平行を判断する方法を説明せよ。",
+    rubric: [
+      "成分比が等しいと平行と述べている",
+      "比例係数が存在することに触れている",
+    ],
+    solution:
+      "成分比が等しいなら比例係数 $k$ が存在し、$\\vec{b}=k\\vec{a}$ となるので平行と判断できる。",
+    level: 1,
+  },
+  {
+    id: "writeup_complex_arg_2",
+    topicId: "complex_argument_basic",
+    title: "偏角の主値",
+    statement: "偏角の主値を取る理由を説明せよ。",
+    rubric: [
+      "偏角は無数に存在することを述べている",
+      "代表値として主値を決めることを述べている",
+    ],
+    solution:
+      "偏角は $2\\pi$ の周期で無数にあるため、代表値として一定範囲の主値を定める。",
+    level: 2,
+  },
+  {
+    id: "writeup_conic_circle_2",
+    topicId: "conic_circle_basic",
+    title: "円の半径の意味",
+    statement: "円の半径が方程式にどう表れるか説明せよ。",
+    rubric: [
+      "標準形の右辺が $r^2$ であることを述べている",
+      "半径が距離であることに触れている",
+    ],
+    solution:
+      "標準形 $(x-a)^2+(y-b)^2=r^2$ で右辺が半径の二乗。中心からの距離が一定であることを示す。",
+    level: 1,
+  },
+  {
+    id: "writeup_quad_inequality_2",
+    topicId: "quad_inequality_basic",
+    title: "二次不等式とグラフ",
+    statement:
+      "二次不等式 $ax^2+bx+c\\le 0$ の解をグラフで判断する方法を説明せよ。",
+    rubric: [
+      "放物線の形（上に凸・下に凸）に触れている",
+      "x軸との交点で符号が変わることを述べている",
+      "不等号の向きに応じて内側/外側を選ぶと書けている",
+    ],
+    solution:
+      "グラフは放物線で、x軸との交点で符号が変わる。$a>0$ なら下にある区間、$a<0$ なら上にある区間が解になる。",
+    level: 1,
+  },
+  {
+    id: "writeup_geo_sine_cosine_law_2",
+    topicId: "geo_sine_cosine_law_basic",
+    title: "余弦定理の適用場面",
+    statement:
+      "三角形の2辺とその間の角が分かっているとき、余弦定理で何が求められるか説明せよ。",
+    rubric: [
+      "余弦定理の形を示している",
+      "未知の辺を求められることを述べている",
+      "角が鈍角でも使えることに触れていると良い",
+    ],
+    solution:
+      "余弦定理 $c^2=a^2+b^2-2ab\\cos C$ により、2辺とその間の角から第三辺を求められる。",
+    level: 1,
+  },
+  {
+    id: "writeup_combi_basic_2",
+    topicId: "combi_basic",
+    title: "順列と組合せの違い",
+    statement: "順列と組合せの違いを簡潔に説明せよ。",
+    rubric: [
+      "順序を考えるかどうかの違いを述べている",
+      "記号 $P$ と $C$ の意味に触れている",
+    ],
+    solution:
+      "順列は順序を区別し、組合せは順序を区別しない。$nPr$ と $nCr$ の違い。",
+    level: 1,
+  },
+  {
+    id: "writeup_exp_log_2",
+    topicId: "exp_log_basic",
+    title: "底の変換",
+    statement: "対数の底の変換公式の意味を説明せよ。",
+    rubric: [
+      "$\\log_a b=\\frac{\\log_c b}{\\log_c a}$ を示している",
+      "任意の底に変換できることを述べている",
+      "計算の都合で底を選ぶと触れている",
+    ],
+    solution:
+      "底の変換は $\\log_a b=\\frac{\\log_c b}{\\log_c a}$。任意の底に変換でき、計算しやすい底を選べる。",
+    level: 2,
+  },
+  {
+    id: "writeup_trig_identities_2",
+    topicId: "trig_identities_basic",
+    title: "二倍角との連携",
+    statement: "三角恒等式と二倍角公式の組み合わせ方を説明せよ。",
+    rubric: [
+      "$\\sin^2\\theta+\\cos^2\\theta=1$ を使う方針がある",
+      "二倍角公式で $\\sin^2\\theta,\\cos^2\\theta$ を置き換えられることを述べている",
+    ],
+    solution:
+      "$\\cos 2\\theta=1-2\\sin^2\\theta$ などを使い、$\\sin^2\\theta$ や $\\cos^2\\theta$ を他の形へ変換できる。",
+    level: 2,
+  },
+  {
+    id: "writeup_stats_mean_2",
+    topicId: "stats_sample_mean_basic",
+    title: "標本平均の偏り",
+    statement: "標本平均が母平均の不偏推定量であることを説明せよ。",
+    rubric: [
+      "期待値の概念に触れている",
+      "標本平均の期待値が母平均になると述べている",
+    ],
+    solution:
+      "標本平均の期待値は母平均に等しいため、不偏推定量といえる。",
+    level: 2,
+  },
+  {
+    id: "writeup_integral_meaning_2",
+    topicId: "calc_integral_basic",
+    title: "積分と面積の符号",
+    statement: "定積分の符号が何を表すか説明せよ。",
+    rubric: [
+      "x軸より上/下で符号が変わることを述べている",
+      "面積は符号付きであることを述べている",
+    ],
+    solution:
+      "定積分は符号付き面積なので、関数がx軸より上なら正、下なら負になる。",
+    level: 1,
+  },
+  {
+    id: "writeup_poly_factor_2",
+    topicId: "poly_factor_k_basic",
+    title: "係数条件と因数分解",
+    statement:
+      "多項式にパラメータがあるとき、因数分解できる条件の探し方を説明せよ。",
+    rubric: [
+      "一次因数を仮定して割り切れる条件を調べると述べている",
+      "代入または剰余定理の利用に触れている",
+      "条件式を解いて $k$ を決める方針が書けている",
+    ],
+    solution:
+      "一次因数 $(x-\\alpha)$ を仮定し $P(\\alpha)=0$ の条件から $k$ を決める。剰余定理を使うとよい。",
+    level: 2,
+  },
+  {
+    id: "writeup_identity_coeff_2",
+    topicId: "identity_coefficient_basic",
+    title: "係数比較の考え方",
+    statement:
+      "恒等式で係数比較を行う理由と手順を説明せよ。",
+    rubric: [
+      "恒等式は全ての $x$ で成り立つことに触れている",
+      "同次数の係数を比較する方針が書けている",
+      "必要なら代入法との違いに触れている",
+    ],
+    solution:
+      "恒等式は全ての $x$ で成り立つため、同次数の係数を比較して未知係数を求める。",
+    level: 1,
+  },
+  {
+    id: "writeup_trig_double_2",
+    topicId: "trig_double_angle_basic",
+    title: "二倍角公式の使い分け",
+    statement: "二倍角公式の3つの形を使い分ける理由を説明せよ。",
+    rubric: [
+      "$\\sin^2\\theta$ や $\\cos^2\\theta$ の形に応じて選ぶと述べている",
+      "式変形の目的（統一・簡約）に触れている",
+    ],
+    solution:
+      "二倍角は $\\cos 2\\theta=1-2\\sin^2\\theta=2\\cos^2\\theta-1$ など形が複数ある。目的の式に合わせて使い分ける。",
+    level: 2,
+  },
+  {
+    id: "writeup_calc_derivative_2",
+    topicId: "calc_derivative_basic",
+    title: "導関数の意味",
+    statement: "導関数 $f'(x)$ の意味を言葉で説明せよ。",
+    rubric: [
+      "接線の傾きとしての意味を述べている",
+      "変化率の極限として説明している",
+    ],
+    solution:
+      "導関数は接線の傾きであり、平均との差分の極限としての瞬間変化率を表す。",
+    level: 1,
+  },
+  {
+    id: "writeup_calc_tangent_2",
+    topicId: "calc_tangent_line_basic",
+    title: "接線の式の求め方",
+    statement:
+      "関数 $y=f(x)$ の点 $x=a$ における接線の式を求める手順を説明せよ。",
+    rubric: [
+      "傾きが $f'(a)$ であることを述べている",
+      "点 $(a, f(a))$ を通る直線を立てると述べている",
+      "最終的に $y-f(a)=f'(a)(x-a)$ を示している",
+    ],
+    solution:
+      "接線の傾きは $f'(a)$、点は $(a,f(a))$。よって $y-f(a)=f'(a)(x-a)$。",
+    level: 1,
+  },
+  {
+    id: "writeup_calc_area_2",
+    topicId: "calc_area_basic",
+    title: "面積計算の基本",
+    statement: "2曲線で囲まれた面積の求め方を説明せよ。",
+    rubric: [
+      "上側-下側の関数差を積分すると述べている",
+      "交点を求めて積分区間を決めることに触れている",
+    ],
+    solution:
+      "交点で区間を分け、上側の関数から下側の関数を引いた差を積分して面積を求める。",
+    level: 1,
+  },
+  {
+    id: "writeup_prob_combi_2",
+    topicId: "prob_combi_basic",
+    title: "場合分けの重要性",
+    statement:
+      "確率の計算で場合分けが必要になる理由を説明せよ。",
+    rubric: [
+      "事象が重ならない部分に分けると数えやすいことを述べている",
+      "全体の場合の数も同様に分ける必要に触れている",
+    ],
+    solution:
+      "重なりがあると数え漏れや重複が起こるため、互いに排反な場合に分けて数えるのが基本。",
+    level: 1,
+  },
+  {
+    id: "writeup_exp_log_prop_2",
+    topicId: "exp_log_property_basic",
+    title: "対数の性質の使い道",
+    statement:
+      "対数の性質（積→和、商→差）を使う利点を説明せよ。",
+    rubric: [
+      "計算や変形が容易になることを述べている",
+      "指数が前に出せることに触れている",
+    ],
+    solution:
+      "積や商を和・差に変換でき、複雑な計算や方程式の整理がしやすくなる。指数を前に出せるのも利点。",
+    level: 1,
+  },
+  {
+    id: "writeup_trig_radian_2",
+    topicId: "trig_radian_basic",
+    title: "ラジアンと円周率",
+    statement:
+      "ラジアンが円周率 $\\pi$ と結び付いている理由を説明せよ。",
+    rubric: [
+      "弧長=半径×角度の定義に触れている",
+      "半径1の円での弧長が角度そのものになると述べている",
+    ],
+    solution:
+      "ラジアンは弧長/半径で定義され、半径1の円では弧長が角度になる。円周は $2\\pi$ だから $\\pi$ と自然に結び付く。",
+    level: 1,
+  },
+  {
+    id: "writeup_coord_circle_2",
+    topicId: "coord_circle_center_basic",
+    title: "中心と半径の読み取り",
+    statement:
+      "円の方程式から中心と半径を読み取る手順を説明せよ。",
+    rubric: [
+      "平方完成で標準形に直すことを述べている",
+      "中心と半径の対応を明記している",
+    ],
+    solution:
+      "平方完成で $(x-a)^2+(y-b)^2=r^2$ に直し、中心は $(a,b)$、半径は $r$ と読み取る。",
+    level: 1,
+  },
+  {
+    id: "writeup_vector_unit_2",
+    topicId: "vector_unit_basic",
+    title: "単位ベクトルの意味",
+    statement:
+      "単位ベクトルが「方向を表す」理由を説明せよ。",
+    rubric: [
+      "大きさが1であることを述べている",
+      "長さの情報が除かれ方向だけになることに触れている",
+    ],
+    solution:
+      "単位ベクトルは大きさが1なので長さの情報が消え、方向のみを表す。",
+    level: 1,
+  },
+  {
+    id: "writeup_complex_conjugate_2",
+    topicId: "complex_conjugate_basic",
+    title: "共役複素数の役割",
+    statement:
+      "共役複素数を使うと何が便利か説明せよ。",
+    rubric: [
+      "積が実数になることを述べている",
+      "分母の有理化や絶対値計算に触れている",
+    ],
+    solution:
+      "共役を掛けると積が実数になり、分母の有理化や絶対値計算が簡単になる。",
+    level: 1,
+  },
+  {
+    id: "writeup_prob_basic_3",
+    topicId: "prob_basic",
+    title: "独立性の確認",
+    statement: "2つの事象が独立であるかを判断する方法を説明せよ。",
+    rubric: [
+      "$P(A\\cap B)=P(A)P(B)$ を用いることを述べている",
+      "$P(A|B)=P(A)$ の同値条件に触れている",
+    ],
+    solution:
+      "$P(A\\cap B)=P(A)P(B)$ が成り立てば独立。条件付き確率で $P(A|B)=P(A)$ でも判断できる。",
+    level: 2,
+  },
+  {
+    id: "writeup_exp_log_equation_3",
+    topicId: "exp_log_equations_basic",
+    title: "対数方程式の解法手順",
+    statement:
+      "対数方程式を解くときの標準的な手順を説明せよ。",
+    rubric: [
+      "定義域の確認を最初に行うと述べている",
+      "指数化して方程式を解く手順を述べている",
+      "得られた解を定義域で検証すると書いている",
+    ],
+    solution:
+      "まず定義域を確認し、両辺を指数化して方程式を解く。最後に定義域に合う解だけを残す。",
+    level: 2,
+  },
+  {
+    id: "writeup_trig_period_3",
+    topicId: "trig_period_basic",
+    title: "周期の読み取り",
+    statement: "三角関数 $y=\\sin(kx)$ の周期の求め方を説明せよ。",
+    rubric: [
+      "基本周期 $2\\pi$ を述べている",
+      "$k$ 倍で周期が $\\frac{2\\pi}{k}$ になることを述べている",
+    ],
+    solution:
+      "基本周期は $2\\pi$。$x$ が $k$ 倍されるので周期は $\\frac{2\\pi}{k}$ になる。",
+    level: 1,
+  },
+  {
+    id: "writeup_stats_ci_3",
+    topicId: "stats_confidence_interval_basic",
+    title: "信頼区間の幅",
+    statement: "信頼区間の幅が何に依存するか説明せよ。",
+    rubric: [
+      "標本数が増えると幅が狭くなることを述べている",
+      "標準偏差や信頼係数に依存することに触れている",
+    ],
+    solution:
+      "幅は標準偏差や信頼係数に依存し、標本数が増えると標準誤差が小さくなって幅は狭くなる。",
+    level: 2,
+  },
+  {
+    id: "writeup_vector_projection_3",
+    topicId: "vector_projection_basic",
+    title: "射影の意味",
+    statement: "ベクトルの射影が何を表しているか説明せよ。",
+    rubric: [
+      "一方のベクトル方向の成分を表すことを述べている",
+      "内積を使って計算できると触れている",
+    ],
+    solution:
+      "射影は特定方向に沿った成分の大きさを表し、内積で計算できる。",
+    level: 1,
+  },
+  {
+    id: "writeup_coord_distance_3",
+    topicId: "coord_distance_point_line_basic",
+    title: "点と直線の距離",
+    statement:
+      "点と直線の距離公式がどのように導かれるか説明せよ。",
+    rubric: [
+      "垂線の長さとして距離を捉えている",
+      "直線の一般形 $ax+by+c=0$ を使うと述べている",
+    ],
+    solution:
+      "点から直線への垂線の長さとして距離を考え、直線 $ax+by+c=0$ に対して公式 $\\frac{|ax_0+by_0+c|}{\\sqrt{a^2+b^2}}$ を得る。",
+    level: 2,
+  },
+  {
+    id: "writeup_poly_factor_3",
+    topicId: "poly_factor_k_basic",
+    title: "整式の割り切れ条件",
+    statement:
+      "多項式が $(x-a)$ で割り切れる条件を説明せよ。",
+    rubric: [
+      "剰余定理 $P(a)=0$ を明記している",
+      "割り切れの確認として代入を使うと述べている",
+    ],
+    solution:
+      "剰余定理より、$(x-a)$ で割り切れる条件は $P(a)=0$。",
+    level: 1,
+  },
+  {
+    id: "writeup_binomial_middle_3",
+    topicId: "binomial_middle_coeff_basic",
+    title: "中央の係数の求め方",
+    statement:
+      "$(a+b)^n$ の中央の係数の求め方を説明せよ。",
+    rubric: [
+      "二項係数 $\\binom{n}{k}$ を使うことを述べている",
+      "$n$ が偶数/奇数で中央項の位置が変わることに触れている",
+    ],
+    solution:
+      "$(a+b)^n$ の係数は $\\binom{n}{k}$。$n$ が偶数なら $k=\\frac{n}{2}$、奇数なら中央は2項で $k=\\frac{n-1}{2},\\frac{n+1}{2}$。",
+    level: 2,
+  },
+  {
+    id: "writeup_identity_coeff_3",
+    topicId: "identity_coefficient_basic",
+    title: "恒等式と代入法",
+    statement: "恒等式で係数比較と代入法をどう使い分けるか説明せよ。",
+    rubric: [
+      "係数比較は一般形で一度に解けると述べている",
+      "代入法は簡便だが必要条件になる点に触れている",
+    ],
+    solution:
+      "係数比較は全ての $x$ で成り立つ性質を使うので確実。代入法は手軽だが条件が不足する場合があるため、必要に応じて使い分ける。",
+    level: 2,
+  },
+  {
+    id: "writeup_complex_modulus_3",
+    topicId: "complex_modulus_basic",
+    title: "絶対値の幾何学的意味",
+    statement: "複素数の絶対値の幾何学的意味を説明せよ。",
+    rubric: [
+      "原点からの距離であることを述べている",
+      "座標表示 $z=x+iy$ に触れている",
+    ],
+    solution:
+      "複素数 $z=x+iy$ の絶対値 $|z|$ は複素平面で原点から点 $(x,y)$ までの距離を表す。",
+    level: 1,
+  },
+  {
+    id: "writeup_quad_graph_3",
+    topicId: "quad_graph_basic",
+    title: "グラフの形の判断",
+    statement: "二次関数のグラフの形を係数から判断する方法を説明せよ。",
+    rubric: [
+      "$a$ の符号で開きが決まることを述べている",
+      "頂点の位置が $b,c$ で決まることに触れている",
+    ],
+    solution:
+      "$a>0$ なら上に開き、$a<0$ なら下に開く。軸は $x=-\\frac{b}{2a}$ で頂点位置が決まる。",
+    level: 1,
+  },
+  {
+    id: "writeup_quad_inequality_3",
+    topicId: "quad_inequality_basic",
+    title: "判別式の役割",
+    statement: "二次不等式で判別式を使う理由を説明せよ。",
+    rubric: [
+      "実数解の有無で符号の変化が決まることを述べている",
+      "グラフとx軸の交点の有無に触れている",
+    ],
+    solution:
+      "判別式は実数解の有無を決め、放物線がx軸と交わるかどうかを判断する。交点の有無で符号の変化が決まる。",
+    level: 1,
+  },
+  {
+    id: "writeup_geo_sine_cosine_law_3",
+    topicId: "geo_sine_cosine_law_basic",
+    title: "正弦定理の活用",
+    statement: "正弦定理を使って角を求める流れを説明せよ。",
+    rubric: [
+      "向かい合う辺と角の比を用いることを述べている",
+      "未知角を逆三角関数で求めることに触れている",
+    ],
+    solution:
+      "正弦定理 $\\frac{a}{\\sin A}=\\frac{b}{\\sin B}=2R$ を使い、既知の辺と角の比から未知角を求める。",
+    level: 2,
+  },
+  {
+    id: "writeup_combi_basic_3",
+    topicId: "combi_basic",
+    title: "同じものを含む並べ方",
+    statement: "同じものを含む並べ方の数え方を説明せよ。",
+    rubric: [
+      "全てを区別した場合から割る考えを述べている",
+      "階乗で割る理由を述べている",
+    ],
+    solution:
+      "同じものを区別した並べ方は $n!$。同じものの並び替えが重複するため、それぞれの個数の階乗で割る。",
+    level: 2,
+  },
+  {
+    id: "writeup_exp_log_3",
+    topicId: "exp_log_basic",
+    title: "指数関数と対数関数の関係",
+    statement:
+      "指数関数と対数関数が逆関数であることを説明せよ。",
+    rubric: [
+      "$\\log_a(a^x)=x$ を示している",
+      "$a^{\\log_a x}=x$ を示している",
+    ],
+    solution:
+      "定義より $\\log_a(a^x)=x$、また $a^{\\log_a x}=x$ が成り立つので互いに逆関数。",
+    level: 1,
+  },
+  {
+    id: "writeup_trig_identities_3",
+    topicId: "trig_identities_basic",
+    title: "恒等式の確認方法",
+    statement: "三角恒等式が正しいことを確認する手順を説明せよ。",
+    rubric: [
+      "片側を変形してもう一方に合わせると述べている",
+      "条件（定義域）を意識すると書いている",
+    ],
+    solution:
+      "一方の式を既知の恒等式で変形し、もう一方と一致することを示す。定義域の確認も行う。",
+    level: 1,
+  },
+  {
+    id: "writeup_vector_inner_3",
+    topicId: "vector_inner_basic",
+    title: "角度の求め方",
+    statement: "内積でベクトルのなす角を求める方法を説明せよ。",
+    rubric: [
+      "$\\vec{a}\\cdot\\vec{b}=|a||b|\\cos\\theta$ を述べている",
+      "成分から内積を計算することに触れている",
+    ],
+    solution:
+      "内積の公式 $\\vec{a}\\cdot\\vec{b}=|a||b|\\cos\\theta$ を使い、成分から内積を計算して角度を求める。",
+    level: 2,
+  },
+  {
+    id: "writeup_stats_mean_3",
+    topicId: "stats_sample_mean_basic",
+    title: "標本平均のばらつき",
+    statement: "標本平均のばらつきが何に依存するか説明せよ。",
+    rubric: [
+      "標本数に依存することを述べている",
+      "標準偏差や標準誤差の概念に触れている",
+    ],
+    solution:
+      "標本数が増えると標準誤差が小さくなり、標本平均のばらつきは減る。母標準偏差にも依存する。",
+    level: 2,
+  },
+  {
+    id: "writeup_calc_integral_3",
+    topicId: "calc_integral_basic",
+    title: "不定積分との関係",
+    statement: "定積分と不定積分の関係を説明せよ。",
+    rubric: [
+      "原始関数の差で表せることを述べている",
+      "微分積分の基本定理に触れている",
+    ],
+    solution:
+      "微分積分の基本定理より、$\\int_a^b f(x)\\,dx=F(b)-F(a)$（$F$ は原始関数）として表せる。",
+    level: 2,
+  },
+  {
+    id: "writeup_seq_arithmetic_sum_3",
+    topicId: "seq_arithmetic_sum_basic",
+    title: "等差数列の和の応用",
+    statement: "等差数列の和が求まると何が便利か説明せよ。",
+    rubric: [
+      "等差的に増減する量の合計を扱えると述べている",
+      "具体的な応用例があると良い",
+    ],
+    solution:
+      "等差的に増える量の合計を効率的に計算でき、階段状の合計や総和の問題に応用できる。",
+    level: 1,
+  },
+  {
+    id: "writeup_prob_complement_3",
+    topicId: "prob_complement_basic",
+    title: "余事象の使いどころ",
+    statement: "余事象を使うと計算が簡単になる場面を説明せよ。",
+    rubric: [
+      "求めたい事象が数えにくい場合と述べている",
+      "全体から引く方針を明記している",
+    ],
+    solution:
+      "求めたい事象が複雑なとき、補集合（余事象）を数えて 1 から引くと簡単になる。",
+    level: 1,
+  },
+  {
+    id: "writeup_trig_addition_3",
+    topicId: "trig_addition_basic",
+    title: "加法定理の活用",
+    statement: "加法定理がどのような場面で有効か説明せよ。",
+    rubric: [
+      "角の和差を単一角に変換できることを述べている",
+      "合成や変形に使えることに触れている",
+    ],
+    solution:
+      "角の和差を単一角の三角関数に変換できるので、合成や恒等変形に有効。",
+    level: 1,
+  },
+  {
+    id: "writeup_algebra_ineq_3",
+    topicId: "algebra_ineq_basic",
+    title: "一次不等式の解き方",
+    statement: "一次不等式の解き方で注意すべき点を説明せよ。",
+    rubric: [
+      "負の数で割ると不等号が反転することを述べている",
+      "解の範囲として表すことに触れている",
+    ],
+    solution:
+      "不等式を変形するとき、負の数で割ると不等号が反転する点に注意する。解は数直線の範囲で表す。",
+    level: 1,
+  },
+  {
+    id: "writeup_set_operations_3",
+    topicId: "set_operations_basic",
+    title: "集合とベン図",
+    statement: "和集合・共通部分をベン図で説明せよ。",
+    rubric: [
+      "和集合がどちらかに含まれる全体と述べている",
+      "共通部分が両方に含まれる部分と述べている",
+    ],
+    solution:
+      "和集合はどちらか一方に属する領域全体、共通部分は両方に共通する領域としてベン図で表す。",
+    level: 1,
+  },
+  {
+    id: "writeup_identity_eval_3",
+    topicId: "identity_eval_basic",
+    title: "恒等式の使い道",
+    statement: "恒等式を用いる利点を説明せよ。",
+    rubric: [
+      "式変形を簡単にできることを述べている",
+      "計算量の削減や整理に触れている",
+    ],
+    solution:
+      "恒等式を使うと式変形が簡単になり、計算量を減らして整理できる。",
+    level: 1,
+  },
+  {
+    id: "writeup_inequality_amgm_3",
+    topicId: "inequality_amgm_basic",
+    title: "AM-GMの使いどころ",
+    statement: "AM-GMの不等式が有効な場面を説明せよ。",
+    rubric: [
+      "積と和が絡む最小最大に触れている",
+      "等号成立条件を意識すると述べている",
+    ],
+    solution:
+      "和と積が絡む最小最大問題で有効。等号成立が揃う点を意識して条件を満たす。",
+    level: 2,
+  },
+  {
+    id: "writeup_trig_double_3",
+    topicId: "trig_double_angle_basic",
+    title: "半角への変換",
+    statement: "二倍角公式を使って半角の式を作る方法を説明せよ。",
+    rubric: [
+      "$\\sin^2\\theta$ や $\\cos^2\\theta$ の形へ変形できることを述べている",
+      "恒等式と組み合わせると述べている",
+    ],
+    solution:
+      "$\\cos 2\\theta=1-2\\sin^2\\theta$ などを変形して $\\sin^2\\theta$ や $\\cos^2\\theta$ を表す。",
+    level: 2,
+  },
+  {
+    id: "writeup_exp_log_domain_3",
+    topicId: "exp_log_domain_basic",
+    title: "定義域の確認",
+    statement: "対数関数の定義域確認が重要な理由を説明せよ。",
+    rubric: [
+      "真数が正である必要を述べている",
+      "解の候補を排除する必要に触れている",
+    ],
+    solution:
+      "対数は真数が正でなければならず、解の候補が定義域外だと無効になるため最初に確認する。",
+    level: 1,
+  },
+  {
+    id: "writeup_coord_line_parallel_3",
+    topicId: "coord_line_parallel_perp_basic",
+    title: "平行・垂直の判定",
+    statement: "直線の平行・垂直を傾きで判定する方法を説明せよ。",
+    rubric: [
+      "平行なら傾きが等しいと述べている",
+      "垂直なら傾きの積が -1 と述べている",
+    ],
+    solution:
+      "傾きが等しければ平行、傾きの積が -1 なら垂直。",
+    level: 1,
+  },
+  {
+    id: "writeup_poly_remainder_3",
+    topicId: "poly_remainder_basic",
+    title: "剰余定理の活用",
+    statement: "剰余定理がどのような場面で便利か説明せよ。",
+    rubric: [
+      "割り算の剰余を代入で得られると述べている",
+      "条件決定に使えることに触れている",
+    ],
+    solution:
+      "割り算の剰余は代入で求まるため、係数条件や値の決定に有効。",
+    level: 1,
+  },
+  {
+    id: "writeup_seq_geo_limit_3",
+    topicId: "seq_geometric_limit_basic",
+    title: "等比数列の極限条件",
+    statement: "等比数列の極限が存在する条件を説明せよ。",
+    rubric: [
+      "公比 $r$ の大きさに依存することを述べている",
+      "$|r|<1$ で 0 に収束することを述べている",
+    ],
+    solution:
+      "等比数列 $a_n=ar^{n-1}$ は $|r|<1$ なら 0 に収束し、$|r|\\ge 1$ では発散する。",
+    level: 2,
+  },
+  {
+    id: "writeup_seq_recurrence_3",
+    topicId: "seq_recurrence_basic",
+    title: "漸化式の扱い方",
+    statement: "一次の漸化式を解く基本手順を説明せよ。",
+    rubric: [
+      "一般項を求める方針を述べている",
+      "初期条件を利用すると述べている",
+    ],
+    solution:
+      "漸化式を変形して一般項を求め、初期条件で定数を決めるのが基本。",
+    level: 1,
+  },
+  {
+    id: "writeup_stats_se_3",
+    topicId: "stats_standard_error_basic",
+    title: "標準誤差の意味",
+    statement: "標準誤差が何を表すか説明せよ。",
+    rubric: [
+      "標本平均のばらつきの尺度であると述べている",
+      "$\\sigma/\\sqrt{n}$ の形に触れている",
+    ],
+    solution:
+      "標準誤差は標本平均のばらつきの尺度で、$\\sigma/\\sqrt{n}$ で表される。",
+    level: 1,
+  },
+  {
+    id: "writeup_stats_corr_3",
+    topicId: "stats_correlation_basic",
+    title: "相関係数の解釈",
+    statement: "相関係数の符号と大きさの意味を説明せよ。",
+    rubric: [
+      "符号で正/負の関係を述べている",
+      "大きさで強さを述べている",
+    ],
+    solution:
+      "符号は正の相関・負の相関を示し、絶対値が1に近いほど関係が強い。",
+    level: 1,
+  },
+  {
+    id: "writeup_vector_parallel_3",
+    topicId: "vector_parallel_basic",
+    title: "平行条件の判定",
+    statement: "2つのベクトルが平行である条件を説明せよ。",
+    rubric: [
+      "スカラー倍の関係を述べている",
+      "成分比が等しいことに触れている",
+    ],
+    solution:
+      "一方が他方のスカラー倍であれば平行。成分比が等しいことでも判定できる。",
+    level: 1,
+  },
+  {
+    id: "writeup_complex_argument_3",
+    topicId: "complex_argument_basic",
+    title: "偏角の幾何学的意味",
+    statement: "偏角が何を表しているか説明せよ。",
+    rubric: [
+      "原点からの方向角であると述べている",
+      "複素平面での位置と結び付けている",
+    ],
+    solution:
+      "偏角は複素平面で原点から点への方向角を表す。",
+    level: 1,
+  },
+  {
+    id: "writeup_conic_circle_3",
+    topicId: "conic_circle_basic",
+    title: "中心移動の意味",
+    statement: "円の方程式で中心を移動する意味を説明せよ。",
+    rubric: [
+      "標準形で中心が座標として現れると述べている",
+      "平行移動による表現と触れている",
+    ],
+    solution:
+      "$(x-a)^2+(y-b)^2=r^2$ は中心 $(a,b)$ の円で、平行移動した座標系で表せる。",
+    level: 1,
+  },
+  {
+    id: "writeup_calc_derivative_3",
+    topicId: "calc_derivative_basic",
+    title: "微分係数の求め方",
+    statement: "微分係数の定義を用いた求め方を説明せよ。",
+    rubric: [
+      "差分商の極限を述べている",
+      "式 $\\lim_{h\\to 0}\\frac{f(x+h)-f(x)}{h}$ に触れている",
+    ],
+    solution:
+      "微分係数は差分商の極限で、$f'(x)=\\lim_{h\\to 0}\\frac{f(x+h)-f(x)}{h}$。",
+    level: 2,
+  },
+  {
+    id: "writeup_calc_tangent_3",
+    topicId: "calc_tangent_line_basic",
+    title: "接線と微分",
+    statement: "接線の傾きが微分係数である理由を説明せよ。",
+    rubric: [
+      "割線の傾きの極限として説明している",
+      "接線の傾きになることを述べている",
+    ],
+    solution:
+      "割線の傾きの極限が微分係数であり、その極限が接線の傾きになる。",
+    level: 2,
+  },
+  {
+    id: "writeup_calc_area_3",
+    topicId: "calc_area_basic",
+    title: "符号付き面積の扱い",
+    statement: "面積計算で符号に注意する理由を説明せよ。",
+    rubric: [
+      "積分は符号付き面積であることを述べている",
+      "必要なら絶対値や区間分割を使うと述べている",
+    ],
+    solution:
+      "積分は符号付き面積なので、上下が入れ替わると負になる。必要に応じて絶対値や区間分割で面積を求める。",
+    level: 2,
+  },
+  {
+    id: "writeup_prob_combi_3",
+    topicId: "prob_combi_basic",
+    title: "場合の数の設計",
+    statement: "確率計算で場合の数を設計する手順を説明せよ。",
+    rubric: [
+      "全体を同様に確からしい単位に分けると述べている",
+      "有利な場合を同じ単位で数えると述べている",
+    ],
+    solution:
+      "全体を同様に確からしい単位で数え、有利な場合も同じ単位で数えることで確率が求められる。",
+    level: 1,
+  },
+  {
+    id: "writeup_exp_log_prop_3",
+    topicId: "exp_log_property_basic",
+    title: "指数への戻し方",
+    statement: "対数の性質を使って指数式に戻す流れを説明せよ。",
+    rubric: [
+      "和や差を積や商に戻すことを述べている",
+      "最後に指数を取ると述べている",
+    ],
+    solution:
+      "対数の和・差を積・商に戻し、最後に指数化して元の式に戻す。",
+    level: 2,
+  },
+  {
+    id: "writeup_trig_radian_3",
+    topicId: "trig_radian_basic",
+    title: "度数法との変換",
+    statement: "度数法と弧度法の変換方法を説明せよ。",
+    rubric: [
+      "$180^\\circ=\\pi$ を用いることを述べている",
+      "具体的な変換式に触れている",
+    ],
+    solution:
+      "度数法と弧度法は $180^\\circ=\\pi$ を使って換算する。$x^\\circ=\\frac{x\\pi}{180}$。",
+    level: 1,
+  },
+  {
+    id: "writeup_coord_circle_3",
+    topicId: "coord_circle_center_basic",
+    title: "一般形から標準形",
+    statement: "円の一般形から標準形への変換手順を説明せよ。",
+    rubric: [
+      "平方完成を使うと述べている",
+      "中心と半径が読み取れることに触れている",
+    ],
+    solution:
+      "平方完成して $(x-a)^2+(y-b)^2=r^2$ に直すと中心と半径が読み取れる。",
+    level: 1,
+  },
+  {
+    id: "writeup_vector_unit_3",
+    topicId: "vector_unit_basic",
+    title: "正規化の理由",
+    statement: "ベクトルを正規化する理由を説明せよ。",
+    rubric: [
+      "方向情報だけを取り出すと述べている",
+      "内積や投影で便利になることに触れている",
+    ],
+    solution:
+      "正規化すると方向だけが残り、内積や投影の計算が簡単になる。",
+    level: 1,
+  },
+  {
+    id: "writeup_complex_conjugate_3",
+    topicId: "complex_conjugate_basic",
+    title: "実部・虚部の取り出し",
+    statement: "共役を使って実部・虚部を取り出す流れを説明せよ。",
+    rubric: [
+      "$z$ と $\\overline{z}$ の和や差を使うことを述べている",
+      "実部と虚部が式で表せることに触れている",
+    ],
+    solution:
+      "複素数 $z$ と共役 $\\overline{z}$ を用いて $\\Re z=\\frac{z+\\overline{z}}{2}$、$\\Im z=\\frac{z-\\overline{z}}{2i}$ と表せる。",
+    level: 2,
+  },
+  {
+    id: "writeup_quad_graph_4",
+    topicId: "quad_graph_basic",
+    title: "グラフの対称性",
+    statement: "二次関数のグラフが軸に関して対称である理由を説明せよ。",
+    rubric: [
+      "軸 $x=\\alpha$ に対して $x=\\alpha\\pm t$ を比較すると述べている",
+      "同じ $y$ になることを示している",
+    ],
+    solution:
+      "軸を $x=\\alpha$ とすると、$x=\\alpha\\pm t$ のとき $y$ が同じ値になるため、軸に関して対称になる。",
+    level: 2,
+  },
+  {
+    id: "writeup_exp_log_equation_4",
+    topicId: "exp_log_equations_basic",
+    title: "底の統一",
+    statement:
+      "指数・対数方程式で底を統一する理由を説明せよ。",
+    rubric: [
+      "同じ底にすると比較や整理が容易と述べている",
+      "変換によって等式が解けると述べている",
+    ],
+    solution:
+      "底を統一すると指数の比較や対数の性質が使いやすくなり、方程式を単純化できる。",
+    level: 1,
+  },
+  {
+    id: "writeup_stats_ci_4",
+    topicId: "stats_confidence_interval_basic",
+    title: "信頼区間と信頼度",
+    statement: "信頼度を上げると信頼区間がどう変わるか説明せよ。",
+    rubric: [
+      "信頼度が上がると区間が広くなると述べている",
+      "誤差を小さくするためのトレードオフに触れている",
+    ],
+    solution:
+      "信頼度を上げると区間は広くなる。確実性と区間の狭さはトレードオフ。",
+    level: 1,
+  },
+  {
+    id: "writeup_coord_distance_4",
+    topicId: "coord_distance_point_line_basic",
+    title: "距離公式の使い分け",
+    statement: "点と直線の距離公式を使う場面を説明せよ。",
+    rubric: [
+      "垂線の長さを求めたい場面と述べている",
+      "座標で計算を簡単にできると触れている",
+    ],
+    solution:
+      "点から直線への最短距離（垂線の長さ）を求めたいときに使う。座標で計算できるため便利。",
+    level: 1,
+  },
+  {
+    id: "writeup_vector_inner_4",
+    topicId: "vector_inner_basic",
+    title: "内積と長さ",
+    statement: "内積を使ってベクトルの長さを表す方法を説明せよ。",
+    rubric: [
+      "$\\vec{a}\\cdot\\vec{a}=|a|^2$ を述べている",
+      "成分から計算できることに触れている",
+    ],
+    solution:
+      "内積より $\\vec{a}\\cdot\\vec{a}=|a|^2$。成分から内積を計算して長さが求まる。",
+    level: 1,
+  },
+  {
+    id: "writeup_trig_period_4",
+    topicId: "trig_period_basic",
+    title: "周期の変形",
+    statement: "三角関数の周期を変形で確かめる方法を説明せよ。",
+    rubric: [
+      "$\\sin(x+2\\pi)=\\sin x$ の性質に触れている",
+      "一般形で周期を判断できると述べている",
+    ],
+    solution:
+      "基本性質 $\\sin(x+2\\pi)=\\sin x$ を使い、置換して同じ値になる周期を確認する。",
+    level: 2,
+  },
+  {
+    id: "writeup_prob_basic_4",
+    topicId: "prob_basic",
+    title: "確率の加法",
+    statement: "確率の加法定理の意味を説明せよ。",
+    rubric: [
+      "排反なら $P(A\\cup B)=P(A)+P(B)$ と述べている",
+      "一般形で重なりを引くと述べている",
+    ],
+    solution:
+      "排反なら和でよく、一般には $P(A\\cup B)=P(A)+P(B)-P(A\\cap B)$ と重なりを引く。",
+    level: 2,
+  },
+  {
+    id: "writeup_combi_basic_4",
+    topicId: "combi_basic",
+    title: "積の法則の応用",
+    statement: "複数段階の選び方を数えるときの考え方を説明せよ。",
+    rubric: [
+      "順に選ぶと掛け合わせると述べている",
+      "例や一般的な式で説明できている",
+    ],
+    solution:
+      "各段階の選び方を順に掛け合わせることで全体の数が得られる（積の法則）。",
+    level: 1,
+  },
+  {
+    id: "writeup_calc_integral_4",
+    topicId: "calc_integral_basic",
+    title: "面積以外の意味",
+    statement: "定積分が面積以外に表す量の例を説明せよ。",
+    rubric: [
+      "累積量や総和としての意味に触れている",
+      "具体例（移動距離など）を述べている",
+    ],
+    solution:
+      "定積分は面積以外にも累積量を表す。例えば速度の積分は移動距離になる。",
+    level: 2,
+  },
+  {
+    id: "writeup_complex_modulus_4",
+    topicId: "complex_modulus_basic",
+    title: "絶対値の計算",
+    statement: "複素数の絶対値を成分で計算する方法を説明せよ。",
+    rubric: [
+      "$|x+iy|=\\sqrt{x^2+y^2}$ を述べている",
+      "共役を使う方法にも触れていると良い",
+    ],
+    solution:
+      "$|x+iy|=\\sqrt{x^2+y^2}$。また $|z|^2=z\\overline{z}$ を使って計算できる。",
+    level: 1,
+  },
+  {
+    id: "writeup_quad_inequality_4",
+    topicId: "quad_inequality_basic",
+    title: "解の範囲の書き方",
+    statement: "二次不等式の解の範囲を正しく書く方法を説明せよ。",
+    rubric: [
+      "区間の形で表すことを述べている",
+      "等号の有無を不等号に合わせると述べている",
+    ],
+    solution:
+      "解は区間で表し、$\\le,\\ge$ のとき端点を含む。$<,>$ なら端点を含めない。",
+    level: 1,
+  },
+  {
+    id: "writeup_geo_sine_cosine_law_4",
+    topicId: "geo_sine_cosine_law_basic",
+    title: "余弦定理から角を求める",
+    statement: "余弦定理を使って角を求める方法を説明せよ。",
+    rubric: [
+      "三辺が分かれば角が求められると述べている",
+      "余弦の逆関数を使うと触れている",
+    ],
+    solution:
+      "三辺が分かれば余弦定理で $\\cos C$ を求め、$\\arccos$ で角を求める。",
+    level: 2,
+  },
+  {
+    id: "writeup_exp_log_4",
+    topicId: "exp_log_basic",
+    title: "グラフの特徴",
+    statement: "指数関数と対数関数のグラフの特徴を説明せよ。",
+    rubric: [
+      "単調性に触れている",
+      "通る点や漸近線に触れている",
+    ],
+    solution:
+      "指数関数は単調増加で $(0,1)$ を通る。対数関数も単調増加で $(1,0)$ を通り、互いに対称。",
+    level: 2,
+  },
+  {
+    id: "writeup_trig_identities_4",
+    topicId: "trig_identities_basic",
+    title: "恒等式の導出",
+    statement: "三角恒等式を導く方法を説明せよ。",
+    rubric: [
+      "単位円の定義に触れている",
+      "基本恒等式から派生させると述べている",
+    ],
+    solution:
+      "単位円で $\\sin^2\\theta+\\cos^2\\theta=1$ を得て、これを基に他の恒等式を導く。",
+    level: 2,
+  },
+  {
+    id: "writeup_stats_mean_4",
+    topicId: "stats_sample_mean_basic",
+    title: "標本平均の使いどころ",
+    statement: "標本平均が実務で使われる場面を説明せよ。",
+    rubric: [
+      "母平均の推定に使うと述べている",
+      "ばらつきとの関係に触れている",
+    ],
+    solution:
+      "標本平均は母平均の推定に使われ、標準誤差と合わせて推定の精度を議論できる。",
+    level: 1,
+  },
+  {
+    id: "writeup_seq_arithmetic_sum_4",
+    topicId: "seq_arithmetic_sum_basic",
+    title: "等差数列の一般項",
+    statement: "等差数列の一般項の求め方を説明せよ。",
+    rubric: [
+      "公差と初項で表すことを述べている",
+      "$a_n=a_1+(n-1)d$ を示している",
+    ],
+    solution:
+      "等差数列の一般項は $a_n=a_1+(n-1)d$。",
+    level: 1,
+  },
+  {
+    id: "writeup_vector_projection_4",
+    topicId: "vector_projection_basic",
+    title: "射影の計算方法",
+    statement: "射影の計算手順を説明せよ。",
+    rubric: [
+      "内積と長さを使うと述べている",
+      "公式の形に触れている",
+    ],
+    solution:
+      "射影の大きさは $\\frac{\\vec{a}\\cdot\\vec{b}}{|b|}$ の形で求められる（方向ベクトルで調整）。",
+    level: 2,
+  },
+  {
+    id: "writeup_poly_factor_4",
+    topicId: "poly_factor_k_basic",
+    title: "代入で条件決定",
+    statement: "因数分解の条件を代入で決める手順を説明せよ。",
+    rubric: [
+      "候補の因数を仮定すると述べている",
+      "代入で条件式を作ると述べている",
+    ],
+    solution:
+      "候補の因数 $(x-\\alpha)$ を仮定し、$P(\\alpha)=0$ の条件からパラメータを決める。",
+    level: 2,
+  },
+  {
+    id: "writeup_binomial_middle_4",
+    topicId: "binomial_middle_coeff_basic",
+    title: "係数の最大",
+    statement: "二項係数の最大値がどこで生じるか説明せよ。",
+    rubric: [
+      "$k$ が $n/2$ 付近で最大になると述べている",
+      "対称性に触れている",
+    ],
+    solution:
+      "二項係数は $\\binom{n}{k}=\\binom{n}{n-k}$ の対称性があり、$k$ が $n/2$ 付近で最大になる。",
+    level: 2,
+  },
+  {
+    id: "writeup_identity_coeff_4",
+    topicId: "identity_coefficient_basic",
+    title: "次数ごとの比較",
+    statement: "係数比較で次数ごとに比較する理由を説明せよ。",
+    rubric: [
+      "同次数同士が一致する必要があると述べている",
+      "恒等式の性質に触れている",
+    ],
+    solution:
+      "恒等式は全ての $x$ で成立するので、同次数の係数が一致する必要がある。",
+    level: 1,
+  },
+  {
+    id: "writeup_prob_complement_4",
+    topicId: "prob_complement_basic",
+    title: "少なくともの確率",
+    statement: "「少なくとも1回起こる」確率の求め方を説明せよ。",
+    rubric: [
+      "起こらない確率を引くと述べている",
+      "余事象の考え方に触れている",
+    ],
+    solution:
+      "「少なくとも1回」は余事象が「一度も起こらない」なので、その確率を引けばよい。",
+    level: 1,
+  },
+  {
+    id: "writeup_trig_addition_4",
+    topicId: "trig_addition_basic",
+    title: "合成の考え方",
+    statement: "三角関数の合成に加法定理を使う理由を説明せよ。",
+    rubric: [
+      "和差を単一角に変換できることを述べている",
+      "係数の整理に使えると触れている",
+    ],
+    solution:
+      "加法定理で和差を単一角に変換でき、合成の係数を整理できる。",
+    level: 2,
+  },
+  {
+    id: "writeup_algebra_ineq_4",
+    topicId: "algebra_ineq_basic",
+    title: "不等式の解の確認",
+    statement: "不等式の解を確認する方法を説明せよ。",
+    rubric: [
+      "数直線で符号を確認すると述べている",
+      "境界での符号変化を述べている",
+    ],
+    solution:
+      "境界点で区間を分け、符号を確認して解の範囲を決める。",
+    level: 1,
+  },
+  {
+    id: "writeup_set_operations_4",
+    topicId: "set_operations_basic",
+    title: "補集合の意味",
+    statement: "補集合の意味と使い方を説明せよ。",
+    rubric: [
+      "全体集合との差として説明している",
+      "余事象との対応に触れている",
+    ],
+    solution:
+      "補集合は全体集合から集合を除いた部分で、確率では余事象として扱える。",
+    level: 1,
+  },
+  {
+    id: "writeup_identity_eval_4",
+    topicId: "identity_eval_basic",
+    title: "公式の活用",
+    statement: "恒等式を使って計算を簡単にする流れを説明せよ。",
+    rubric: [
+      "置き換えや分解に触れている",
+      "計算量が減ることを述べている",
+    ],
+    solution:
+      "恒等式で式を置き換えたり分解したりすると、計算量が減り整理しやすくなる。",
+    level: 1,
+  },
+  {
+    id: "writeup_inequality_amgm_4",
+    topicId: "inequality_amgm_basic",
+    title: "等号成立条件",
+    statement: "AM-GM の等号成立条件を説明せよ。",
+    rubric: [
+      "全ての変数が等しいと述べている",
+      "最小値・最大値で使うと触れている",
+    ],
+    solution:
+      "AM-GM は各変数が等しいときに等号成立し、最小値問題などで条件を決める手掛かりになる。",
+    level: 2,
+  },
+  {
+    id: "writeup_trig_double_4",
+    topicId: "trig_double_angle_basic",
+    title: "別形の使い分け",
+    statement: "二倍角公式の形を使い分ける理由を説明せよ。",
+    rubric: [
+      "目的の式に合わせると述べている",
+      "変形の容易さに触れている",
+    ],
+    solution:
+      "式に含まれる $\\sin^2$ や $\\cos^2$ の形に合わせると変形が容易になるため、形を使い分ける。",
+    level: 2,
+  },
+  {
+    id: "writeup_exp_log_domain_4",
+    topicId: "exp_log_domain_basic",
+    title: "定義域の落とし穴",
+    statement: "対数の定義域を見落とすと何が起こるか説明せよ。",
+    rubric: [
+      "解として不適切な値が混入することを述べている",
+      "チェックの必要性に触れている",
+    ],
+    solution:
+      "定義域外の値が解として残ってしまう。必ず真数が正か確認する必要がある。",
+    level: 1,
+  },
+  {
+    id: "writeup_coord_line_parallel_4",
+    topicId: "coord_line_parallel_perp_basic",
+    title: "法線ベクトルで判定",
+    statement: "直線の法線ベクトルで平行・垂直を判定する方法を説明せよ。",
+    rubric: [
+      "法線ベクトルの平行が直線の平行を意味すると述べている",
+      "内積0で垂直になることに触れている",
+    ],
+    solution:
+      "直線 $ax+by+c=0$ の法線ベクトルは $(a,b)$。法線が平行なら直線も平行、内積0なら直線は垂直。",
+    level: 2,
+  },
+  {
+    id: "writeup_poly_remainder_4",
+    topicId: "poly_remainder_basic",
+    title: "一次式で割った剰余",
+    statement: "一次式で割った剰余の求め方を説明せよ。",
+    rubric: [
+      "代入で剰余が求まると述べている",
+      "剰余定理に触れている",
+    ],
+    solution:
+      "一次式 $(x-a)$ で割った剰余は $P(a)$。剰余定理で求まる。",
+    level: 1,
+  },
+  {
+    id: "writeup_seq_geo_limit_4",
+    topicId: "seq_geometric_limit_basic",
+    title: "極限と初項",
+    statement: "等比数列の極限が初項に依存するか説明せよ。",
+    rubric: [
+      "$|r|<1$ なら初項に関わらず0に収束と述べている",
+      "他の場合の発散にも触れている",
+    ],
+    solution:
+      "$|r|<1$ なら初項に関わらず0に収束する。$|r|\\ge1$ なら発散して初項に依存する。",
+    level: 2,
+  },
+  {
+    id: "writeup_seq_recurrence_4",
+    topicId: "seq_recurrence_basic",
+    title: "漸化式の見通し",
+    statement: "漸化式を解くときの見通しを説明せよ。",
+    rubric: [
+      "差分を取る・代入する等の方針に触れている",
+      "既知の型に帰着させることを述べている",
+    ],
+    solution:
+      "差分を取る・代入するなどで既知の型（一次・等差・等比）に帰着させ、一般項を求める。",
+    level: 2,
+  },
+  {
+    id: "writeup_stats_se_4",
+    topicId: "stats_standard_error_basic",
+    title: "標準誤差と標本数",
+    statement: "標本数が標準誤差に与える影響を説明せよ。",
+    rubric: [
+      "$\\sigma/\\sqrt{n}$ を述べている",
+      "標本数が増えると減ると述べている",
+    ],
+    solution:
+      "標準誤差は $\\sigma/\\sqrt{n}$ なので、標本数が増えると小さくなる。",
+    level: 1,
+  },
+  {
+    id: "writeup_stats_corr_4",
+    topicId: "stats_correlation_basic",
+    title: "相関と因果",
+    statement: "相関係数と因果関係の違いを説明せよ。",
+    rubric: [
+      "相関は関係の強さを表すと述べている",
+      "因果関係とは別であると述べている",
+    ],
+    solution:
+      "相関は関係の強さを表すだけで、因果関係を直接示すものではない。",
+    level: 2,
+  },
+  {
+    id: "writeup_vector_parallel_4",
+    topicId: "vector_parallel_basic",
+    title: "平行条件と内積",
+    statement: "平行条件を内積で表す方法を説明せよ。",
+    rubric: [
+      "$\\vec{a}\\times\\vec{b}=\\vec{0}$ などの条件に触れている",
+      "成分比例で示せることに触れている",
+    ],
+    solution:
+      "平行なら成分が比例し、（3次元なら）外積がゼロになる。2次元でも比例で判定できる。",
+    level: 2,
+  },
+  {
+    id: "writeup_complex_argument_4",
+    topicId: "complex_argument_basic",
+    title: "偏角の加法",
+    statement: "複素数の積で偏角がどう変わるか説明せよ。",
+    rubric: [
+      "偏角が加法的に変化すると述べている",
+      "極形式に触れている",
+    ],
+    solution:
+      "極形式で $z_1z_2=r_1r_2(\\cos(\\theta_1+\\theta_2)+i\\sin(\\theta_1+\\theta_2))$ となり、偏角は加算される。",
+    level: 2,
+  },
+  {
+    id: "writeup_conic_circle_4",
+    topicId: "conic_circle_basic",
+    title: "円の標準形の利点",
+    statement: "円を標準形にする利点を説明せよ。",
+    rubric: [
+      "中心と半径が直ちに分かると述べている",
+      "図形的に解釈しやすいことに触れている",
+    ],
+    solution:
+      "標準形にすると中心と半径が直ちに分かり、図形的に扱いやすくなる。",
+    level: 1,
+  },
+  {
+    id: "writeup_calc_derivative_4",
+    topicId: "calc_derivative_basic",
+    title: "接線と増減",
+    statement: "導関数の符号が増減を表す理由を説明せよ。",
+    rubric: [
+      "導関数が傾きであることを述べている",
+      "正なら増加、負なら減少と述べている",
+    ],
+    solution:
+      "導関数は接線の傾きなので、正なら増加、負なら減少、0 なら停滞点を意味する。",
+    level: 2,
+  },
+  {
+    id: "writeup_calc_tangent_4",
+    topicId: "calc_tangent_line_basic",
+    title: "接線の判定",
+    statement: "曲線と直線が接する条件を説明せよ。",
+    rubric: [
+      "共有点が1つになる条件に触れている",
+      "方程式が重解をもつと述べている",
+    ],
+    solution:
+      "曲線と直線が接するのは共有点が1つのときで、連立して得られる方程式が重解を持つことが条件。",
+    level: 2,
+  },
+  {
+    id: "writeup_calc_area_4",
+    topicId: "calc_area_basic",
+    title: "面積と区間分割",
+    statement: "面積計算で区間分割が必要な理由を説明せよ。",
+    rubric: [
+      "上下が入れ替わる場合に触れている",
+      "交点で区間を分けると述べている",
+    ],
+    solution:
+      "上下が入れ替わると差の符号が変わるため、交点で区間を分けて積分する必要がある。",
+    level: 2,
+  },
+  {
+    id: "writeup_exp_log_property_4",
+    topicId: "exp_log_property_basic",
+    title: "対数の性質の導出",
+    statement: "対数の性質が成り立つ理由を説明せよ。",
+    rubric: [
+      "指数法則との対応に触れている",
+      "積が和、商が差になる理由を述べている",
+    ],
+    solution:
+      "指数法則 $a^{x+y}=a^xa^y$ を対数で表すと、積が和、商が差になる性質が得られる。",
+    level: 2,
+  },
+  {
+    id: "writeup_trig_radian_4",
+    topicId: "trig_radian_basic",
+    title: "弧度法の利点",
+    statement: "弧度法を使う利点を説明せよ。",
+    rubric: [
+      "三角関数の微分・積分が簡単になると述べている",
+      "弧長と角度が直接対応すると述べている",
+    ],
+    solution:
+      "弧度法では弧長と角度が直接対応し、三角関数の微分・積分の公式が簡潔になる。",
+    level: 2,
+  },
+  {
+    id: "writeup_coord_circle_4",
+    topicId: "coord_circle_center_basic",
+    title: "中心からの距離",
+    statement: "円の方程式が中心からの距離で表される理由を説明せよ。",
+    rubric: [
+      "距離公式に触れている",
+      "中心からの距離が一定と述べている",
+    ],
+    solution:
+      "距離公式で中心 $(a,b)$ からの距離が $r$ と一定になる条件が $(x-a)^2+(y-b)^2=r^2$。",
+    level: 1,
+  },
+  {
+    id: "writeup_vector_unit_4",
+    topicId: "vector_unit_basic",
+    title: "正規化の計算",
+    statement: "ベクトルを正規化する計算手順を説明せよ。",
+    rubric: [
+      "大きさで割ると述べている",
+      "式 $\\vec{a}/|a|$ を示している",
+    ],
+    solution:
+      "ベクトルを正規化するには $\\vec{a}/|a|$ として大きさで割る。",
+    level: 1,
+  },
+  {
+    id: "writeup_complex_conjugate_4",
+    topicId: "complex_conjugate_basic",
+    title: "共役と絶対値",
+    statement: "共役を使って絶対値を表す方法を説明せよ。",
+    rubric: [
+      "$|z|^2=z\\overline{z}$ を述べている",
+      "実数になる理由に触れている",
+    ],
+    solution:
+      "共役を掛けると $z\\overline{z}=|z|^2$ となり実数になる。",
+    level: 1,
+  },
+  {
+    id: "writeup_quad_inequality_5",
+    topicId: "quad_inequality_basic",
+    title: "判別式と解の形",
+    statement: "二次不等式の解の形と判別式の関係を説明せよ。",
+    rubric: [
+      "判別式が負なら符号が変わらないと述べている",
+      "判別式が正なら区間で符号が変わると述べている",
+    ],
+    solution:
+      "判別式が負なら交点がなく符号が変わらない。正なら2交点で区間に分かれ、符号が変わる。",
+    level: 3,
+  },
+  {
+    id: "writeup_exp_log_5",
+    topicId: "exp_log_basic",
+    title: "指数・対数の単調性",
+    statement: "指数関数と対数関数の単調性の理由を説明せよ。",
+    rubric: [
+      "底が1より大きい場合の増加性を述べている",
+      "逆関数として単調性が対応すると述べている",
+    ],
+    solution:
+      "底が $a>1$ のとき指数関数は増加。対数関数はその逆関数なので同様に増加する。",
+    level: 3,
+  },
+  {
+    id: "writeup_trig_identities_5",
+    topicId: "trig_identities_basic",
+    title: "恒等式の変形方針",
+    statement: "三角恒等式の変形で迷わないための方針を説明せよ。",
+    rubric: [
+      "片側を因数分解・共通因数でまとめると述べている",
+      "基本恒等式へ寄せる方針に触れている",
+    ],
+    solution:
+      "一方を因数分解して共通因数を作り、基本恒等式 $\\sin^2+\\cos^2=1$ へ寄せるのが定石。",
+    level: 3,
+  },
+  {
+    id: "writeup_stats_mean_5",
+    topicId: "stats_sample_mean_basic",
+    title: "標本平均と標準誤差",
+    statement: "標本平均と標準誤差の関係を説明せよ。",
+    rubric: [
+      "標本平均のばらつきが標準誤差で表されると述べている",
+      "$\\sigma/\\sqrt{n}$ に触れている",
+    ],
+    solution:
+      "標本平均のばらつきの尺度が標準誤差で、$\\sigma/\\sqrt{n}$ と表される。",
+    level: 3,
+  },
+  {
+    id: "writeup_seq_arithmetic_sum_5",
+    topicId: "seq_arithmetic_sum_basic",
+    title: "和の導出の別解",
+    statement: "等差数列の和を別の方法で導く手順を説明せよ。",
+    rubric: [
+      "平均との差分や平均値×項数の考えに触れている",
+      "最終式へ導くと述べている",
+    ],
+    solution:
+      "等差数列の平均は $(a_1+a_n)/2$。平均×項数で $S_n=\\frac{n(a_1+a_n)}{2}$ を得る。",
+    level: 3,
+  },
+  {
+    id: "writeup_trig_addition_5",
+    topicId: "trig_addition_basic",
+    title: "加法定理の証明方針",
+    statement: "加法定理を導く一般的な方針を説明せよ。",
+    rubric: [
+      "単位円や回転行列の利用に触れている",
+      "座標の回転・合成で導くと述べている",
+    ],
+    solution:
+      "単位円上の回転や回転行列の合成で座標を比較すると、加法定理を導ける。",
+    level: 3,
+  },
+  {
+    id: "writeup_inequality_amgm_5",
+    topicId: "inequality_amgm_basic",
+    title: "置換の方針",
+    statement: "AM-GMを使う際の置換の方針を説明せよ。",
+    rubric: [
+      "非負条件を満たす形に変形すると述べている",
+      "等号成立が見える形にすることを述べている",
+    ],
+    solution:
+      "非負になる形に置換し、等号成立が分かる形で AM-GM を適用するのが基本。",
+    level: 3,
+  },
+  {
+    id: "writeup_calc_area_5",
+    topicId: "calc_area_basic",
+    title: "面積の式の立て方",
+    statement: "面積の式を立てるときの一般的な流れを説明せよ。",
+    rubric: [
+      "交点を求めて区間を決めると述べている",
+      "上側-下側で差を取ると述べている",
+    ],
+    solution:
+      "交点を求めて区間を決め、上側の関数から下側の関数を引いた差を積分する。",
+    level: 3,
+  },
+  {
+    id: "writeup_complex_argument_5",
+    topicId: "complex_argument_basic",
+    title: "偏角と積の関係",
+    statement: "偏角が積で加算される理由を説明せよ。",
+    rubric: [
+      "極形式での表現に触れている",
+      "角度の和になることを述べている",
+    ],
+    solution:
+      "極形式 $z=re^{i\\theta}$ を用いると積は $r_1r_2e^{i(\\theta_1+\\theta_2)}$ となり、偏角は加算される。",
+    level: 3,
+  },
+  {
+    id: "writeup_vector_projection_5",
+    topicId: "vector_projection_basic",
+    title: "射影と内積の関係",
+    statement: "射影が内積で表せる理由を説明せよ。",
+    rubric: [
+      "内積が成分の積の和であることに触れている",
+      "方向成分の取り出しと結び付けている",
+    ],
+    solution:
+      "内積は一方のベクトルの他方方向成分を測る量であり、射影の大きさを内積で表せる。",
+    level: 3,
+  },
+  {
+    id: "writeup_exp_log_equation_5",
+    topicId: "exp_log_equations_basic",
+    title: "解の妥当性チェック",
+    statement: "対数方程式の解を検算する理由を説明せよ。",
+    rubric: [
+      "定義域外の解が混入しうると述べている",
+      "代入で確認する必要に触れている",
+    ],
+    solution:
+      "対数は定義域があり、操作で無効な解が混入しうるため、元の式に代入して確認する。",
+    level: 3,
+  },
+  {
+    id: "writeup_stats_ci_5",
+    topicId: "stats_confidence_interval_basic",
+    title: "信頼区間の解釈",
+    statement: "信頼区間を誤解しやすい点を説明せよ。",
+    rubric: [
+      "固定された区間に母平均が入る確率ではないと述べている",
+      "標本ごとに区間が変わることに触れている",
+    ],
+    solution:
+      "信頼区間は標本に依存して変わる。固定区間に母平均が確率的に入るという意味ではない。",
+    level: 3,
+  },
+  {
+    id: "writeup_coord_distance_5",
+    topicId: "coord_distance_point_line_basic",
+    title: "距離公式と幾何",
+    statement: "点と直線の距離公式が幾何的に納得できる理由を説明せよ。",
+    rubric: [
+      "垂線の長さとして捉えると述べている",
+      "直線の法線ベクトルに触れている",
+    ],
+    solution:
+      "直線の法線方向に射影した長さが距離になるため、法線ベクトルの大きさで割る形になる。",
+    level: 3,
+  },
+  {
+    id: "writeup_poly_factor_5",
+    topicId: "poly_factor_k_basic",
+    title: "因数分解とグラフ",
+    statement: "因数分解とグラフの交点の関係を説明せよ。",
+    rubric: [
+      "因数の根がx軸交点になると述べている",
+      "割り切れ条件と根の一致に触れている",
+    ],
+    solution:
+      "因数 $(x-a)$ を持つと $x=a$ が根となり、グラフはx軸と交わる。割り切れ条件と根は一致する。",
+    level: 3,
+  },
+  {
+    id: "writeup_binomial_middle_5",
+    topicId: "binomial_middle_coeff_basic",
+    title: "最大係数の理由",
+    statement: "中央係数が最大になる理由を説明せよ。",
+    rubric: [
+      "対称性と隣り合う係数の比に触れている",
+      "増加から減少に変わる点として述べている",
+    ],
+    solution:
+      "二項係数は対称で、隣り合う係数の比で増加→減少が変わる点が中央付近となるため最大になる。",
+    level: 3,
+  },
+  {
+    id: "writeup_identity_coeff_5",
+    topicId: "identity_coefficient_basic",
+    title: "係数比較の優位性",
+    statement: "係数比較が代入法より優れている点を説明せよ。",
+    rubric: [
+      "全ての係数を一度に決められると述べている",
+      "条件不足を避けられることに触れている",
+    ],
+    solution:
+      "係数比較は全次数を同時に比較でき、少数の代入による条件不足を避けられる。",
+    level: 3,
+  },
+  {
+    id: "writeup_trig_double_5",
+    topicId: "trig_double_angle_basic",
+    title: "二倍角の導出",
+    statement: "二倍角公式の導き方の方針を説明せよ。",
+    rubric: [
+      "加法定理の利用に触れている",
+      "同一角の和として導くと述べている",
+    ],
+    solution:
+      "加法定理に $\\alpha=\\beta=\\theta$ を代入して、二倍角公式を導く。",
+    level: 3,
+  },
+  {
+    id: "writeup_exp_log_domain_5",
+    topicId: "exp_log_domain_basic",
+    title: "底の条件",
+    statement: "対数の底の条件 $a>0, a\\neq 1$ の意味を説明せよ。",
+    rubric: [
+      "指数関数の定義に触れている",
+      "単調性が保たれる条件と述べている",
+    ],
+    solution:
+      "底が正でないと指数関数が定義できず、$a=1$ では一対一対応が崩れるため条件が必要。",
+    level: 3,
+  },
+  {
+    id: "writeup_coord_line_parallel_5",
+    topicId: "coord_line_parallel_perp_basic",
+    title: "傾きが使えない場合",
+    statement: "傾きが使えない場合の平行・垂直判定法を説明せよ。",
+    rubric: [
+      "法線ベクトルを使うと述べている",
+      "係数比較の考えに触れている",
+    ],
+    solution:
+      "直線 $ax+by+c=0$ の法線ベクトル $(a,b)$ を用い、係数の比例や内積で平行・垂直を判定する。",
+    level: 3,
+  },
+  {
+    id: "writeup_seq_geo_limit_5",
+    topicId: "seq_geometric_limit_basic",
+    title: "比が1に近い場合",
+    statement: "公比が1に近いときの極限の挙動を説明せよ。",
+    rubric: [
+      "|r|<1 と |r|=1 の違いに触れている",
+      "発散や振動の可能性に触れている",
+    ],
+    solution:
+      "|r|<1 なら0へ収束するが、|r|=1 では一定または振動し、収束しない場合がある。",
+    level: 3,
+  },
+  {
+    id: "writeup_stats_se_5",
+    topicId: "stats_standard_error_basic",
+    title: "推定精度との関係",
+    statement: "標準誤差が推定精度にどう影響するか説明せよ。",
+    rubric: [
+      "小さいほど推定が精密と述べている",
+      "標本数で改善できることに触れている",
+    ],
+    solution:
+      "標準誤差が小さいほど推定は精密。標本数を増やすと標準誤差が下がり精度が上がる。",
+    level: 3,
+  },
+  {
+    id: "writeup_vector_parallel_5",
+    topicId: "vector_parallel_basic",
+    title: "比例関係の使い方",
+    statement: "平行条件の比例関係を使って未知数を求める手順を説明せよ。",
+    rubric: [
+      "成分比を等しく置くと述べている",
+      "連立方程式で解くことに触れている",
+    ],
+    solution:
+      "平行なら成分比が等しいので比例式を立て、未知数を連立で解く。",
+    level: 3,
+  },
+  {
+    id: "writeup_stats_corr_5",
+    topicId: "stats_correlation_basic",
+    title: "相関係数の限界",
+    statement: "相関係数の限界や注意点を説明せよ。",
+    rubric: [
+      "非線形関係を捉えにくいことに触れている",
+      "因果関係を示さない点を述べている",
+    ],
+    solution:
+      "相関係数は線形関係の強さしか表さず、非線形の関係や因果関係は示せない。",
+    level: 3,
+  },
+  {
+    id: "writeup_calc_derivative_5",
+    topicId: "calc_derivative_basic",
+    title: "増減と極値",
+    statement: "導関数を使って極値を調べる流れを説明せよ。",
+    rubric: [
+      "導関数=0 の点を候補にすることを述べている",
+      "増減表で判定することに触れている",
+    ],
+    solution:
+      "導関数を求めて $f'(x)=0$ の点を候補にし、増減表で符号が変わるかで極値を判定する。",
+    level: 3,
+  },
+  {
+    id: "writeup_calc_tangent_5",
+    topicId: "calc_tangent_line_basic",
+    title: "共有点の条件",
+    statement: "接線条件を共有点の数で説明せよ。",
+    rubric: [
+      "共有点が1つになることを述べている",
+      "連立で重解になると述べている",
+    ],
+    solution:
+      "曲線と直線の共有点が1つになるとき接線であり、連立して得る方程式が重解になる。",
+    level: 3,
+  },
+  {
+    id: "writeup_prob_combi_5",
+    topicId: "prob_combi_basic",
+    title: "数え上げの設計",
+    statement: "複雑な場合の数を設計する方針を説明せよ。",
+    rubric: [
+      "条件で場合分けすることを述べている",
+      "積や和の法則を併用することに触れている",
+    ],
+    solution:
+      "条件で排反な場合に分け、各場合で積・和の法則を使って数え上げる。",
+    level: 3,
+  },
+  {
+    id: "writeup_exp_log_prop_5",
+    topicId: "exp_log_property_basic",
+    title: "対数のまとめ方",
+    statement: "複数の対数を1つにまとめる手順を説明せよ。",
+    rubric: [
+      "和は積、差は商に直すと述べている",
+      "指数を前に出す性質に触れている",
+    ],
+    solution:
+      "対数の和は積、差は商に直し、指数は前に出して1つの対数にまとめる。",
+    level: 3,
+  },
+  {
+    id: "writeup_trig_radian_5",
+    topicId: "trig_radian_basic",
+    title: "弧度法の自然さ",
+    statement: "弧度法が「自然な角度の測り方」と言われる理由を説明せよ。",
+    rubric: [
+      "弧長/半径の定義に触れている",
+      "微分積分での簡潔さに触れている",
+    ],
+    solution:
+      "弧度法は弧長/半径で定義され、角度が長さに直接対応する。三角関数の微分・積分も簡潔になる。",
+    level: 3,
+  },
+  {
+    id: "writeup_coord_circle_5",
+    topicId: "coord_circle_center_basic",
+    title: "一般形の判定",
+    statement: "二次方程式が円を表す条件を説明せよ。",
+    rubric: [
+      "平方完成で $r^2>0$ を確認することを述べている",
+      "係数の一致（$x^2,y^2$ の係数が等しい）に触れている",
+    ],
+    solution:
+      "$x^2,y^2$ の係数が等しく、平方完成で $r^2>0$ となれば円を表す。",
+    level: 3,
+  },
+  {
+    id: "writeup_vector_unit_5",
+    topicId: "vector_unit_basic",
+    title: "単位ベクトルの用途",
+    statement: "単位ベクトルが役立つ場面を説明せよ。",
+    rubric: [
+      "方向の統一に使えると述べている",
+      "射影や内積で便利になると触れている",
+    ],
+    solution:
+      "方向を統一したいときに使い、射影や内積の計算で扱いやすくなる。",
+    level: 3,
+  },
+  {
+    id: "writeup_complex_conjugate_5",
+    topicId: "complex_conjugate_basic",
+    title: "分母の有理化",
+    statement: "共役を用いた分母の有理化の流れを説明せよ。",
+    rubric: [
+      "共役を掛けると述べている",
+      "実数が残ることを述べている",
+    ],
+    solution:
+      "分母に共役を掛けると $z\\overline{z}$ が実数になるため、有理化できる。",
+    level: 3,
+  },
+  {
+    id: "writeup_prob_complement_5",
+    topicId: "prob_complement_basic",
+    title: "余事象の設計",
+    statement: "余事象を使うべきか判断する基準を説明せよ。",
+    rubric: [
+      "直接数えるのが難しい場合と述べている",
+      "余事象が簡単に数えられることに触れている",
+    ],
+    solution:
+      "直接数えるのが複雑なとき、余事象が簡単に数えられるなら余事象を用いるのが有効。",
+    level: 3,
+  },
+  {
+    id: "writeup_algebra_ineq_5",
+    topicId: "algebra_ineq_basic",
+    title: "不等式の同値変形",
+    statement: "不等式の同値変形で注意すべき点を説明せよ。",
+    rubric: [
+      "負の数で割ると不等号が反転すると述べている",
+      "同値性を保つ操作を選ぶと触れている",
+    ],
+    solution:
+      "負の数で割ると不等号が反転する。常に同値な変形になっているかを確認する。",
+    level: 3,
+  },
+  {
+    id: "writeup_set_operations_5",
+    topicId: "set_operations_basic",
+    title: "ド・モルガンの法則",
+    statement: "集合のド・モルガンの法則の意味を説明せよ。",
+    rubric: [
+      "補集合の和と共通部分の入れ替えに触れている",
+      "記号で示せている",
+    ],
+    solution:
+      "補集合に対して $(A\\cup B)^c=A^c\\cap B^c$、$(A\\cap B)^c=A^c\\cup B^c$ が成り立つ。",
+    level: 3,
+  },
+  {
+    id: "writeup_identity_eval_5",
+    topicId: "identity_eval_basic",
+    title: "式変形の戦略",
+    statement: "恒等式を使った式変形の戦略を説明せよ。",
+    rubric: [
+      "形を揃える方針に触れている",
+      "既知の公式に合わせると述べている",
+    ],
+    solution:
+      "目標の形や既知の公式に合わせるように式を変形し、恒等式で置き換えるのが基本。",
+    level: 3,
+  },
+  {
+    id: "writeup_conic_circle_5",
+    topicId: "conic_circle_basic",
+    title: "円と距離の関係",
+    statement: "円の方程式が距離の一定条件であることを説明せよ。",
+    rubric: [
+      "中心からの距離が一定と述べている",
+      "距離公式に触れている",
+    ],
+    solution:
+      "中心 $(a,b)$ からの距離が一定 $r$ である条件が $(x-a)^2+(y-b)^2=r^2$ となる。",
+    level: 3,
+  },
+  {
+    id: "writeup_quad_graph_5",
+    topicId: "quad_graph_basic",
+    title: "頂点と軸の求め方",
+    statement: "二次関数の頂点と軸を効率的に求める方法を説明せよ。",
+    rubric: [
+      "平方完成を用いると述べている",
+      "軸 $x=-\\frac{b}{2a}$ を示している",
+    ],
+    solution:
+      "平方完成で $y=a(x+\\frac{b}{2a})^2+\\cdots$ とし、軸 $x=-\\frac{b}{2a}$ と頂点を求める。",
+    level: 3,
+  },
+  {
+    id: "writeup_geo_sine_cosine_law_5",
+    topicId: "geo_sine_cosine_law_basic",
+    title: "解の一意性",
+    statement: "正弦定理・余弦定理で解が一意かどうか判断する視点を説明せよ。",
+    rubric: [
+      "正弦定理は角が2通りになる場合があると述べている",
+      "余弦定理は一意に決まると触れている",
+    ],
+    solution:
+      "正弦定理は角の正弦が同じになる場合があり2通りが生じることがある。余弦定理は三辺が決まれば角は一意。",
+    level: 3,
+  },
+  {
+    id: "writeup_combi_basic_5",
+    topicId: "combi_basic",
+    title: "重複の除き方",
+    statement: "場合の数で重複を除く考え方を説明せよ。",
+    rubric: [
+      "重複する分を割ると述べている",
+      "同一の並び替えをまとめることに触れている",
+    ],
+    solution:
+      "重複する並び替えは同一とみなすため、その重複数だけ割って除く。",
+    level: 3,
+  },
+  {
+    id: "writeup_prob_basic_5",
+    topicId: "prob_basic",
+    title: "条件付き確率の視点",
+    statement: "条件付き確率の考え方を説明せよ。",
+    rubric: [
+      "標本空間を条件で絞ると述べている",
+      "式 $P(A|B)=\\frac{P(A\\cap B)}{P(B)}$ に触れている",
+    ],
+    solution:
+      "条件 $B$ が起きたと仮定して標本空間を絞り、その中で $A$ が起きる割合を考える。",
+    level: 3,
+  },
+  {
+    id: "writeup_vector_inner_5",
+    topicId: "vector_inner_basic",
+    title: "内積の利用場面",
+    statement: "内積が役立つ場面を説明せよ。",
+    rubric: [
+      "角度や射影の計算に触れている",
+      "直交判定に使えると述べている",
+    ],
+    solution:
+      "内積は角度や射影の計算、直交判定などに使える。",
+    level: 3,
+  },
+  {
+    id: "writeup_calc_integral_5",
+    topicId: "calc_integral_basic",
+    title: "積分の設計",
+    statement: "定積分の計算方針を立てる手順を説明せよ。",
+    rubric: [
+      "積分区間を確認すると述べている",
+      "原始関数を求めて差を取ると述べている",
+    ],
+    solution:
+      "積分区間を確認し、原始関数を求めて上端-下端の差を取る。",
+    level: 3,
+  },
+  {
+    id: "writeup_trig_period_5",
+    topicId: "trig_period_basic",
+    title: "周期とグラフ",
+    statement: "周期がグラフにどう反映されるか説明せよ。",
+    rubric: [
+      "周期ごとに同じ形が繰り返されると述べている",
+      "横方向の伸縮と関連付けている",
+    ],
+    solution:
+      "周期ごとに同じ形が繰り返される。係数があると横方向の伸縮が起き、周期が変化する。",
+    level: 3,
+  },
+  {
+    id: "writeup_complex_modulus_5",
+    topicId: "complex_modulus_basic",
+    title: "絶対値と積",
+    statement: "複素数の積で絶対値がどう変化するか説明せよ。",
+    rubric: [
+      "|zw|=|z||w| に触れている",
+      "幾何学的意味に触れている",
+    ],
+    solution:
+      "複素数の積では絶対値が掛け算される。距離（大きさ）が倍率として作用する。",
+    level: 3,
+  },
+  {
+    id: "writeup_poly_remainder_5",
+    topicId: "poly_remainder_basic",
+    title: "剰余の設計",
+    statement: "剰余定理を使った設計問題の方針を説明せよ。",
+    rubric: [
+      "剰余条件を式にすることを述べている",
+      "代入で条件を立てると述べている",
+    ],
+    solution:
+      "剰余が与えられる場合は $P(a)=r$ の形で条件式を作り、パラメータを決める。",
+    level: 3,
+  },
+  {
+    id: "writeup_seq_recurrence_5",
+    topicId: "seq_recurrence_basic",
+    title: "一般項の決定",
+    statement: "漸化式から一般項を決定する流れを説明せよ。",
+    rubric: [
+      "形を整えて既知の型にすることを述べている",
+      "初期条件で定数を決めると述べている",
+    ],
+    solution:
+      "漸化式を既知の型に整えて一般項を求め、初期条件で定数を決める。",
+    level: 3,
+  },
+  {
+    id: "writeup_prob_combi_6",
+    topicId: "prob_combi_basic",
+    title: "順列・組合せの切り替え",
+    statement: "同じ状況で順列と組合せを使い分ける視点を説明せよ。",
+    rubric: [
+      "順序を区別するかどうかを述べている",
+      "具体的な例で言及していると良い",
+    ],
+    solution:
+      "順序を区別するなら順列、区別しないなら組合せを使う。例えば席順は順列、チーム分けは組合せ。",
+    level: 2,
+  },
+  {
+    id: "writeup_conic_circle_6",
+    topicId: "conic_circle_basic",
+    title: "円の一般形の判定",
+    statement: "円の一般形から中心と半径を求める流れを説明せよ。",
+    rubric: [
+      "平方完成を述べている",
+      "中心と半径が読み取れると述べている",
+    ],
+    solution:
+      "平方完成して標準形に直し、中心と半径を読み取る。",
+    level: 2,
+  },
+  {
+    id: "writeup_coord_circle_6",
+    topicId: "coord_circle_center_basic",
+    title: "円の式の読み替え",
+    statement: "円の式を中心と半径に読み替える手順を説明せよ。",
+    rubric: [
+      "平方完成の手順に触れている",
+      "半径の平方が正であることに触れている",
+    ],
+    solution:
+      "平方完成で $(x-a)^2+(y-b)^2=r^2$ に直し、$r^2>0$ を確認して中心と半径を読む。",
+    level: 2,
+  },
+  {
+    id: "writeup_vector_unit_6",
+    topicId: "vector_unit_basic",
+    title: "方向ベクトルとの関係",
+    statement: "単位ベクトルと方向ベクトルの関係を説明せよ。",
+    rubric: [
+      "方向ベクトルを正規化すると単位ベクトルになると述べている",
+      "大きさだけが違う点に触れている",
+    ],
+    solution:
+      "方向ベクトルを正規化すれば単位ベクトルになる。方向は同じで大きさだけが違う。",
+    level: 2,
+  },
+  {
+    id: "writeup_exp_log_equation_6",
+    topicId: "exp_log_equations_basic",
+    title: "底の統一の狙い",
+    statement: "指数・対数方程式で底を揃える狙いを説明せよ。",
+    rubric: [
+      "同じ底にすると比較ができると述べている",
+      "変形の自由度が増すことに触れている",
+    ],
+    solution:
+      "底を揃えると指数や対数を比較でき、方程式の形が簡単になって解きやすい。",
+    level: 1,
+  },
+  {
+    id: "writeup_stats_ci_6",
+    topicId: "stats_confidence_interval_basic",
+    title: "信頼区間の作り方",
+    statement: "信頼区間を作るときの基本手順を説明せよ。",
+    rubric: [
+      "推定量と標準誤差を用いると述べている",
+      "信頼係数で幅を決めることに触れている",
+    ],
+    solution:
+      "推定量に標準誤差を用いて誤差幅を作り、信頼係数に対応する幅を加減して区間を作る。",
+    level: 1,
+  },
+  {
+    id: "writeup_exp_log_property_6",
+    topicId: "exp_log_property_basic",
+    title: "対数の性質の方向",
+    statement: "対数の性質で「まとめる」と「分解する」を使い分ける理由を説明せよ。",
+    rubric: [
+      "計算の見通しが良くなると述べている",
+      "方程式の形に合わせると触れている",
+    ],
+    solution:
+      "式の形に合わせてまとめたり分解したりすると、計算や解法の見通しが良くなる。",
+    level: 1,
+  },
+  {
+    id: "writeup_calc_tangent_6",
+    topicId: "calc_tangent_line_basic",
+    title: "接線と接点",
+    statement: "接線の式を求めるときに接点が重要な理由を説明せよ。",
+    rubric: [
+      "接点の座標で直線が定まると述べている",
+      "傾きと点が必要であることを述べている",
+    ],
+    solution:
+      "接線は傾きと通る点で決まるため、接点の座標が必要になる。",
+    level: 1,
+  },
+  {
+    id: "writeup_calc_area_6",
+    topicId: "calc_area_basic",
+    title: "上下の判断",
+    statement: "面積計算で上下の関数を判断する方法を説明せよ。",
+    rubric: [
+      "区間の中点で値を比較すると述べている",
+      "グラフの位置関係を見ると触れている",
+    ],
+    solution:
+      "区間の中点などで値を比較し、上にある関数から下にある関数を引く。",
+    level: 1,
+  },
+];
+
+export function getWriteupProblemsByTopic(topicId?: TopicId) {
+  if (!topicId) return WRITEUP_PROBLEMS;
+  return WRITEUP_PROBLEMS.filter((p) => p.topicId === topicId);
+}
+
+export function getWriteupProblemById(problemId: string) {
+  return WRITEUP_PROBLEMS.find((p) => p.id === problemId);
+}
+
+export function getDefaultRubric() {
+  return DEFAULT_RUBRIC;
+}

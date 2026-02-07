@@ -1,0 +1,10 @@
+{
+  "courseId": "hs_ia_algebra",
+  "goal": 55,
+  "topicOrder": [
+    "algebra_expand_basic",
+    "algebra_factor_basic",
+    "algebra_linear_eq_basic",
+    "algebra_ineq_basic"
+  ]
+}

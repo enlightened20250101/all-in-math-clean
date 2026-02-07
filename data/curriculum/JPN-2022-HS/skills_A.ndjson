@@ -1,0 +1,40 @@
+{"id":"M1.NS.ADD.001","title":"文字式の記法と同類項判定（基礎）","subject":"数学I","unit":"数と式","topic":"整式の加減","difficulty":1,"priority":5,"tags":["mathI","algebra","必修"],"examples":[]}
+{"id":"M1.NS.ADD.002","title":"同類項の加減（整数係数）","subject":"数学I","unit":"数と式","topic":"整式の加減","difficulty":1,"priority":5,"tags":["mathI","algebra","必修"],"examples":[]}
+{"id":"M1.NS.ADD.003","title":"複数文字・指数での同類項判定","subject":"数学I","unit":"数と式","topic":"整式の加減","difficulty":2,"priority":5,"tags":["mathI","algebra"],"examples":[]}
+{"id":"M1.NS.ADD.004","title":"降べき順・標準形","subject":"数学I","unit":"数と式","topic":"整式の加減","difficulty":2,"priority":4,"tags":["mathI","algebra"],"examples":[]}
+{"id":"M1.NS.ADD.005","title":"括弧外し（＋）","subject":"数学I","unit":"数と式","topic":"整式の加減","difficulty":2,"priority":5,"tags":["mathI","algebra","必修"],"examples":[]}
+{"id":"M1.NS.ADD.006","title":"括弧前が−の符号反転","subject":"数学I","unit":"数と式","topic":"整式の加減","difficulty":3,"priority":5,"tags":["mathI","algebra","共通テ頻出"],"examples":[]}
+{"id":"M1.NS.ADD.007","title":"負係数・0項を含む整理","subject":"数学I","unit":"数と式","topic":"整式の加減","difficulty":3,"priority":4,"tags":["mathI","algebra"],"examples":[]}
+{"id":"M1.NS.ADD.008","title":"3多項式以上の加減","subject":"数学I","unit":"数と式","topic":"整式の加減","difficulty":3,"priority":4,"tags":["mathI","algebra"],"examples":[]}
+{"id":"M1.NS.ADD.009","title":"多文字・混在整理","subject":"数学I","unit":"数と式","topic":"整式の加減","difficulty":3,"priority":4,"tags":["mathI","algebra"],"examples":[]}
+{"id":"M1.NS.ADD.010","title":"係数が分数/小数の加減","subject":"数学I","unit":"数と式","topic":"整式の加減","difficulty":3,"priority":3,"tags":["mathI","algebra"],"examples":[]}
+{"id":"M1.NS.ADD.011","title":"誤り探し（符号/同類項）","subject":"数学I","unit":"数と式","topic":"整式の加減","difficulty":3,"priority":3,"tags":["mathI","algebra","誤り訂正"],"examples":[]}
+{"id":"M1.NS.ADD.012","title":"文脈置換（文章→式の整理）","subject":"数学I","unit":"数と式","topic":"整式の加減","difficulty":4,"priority":4,"tags":["mathI","algebra","文章題"],"examples":[]}
+{"id":"M1.NS.MUL.001","title":"単項式×単項式（指数法則）","subject":"数学I","unit":"数と式","topic":"乗法・展開","difficulty":2,"priority":5,"tags":["mathI","algebra","必修"],"examples":[]}
+{"id":"M1.NS.MUL.002","title":"単項式×多項式の分配法則","subject":"数学I","unit":"数と式","topic":"乗法・展開","difficulty":2,"priority":5,"tags":["mathI","algebra","必修"],"examples":[]}
+{"id":"M1.NS.MUL.003","title":"多項式×多項式（2×2 基本）","subject":"数学I","unit":"数と式","topic":"乗法・展開","difficulty":2,"priority":5,"tags":["mathI","algebra","共通テ頻出"],"examples":[]}
+{"id":"M1.NS.MUL.004","title":"(a+b)^2, (a-b)^2 のパターン","subject":"数学I","unit":"数と式","topic":"乗法・展開","difficulty":2,"priority":5,"tags":["mathI","algebra","公式"],"examples":[]}
+{"id":"M1.NS.MUL.005","title":"(a+b)(a-b) のパターン","subject":"数学I","unit":"数と式","topic":"乗法・展開","difficulty":2,"priority":5,"tags":["mathI","algebra","公式"],"examples":[]}
+{"id":"M1.NS.MUL.006","title":"係数・符号を含む展開の安定化","subject":"数学I","unit":"数と式","topic":"乗法・展開","difficulty":3,"priority":4,"tags":["mathI","algebra"],"examples":[]}
+{"id":"M1.NS.MUL.007","title":"次数・項数の確認","subject":"数学I","unit":"数と式","topic":"乗法・展開","difficulty":2,"priority":3,"tags":["mathI","algebra"],"examples":[]}
+{"id":"M1.NS.DIV.001","title":"単項式で割る（係数・指数の処理）","subject":"数学I","unit":"数と式","topic":"除法","difficulty":2,"priority":4,"tags":["mathI","algebra"],"examples":[]}
+{"id":"M1.NS.DIV.002","title":"整式÷単項式（余りを伴うことあり）","subject":"数学I","unit":"数と式","topic":"除法","difficulty":3,"priority":3,"tags":["mathI","algebra"],"examples":[]}
+{"id":"M1.NS.DIV.003","title":"誤り探し（指数の減算/符号）","subject":"数学I","unit":"数と式","topic":"除法","difficulty":3,"priority":3,"tags":["mathI","algebra","誤り訂正"],"examples":[]}
+{"id":"M1.FAC.001","title":"共通因数でくくる","subject":"数学I","unit":"数と式","topic":"因数分解","difficulty":2,"priority":5,"tags":["mathI","algebra","必修"],"examples":[]}
+{"id":"M1.FAC.002","title":"平方差 a^2−b^2","subject":"数学I","unit":"数と式","topic":"因数分解","difficulty":2,"priority":5,"tags":["mathI","algebra","公式"],"examples":[]}
+{"id":"M1.FAC.003","title":"(a±b)^2 の逆（平方の展開の逆）","subject":"数学I","unit":"数と式","topic":"因数分解","difficulty":2,"priority":5,"tags":["mathI","algebra","公式"],"examples":[]}
+{"id":"M1.FAC.004","title":"ax^2+bx+c の因数分解（積と和）","subject":"数学I","unit":"数と式","topic":"因数分解","difficulty":3,"priority":5,"tags":["mathI","algebra","共通テ頻出"],"examples":[]}
+{"id":"M1.FAC.005","title":"置換による因数分解（多文字）","subject":"数学I","unit":"数と式","topic":"因数分解","difficulty":3,"priority":4,"tags":["mathI","algebra"],"examples":[]}
+{"id":"M1.FAC.006","title":"因数分解と展開の往復","subject":"数学I","unit":"数と式","topic":"因数分解","difficulty":3,"priority":4,"tags":["mathI","algebra"],"examples":[]}
+{"id":"M1.FAC.007","title":"3項の並べ替えと見抜き方","subject":"数学I","unit":"数と式","topic":"因数分解","difficulty":3,"priority":3,"tags":["mathI","algebra"],"examples":[]}
+{"id":"M1.FAC.008","title":"因数分解→簡約（分数式への布石）","subject":"数学I","unit":"数と式","topic":"因数分解","difficulty":3,"priority":4,"tags":["mathI","algebra"],"examples":[]}
+{"id":"M1.FAC.009","title":"誤り探し（係数・符号）","subject":"数学I","unit":"数と式","topic":"因数分解","difficulty":3,"priority":3,"tags":["mathI","algebra","誤り訂正"],"examples":[]}
+{"id":"M1.FAC.010","title":"立式からの因数分解（文章題）","subject":"数学I","unit":"数と式","topic":"因数分解","difficulty":4,"priority":4,"tags":["mathI","algebra","文章題"],"examples":[]}
+{"id":"M1.FAC.011","title":"余りの定理（入門・任意）","subject":"数学I","unit":"数と式","topic":"因数分解","difficulty":4,"priority":2,"tags":["mathI","algebra","発展"],"examples":[]}
+{"id":"M1.FAC.012","title":"因数分解の計画立案（難）","subject":"数学I","unit":"数と式","topic":"因数分解","difficulty":4,"priority":3,"tags":["mathI","algebra","発展"],"examples":[]}
+{"id":"M1.RAT.001","title":"分数式の約分・通分","subject":"数学I","unit":"数と式","topic":"分数式・有理化","difficulty":2,"priority":5,"tags":["mathI","algebra","必修"],"examples":[]}
+{"id":"M1.RAT.002","title":"分数式の加減（共通分母化）","subject":"数学I","unit":"数と式","topic":"分数式・有理化","difficulty":3,"priority":5,"tags":["mathI","algebra","共通テ頻出"],"examples":[]}
+{"id":"M1.RAT.003","title":"分数式の乗除（逆数・約分）","subject":"数学I","unit":"数と式","topic":"分数式・有理化","difficulty":3,"priority":4,"tags":["mathI","algebra"],"examples":[]}
+{"id":"M1.RAT.004","title":"ルートの基本（√の性質）","subject":"数学I","unit":"数と式","topic":"分数式・有理化","difficulty":2,"priority":4,"tags":["mathI","algebra","root"],"examples":[]}
+{"id":"M1.RAT.005","title":"分母の有理化（共役で処理）","subject":"数学I","unit":"数と式","topic":"分数式・有理化","difficulty":3,"priority":4,"tags":["mathI","algebra","root"],"examples":[]}
+{"id":"M1.RAT.006","title":"無理式の整理（混在の標準形）","subject":"数学I","unit":"数と式","topic":"分数式・有理化","difficulty":3,"priority":3,"tags":["mathI","algebra","root"],"examples":[]}

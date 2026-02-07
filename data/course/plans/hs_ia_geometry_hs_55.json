@@ -1,0 +1,10 @@
+{
+  "courseId": "hs_ia_geometry_hs",
+  "goal": 55,
+  "topicOrder": [
+    "geo_ratio_theorems",
+    "geo_circle_geometry",
+    "geo_triangle_centers",
+    "geo_circle_relations"
+  ]
+}

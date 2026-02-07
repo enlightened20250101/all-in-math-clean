@@ -1,0 +1,18 @@
+{"id": "JHS.NUM.PLACE", "title": "位取りと数の大小（正負を含む）", "subject": "中学校", "unit": "数と式", "topic": "数の基礎", "difficulty": 1, "priority": 5, "tags": ["jhs", "number", "必修"], "examples": []}
+{"id": "JHS.NUM.OP_INT", "title": "整数の四則（符号規則）", "subject": "中学校", "unit": "数と式", "topic": "数の基礎", "difficulty": 1, "priority": 5, "tags": ["jhs", "integer", "必修"], "examples": []}
+{"id": "JHS.NUM.OP_FRAC", "title": "分数の加減（通分・約分）", "subject": "中学校", "unit": "数と式", "topic": "分数", "difficulty": 2, "priority": 5, "tags": ["jhs", "fraction", "必修"], "examples": []}
+{"id": "JHS.NUM.OP_FRAC_MUL", "title": "分数の乗除（逆数・約分）", "subject": "中学校", "unit": "数と式", "topic": "分数", "difficulty": 2, "priority": 5, "tags": ["jhs", "fraction"], "examples": []}
+{"id": "JHS.NUM.DEC", "title": "小数の四則と桁操作", "subject": "中学校", "unit": "数と式", "topic": "小数", "difficulty": 1, "priority": 4, "tags": ["jhs", "decimal"], "examples": []}
+{"id": "JHS.NUM.PERC", "title": "百分率・割合（三公式）", "subject": "中学校", "unit": "数と式", "topic": "割合", "difficulty": 2, "priority": 4, "tags": ["jhs", "percent"], "examples": []}
+{"id": "JHS.NUM.ROUND", "title": "近似と四捨五入・有効数字（入門）", "subject": "中学校", "unit": "数と式", "topic": "近似", "difficulty": 2, "priority": 3, "tags": ["jhs", "approx"], "examples": []}
+{"id": "JHS.NUM.ORDER", "title": "計算の優先順位と括弧の扱い", "subject": "中学校", "unit": "数と式", "topic": "式のルール", "difficulty": 1, "priority": 5, "tags": ["jhs", "expression", "必修"], "examples": []}
+{"id": "JHS.EXPR.SUBST", "title": "文字式の値（代入と評価）", "subject": "中学校", "unit": "数と式", "topic": "文字式", "difficulty": 2, "priority": 5, "tags": ["jhs", "algebra", "必修"], "examples": []}
+{"id": "JHS.EXPR.SIMPL", "title": "文字式の簡単な整理（同類項まとめ）", "subject": "中学校", "unit": "数と式", "topic": "文字式", "difficulty": 2, "priority": 5, "tags": ["jhs", "algebra", "like-terms"], "examples": []}
+{"id": "JHS.EXP.LAW_MUL", "title": "指数法則：積（a^m·a^n=a^{m+n})", "subject": "中学校", "unit": "数と式", "topic": "指数法則", "difficulty": 2, "priority": 5, "tags": ["jhs", "expo", "必修"], "examples": []}
+{"id": "JHS.EXP.LAW_DIV", "title": "指数法則：商（a^m/a^n=a^{m-n})", "subject": "中学校", "unit": "数と式", "topic": "指数法則", "difficulty": 2, "priority": 5, "tags": ["jhs", "expo"], "examples": []}
+{"id": "JHS.EXP.LAW_POW", "title": "指数法則：累乗の累乗（(a^m)^n=a^{mn})", "subject": "中学校", "unit": "数と式", "topic": "指数法則", "difficulty": 2, "priority": 5, "tags": ["jhs", "expo"], "examples": []}
+{"id": "JHS.ROOT.MEANING", "title": "平方根の意味と記法", "subject": "中学校", "unit": "数と式", "topic": "平方根", "difficulty": 2, "priority": 5, "tags": ["jhs", "root", "必修"], "examples": []}
+{"id": "JHS.ROOT.SIMPL", "title": "根号の中の整理（因数分解による簡約）", "subject": "中学校", "unit": "数と式", "topic": "平方根", "difficulty": 2, "priority": 4, "tags": ["jhs", "root"], "examples": []}
+{"id": "JHS.ROOT.OP", "title": "根号を含む式の加減乗除（基礎）", "subject": "中学校", "unit": "数と式", "topic": "平方根", "difficulty": 3, "priority": 4, "tags": ["jhs", "root"], "examples": []}
+{"id": "JHS.RATIO.BAS", "title": "比と比例の基礎（内項・外項）", "subject": "中学校", "unit": "数と式", "topic": "比と比例", "difficulty": 2, "priority": 4, "tags": ["jhs", "ratio"], "examples": []}
+{"id": "JHS.RATIO.SCALE", "title": "比例式とスケール変換（拡大縮小）", "subject": "中学校", "unit": "数と式", "topic": "比と比例", "difficulty": 2, "priority": 4, "tags": ["jhs", "ratio", "geometry"], "examples": []}

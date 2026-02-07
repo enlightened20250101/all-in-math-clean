@@ -1,0 +1,16 @@
+{"id": "JHS.ALG.MONO", "title": "単項式の次数・係数・記法", "subject": "中学校", "unit": "数と式", "topic": "文字式・多項式", "difficulty": 2, "priority": 5, "tags": ["jhs", "algebra", "必修"], "examples": []}
+{"id": "JHS.ALG.POLY_ID", "title": "多項式の項・次数・標準形", "subject": "中学校", "unit": "数と式", "topic": "文字式・多項式", "difficulty": 2, "priority": 5, "tags": ["jhs", "algebra"], "examples": []}
+{"id": "JHS.ALG.LIKE", "title": "同類項の判定（多文字・指数）", "subject": "中学校", "unit": "数と式", "topic": "文字式・多項式", "difficulty": 2, "priority": 5, "tags": ["jhs", "algebra", "like-terms"], "examples": []}
+{"id": "JHS.ALG.ADD", "title": "多項式の加法・減法（整理）", "subject": "中学校", "unit": "数と式", "topic": "文字式・多項式", "difficulty": 2, "priority": 5, "tags": ["jhs", "algebra"], "examples": []}
+{"id": "JHS.ALG.MUL_MONO", "title": "単項式×多項式（分配法則）", "subject": "中学校", "unit": "数と式", "topic": "文字式・多項式", "difficulty": 2, "priority": 5, "tags": ["jhs", "algebra"], "examples": []}
+{"id": "JHS.ALG.MUL_POLY", "title": "多項式×多項式（2×2 基本）", "subject": "中学校", "unit": "数と式", "topic": "文字式・多項式", "difficulty": 2, "priority": 5, "tags": ["jhs", "algebra"], "examples": []}
+{"id": "JHS.ALG.SQSUM", "title": "(a+b)^2 の展開と活用", "subject": "中学校", "unit": "数と式", "topic": "文字式・多項式", "difficulty": 2, "priority": 5, "tags": ["jhs", "algebra", "pattern"], "examples": []}
+{"id": "JHS.ALG.SQDIFF", "title": "(a-b)^2 の展開と活用", "subject": "中学校", "unit": "数と式", "topic": "文字式・多項式", "difficulty": 2, "priority": 4, "tags": ["jhs", "algebra", "pattern"], "examples": []}
+{"id": "JHS.ALG.PROD_DIFF", "title": "(a+b)(a-b) の展開と活用", "subject": "中学校", "unit": "数と式", "topic": "文字式・多項式", "difficulty": 2, "priority": 5, "tags": ["jhs", "algebra", "pattern"], "examples": []}
+{"id": "JHS.ALG.DIV_MONO", "title": "単項式で割る（指数の減算）", "subject": "中学校", "unit": "数と式", "topic": "文字式・多項式", "difficulty": 2, "priority": 4, "tags": ["jhs", "algebra"], "examples": []}
+{"id": "JHS.ALG.FACT_CF", "title": "因数分解：共通因数でくくる", "subject": "中学校", "unit": "数と式", "topic": "因数分解", "difficulty": 2, "priority": 5, "tags": ["jhs", "factor", "必修"], "examples": []}
+{"id": "JHS.ALG.FACT_DSQ", "title": "因数分解：平方差 a^2-b^2", "subject": "中学校", "unit": "数と式", "topic": "因数分解", "difficulty": 2, "priority": 5, "tags": ["jhs", "factor"], "examples": []}
+{"id": "JHS.ALG.FACT_TRIN", "title": "因数分解：x^2+px+q（簡単形）", "subject": "中学校", "unit": "数と式", "topic": "因数分解", "difficulty": 3, "priority": 4, "tags": ["jhs", "factor"], "examples": []}
+{"id": "JHS.ALG.SUBST", "title": "置換による整理（t置換の初歩）", "subject": "中学校", "unit": "数と式", "topic": "文字式・多項式", "difficulty": 3, "priority": 3, "tags": ["jhs", "algebra"], "examples": []}
+{"id": "JHS.ALG.CHECK", "title": "誤り探し（符号・指数・整列）", "subject": "中学校", "unit": "数と式", "topic": "文字式・多項式", "difficulty": 2, "priority": 3, "tags": ["jhs", "algebra", "誤り訂正"], "examples": []}
+{"id": "JHS.ALG.WORD", "title": "文章題→式の立式（基本パターン）", "subject": "中学校", "unit": "数と式", "topic": "文字式・多項式", "difficulty": 3, "priority": 4, "tags": ["jhs", "algebra", "word"], "examples": []}

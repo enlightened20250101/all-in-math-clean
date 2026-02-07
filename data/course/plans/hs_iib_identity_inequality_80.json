@@ -1,0 +1,12 @@
+{
+  "courseId": "hs_iib_identity_inequality",
+  "goal": 80,
+  "topicOrder": [
+    "identity_eval_basic",
+    "identity_coefficient_basic",
+    "identity_coeff_quadratic_basic",
+    "inequality_mean_basic",
+    "inequality_sum_product_basic",
+    "inequality_amgm_basic"
+  ]
+}

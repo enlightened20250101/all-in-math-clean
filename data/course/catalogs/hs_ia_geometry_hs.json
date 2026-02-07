@@ -1,0 +1,33 @@
+{
+  "courseId": "hs_ia_geometry_hs",
+  "title": "高校数学IA：図形",
+  "topics": [
+    {
+      "id": "geo_ratio_theorems",
+      "title": "比の定理",
+      "description": "角の二等分線・中点連結・チェバ・メネラウス・面積比を扱う",
+      "viewCode": "centertest-geo-ratio-theorems"
+    },
+    {
+      "id": "geo_circle_geometry",
+      "title": "円の性質",
+      "description": "内接四角形・接弦定理・円の冪で角度や長さを求める",
+      "viewCode": "centertest-geo-circle-geometry"
+    },
+    {
+      "id": "geo_triangle_centers",
+      "title": "三角形の中心",
+      "description": "重心・内心・外心の性質を使って比や長さを求める",
+      "viewCode": "centertest-geo-triangle-centers"
+    },
+    {
+      "id": "geo_circle_relations",
+      "title": "2円の位置関係",
+      "description": "中心間距離と半径の和・差で交点や共通接線を判断する",
+      "viewCode": "centertest-geo-circle-relations"
+    }
+  ],
+  "units": [
+    "mathA"
+  ]
+}

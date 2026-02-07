@@ -1,0 +1,36 @@
+{"id":"M1.QF.BASE.001","title":"標準形 y=ax^2 の開き・対称性","subject":"数学I","unit":"二次関数","topic":"基本形とグラフ","difficulty":1,"priority":5,"tags":["mathI","quadratic","graph","必修"],"examples":[]}
+{"id":"M1.QF.BASE.002","title":"y=ax^2+bx+c の係数とグラフの関係","subject":"数学I","unit":"二次関数","topic":"基本形とグラフ","difficulty":2,"priority":5,"tags":["mathI","quadratic","graph"],"examples":[]}
+{"id":"M1.QF.BASE.003","title":"平方完成と頂点表示への変形","subject":"数学I","unit":"二次関数","topic":"基本形とグラフ","difficulty":2,"priority":5,"tags":["mathI","quadratic","complete-square","必修"],"examples":[]}
+{"id":"M1.QF.BASE.004","title":"軸・頂点・切片の読み取り","subject":"数学I","unit":"二次関数","topic":"基本形とグラフ","difficulty":2,"priority":5,"tags":["mathI","quadratic","graph"],"examples":[]}
+{"id":"M1.QF.BASE.005","title":"表・式・グラフの往復変換","subject":"数学I","unit":"二次関数","topic":"基本形とグラフ","difficulty":2,"priority":4,"tags":["mathI","quadratic","representation"],"examples":[]}
+{"id":"M1.QF.BASE.006","title":"複数グラフの比較（開き・位置・交点）","subject":"数学I","unit":"二次関数","topic":"基本形とグラフ","difficulty":2,"priority":4,"tags":["mathI","quadratic","graph"],"examples":[]}
+{"id":"M1.QF.BASE.007","title":"値域の求め方（平方完成ベース）","subject":"数学I","unit":"二次関数","topic":"基本形とグラフ","difficulty":3,"priority":5,"tags":["mathI","quadratic","range"],"examples":[]}
+{"id":"M1.QF.BASE.008","title":"対称性と点の対応（軸対称）","subject":"数学I","unit":"二次関数","topic":"基本形とグラフ","difficulty":2,"priority":4,"tags":["mathI","quadratic","symmetry"],"examples":[]}
+{"id":"M1.QF.BASE.009","title":"基本作図（スケール・格子点）","subject":"数学I","unit":"二次関数","topic":"基本形とグラフ","difficulty":2,"priority":3,"tags":["mathI","quadratic","graph","作図"],"examples":[]}
+{"id":"M1.QF.BASE.010","title":"文章から二次式モデルを立てる","subject":"数学I","unit":"二次関数","topic":"基本形とグラフ","difficulty":3,"priority":4,"tags":["mathI","quadratic","modeling","文章題"],"examples":[]}
+{"id":"M1.QF.EQ.001","title":"二次方程式の解の公式","subject":"数学I","unit":"二次関数","topic":"方程式・判別式・解の配置","difficulty":2,"priority":5,"tags":["mathI","quadratic","equation","必修"],"examples":[]}
+{"id":"M1.QF.EQ.002","title":"判別式と解の個数","subject":"数学I","unit":"二次関数","topic":"方程式・判別式・解の配置","difficulty":2,"priority":5,"tags":["mathI","quadratic","discriminant"],"examples":[]}
+{"id":"M1.QF.EQ.003","title":"係数条件と実数解の存在","subject":"数学I","unit":"二次関数","topic":"方程式・判別式・解の配置","difficulty":3,"priority":5,"tags":["mathI","quadratic","condition"],"examples":[]}
+{"id":"M1.QF.EQ.004","title":"解と係数の関係（Viète）","subject":"数学I","unit":"二次関数","topic":"方程式・判別式・解の配置","difficulty":3,"priority":4,"tags":["mathI","quadratic","viete"],"examples":[]}
+{"id":"M1.QF.EQ.005","title":"解の和と積の活用","subject":"数学I","unit":"二次関数","topic":"方程式・判別式・解の配置","difficulty":3,"priority":4,"tags":["mathI","quadratic"],"examples":[]}
+{"id":"M1.QF.EQ.006","title":"α,β 表記による式変形","subject":"数学I","unit":"二次関数","topic":"方程式・判別式・解の配置","difficulty":3,"priority":3,"tags":["mathI","quadratic"],"examples":[]}
+{"id":"M1.QF.EQ.007","title":"パラメータ付き解の個数・配置","subject":"数学I","unit":"二次関数","topic":"方程式・判別式・解の配置","difficulty":4,"priority":4,"tags":["mathI","quadratic","parameter"],"examples":[]}
+{"id":"M1.QF.EQ.008","title":"二次関数どうしの交点個数","subject":"数学I","unit":"二次関数","topic":"方程式・判別式・解の配置","difficulty":3,"priority":4,"tags":["mathI","quadratic","intersection"],"examples":[]}
+{"id":"M1.QF.EQ.009","title":"一次関数との交点条件","subject":"数学I","unit":"二次関数","topic":"方程式・判別式・解の配置","difficulty":3,"priority":4,"tags":["mathI","quadratic","line"],"examples":[]}
+{"id":"M1.QF.EQ.010","title":"接線条件（判別式=0）の入門","subject":"数学I","unit":"二次関数","topic":"方程式・判別式・解の配置","difficulty":3,"priority":3,"tags":["mathI","quadratic","tangent"],"examples":[]}
+{"id":"M1.QF.EQ.011","title":"二次不等式の解集合（数直線表現）","subject":"数学I","unit":"二次関数","topic":"方程式・判別式・解の配置","difficulty":3,"priority":5,"tags":["mathI","quadratic","inequality"],"examples":[]}
+{"id":"M1.QF.EQ.012","title":"合成条件・置換での二次化（初歩）","subject":"数学I","unit":"二次関数","topic":"方程式・判別式・解の配置","difficulty":4,"priority":3,"tags":["mathI","quadratic","substitution"],"examples":[]}
+{"id":"M1.QF.OPT.001","title":"平方完成による最大・最小","subject":"数学I","unit":"二次関数","topic":"最大最小・最適化","difficulty":3,"priority":5,"tags":["mathI","quadratic","opt","必修"],"examples":[]}
+{"id":"M1.QF.OPT.002","title":"区間付き最大最小（端点評価）","subject":"数学I","unit":"二次関数","topic":"最大最小・最適化","difficulty":3,"priority":4,"tags":["mathI","quadratic","opt"],"examples":[]}
+{"id":"M1.QF.OPT.003","title":"パラメータ付き値域","subject":"数学I","unit":"二次関数","topic":"最大最小・最適化","difficulty":4,"priority":4,"tags":["mathI","quadratic","range","parameter"],"examples":[]}
+{"id":"M1.QF.OPT.004","title":"条件式のもとでの最適化（入門）","subject":"数学I","unit":"二次関数","topic":"最大最小・最適化","difficulty":4,"priority":3,"tags":["mathI","quadratic","opt"],"examples":[]}
+{"id":"M1.QF.OPT.005","title":"幾何的距離最小（点と放物線など）","subject":"数学I","unit":"二次関数","topic":"最大最小・最適化","difficulty":4,"priority":3,"tags":["mathI","quadratic","geometry","opt"],"examples":[]}
+{"id":"M1.QF.OPT.006","title":"合成関数での最小（基本）","subject":"数学I","unit":"二次関数","topic":"最大最小・最適化","difficulty":4,"priority":3,"tags":["mathI","quadratic","composition"],"examples":[]}
+{"id":"M1.QF.OPT.007","title":"二次不等式を伴う最適化","subject":"数学I","unit":"二次関数","topic":"最大最小・最適化","difficulty":4,"priority":4,"tags":["mathI","quadratic","inequality","opt"],"examples":[]}
+{"id":"M1.QF.OPT.008","title":"応用文章題（面積・コスト最小化）","subject":"数学I","unit":"二次関数","topic":"最大最小・最適化","difficulty":4,"priority":3,"tags":["mathI","quadratic","application"],"examples":[]}
+{"id":"M1.QF.LOCUS.001","title":"二次関数と不等式の領域図示","subject":"数学I","unit":"二次関数","topic":"軌跡・領域","difficulty":3,"priority":4,"tags":["mathI","quadratic","region"],"examples":[]}
+{"id":"M1.QF.LOCUS.002","title":"y≥f(x) などの図示規則","subject":"数学I","unit":"二次関数","topic":"軌跡・領域","difficulty":3,"priority":4,"tags":["mathI","quadratic","region"],"examples":[]}
+{"id":"M1.QF.LOCUS.003","title":"交点を用いた領域分割","subject":"数学I","unit":"二次関数","topic":"軌跡・領域","difficulty":3,"priority":3,"tags":["mathI","quadratic","region"],"examples":[]}
+{"id":"M1.QF.LOCUS.004","title":"等式から軌跡条件への翻訳","subject":"数学I","unit":"二次関数","topic":"軌跡・領域","difficulty":4,"priority":3,"tags":["mathI","quadratic","locus"],"examples":[]}
+{"id":"M1.QF.LOCUS.005","title":"一次・二次の複合領域（入門）","subject":"数学I","unit":"二次関数","topic":"軌跡・領域","difficulty":4,"priority":3,"tags":["mathI","quadratic","region","mixed"],"examples":[]}
+{"id":"M1.QF.LOCUS.006","title":"幾何条件の式化（初歩）","subject":"数学I","unit":"二次関数","topic":"軌跡・領域","difficulty":4,"priority":3,"tags":["mathI","quadratic","geometry"],"examples":[]}

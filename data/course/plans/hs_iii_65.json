@@ -1,0 +1,12 @@
+{
+  "courseId": "hs_iii",
+  "goal": 65,
+  "topicOrder": [
+    "calc_limit_basic",
+    "calc_continuity_basic",
+    "calc_derivative_advanced_basic",
+    "calc_integral_advanced_basic",
+    "calc_curve_area_basic",
+    "calc_parametric_basic"
+  ]
+}

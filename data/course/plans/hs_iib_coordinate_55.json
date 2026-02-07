@@ -1,0 +1,12 @@
+{
+  "courseId": "hs_iib_coordinate",
+  "goal": 55,
+  "topicOrder": [
+    "coord_line_slope_basic",
+    "coord_line_intercept_basic",
+    "coord_line_parallel_perp_basic",
+    "coord_distance_point_line_basic",
+    "coord_circle_radius_basic",
+    "coord_circle_center_basic"
+  ]
+}

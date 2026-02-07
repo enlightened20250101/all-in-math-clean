@@ -1,0 +1,272 @@
+{
+  "courses": [
+    {
+      "courseId": "ct_iib",
+      "title": "共通テストII/B",
+      "units": [
+        "math2",
+        "mathB"
+      ]
+    },
+    {
+      "courseId": "ct_iib_sequence",
+      "title": "共通テストII/B（数列）",
+      "units": [
+        "mathB"
+      ]
+    },
+    {
+      "courseId": "ct_iib_statistics",
+      "title": "共通テストII/B（統計）",
+      "units": [
+        "mathB"
+      ]
+    },
+    {
+      "courseId": "hs_iic",
+      "title": "高校数学C",
+      "units": [
+        "mathC"
+      ]
+    },
+    {
+      "courseId": "hs_iic_conic",
+      "title": "高校数学C：円錐曲線",
+      "units": [
+        "mathC"
+      ],
+      "baseCourseId": "hs_iic",
+      "section": "conic"
+    },
+    {
+      "courseId": "hs_iic_probability",
+      "title": "高校数学C：確率",
+      "units": [
+        "mathC"
+      ],
+      "baseCourseId": "hs_iic",
+      "section": "probability"
+    },
+    {
+      "courseId": "hs_iic_complex",
+      "title": "高校数学C：複素数",
+      "units": [
+        "mathC"
+      ],
+      "baseCourseId": "hs_iic",
+      "section": "complex"
+    },
+    {
+      "courseId": "hs_ia",
+      "title": "高校数学IA",
+      "units": [
+        "math1",
+        "mathA"
+      ]
+    },
+    {
+      "courseId": "hs_ia_data",
+      "title": "高校数学IA：データ・統計",
+      "units": [
+        "math1"
+      ],
+      "baseCourseId": "hs_ia",
+      "section": "data"
+    },
+    {
+      "courseId": "hs_ia_probability",
+      "title": "高校数学IA：確率",
+      "units": [
+        "mathA"
+      ],
+      "baseCourseId": "hs_ia",
+      "section": "probability"
+    },
+    {
+      "courseId": "hs_ia_geometry",
+      "title": "高校数学IA：幾何",
+      "units": [
+        "math1"
+      ],
+      "baseCourseId": "hs_ia",
+      "section": "geometry"
+    },
+    {
+      "courseId": "hs_ia_trigonometry",
+      "title": "高校数学IA：三角関数",
+      "units": [
+        "math1"
+      ],
+      "baseCourseId": "hs_ia",
+      "section": "trigonometry"
+    },
+    {
+      "courseId": "hs_ia_proof",
+      "title": "高校数学IA：証明",
+      "units": [
+        "mathA"
+      ],
+      "baseCourseId": "hs_ia",
+      "section": "proof"
+    },
+    {
+      "courseId": "hs_ia_combinatorics",
+      "title": "高校数学IA：場合の数",
+      "units": [
+        "mathA"
+      ],
+      "baseCourseId": "hs_ia",
+      "section": "combinatorics"
+    },
+    {
+      "courseId": "hs_ia_geometry_hs",
+      "title": "高校数学IA：図形",
+      "units": [
+        "mathA"
+      ],
+      "baseCourseId": "hs_ia",
+      "section": "geometry_hs"
+    },
+    {
+      "courseId": "hs_ia_integer",
+      "title": "高校数学IA：整数",
+      "units": [
+        "mathA"
+      ],
+      "baseCourseId": "hs_ia",
+      "section": "integer"
+    },
+    {
+      "courseId": "hs_ia_algebra",
+      "title": "高校数学IA：代数",
+      "units": [
+        "math1"
+      ],
+      "baseCourseId": "hs_ia",
+      "section": "algebra"
+    },
+    {
+      "courseId": "hs_ia_quadratic",
+      "title": "高校数学IA：二次関数",
+      "units": [
+        "math1"
+      ],
+      "baseCourseId": "hs_ia",
+      "section": "quadratic"
+    },
+    {
+      "courseId": "hs_ia_logic",
+      "title": "高校数学IA：論理",
+      "units": [
+        "math1"
+      ],
+      "baseCourseId": "hs_ia",
+      "section": "logic"
+    },
+    {
+      "courseId": "hs_iib",
+      "title": "高校数学IIB",
+      "units": [
+        "math2",
+        "mathB"
+      ]
+    },
+    {
+      "courseId": "hs_iib_vector",
+      "title": "高校数学IIB：ベクトル",
+      "units": [
+        "mathB"
+      ],
+      "baseCourseId": "hs_iib",
+      "section": "vector"
+    },
+    {
+      "courseId": "hs_iib_identity_inequality",
+      "title": "高校数学IIB：恒等式・不等式",
+      "units": [
+        "math2"
+      ],
+      "baseCourseId": "hs_iib",
+      "section": "identity_inequality"
+    },
+    {
+      "courseId": "hs_iib_coordinate",
+      "title": "高校数学IIB：座標",
+      "units": [
+        "math2"
+      ],
+      "baseCourseId": "hs_iib",
+      "section": "coordinate"
+    },
+    {
+      "courseId": "hs_iib_trigonometry",
+      "title": "高校数学IIB：三角関数",
+      "units": [
+        "math2"
+      ],
+      "baseCourseId": "hs_iib",
+      "section": "trigonometry"
+    },
+    {
+      "courseId": "hs_iib_exp_log",
+      "title": "高校数学IIB：指数・対数",
+      "units": [
+        "math2"
+      ],
+      "baseCourseId": "hs_iib",
+      "section": "exp_log"
+    },
+    {
+      "courseId": "hs_iib_sequence",
+      "title": "高校数学IIB：数列",
+      "units": [
+        "mathB"
+      ],
+      "baseCourseId": "hs_iib",
+      "section": "sequence"
+    },
+    {
+      "courseId": "hs_iib_polynomial",
+      "title": "高校数学IIB：多項式",
+      "units": [
+        "math2"
+      ],
+      "baseCourseId": "hs_iib",
+      "section": "polynomial"
+    },
+    {
+      "courseId": "hs_iib_statistics",
+      "title": "高校数学IIB：統計",
+      "units": [
+        "mathB"
+      ],
+      "baseCourseId": "hs_iib",
+      "section": "statistics"
+    },
+    {
+      "courseId": "hs_iib_calculus",
+      "title": "高校数学IIB：微積",
+      "units": [
+        "math2"
+      ],
+      "baseCourseId": "hs_iib",
+      "section": "calculus"
+    },
+    {
+      "courseId": "hs_iii",
+      "title": "高校数学III",
+      "units": [
+        "math3"
+      ]
+    },
+    {
+      "courseId": "hs_iii_calculus",
+      "title": "高校数学III：微積",
+      "units": [
+        "math3"
+      ],
+      "baseCourseId": "hs_iii",
+      "section": "calculus"
+    }
+  ]
+}

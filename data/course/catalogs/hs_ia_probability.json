@@ -1,0 +1,27 @@
+{
+  "courseId": "hs_ia_probability",
+  "title": "高校数学IA：確率",
+  "topics": [
+    {
+      "id": "prob_basic",
+      "title": "確率の基本",
+      "description": "起こりうる場合の数と有利な場合の数で求める",
+      "viewCode": "centertest-prob-basic"
+    },
+    {
+      "id": "prob_complement_basic",
+      "title": "補集合と確率",
+      "description": "余事象を使って確率を求める",
+      "viewCode": "centertest-prob-complement-basic"
+    },
+    {
+      "id": "prob_combi_basic",
+      "title": "組合せと確率",
+      "description": "組合せで有利・全体を数えて確率を求める",
+      "viewCode": "centertest-prob-combi-basic"
+    }
+  ],
+  "units": [
+    "mathA"
+  ]
+}

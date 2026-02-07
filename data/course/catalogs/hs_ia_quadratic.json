@@ -1,0 +1,45 @@
+{
+  "courseId": "hs_ia_quadratic",
+  "title": "高校数学IA：二次関数",
+  "topics": [
+    {
+      "id": "quad_solve_basic",
+      "title": "二次方程式の解（基本）",
+      "description": "判別式で実数解の個数と解を判断する",
+      "viewCode": "centertest-quad-solve-basic"
+    },
+    {
+      "id": "quad_discriminant_basic",
+      "title": "判別式と解の個数（基本）",
+      "description": "判別式 D=b^2-4ac を計算して個数判定する",
+      "viewCode": "centertest-quad-discriminant-basic"
+    },
+    {
+      "id": "quad_roots_relations_basic",
+      "title": "解と係数の関係（基本）",
+      "description": "解の和・積（-b/a, c/a）を使って値を求める",
+      "viewCode": "centertest-quad-roots-relations-basic"
+    },
+    {
+      "id": "quad_inequality_basic",
+      "title": "二次不等式（基本）",
+      "description": "因数分解と符号の変化から解の範囲を判断する",
+      "viewCode": "centertest-quad-inequality-basic"
+    },
+    {
+      "id": "quad_graph_basic",
+      "title": "二次関数のグラフと頂点",
+      "description": "軸・頂点・グラフの形を押さえる",
+      "viewCode": "centertest-mathA-core"
+    },
+    {
+      "id": "quad_maxmin_basic",
+      "title": "二次関数の最大・最小（基本）",
+      "description": "平方完成で最大値・最小値を求める",
+      "viewCode": "centertest-quad-maxmin-basic"
+    }
+  ],
+  "units": [
+    "math1"
+  ]
+}

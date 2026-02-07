@@ -1,0 +1,57 @@
+{
+  "courseId": "hs_iib_polynomial",
+  "title": "高校数学IIB：多項式",
+  "topics": [
+    {
+      "id": "poly_remainder_basic",
+      "title": "余りの定理（基本）",
+      "description": "余りの定理で余りを求める",
+      "viewCode": "topic-poly_remainder_basic"
+    },
+    {
+      "id": "poly_factor_k_basic",
+      "title": "因数定理（基本）",
+      "description": "因数定理を使って係数を決める",
+      "viewCode": "topic-poly_factor_k_basic"
+    },
+    {
+      "id": "poly_value_sum_basic",
+      "title": "多項式の値（基本）",
+      "description": "f(1)+f(-1) のような値を求める",
+      "viewCode": "topic-poly_value_sum_basic"
+    },
+    {
+      "id": "poly_coeff_from_roots_basic",
+      "title": "因数から係数（基本）",
+      "description": "因数分解形から係数を読み取る",
+      "viewCode": "topic-poly_coeff_from_roots_basic"
+    },
+    {
+      "id": "binomial_coeff_basic",
+      "title": "二項定理の係数（基本）",
+      "description": "(x+a)^n の係数を求める",
+      "viewCode": "topic-binomial_coeff_basic"
+    },
+    {
+      "id": "binomial_xy_coeff_basic",
+      "title": "二項定理（x+y）（基本）",
+      "description": "(x+y)^n の係数を求める",
+      "viewCode": "topic-binomial_xy_coeff_basic"
+    },
+    {
+      "id": "binomial_value_basic",
+      "title": "二項定理の値（基本）",
+      "description": "(1+a)^n の値を求める",
+      "viewCode": "topic-binomial_value_basic"
+    },
+    {
+      "id": "binomial_middle_coeff_basic",
+      "title": "二項定理の中央項（基本）",
+      "description": "(x+y)^n の中央項の係数を求める",
+      "viewCode": "topic-binomial_middle_coeff_basic"
+    }
+  ],
+  "units": [
+    "math2"
+  ]
+}

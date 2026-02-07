@@ -1,0 +1,15 @@
+{"id": "JHS.EQ.LINEAR_SOLVE", "title": "一次方程式の解法（移項・分配・約分）", "subject": "中学校", "unit": "数と式", "topic": "一次方程式", "difficulty": 2, "priority": 5, "tags": ["jhs", "equation", "必修"], "examples": []}
+{"id": "JHS.EQ.LINEAR_FRA", "title": "分数を含む一次方程式（通分処理）", "subject": "中学校", "unit": "数と式", "topic": "一次方程式", "difficulty": 3, "priority": 5, "tags": ["jhs", "equation"], "examples": []}
+{"id": "JHS.EQ.LINEAR_WORD", "title": "一次方程式の文章題（割合・速さ・濃度）", "subject": "中学校", "unit": "数と式", "topic": "一次方程式", "difficulty": 3, "priority": 4, "tags": ["jhs", "equation", "word"], "examples": []}
+{"id": "JHS.EQ.SIM_ADD", "title": "連立方程式（加減法）", "subject": "中学校", "unit": "数と式", "topic": "連立方程式", "difficulty": 3, "priority": 5, "tags": ["jhs", "equation", "simul", "必修"], "examples": []}
+{"id": "JHS.EQ.SIM_SUBS", "title": "連立方程式（代入法）", "subject": "中学校", "unit": "数と式", "topic": "連立方程式", "difficulty": 3, "priority": 5, "tags": ["jhs", "equation", "simul"], "examples": []}
+{"id": "JHS.EQ.SIM_FRA", "title": "分数・小数を含む連立方程式", "subject": "中学校", "unit": "数と式", "topic": "連立方程式", "difficulty": 3, "priority": 4, "tags": ["jhs", "equation", "simul"], "examples": []}
+{"id": "JHS.EQ.SIM_WORD", "title": "連立方程式の文章題（個数・料金・割合）", "subject": "中学校", "unit": "数と式", "topic": "連立方程式", "difficulty": 3, "priority": 4, "tags": ["jhs", "equation", "word"], "examples": []}
+{"id": "JHS.INEQ.LINE", "title": "一次不等式の解法と数直線", "subject": "中学校", "unit": "数と式", "topic": "不等式", "difficulty": 2, "priority": 5, "tags": ["jhs", "inequality", "必修"], "examples": []}
+{"id": "JHS.INEQ.FRA", "title": "分数を含む一次不等式（不等号の向き）", "subject": "中学校", "unit": "数と式", "topic": "不等式", "difficulty": 3, "priority": 4, "tags": ["jhs", "inequality"], "examples": []}
+{"id": "JHS.INEQ.SYS", "title": "一次不等式の連立（共通解領域）", "subject": "中学校", "unit": "数と式", "topic": "不等式", "difficulty": 3, "priority": 4, "tags": ["jhs", "inequality"], "examples": []}
+{"id": "JHS.EQ.RATIO_PROP", "title": "比例式の解法と内外項の積", "subject": "中学校", "unit": "数と式", "topic": "比例式", "difficulty": 2, "priority": 4, "tags": ["jhs", "ratio"], "examples": []}
+{"id": "JHS.EQ.DIRECT", "title": "比例 y=kx の方程式化と定数決定", "subject": "中学校", "unit": "数と式", "topic": "比例", "difficulty": 2, "priority": 5, "tags": ["jhs", "function", "必修"], "examples": []}
+{"id": "JHS.EQ.INVERSE", "title": "反比例 y=a/x の式決定と利用", "subject": "中学校", "unit": "数と式", "topic": "反比例", "difficulty": 2, "priority": 5, "tags": ["jhs", "function"], "examples": []}
+{"id": "JHS.EQ.ABS_BAS", "title": "絶対値の意味と基本等式", "subject": "中学校", "unit": "数と式", "topic": "絶対値", "difficulty": 3, "priority": 3, "tags": ["jhs", "equation"], "examples": []}
+{"id": "JHS.EQ.CHECK", "title": "解の検算・条件の点検（定義域・除外値）", "subject": "中学校", "unit": "数と式", "topic": "メタ技能", "difficulty": 2, "priority": 4, "tags": ["jhs", "equation", "check"], "examples": []}

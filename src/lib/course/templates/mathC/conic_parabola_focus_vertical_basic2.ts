@@ -1,0 +1,56 @@
+// src/lib/course/templates/mathC/conic_parabola_focus_vertical_basic2.ts
+import type { QuestionTemplate } from "../../types";
+import { gradeNumeric, pick } from "../_shared/utils";
+
+const CASES = [
+  { a: 1, ans: 1 },
+  { a: 2, ans: 2 },
+  { a: 3, ans: 3 },
+  { a: 4, ans: 4 },
+];
+
+type Params = {
+  a: number;
+  ans: number;
+};
+
+function buildParams(): Params {
+  return pick(CASES);
+}
+
+function buildTemplate(id: string, title: string): QuestionTemplate {
+  return {
+    meta: {
+      id,
+      topicId: "conic_parabola_focus_vertical_basic",
+      title,
+      difficulty: 1,
+      tags: ["conic", "parabola"],
+    },
+    generate() {
+      const params = buildParams();
+      const statement = `放物線 $x^2=4${params.a}y$ の焦点の $y$ 座標を求めよ。`;
+      return {
+        templateId: id,
+        statement,
+        answerKind: "numeric",
+        params,
+      };
+    },
+    grade(params, userAnswer) {
+      return gradeNumeric(userAnswer, (params as Params).ans);
+    },
+    explain(params) {
+      const p = params as Params;
+      return `
+### この問題の解説
+放物線 $x^2=4ay$ の焦点は $(0,a)$。
+よって $y$ 座標は **${p.ans}**。
+`;
+    },
+  };
+}
+
+export const conicParabolaFocusVerticalExtraTemplates: QuestionTemplate[] = Array.from({ length: 6 }, (_, i) =>
+  buildTemplate(`conic_parabola_focus_vertical_basic2_${i + 1}`, `焦点 ${i + 1}`)
+);

@@ -1,0 +1,16 @@
+{"id": "JHS.DATA.TABLE", "title": "度数表と相対度数（基本）", "subject": "中学校", "unit": "データ", "topic": "記述統計", "difficulty": 1, "priority": 5, "tags": ["jhs", "data", "table", "必修"], "examples": []}
+{"id": "JHS.DATA.CHARTS", "title": "柱状・折れ線・円グラフの読み取り", "subject": "中学校", "unit": "データ", "topic": "可視化", "difficulty": 1, "priority": 4, "tags": ["jhs", "data", "chart"], "examples": []}
+{"id": "JHS.DATA.HIST", "title": "ヒストグラムと階級幅", "subject": "中学校", "unit": "データ", "topic": "可視化", "difficulty": 2, "priority": 4, "tags": ["jhs", "data", "hist"], "examples": []}
+{"id": "JHS.DATA.CENTER", "title": "代表値：平均・中央値・最頻値", "subject": "中学校", "unit": "データ", "topic": "記述統計", "difficulty": 2, "priority": 5, "tags": ["jhs", "data", "center", "必修"], "examples": []}
+{"id": "JHS.DATA.SPREAD", "title": "範囲と四分位範囲（IQR）", "subject": "中学校", "unit": "データ", "topic": "記述統計", "difficulty": 2, "priority": 4, "tags": ["jhs", "data", "spread"], "examples": []}
+{"id": "JHS.DATA.SCATTER", "title": "散布図と相関の向き", "subject": "中学校", "unit": "データ", "topic": "相関", "difficulty": 2, "priority": 4, "tags": ["jhs", "data", "scatter"], "examples": []}
+{"id": "JHS.DATA.CORR_CONCEPT", "title": "相関係数の概念（計算は簡略）", "subject": "中学校", "unit": "データ", "topic": "相関", "difficulty": 3, "priority": 3, "tags": ["jhs", "data", "correlation"], "examples": []}
+{"id": "JHS.DATA.TREND", "title": "近似直線（傾向線）の直感", "subject": "中学校", "unit": "データ", "topic": "相関", "difficulty": 2, "priority": 3, "tags": ["jhs", "data", "regression"], "examples": []}
+{"id": "JHS.PROB.SPACE", "title": "標本空間と事象（同様に確からしい）", "subject": "中学校", "unit": "確率", "topic": "基礎", "difficulty": 2, "priority": 5, "tags": ["jhs", "probability", "必修"], "examples": []}
+{"id": "JHS.PROB.FRACTION", "title": "確率の分数表現と補集合", "subject": "中学校", "unit": "確率", "topic": "基礎", "difficulty": 2, "priority": 5, "tags": ["jhs", "probability"], "examples": []}
+{"id": "JHS.PROB.TREE", "title": "場合分け・樹形図", "subject": "中学校", "unit": "確率", "topic": "方法", "difficulty": 2, "priority": 5, "tags": ["jhs", "probability", "tree"], "examples": []}
+{"id": "JHS.PROB.MULTI_STAGE", "title": "複段試行（玉/コイン/サイコロ）", "subject": "中学校", "unit": "確率", "topic": "方法", "difficulty": 3, "priority": 4, "tags": ["jhs", "probability", "multi"], "examples": []}
+{"id": "JHS.PROB.AND_OR", "title": "和事象・積事象の基本計算", "subject": "中学校", "unit": "確率", "topic": "基礎", "difficulty": 3, "priority": 4, "tags": ["jhs", "probability"], "examples": []}
+{"id": "JHS.PROB.WITHOUT_REP", "title": "順不同・取り出し（重複なし）入門", "subject": "中学校", "unit": "確率", "topic": "方法", "difficulty": 3, "priority": 3, "tags": ["jhs", "probability"], "examples": []}
+{"id": "JHS.PROB.EXPECT_SIMPLE", "title": "期待値の直感（簡単な平均）", "subject": "中学校", "unit": "確率", "topic": "基礎", "difficulty": 2, "priority": 3, "tags": ["jhs", "probability", "expectation"], "examples": []}
+{"id": "JHS.PROB.ERROR_CHECK", "title": "誤りやすい条件読み・全事象チェック", "subject": "中学校", "unit": "確率", "topic": "メタ技能", "difficulty": 2, "priority": 3, "tags": ["jhs", "probability", "check"], "examples": []}

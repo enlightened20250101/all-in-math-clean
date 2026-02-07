@@ -1,0 +1,105 @@
+{
+  "courseId": "hs_iib_sequence",
+  "title": "高校数学IIB：数列",
+  "topics": [
+    {
+      "id": "seq_arithmetic_basic",
+      "title": "等差数列の一般項（基本）",
+      "description": "初項と公差から一般項を求める基本問題に取り組む",
+      "viewCode": "topic-seq_arithmetic_basic"
+    },
+    {
+      "id": "seq_geometric_basic",
+      "title": "等比数列の一般項（基本）",
+      "description": "初項と公比から一般項を求める基本問題に取り組む",
+      "viewCode": "topic-seq_geometric_basic"
+    },
+    {
+      "id": "seq_geometric_mean_basic",
+      "title": "等比数列の平均（基本）",
+      "description": "$a_1$ と $a_3$ から $a_2$ を求める",
+      "viewCode": "topic-seq_geometric_mean_basic"
+    },
+    {
+      "id": "seq_term_from_sum_basic",
+      "title": "和から項（基本）",
+      "description": "S_n と S_{n-1} から a_n を求める",
+      "viewCode": "topic-seq_term_from_sum_basic"
+    },
+    {
+      "id": "seq_geometric_sum_n_basic",
+      "title": "等比数列の和（基本）",
+      "description": "等比数列の和を公式で求める",
+      "viewCode": "topic-seq_geometric_sum_n_basic"
+    },
+    {
+      "id": "seq_common_ratio_from_terms_basic",
+      "title": "公比（項から）（基本）",
+      "description": "項の値から公比を求める",
+      "viewCode": "topic-seq_common_ratio_from_terms_basic"
+    },
+    {
+      "id": "seq_sum_basic",
+      "title": "数列の和（基本）",
+      "description": "等差・等比数列の和の公式を使う基本問題に取り組む",
+      "viewCode": "topic-seq_sum_basic"
+    },
+    {
+      "id": "seq_common_difference_basic",
+      "title": "公差の計算（基本）",
+      "description": "等差数列の公差を求める",
+      "viewCode": "topic-seq_common_difference_basic"
+    },
+    {
+      "id": "seq_geometric_sum_basic",
+      "title": "等比数列の和（基本）",
+      "description": "等比数列の和の公式を用いる",
+      "viewCode": "topic-seq_geometric_sum_basic"
+    },
+    {
+      "id": "seq_geometric_limit_basic",
+      "title": "等比数列の無限和（基本）",
+      "description": "公比の絶対値が1未満の無限和を求める",
+      "viewCode": "topic-seq_geometric_limit_basic"
+    },
+    {
+      "id": "seq_arithmetic_sum_basic",
+      "title": "等差数列の和（基本）",
+      "description": "等差数列の和の公式を用いる",
+      "viewCode": "topic-seq_arithmetic_sum_basic"
+    },
+    {
+      "id": "seq_arithmetic_sum_from_terms_basic",
+      "title": "等差数列の和（項から）（基本）",
+      "description": "初項と $a_n$ から和を求める",
+      "viewCode": "topic-seq_arithmetic_sum_from_terms_basic"
+    },
+    {
+      "id": "seq_arithmetic_mean_basic",
+      "title": "等差数列の平均（基本）",
+      "description": "$a_1$ と $a_3$ から $a_2$ を求める",
+      "viewCode": "topic-seq_arithmetic_mean_basic"
+    },
+    {
+      "id": "seq_arithmetic_diff_from_terms_basic",
+      "title": "公差（項から）（基本）",
+      "description": "$a_1$ と $a_4$ から公差を求める",
+      "viewCode": "topic-seq_arithmetic_diff_from_terms_basic"
+    },
+    {
+      "id": "seq_recurrence_basic",
+      "title": "漸化式（基本）",
+      "description": "一次の漸化式から一般項を求める基本問題に取り組む",
+      "viewCode": "topic-seq_recurrence_basic"
+    },
+    {
+      "id": "seq_recurrence_term_basic",
+      "title": "漸化式の項（基本）",
+      "description": "漸化式から具体的な項を求める",
+      "viewCode": "topic-seq_recurrence_term_basic"
+    }
+  ],
+  "units": [
+    "mathB"
+  ]
+}

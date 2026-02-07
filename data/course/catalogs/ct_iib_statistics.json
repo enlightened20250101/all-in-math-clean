@@ -1,0 +1,60 @@
+{
+  "courseId": "ct_iib_statistics",
+  "title": "共通テストII/B（統計）",
+  "topics": [
+    {
+      "id": "stats_sample_mean_basic",
+      "title": "標本平均（基本）",
+      "description": "共通テスト頻出: データの平均を求める",
+      "viewCode": "topic-stats_sample_mean_basic"
+    },
+    {
+      "id": "stats_sampling_mean_basic",
+      "title": "標本平均の平均（基本）",
+      "description": "共通テスト頻出: 標本平均の期待値が母平均に等しいことを使う",
+      "viewCode": "topic-stats_sampling_mean_basic"
+    },
+    {
+      "id": "stats_standard_error_basic",
+      "title": "標準誤差（基本）",
+      "description": "共通テスト頻出: 標準誤差 $\\sigma/\\sqrt{n}$ を求める",
+      "viewCode": "topic-stats_standard_error_basic"
+    },
+    {
+      "id": "stats_confidence_interval_basic",
+      "title": "信頼区間の幅（基本）",
+      "description": "共通テスト頻出: 幅（片側）$z\\cdot \\text{SE}$ を求める",
+      "viewCode": "topic-stats_confidence_interval_basic"
+    },
+    {
+      "id": "stats_scatter_basic",
+      "title": "散布図（基本）",
+      "description": "共通テスト頻出: 散布図から相関の向きを読み取る",
+      "viewCode": "topic-stats_scatter_basic"
+    },
+    {
+      "id": "stats_covariance_basic",
+      "title": "共分散（基本）",
+      "description": "共通テスト頻出: 共分散を計算して関係の向きを判断する",
+      "viewCode": "topic-stats_covariance_basic"
+    },
+    {
+      "id": "stats_correlation_basic",
+      "title": "相関係数（基本）",
+      "description": "共通テスト頻出: 相関係数を計算して強さを読み取る",
+      "viewCode": "topic-stats_correlation_basic"
+    },
+    {
+      "id": "stats_regression_basic",
+      "title": "回帰直線（基本）",
+      "description": "共通テスト頻出: 回帰直線の式から推定値を求める",
+      "viewCode": "topic-stats_regression_basic"
+    },
+    {
+      "id": "stats_inference_basic",
+      "title": "統計的推定（基本）",
+      "description": "共通テスト頻出: 信頼区間の中心を読み取り点推定に慣れる",
+      "viewCode": "topic-stats_inference_basic"
+    }
+  ]
+}

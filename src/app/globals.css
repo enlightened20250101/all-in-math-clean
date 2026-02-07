@@ -1,0 +1,143 @@
+/* src/app/globals.css */
+@import "katex/dist/katex.min.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #f6f7fb;
+}
+
+/* 黒板風ヘッダー */
+.chalkboard {
+  background-color: #102a3a;
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.08), transparent 36%),
+    radial-gradient(circle at 78% 14%, rgba(255, 255, 255, 0.06), transparent 38%),
+    radial-gradient(circle at 18% 78%, rgba(255, 255, 255, 0.05), transparent 46%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.035) 1px, transparent 1px, transparent 6px),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0.025) 1px, transparent 1px, transparent 7px);
+}
+
+/* 見出しなどの微調整（任意） */
+.prose kbd { @apply px-1 py-0.5 rounded bg-gray-100 border; }
+
+/* 数式の最終調整 */
+.math-prose .katex-display {
+  display: block;
+  text-align: center;
+  margin: 1.25em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+.math-prose .katex-display > .katex {
+  font-size: 1.25em;   /* お好みで 1.15〜1.35em くらい */
+  max-width: 100%;
+}
+/* 万一 p 内に入っていても中央寄せに見せる保険 */
+.math-prose p > .katex-display { display: block; text-align: center; }
+
+.course-topics .prose {
+  line-height: 1.55;
+}
+.course-topics .prose p {
+  margin: 0.2em 0 0.4em;
+}
+.course-topics .katex-display {
+  margin: 0.6em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+.course-topics .katex-display > .katex {
+  font-size: 1.05em;
+  max-width: 100%;
+}
+.course-topics .katex {
+  font-size: 1em;
+}
+
+.course-topic-desc {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.35;
+}
+.course-topic-desc .katex-display {
+  display: inline-block;
+  margin: 0;
+  vertical-align: middle;
+  max-width: 100%;
+}
+.course-topic-desc .katex-display > .katex {
+  display: inline-block;
+  max-width: 100%;
+}
+.course-topic-desc .katex {
+  font-size: 1em;
+}
+
+.course-topic-title {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.course-topic-title .katex-display {
+  display: inline-block;
+  margin: 0;
+  vertical-align: middle;
+  max-width: 100%;
+}
+.course-topic-title .katex-display > .katex {
+  font-size: 1.05em;
+}
+
+.katex-inline {
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  vertical-align: middle;
+}
+
+@media (max-width: 640px) {
+  .course-topic-desc {
+    -webkit-line-clamp: 1;
+    line-height: 1.25;
+  }
+}
+
+.JXGbox {
+  touch-action: none;           /* モバイルでの操作を安定化 */
+  background: #ffffff;
+}
+.JXGtext {
+  font-size: 12px;
+}
+
+/* 保存のみ表示（ローカル） */
+.saved-only [data-saved-item]:not([data-saved="1"]) {
+  display: none;
+}
+
+[data-saved-item] .saved-badge {
+  display: none;
+}
+[data-saved-item][data-saved="1"] .saved-badge {
+  display: inline-flex;
+}
+.saved-only .saved-badge {
+  background: #d1fae5;
+  color: #047857;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}

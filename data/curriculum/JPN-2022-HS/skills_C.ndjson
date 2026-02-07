@@ -1,0 +1,32 @@
+{"id":"M1.TRIG.DEF.001","title":"三角比の定義（鋭角）","subject":"数学I","unit":"図形と計量","topic":"三角比の定義と性質","difficulty":1,"priority":5,"tags":["mathI","trig","必修"],"examples":[]}
+{"id":"M1.TRIG.DEF.002","title":"sin,cos,tan の相互関係","subject":"数学I","unit":"図形と計量","topic":"三角比の定義と性質","difficulty":1,"priority":5,"tags":["mathI","trig"],"examples":[]}
+{"id":"M1.TRIG.DEF.003","title":"30°・45°・60°の標準値","subject":"数学I","unit":"図形と計量","topic":"三角比の定義と性質","difficulty":1,"priority":5,"tags":["mathI","trig","table"],"examples":[]}
+{"id":"M1.TRIG.DEF.004","title":"tan=sin/cos などの変換","subject":"数学I","unit":"図形と計量","topic":"三角比の定義と性質","difficulty":2,"priority":4,"tags":["mathI","trig"],"examples":[]}
+{"id":"M1.TRIG.DEF.005","title":"補角・余角の関係（高校範囲）","subject":"数学I","unit":"図形と計量","topic":"三角比の定義と性質","difficulty":2,"priority":4,"tags":["mathI","trig"],"examples":[]}
+{"id":"M1.TRIG.DEF.006","title":"直角三角形の辺比と三角比","subject":"数学I","unit":"図形と計量","topic":"三角比の定義と性質","difficulty":2,"priority":5,"tags":["mathI","trig","必修"],"examples":[]}
+{"id":"M1.TRIG.DEF.007","title":"角度→比（長さ）への換算","subject":"数学I","unit":"図形と計量","topic":"三角比の定義と性質","difficulty":2,"priority":4,"tags":["mathI","trig"],"examples":[]}
+{"id":"M1.TRIG.DEF.008","title":"比→代表角の推定","subject":"数学I","unit":"図形と計量","topic":"三角比の定義と性質","difficulty":2,"priority":3,"tags":["mathI","trig"],"examples":[]}
+{"id":"M1.TRIG.DEF.009","title":"角度の和・差の扱い（数I内の範囲）","subject":"数学I","unit":"図形と計量","topic":"三角比の定義と性質","difficulty":2,"priority":3,"tags":["mathI","trig"],"examples":[]}
+{"id":"M1.TRIG.DEF.010","title":"三角比表と近似の使い方","subject":"数学I","unit":"図形と計量","topic":"三角比の定義と性質","difficulty":2,"priority":3,"tags":["mathI","trig","approx"],"examples":[]}
+{"id":"M1.TRIG.APP.001","title":"斜辺・高さ・底辺の関係整理","subject":"数学I","unit":"図形と計量","topic":"応用計量","difficulty":2,"priority":4,"tags":["mathI","trig","application"],"examples":[]}
+{"id":"M1.TRIG.APP.002","title":"一次関数の傾きと角度の対応","subject":"数学I","unit":"図形と計量","topic":"応用計量","difficulty":2,"priority":4,"tags":["mathI","trig","line"],"examples":[]}
+{"id":"M1.TRIG.APP.003","title":"方位角・仰角・俯角の読み替え","subject":"数学I","unit":"図形と計量","topic":"応用計量","difficulty":2,"priority":4,"tags":["mathI","trig"],"examples":[]}
+{"id":"M1.TRIG.APP.004","title":"影の長さ・建物の高さ問題","subject":"数学I","unit":"図形と計量","topic":"応用計量","difficulty":2,"priority":5,"tags":["mathI","trig","文章題"],"examples":[]}
+{"id":"M1.TRIG.APP.005","title":"観測点移動に伴う角度・長さの変化","subject":"数学I","unit":"図形と計量","topic":"応用計量","difficulty":3,"priority":4,"tags":["mathI","trig"],"examples":[]}
+{"id":"M1.TRIG.APP.006","title":"比の連鎖合成（多段推論）","subject":"数学I","unit":"図形と計量","topic":"応用計量","difficulty":3,"priority":3,"tags":["mathI","trig"],"examples":[]}
+{"id":"M1.TRIG.APP.007","title":"面積公式 1/2 ab sinC（入門）","subject":"数学I","unit":"図形と計量","topic":"応用計量","difficulty":3,"priority":4,"tags":["mathI","trig","area"],"examples":[]}
+{"id":"M1.TRIG.APP.008","title":"測量系文章題への翻訳手順","subject":"数学I","unit":"図形と計量","topic":"応用計量","difficulty":3,"priority":3,"tags":["mathI","trig","文章題"],"examples":[]}
+{"id":"M1.TRIG.APP.009","title":"誤差と有効数字（入門）","subject":"数学I","unit":"図形と計量","topic":"応用計量","difficulty":2,"priority":3,"tags":["mathI","trig","error"],"examples":[]}
+{"id":"M1.TRIG.APP.010","title":"近似計算と精度の評価","subject":"数学I","unit":"図形と計量","topic":"応用計量","difficulty":2,"priority":3,"tags":["mathI","trig","approx"],"examples":[]}
+{"id":"M1.TRIG.APP.011","title":"作図・実測と数値の照合（入門）","subject":"数学I","unit":"図形と計量","topic":"応用計量","difficulty":2,"priority":2,"tags":["mathI","trig","作図"],"examples":[]}
+{"id":"M1.TRIG.APP.012","title":"典型誤りの訂正（符号・定義域など）","subject":"数学I","unit":"図形と計量","topic":"応用計量","difficulty":3,"priority":3,"tags":["mathI","trig","誤り訂正"],"examples":[]}
+{"id":"M1.TRIG.GEO.001","title":"補助線で直角化する着眼","subject":"数学I","unit":"図形と計量","topic":"三角比と図形融合","difficulty":3,"priority":3,"tags":["mathI","trig","geometry"],"examples":[]}
+{"id":"M1.TRIG.GEO.002","title":"相似と三角比の連携","subject":"数学I","unit":"図形と計量","topic":"三角比と図形融合","difficulty":3,"priority":4,"tags":["mathI","trig","similarity"],"examples":[]}
+{"id":"M1.TRIG.GEO.003","title":"円の接点・接線角への三角比応用","subject":"数学I","unit":"図形と計量","topic":"三角比と図形融合","difficulty":3,"priority":3,"tags":["mathI","trig","circle"],"examples":[]}
+{"id":"M1.TRIG.GEO.004","title":"多角形分割と面積計算","subject":"数学I","unit":"図形と計量","topic":"三角比と図形融合","difficulty":3,"priority":3,"tags":["mathI","trig","area"],"examples":[]}
+{"id":"M1.TRIG.GEO.005","title":"ベクトル入門へのブリッジ（方向余弦の直感）","subject":"数学I","unit":"図形と計量","topic":"三角比と図形融合","difficulty":3,"priority":2,"tags":["mathI","trig","vector"],"examples":[]}
+{"id":"M1.TRIG.GEO.006","title":"直交・平行条件の比表現","subject":"数学I","unit":"図形と計量","topic":"三角比と図形融合","difficulty":3,"priority":3,"tags":["mathI","trig","geometry"],"examples":[]}
+{"id":"M1.TRIG.GEO.007","title":"位置関係の数式化（長さ・角度）","subject":"数学I","unit":"図形と計量","topic":"三角比と図形融合","difficulty":3,"priority":3,"tags":["mathI","trig","geometry"],"examples":[]}
+{"id":"M1.TRIG.GEO.008","title":"高さ・中線・角二等分線との絡み","subject":"数学I","unit":"図形と計量","topic":"三角比と図形融合","difficulty":3,"priority":3,"tags":["mathI","trig","triangle"],"examples":[]}
+{"id":"M1.TRIG.GEO.009","title":"立体図形への拡張の見取り図","subject":"数学I","unit":"図形と計量","topic":"三角比と図形融合","difficulty":3,"priority":2,"tags":["mathI","trig","solid"],"examples":[]}
+{"id":"M1.TRIG.GEO.010","title":"図形文章題の式化テンプレ","subject":"数学I","unit":"図形と計量","topic":"三角比と図形融合","difficulty":3,"priority":4,"tags":["mathI","trig","template"],"examples":[]}

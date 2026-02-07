@@ -1,0 +1,6 @@
+{"skill_id": "M1.TRIG.DEF.001", "prereq_id": "JHS.GEO.PYTH"}
+{"skill_id": "M1.TRIG.APP.004", "prereq_id": "JHS.GEO.PYTH"}
+{"skill_id": "M1.DA.CENT.001", "prereq_id": "JHS.DATA.CENTER"}
+{"skill_id": "M1.DA.CORR.001", "prereq_id": "JHS.DATA.SCATTER"}
+{"skill_id": "M1.QF.BASE.001", "prereq_id": "JHS.FUNC.LINE_BAS"}
+{"skill_id": "M1.QF.BASE.003", "prereq_id": "JHS.FUNC.QUAD_INTRO"}

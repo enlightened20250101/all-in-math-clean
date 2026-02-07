@@ -1,0 +1,21 @@
+{
+  "courseId": "hs_ia_trigonometry",
+  "title": "高校数学IA：三角関数",
+  "topics": [
+    {
+      "id": "trig_ratio_basic",
+      "title": "三角比（直角三角形）",
+      "description": "直角三角形の sin・cos・tan を求める",
+      "viewCode": "centertest-trig-ratio-basic"
+    },
+    {
+      "id": "trig_special_angles_basic",
+      "title": "特殊角の三角比",
+      "description": "30°・45°・60°の値を確認する",
+      "viewCode": "centertest-trig-special-angles-basic"
+    }
+  ],
+  "units": [
+    "math1"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "courseId": "hs_ia_proof",
+  "title": "高校数学IA：証明",
+  "topics": [
+    {
+      "id": "induction_basic",
+      "title": "数学的帰納法（基本）",
+      "description": "初期条件と帰納法のステップを確認する",
+      "viewCode": "centertest-induction-basic"
+    }
+  ],
+  "units": [
+    "mathA"
+  ]
+}

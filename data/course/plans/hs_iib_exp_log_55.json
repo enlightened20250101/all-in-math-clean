@@ -1,0 +1,18 @@
+{
+  "courseId": "hs_iib_exp_log",
+  "goal": 55,
+  "topicOrder": [
+    "exp_log_basic",
+    "exp_log_equations_basic",
+    "exp_log_change_base_basic",
+    "exp_log_growth_basic",
+    "exp_log_domain_basic",
+    "exp_log_simple_equation_basic",
+    "exp_log_power_equation_basic",
+    "exp_log_log_equation_basic",
+    "exp_log_log_sum_basic",
+    "exp_log_log_diff_basic",
+    "exp_log_log_product_basic",
+    "exp_log_property_basic"
+  ]
+}

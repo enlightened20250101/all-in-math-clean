@@ -1,0 +1,267 @@
+{
+  "courseId": "hs_iic_conic",
+  "title": "高校数学C：円錐曲線",
+  "topics": [
+    {
+      "id": "conic_circle_basic",
+      "title": "円の方程式（基本）",
+      "description": "円の中心・半径の読み取りに慣れる",
+      "viewCode": "topic-conic_circle_basic"
+    },
+    {
+      "id": "conic_circle_center_basic",
+      "title": "円の中心（基本）",
+      "description": "円の中心の座標を読み取る",
+      "viewCode": "topic-conic_circle_center_basic"
+    },
+    {
+      "id": "conic_intersection_basic",
+      "title": "交点の判別（基本）",
+      "description": "円と直線の交点の個数を判定する",
+      "viewCode": "topic-conic_intersection_basic"
+    },
+    {
+      "id": "conic_tangent_basic",
+      "title": "接線の条件（基本）",
+      "description": "円に接する直線の条件を判定する",
+      "viewCode": "topic-conic_tangent_basic"
+    },
+    {
+      "id": "conic_parabola_basic",
+      "title": "放物線の基本（焦点）",
+      "description": "放物線の標準形から焦点を求める",
+      "viewCode": "topic-conic_parabola_basic"
+    },
+    {
+      "id": "conic_parabola_directrix_basic",
+      "title": "放物線の準線（基本）",
+      "description": "放物線の準線を求める",
+      "viewCode": "topic-conic_parabola_directrix_basic"
+    },
+    {
+      "id": "conic_parabola_focus_basic",
+      "title": "放物線の焦点（基本）",
+      "description": "放物線の焦点を求める",
+      "viewCode": "topic-conic_parabola_focus_basic"
+    },
+    {
+      "id": "conic_parabola_latus_rectum_basic",
+      "title": "放物線の準弦（基本）",
+      "description": "準弦の長さを求める",
+      "viewCode": "topic-conic_parabola_latus_rectum_basic"
+    },
+    {
+      "id": "conic_parabola_tangent_slope_basic",
+      "title": "放物線の接線の傾き（基本）",
+      "description": "接線の傾きを求める",
+      "viewCode": "topic-conic_parabola_tangent_slope_basic"
+    },
+    {
+      "id": "conic_parabola_vertex_basic",
+      "title": "放物線の頂点（基本）",
+      "description": "頂点の座標を読み取る",
+      "viewCode": "topic-conic_parabola_vertex_basic"
+    },
+    {
+      "id": "conic_circle_radius_basic",
+      "title": "円の半径（基本）",
+      "description": "円の半径を求める",
+      "viewCode": "topic-conic_circle_radius_basic"
+    },
+    {
+      "id": "conic_ellipse_axis_basic",
+      "title": "楕円の軸（基本）",
+      "description": "長軸がどの軸か判定する",
+      "viewCode": "topic-conic_ellipse_axis_basic"
+    },
+    {
+      "id": "conic_hyperbola_vertex_basic",
+      "title": "双曲線の頂点（基本）",
+      "description": "双曲線の頂点の座標を求める",
+      "viewCode": "topic-conic_hyperbola_vertex_basic"
+    },
+    {
+      "id": "conic_ellipse_basic",
+      "title": "楕円の基本（長軸）",
+      "description": "楕円の標準形から長軸の長さを求める",
+      "viewCode": "topic-conic_ellipse_basic"
+    },
+    {
+      "id": "conic_ellipse_major_axis_basic",
+      "title": "楕円の長軸（基本）",
+      "description": "長軸の長さを求める",
+      "viewCode": "topic-conic_ellipse_major_axis_basic"
+    },
+    {
+      "id": "conic_ellipse_minor_axis_basic",
+      "title": "楕円の短軸（基本）",
+      "description": "短軸の長さを求める",
+      "viewCode": "topic-conic_ellipse_minor_axis_basic"
+    },
+    {
+      "id": "conic_ellipse_tangent_basic",
+      "title": "楕円の接線（基本）",
+      "description": "接線の係数を求める",
+      "viewCode": "topic-conic_ellipse_tangent_basic"
+    },
+    {
+      "id": "conic_ellipse_focus_basic",
+      "title": "楕円の焦点（基本）",
+      "description": "楕円の焦点距離 $c$ を求める",
+      "viewCode": "topic-conic_ellipse_focus_basic"
+    },
+    {
+      "id": "conic_hyperbola_basic",
+      "title": "双曲線の基本（焦点）",
+      "description": "双曲線の標準形から焦点距離を求める",
+      "viewCode": "topic-conic_hyperbola_basic"
+    },
+    {
+      "id": "conic_hyperbola_asymptote_basic",
+      "title": "双曲線の漸近線（基本）",
+      "description": "漸近線の傾きを求める",
+      "viewCode": "topic-conic_hyperbola_asymptote_basic"
+    },
+    {
+      "id": "conic_hyperbola_asymptote_slope_basic",
+      "title": "双曲線の漸近線の傾き（基本）",
+      "description": "漸近線の傾きを求める",
+      "viewCode": "topic-conic_hyperbola_asymptote_slope_basic"
+    },
+    {
+      "id": "conic_hyperbola_transverse_axis_basic",
+      "title": "双曲線の実軸（基本）",
+      "description": "実軸の長さを求める",
+      "viewCode": "topic-conic_hyperbola_transverse_axis_basic"
+    },
+    {
+      "id": "conic_circle_tangent_slope_basic",
+      "title": "円の接線の傾き（基本）",
+      "description": "接線と半径の関係を使う",
+      "viewCode": "topic-conic_circle_tangent_slope_basic"
+    },
+    {
+      "id": "conic_line_intersection_count_basic",
+      "title": "円と直線の交点（基本）",
+      "description": "交点の個数を判定する",
+      "viewCode": "topic-conic_line_intersection_count_basic"
+    },
+    {
+      "id": "conic_circle_general_radius_basic",
+      "title": "円の一般形の半径（基本）",
+      "description": "一般形から半径を求める",
+      "viewCode": "topic-conic_circle_general_radius_basic"
+    },
+    {
+      "id": "conic_circle_general_center_basic",
+      "title": "円の一般形の中心（基本）",
+      "description": "一般形から中心を求める",
+      "viewCode": "topic-conic_circle_general_center_basic"
+    },
+    {
+      "id": "conic_hyperbola_foci_distance_basic",
+      "title": "双曲線の焦点間距離（基本）",
+      "description": "2焦点間の距離を求める",
+      "viewCode": "topic-conic_hyperbola_foci_distance_basic"
+    },
+    {
+      "id": "conic_ellipse_c_basic",
+      "title": "楕円の焦点距離（基本）",
+      "description": "c^2=a^2-b^2 を使う",
+      "viewCode": "topic-conic_ellipse_c_basic"
+    },
+    {
+      "id": "conic_hyperbola_c_basic",
+      "title": "双曲線の焦点距離（基本）",
+      "description": "c^2=a^2+b^2 を使う",
+      "viewCode": "topic-conic_hyperbola_c_basic"
+    },
+    {
+      "id": "conic_parabola_line_intersection_count_basic",
+      "title": "放物線と直線の交点（基本）",
+      "description": "交点の個数を判定する",
+      "viewCode": "topic-conic_parabola_line_intersection_count_basic"
+    },
+    {
+      "id": "conic_ellipse_value_basic",
+      "title": "楕円の代入値（基本）",
+      "description": "式に点を代入した値を求める",
+      "viewCode": "topic-conic_ellipse_value_basic"
+    },
+    {
+      "id": "conic_hyperbola_value_basic",
+      "title": "双曲線の代入値（基本）",
+      "description": "式に点を代入した値を求める",
+      "viewCode": "topic-conic_hyperbola_value_basic"
+    },
+    {
+      "id": "conic_parabola_general_focus_basic",
+      "title": "放物線の焦点（一般形）（基本）",
+      "description": "平行移動した放物線の焦点を求める",
+      "viewCode": "topic-conic_parabola_general_focus_basic"
+    },
+    {
+      "id": "conic_parabola_vertex_shift_basic",
+      "title": "放物線の頂点（平行移動）（基本）",
+      "description": "平行移動した放物線の頂点を求める",
+      "viewCode": "topic-conic_parabola_vertex_shift_basic"
+    },
+    {
+      "id": "conic_circle_tangent_point_basic",
+      "title": "円の接点（基本）",
+      "description": "与えられた接点の座標を答える",
+      "viewCode": "topic-conic_circle_tangent_point_basic"
+    },
+    {
+      "id": "conic_parabola_focus_vertical_basic",
+      "title": "放物線の焦点（縦）（基本）",
+      "description": "x^2=4py の焦点を求める",
+      "viewCode": "topic-conic_parabola_focus_vertical_basic"
+    },
+    {
+      "id": "conic_parabola_directrix_vertical_basic",
+      "title": "放物線の準線（縦）（基本）",
+      "description": "x^2=4py の準線を求める",
+      "viewCode": "topic-conic_parabola_directrix_vertical_basic"
+    },
+    {
+      "id": "conic_ellipse_focus_distance_basic",
+      "title": "楕円の焦点間距離（基本）",
+      "description": "2焦点間距離を求める",
+      "viewCode": "topic-conic_ellipse_focus_distance_basic"
+    },
+    {
+      "id": "conic_circle_point_on_basic",
+      "title": "円上の点判定（基本）",
+      "description": "点が円上か判定する",
+      "viewCode": "topic-conic_circle_point_on_basic"
+    },
+    {
+      "id": "conic_parabola_tangent_intercept_basic",
+      "title": "放物線の接線の切片（基本）",
+      "description": "接線の切片を求める",
+      "viewCode": "topic-conic_parabola_tangent_intercept_basic"
+    },
+    {
+      "id": "conic_ellipse_center_basic",
+      "title": "楕円の中心（基本）",
+      "description": "標準形から中心を求める",
+      "viewCode": "topic-conic_ellipse_center_basic"
+    },
+    {
+      "id": "conic_hyperbola_center_basic",
+      "title": "双曲線の中心（基本）",
+      "description": "標準形から中心を求める",
+      "viewCode": "topic-conic_hyperbola_center_basic"
+    },
+    {
+      "id": "conic_hyperbola_asymptote_equation_basic",
+      "title": "双曲線の漸近線の式（基本）",
+      "description": "漸近線の係数を求める",
+      "viewCode": "topic-conic_hyperbola_asymptote_equation_basic"
+    }
+  ],
+  "units": [
+    "mathC"
+  ]
+}

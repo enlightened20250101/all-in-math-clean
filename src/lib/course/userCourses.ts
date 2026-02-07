@@ -1,0 +1,20 @@
+export type UserCourse = {
+  id: string;
+  name: string;
+  baseCourseId: string;
+  goal: number;
+  startTopicId?: string | null;
+  targetTopicId?: string | null;
+  targetType?: string | null;
+  targetName?: string | null;
+  targetDate?: string | null;
+  weeklyHours?: number | null;
+  note?: string | null;
+  electives?: Record<string, string[]> | null;
+  level?: number | null;
+  masteredTopicIds?: string[] | null;
+  isActive: boolean;
+  isArchived: boolean;
+  createdAt?: string | null;
+  updatedAt?: string | null;
+};

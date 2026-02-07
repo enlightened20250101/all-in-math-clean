@@ -1,0 +1,18 @@
+{
+  "seq_arithmetic_basic": { "difficulty": 2, "core": true },
+  "seq_geometric_basic": { "difficulty": 2, "core": true },
+  "seq_sum_basic": { "difficulty": 2, "core": true },
+  "seq_common_difference_basic": { "difficulty": 2, "core": true },
+  "seq_geometric_sum_basic": { "difficulty": 3, "core": true },
+  "seq_geometric_limit_basic": { "difficulty": 3, "core": true },
+  "seq_arithmetic_sum_basic": { "difficulty": 3, "core": true },
+  "seq_arithmetic_sum_from_terms_basic": { "difficulty": 3, "core": true },
+  "seq_arithmetic_mean_basic": { "difficulty": 2, "core": true },
+  "seq_arithmetic_diff_from_terms_basic": { "difficulty": 3, "core": true },
+  "seq_common_ratio_from_terms_basic": { "difficulty": 3, "core": true },
+  "seq_geometric_mean_basic": { "difficulty": 2, "core": false },
+  "seq_term_from_sum_basic": { "difficulty": 3, "core": true },
+  "seq_geometric_sum_n_basic": { "difficulty": 3, "core": true },
+  "seq_recurrence_basic": { "difficulty": 3, "core": true },
+  "seq_recurrence_term_basic": { "difficulty": 3, "core": true }
+}

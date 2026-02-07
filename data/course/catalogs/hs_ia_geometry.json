@@ -1,0 +1,21 @@
+{
+  "courseId": "hs_ia_geometry",
+  "title": "高校数学IA：幾何",
+  "topics": [
+    {
+      "id": "geo_measure_right_triangle_basic",
+      "title": "直角三角形の計量（基本）",
+      "description": "三角比で高さ・距離を求める",
+      "viewCode": "centertest-geo-right-triangle-basic"
+    },
+    {
+      "id": "geo_sine_cosine_law_basic",
+      "title": "正弦定理・余弦定理（基本）",
+      "description": "一般三角形の辺・角を求める",
+      "viewCode": "centertest-geo-sine-cosine-basic"
+    }
+  ],
+  "units": [
+    "math1"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "courseId": "hs_iib_sequence",
+  "goal": 65,
+  "topicOrder": [
+    "seq_arithmetic_basic",
+    "seq_geometric_basic",
+    "seq_geometric_mean_basic",
+    "seq_term_from_sum_basic",
+    "seq_geometric_sum_n_basic",
+    "seq_common_ratio_from_terms_basic",
+    "seq_sum_basic",
+    "seq_common_difference_basic",
+    "seq_geometric_sum_basic",
+    "seq_geometric_limit_basic",
+    "seq_arithmetic_sum_basic",
+    "seq_arithmetic_sum_from_terms_basic",
+    "seq_arithmetic_mean_basic",
+    "seq_arithmetic_diff_from_terms_basic",
+    "seq_recurrence_basic",
+    "seq_recurrence_term_basic"
+  ]
+}

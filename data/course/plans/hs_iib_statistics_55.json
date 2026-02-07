@@ -1,0 +1,10 @@
+{
+  "courseId": "hs_iib_statistics",
+  "goal": 55,
+  "topicOrder": [
+    "stats_sample_mean_basic",
+    "stats_sampling_mean_basic",
+    "stats_standard_error_basic",
+    "stats_confidence_interval_basic"
+  ]
+}

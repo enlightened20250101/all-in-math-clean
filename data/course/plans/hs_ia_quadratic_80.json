@@ -1,0 +1,11 @@
+{
+  "courseId": "hs_ia_quadratic",
+  "goal": 80,
+  "topicOrder": [
+    "quad_solve_basic",
+    "quad_discriminant_basic",
+    "quad_roots_relations_basic",
+    "quad_graph_basic",
+    "quad_maxmin_basic"
+  ]
+}

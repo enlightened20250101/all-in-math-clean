@@ -1,0 +1,42 @@
+{
+  "courseId": "hs_iii",
+  "title": "高校数学III",
+  "topics": [
+    {
+      "id": "calc_limit_basic",
+      "title": "極限（基本）",
+      "description": "多項式・分数関数の極限を計算する基本問題に取り組む",
+      "viewCode": "topic-calc_limit_basic"
+    },
+    {
+      "id": "calc_continuity_basic",
+      "title": "連続性（基本）",
+      "description": "関数の連続条件を確認し、値を決める基本問題に取り組む",
+      "viewCode": "topic-calc_continuity_basic"
+    },
+    {
+      "id": "calc_derivative_advanced_basic",
+      "title": "微分法（応用）",
+      "description": "合成関数・指数/対数・三角関数を含む微分を扱う",
+      "viewCode": "topic-calc_derivative_advanced_basic"
+    },
+    {
+      "id": "calc_integral_advanced_basic",
+      "title": "積分法（応用）",
+      "description": "置換積分・部分積分の基本パターンを扱う",
+      "viewCode": "topic-calc_integral_advanced_basic"
+    },
+    {
+      "id": "calc_curve_area_basic",
+      "title": "曲線で囲まれた面積（基本）",
+      "description": "2曲線で囲まれた面積を積分で求める基本問題に取り組む",
+      "viewCode": "topic-calc_curve_area_basic"
+    },
+    {
+      "id": "calc_parametric_basic",
+      "title": "媒介変数表示（基本）",
+      "description": "媒介変数表示の微分・接線・面積の基本を扱う",
+      "viewCode": "topic-calc_parametric_basic"
+    }
+  ]
+}

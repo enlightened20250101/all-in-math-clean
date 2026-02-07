@@ -1,0 +1,81 @@
+{
+  "courseId": "hs_iib_exp_log",
+  "title": "高校数学IIB：指数・対数",
+  "topics": [
+    {
+      "id": "exp_log_basic",
+      "title": "指数・対数の計算（基本）",
+      "description": "指数法則と対数の定義に基づいた計算の基本問題に取り組む",
+      "viewCode": "topic-exp_log_basic"
+    },
+    {
+      "id": "exp_log_equations_basic",
+      "title": "指数・対数方程式（基本）",
+      "description": "指数方程式・対数方程式の基本的な解き方を学ぶ",
+      "viewCode": "topic-exp_log_equations_basic"
+    },
+    {
+      "id": "exp_log_change_base_basic",
+      "title": "底の変換（基本）",
+      "description": "底の変換を使って対数を簡単化する",
+      "viewCode": "topic-exp_log_change_base_basic"
+    },
+    {
+      "id": "exp_log_growth_basic",
+      "title": "指数成長（基本）",
+      "description": "指数的な増加で $n$ を求める",
+      "viewCode": "topic-exp_log_growth_basic"
+    },
+    {
+      "id": "exp_log_domain_basic",
+      "title": "定義域（基本）",
+      "description": "対数関数の定義域を求める",
+      "viewCode": "topic-exp_log_domain_basic"
+    },
+    {
+      "id": "exp_log_simple_equation_basic",
+      "title": "指数方程式（同底）（基本）",
+      "description": "同じ底の指数方程式を解く",
+      "viewCode": "topic-exp_log_simple_equation_basic"
+    },
+    {
+      "id": "exp_log_power_equation_basic",
+      "title": "指数方程式（2x）（基本）",
+      "description": "指数が 2x の形の方程式を解く",
+      "viewCode": "topic-exp_log_power_equation_basic"
+    },
+    {
+      "id": "exp_log_log_equation_basic",
+      "title": "対数方程式（基本）",
+      "description": "対数方程式を指数に戻して解く",
+      "viewCode": "topic-exp_log_log_equation_basic"
+    },
+    {
+      "id": "exp_log_log_sum_basic",
+      "title": "対数の加法（基本）",
+      "description": "対数の性質で和をまとめる",
+      "viewCode": "topic-exp_log_log_sum_basic"
+    },
+    {
+      "id": "exp_log_log_diff_basic",
+      "title": "対数の減法（基本）",
+      "description": "対数の性質で差をまとめる",
+      "viewCode": "topic-exp_log_log_diff_basic"
+    },
+    {
+      "id": "exp_log_log_product_basic",
+      "title": "対数と指数の積（基本）",
+      "description": "指数法則を使って対数を整理する",
+      "viewCode": "topic-exp_log_log_product_basic"
+    },
+    {
+      "id": "exp_log_property_basic",
+      "title": "対数の性質（基本）",
+      "description": "対数の性質を使った簡単な計算を行う",
+      "viewCode": "topic-exp_log_property_basic"
+    }
+  ],
+  "units": [
+    "math2"
+  ]
+}

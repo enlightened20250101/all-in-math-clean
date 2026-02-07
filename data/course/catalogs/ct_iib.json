@@ -1,0 +1,702 @@
+{
+  "courseId": "ct_iib",
+  "title": "共通テストII/B",
+  "topics": [
+    {
+      "id": "exp_log_basic",
+      "title": "指数・対数の計算（基本）",
+      "description": "共通テスト頻出: 指数法則と対数の定義に基づいた計算の基本問題に取り組む",
+      "viewCode": "topic-exp_log_basic"
+    },
+    {
+      "id": "exp_log_equations_basic",
+      "title": "指数・対数方程式（基本）",
+      "description": "共通テスト頻出: 指数方程式・対数方程式の基本的な解き方を学ぶ",
+      "viewCode": "topic-exp_log_equations_basic"
+    },
+    {
+      "id": "exp_log_change_base_basic",
+      "title": "底の変換（基本）",
+      "description": "共通テスト頻出: 底の変換を使って対数を簡単化する",
+      "viewCode": "topic-exp_log_change_base_basic"
+    },
+    {
+      "id": "exp_log_growth_basic",
+      "title": "指数成長（基本）",
+      "description": "共通テスト頻出: 指数的な増加で $n$ を求める",
+      "viewCode": "topic-exp_log_growth_basic"
+    },
+    {
+      "id": "exp_log_domain_basic",
+      "title": "定義域（基本）",
+      "description": "共通テスト頻出: 対数関数の定義域を求める",
+      "viewCode": "topic-exp_log_domain_basic"
+    },
+    {
+      "id": "exp_log_simple_equation_basic",
+      "title": "指数方程式（同底）（基本）",
+      "description": "共通テスト頻出: 同じ底の指数方程式を解く",
+      "viewCode": "topic-exp_log_simple_equation_basic"
+    },
+    {
+      "id": "exp_log_power_equation_basic",
+      "title": "指数方程式（2x）（基本）",
+      "description": "共通テスト頻出: 指数が 2x の形の方程式を解く",
+      "viewCode": "topic-exp_log_power_equation_basic"
+    },
+    {
+      "id": "exp_log_log_equation_basic",
+      "title": "対数方程式（基本）",
+      "description": "共通テスト頻出: 対数方程式を指数に戻して解く",
+      "viewCode": "topic-exp_log_log_equation_basic"
+    },
+    {
+      "id": "exp_log_log_sum_basic",
+      "title": "対数の加法（基本）",
+      "description": "共通テスト頻出: 対数の性質で和をまとめる",
+      "viewCode": "topic-exp_log_log_sum_basic"
+    },
+    {
+      "id": "exp_log_log_diff_basic",
+      "title": "対数の減法（基本）",
+      "description": "共通テスト頻出: 対数の性質で差をまとめる",
+      "viewCode": "topic-exp_log_log_diff_basic"
+    },
+    {
+      "id": "exp_log_log_product_basic",
+      "title": "対数と指数の積（基本）",
+      "description": "共通テスト頻出: 指数法則を使って対数を整理する",
+      "viewCode": "topic-exp_log_log_product_basic"
+    },
+    {
+      "id": "poly_remainder_basic",
+      "title": "余りの定理（基本）",
+      "description": "共通テスト頻出: 余りの定理で余りを求める",
+      "viewCode": "topic-poly_remainder_basic"
+    },
+    {
+      "id": "poly_factor_k_basic",
+      "title": "因数定理（基本）",
+      "description": "共通テスト頻出: 因数定理を使って係数を決める",
+      "viewCode": "topic-poly_factor_k_basic"
+    },
+    {
+      "id": "poly_value_sum_basic",
+      "title": "多項式の値（基本）",
+      "description": "共通テスト頻出: f(1)+f(-1) のような値を求める",
+      "viewCode": "topic-poly_value_sum_basic"
+    },
+    {
+      "id": "poly_coeff_from_roots_basic",
+      "title": "因数から係数（基本）",
+      "description": "共通テスト頻出: 因数分解形から係数を読み取る",
+      "viewCode": "topic-poly_coeff_from_roots_basic"
+    },
+    {
+      "id": "binomial_coeff_basic",
+      "title": "二項定理の係数（基本）",
+      "description": "共通テスト頻出: (x+a)^n の係数を求める",
+      "viewCode": "topic-binomial_coeff_basic"
+    },
+    {
+      "id": "binomial_xy_coeff_basic",
+      "title": "二項定理（x+y）（基本）",
+      "description": "共通テスト頻出: (x+y)^n の係数を求める",
+      "viewCode": "topic-binomial_xy_coeff_basic"
+    },
+    {
+      "id": "binomial_value_basic",
+      "title": "二項定理の値（基本）",
+      "description": "共通テスト頻出: (1+a)^n の値を求める",
+      "viewCode": "topic-binomial_value_basic"
+    },
+    {
+      "id": "binomial_middle_coeff_basic",
+      "title": "二項定理の中央項（基本）",
+      "description": "共通テスト頻出: (x+y)^n の中央項の係数を求める",
+      "viewCode": "topic-binomial_middle_coeff_basic"
+    },
+    {
+      "id": "identity_eval_basic",
+      "title": "恒等式の値（基本）",
+      "description": "共通テスト頻出: 恒等式に数値を代入して値を求める",
+      "viewCode": "topic-identity_eval_basic"
+    },
+    {
+      "id": "identity_coefficient_basic",
+      "title": "恒等式の係数（基本）",
+      "description": "共通テスト頻出: 恒等式の係数を比較して求める",
+      "viewCode": "topic-identity_coefficient_basic"
+    },
+    {
+      "id": "identity_coeff_quadratic_basic",
+      "title": "恒等式の係数比較（基本）",
+      "description": "共通テスト頻出: 積の係数から未知数を求める",
+      "viewCode": "topic-identity_coeff_quadratic_basic"
+    },
+    {
+      "id": "inequality_mean_basic",
+      "title": "相加相乗（基本）",
+      "description": "共通テスト頻出: 相加相乗平均で最小値を求める",
+      "viewCode": "topic-inequality_mean_basic"
+    },
+    {
+      "id": "inequality_sum_product_basic",
+      "title": "和と積（基本）",
+      "description": "共通テスト頻出: 和一定のとき積の最大を求める",
+      "viewCode": "topic-inequality_sum_product_basic"
+    },
+    {
+      "id": "inequality_amgm_basic",
+      "title": "相加相乗の差（基本）",
+      "description": "共通テスト頻出: 相加平均と相乗平均の差を求める",
+      "viewCode": "topic-inequality_amgm_basic"
+    },
+    {
+      "id": "coord_line_slope_basic",
+      "title": "直線の傾き（基本）",
+      "description": "共通テスト頻出: 2点から直線の傾きを求める",
+      "viewCode": "topic-coord_line_slope_basic"
+    },
+    {
+      "id": "coord_line_intercept_basic",
+      "title": "直線の切片（基本）",
+      "description": "共通テスト頻出: 2点を通る直線の y 切片を求める",
+      "viewCode": "topic-coord_line_intercept_basic"
+    },
+    {
+      "id": "coord_line_parallel_perp_basic",
+      "title": "平行・垂直の傾き（基本）",
+      "description": "共通テスト頻出: 平行・垂直な直線の傾きを求める",
+      "viewCode": "topic-coord_line_parallel_perp_basic"
+    },
+    {
+      "id": "coord_distance_point_line_basic",
+      "title": "点と直線の距離（基本）",
+      "description": "共通テスト頻出: 点と直線の距離を求める",
+      "viewCode": "topic-coord_distance_point_line_basic"
+    },
+    {
+      "id": "coord_circle_radius_basic",
+      "title": "円の半径（基本）",
+      "description": "共通テスト頻出: 中心と通る点から半径を求める",
+      "viewCode": "topic-coord_circle_radius_basic"
+    },
+    {
+      "id": "coord_circle_center_basic",
+      "title": "円の中心（基本）",
+      "description": "共通テスト頻出: 標準形の式から中心を読み取る",
+      "viewCode": "topic-coord_circle_center_basic"
+    },
+    {
+      "id": "coord_region_basic",
+      "title": "領域（基本）",
+      "description": "共通テスト頻出: 一次不等式の共通部分でできる領域を読み取る",
+      "viewCode": "topic-coord_region_basic"
+    },
+    {
+      "id": "trig_identities_basic",
+      "title": "三角恒等式（基本）",
+      "description": "共通テスト頻出: 三角恒等式を用いた計算の基本問題に取り組む",
+      "viewCode": "topic-trig_identities_basic"
+    },
+    {
+      "id": "trig_identity_pythag_basic",
+      "title": "三角恒等式（1）（基本）",
+      "description": "共通テスト頻出: sin^2+cos^2=1 を確認する",
+      "viewCode": "topic-trig_identity_pythag_basic"
+    },
+    {
+      "id": "trig_amplitude_basic",
+      "title": "振幅（基本）",
+      "description": "共通テスト頻出: 三角関数の振幅を求める",
+      "viewCode": "topic-trig_amplitude_basic"
+    },
+    {
+      "id": "trig_phase_shift_basic",
+      "title": "位相のずれ（基本）",
+      "description": "共通テスト頻出: 三角関数の位相のずれを求める",
+      "viewCode": "topic-trig_phase_shift_basic"
+    },
+    {
+      "id": "trig_vertical_shift_basic",
+      "title": "上下移動（基本）",
+      "description": "共通テスト頻出: 三角関数の中心線を求める",
+      "viewCode": "topic-trig_vertical_shift_basic"
+    },
+    {
+      "id": "trig_graph_range_basic",
+      "title": "値域（基本）",
+      "description": "共通テスト頻出: 三角関数の値域を求める",
+      "viewCode": "topic-trig_graph_range_basic"
+    },
+    {
+      "id": "trig_graph_period_basic",
+      "title": "周期（グラフ）（基本）",
+      "description": "共通テスト頻出: 係数つき三角関数の周期を求める",
+      "viewCode": "topic-trig_graph_period_basic"
+    },
+    {
+      "id": "trig_graph_midline_basic",
+      "title": "中心線（基本）",
+      "description": "共通テスト頻出: 三角関数の中心線を求める",
+      "viewCode": "topic-trig_graph_midline_basic"
+    },
+    {
+      "id": "trig_graph_max_basic",
+      "title": "最大値（基本）",
+      "description": "共通テスト頻出: 三角関数の最大値を求める",
+      "viewCode": "topic-trig_graph_max_basic"
+    },
+    {
+      "id": "trig_graph_min_basic",
+      "title": "最小値（基本）",
+      "description": "共通テスト頻出: 三角関数の最小値を求める",
+      "viewCode": "topic-trig_graph_min_basic"
+    },
+    {
+      "id": "trig_graph_intercept_basic",
+      "title": "y切片（基本）",
+      "description": "共通テスト頻出: x=0 のときの値を求める",
+      "viewCode": "topic-trig_graph_intercept_basic"
+    },
+    {
+      "id": "trig_equation_radian_basic",
+      "title": "三角方程式（弧度）（基本）",
+      "description": "共通テスト頻出: 弧度法での基本方程式を解く",
+      "viewCode": "topic-trig_equation_radian_basic"
+    },
+    {
+      "id": "trig_identity_tan_basic",
+      "title": "tanの値（基本）",
+      "description": "共通テスト頻出: 基本角の tan を求める",
+      "viewCode": "topic-trig_identity_tan_basic"
+    },
+    {
+      "id": "trig_identity_tan_relation_basic",
+      "title": "tanの恒等式（基本）",
+      "description": "共通テスト頻出: 1+tan^2=1/cos^2 を使う",
+      "viewCode": "topic-trig_identity_tan_relation_basic"
+    },
+    {
+      "id": "trig_addition_basic",
+      "title": "加法定理（基本）",
+      "description": "共通テスト頻出: 加法定理で基本角の値を求める",
+      "viewCode": "topic-trig_addition_basic"
+    },
+    {
+      "id": "trig_double_angle_basic",
+      "title": "倍角（基本）",
+      "description": "共通テスト頻出: 倍角の値を基本角で計算する",
+      "viewCode": "topic-trig_double_angle_basic"
+    },
+    {
+      "id": "trig_period_basic",
+      "title": "周期（基本）",
+      "description": "共通テスト頻出: 三角関数の周期を求める",
+      "viewCode": "topic-trig_period_basic"
+    },
+    {
+      "id": "trig_radian_basic",
+      "title": "弧度法（基本）",
+      "description": "共通テスト頻出: 弧度法の角で値を計算する",
+      "viewCode": "topic-trig_radian_basic"
+    },
+    {
+      "id": "calc_derivative_basic",
+      "title": "微分の計算（基本）",
+      "description": "共通テスト頻出: 2次関数の導関数を用いた基本計算に取り組む",
+      "viewCode": "topic-calc_derivative_basic"
+    },
+    {
+      "id": "calc_derivative_linear_basic",
+      "title": "一次関数の微分（基本）",
+      "description": "共通テスト頻出: 一次関数の導関数を求める",
+      "viewCode": "topic-calc_derivative_linear_basic"
+    },
+    {
+      "id": "calc_integral_basic",
+      "title": "積分の計算（基本）",
+      "description": "共通テスト頻出: 1次関数の定積分を計算する基本問題に取り組む",
+      "viewCode": "topic-calc_integral_basic"
+    },
+    {
+      "id": "calc_tangent_slope_basic",
+      "title": "接線の傾き（基本）",
+      "description": "共通テスト頻出: 導関数を使って接線の傾きを求める",
+      "viewCode": "topic-calc_tangent_slope_basic"
+    },
+    {
+      "id": "calc_tangent_line_basic",
+      "title": "接線の式（基本）",
+      "description": "共通テスト頻出: 接線 $y=mx+k$ の切片を求める",
+      "viewCode": "topic-calc_tangent_line_basic"
+    },
+    {
+      "id": "calc_increasing_basic",
+      "title": "増減（基本）",
+      "description": "共通テスト頻出: 導関数の符号から増加・減少を判定する",
+      "viewCode": "topic-calc_increasing_basic"
+    },
+    {
+      "id": "calc_average_value_basic",
+      "title": "平均値（基本）",
+      "description": "共通テスト頻出: 区間での平均値を求める",
+      "viewCode": "topic-calc_average_value_basic"
+    },
+    {
+      "id": "calc_area_between_lines_basic",
+      "title": "直線間の面積（基本）",
+      "description": "共通テスト頻出: 平行な直線に囲まれた面積を求める",
+      "viewCode": "topic-calc_area_between_lines_basic"
+    },
+    {
+      "id": "calc_integral_linear_basic2",
+      "title": "定積分（一次関数）（基本）",
+      "description": "共通テスト頻出: 一次関数の定積分を計算する",
+      "viewCode": "topic-calc_integral_linear_basic2"
+    },
+    {
+      "id": "calc_area_between_parabola_basic",
+      "title": "放物線と直線の面積（基本）",
+      "description": "共通テスト頻出: 放物線と直線に囲まれた面積を求める",
+      "viewCode": "topic-calc_area_between_parabola_basic"
+    },
+    {
+      "id": "calc_area_under_line_basic",
+      "title": "直線下の面積（基本）",
+      "description": "共通テスト頻出: 直線と $x$ 軸で囲まれた面積を求める",
+      "viewCode": "topic-calc_area_under_line_basic"
+    },
+    {
+      "id": "calc_tangent_value_basic",
+      "title": "接点の座標（基本）",
+      "description": "共通テスト頻出: 接点の $y$ 座標を求める",
+      "viewCode": "topic-calc_tangent_value_basic"
+    },
+    {
+      "id": "calc_integral_constant_basic",
+      "title": "定数の積分（基本）",
+      "description": "共通テスト頻出: 定数の定積分を計算する",
+      "viewCode": "topic-calc_integral_constant_basic"
+    },
+    {
+      "id": "calc_integral_sum_basic",
+      "title": "定積分（基本）",
+      "description": "共通テスト頻出: 定積分の値を求める",
+      "viewCode": "topic-calc_integral_sum_basic"
+    },
+    {
+      "id": "calc_integral_quadratic_basic",
+      "title": "2次関数の積分（基本）",
+      "description": "共通テスト頻出: 簡単な2次関数の定積分を計算する",
+      "viewCode": "topic-calc_integral_quadratic_basic"
+    },
+    {
+      "id": "calc_extrema_basic",
+      "title": "極値（基本）",
+      "description": "共通テスト頻出: 導関数を用いて極値を求める",
+      "viewCode": "topic-calc_extrema_basic"
+    },
+    {
+      "id": "calc_area_basic",
+      "title": "面積（基本）",
+      "description": "共通テスト頻出: 非負関数の定積分で面積を求める",
+      "viewCode": "topic-calc_area_basic"
+    },
+    {
+      "id": "exp_log_property_basic",
+      "title": "対数の性質（基本）",
+      "description": "共通テスト頻出: 対数の性質を使った簡単な計算を行う",
+      "viewCode": "topic-exp_log_property_basic"
+    },
+    {
+      "id": "trig_equations_basic",
+      "title": "三角方程式（基本）",
+      "description": "共通テスト頻出: 0°〜360°の基本的な三角方程式を解く",
+      "viewCode": "topic-trig_equations_basic"
+    },
+    {
+      "id": "seq_arithmetic_basic",
+      "title": "等差数列の一般項（基本）",
+      "description": "共通テスト頻出: 初項と公差から一般項を求める基本問題に取り組む",
+      "viewCode": "topic-seq_arithmetic_basic"
+    },
+    {
+      "id": "seq_geometric_basic",
+      "title": "等比数列の一般項（基本）",
+      "description": "共通テスト頻出: 初項と公比から一般項を求める基本問題に取り組む",
+      "viewCode": "topic-seq_geometric_basic"
+    },
+    {
+      "id": "seq_geometric_mean_basic",
+      "title": "等比数列の平均（基本）",
+      "description": "共通テスト頻出: $a_1$ と $a_3$ から $a_2$ を求める",
+      "viewCode": "topic-seq_geometric_mean_basic"
+    },
+    {
+      "id": "seq_term_from_sum_basic",
+      "title": "和から項（基本）",
+      "description": "共通テスト頻出: S_n と S_{n-1} から a_n を求める",
+      "viewCode": "topic-seq_term_from_sum_basic"
+    },
+    {
+      "id": "seq_geometric_sum_n_basic",
+      "title": "等比数列の和（基本）",
+      "description": "共通テスト頻出: 等比数列の和を公式で求める",
+      "viewCode": "topic-seq_geometric_sum_n_basic"
+    },
+    {
+      "id": "seq_common_ratio_from_terms_basic",
+      "title": "公比（項から）（基本）",
+      "description": "共通テスト頻出: 項の値から公比を求める",
+      "viewCode": "topic-seq_common_ratio_from_terms_basic"
+    },
+    {
+      "id": "seq_sum_basic",
+      "title": "数列の和（基本）",
+      "description": "共通テスト頻出: 等差・等比数列の和の公式を使う基本問題に取り組む",
+      "viewCode": "topic-seq_sum_basic"
+    },
+    {
+      "id": "seq_common_difference_basic",
+      "title": "公差の計算（基本）",
+      "description": "共通テスト頻出: 等差数列の公差を求める",
+      "viewCode": "topic-seq_common_difference_basic"
+    },
+    {
+      "id": "seq_geometric_sum_basic",
+      "title": "等比数列の和（基本）",
+      "description": "共通テスト頻出: 等比数列の和の公式を用いる",
+      "viewCode": "topic-seq_geometric_sum_basic"
+    },
+    {
+      "id": "seq_geometric_limit_basic",
+      "title": "等比数列の無限和（基本）",
+      "description": "共通テスト頻出: 公比の絶対値が1未満の無限和を求める",
+      "viewCode": "topic-seq_geometric_limit_basic"
+    },
+    {
+      "id": "seq_arithmetic_sum_basic",
+      "title": "等差数列の和（基本）",
+      "description": "共通テスト頻出: 等差数列の和の公式を用いる",
+      "viewCode": "topic-seq_arithmetic_sum_basic"
+    },
+    {
+      "id": "seq_arithmetic_sum_from_terms_basic",
+      "title": "等差数列の和（項から）（基本）",
+      "description": "共通テスト頻出: 初項と $a_n$ から和を求める",
+      "viewCode": "topic-seq_arithmetic_sum_from_terms_basic"
+    },
+    {
+      "id": "seq_arithmetic_mean_basic",
+      "title": "等差数列の平均（基本）",
+      "description": "共通テスト頻出: $a_1$ と $a_3$ から $a_2$ を求める",
+      "viewCode": "topic-seq_arithmetic_mean_basic"
+    },
+    {
+      "id": "seq_arithmetic_diff_from_terms_basic",
+      "title": "公差（項から）（基本）",
+      "description": "共通テスト頻出: $a_1$ と $a_4$ から公差を求める",
+      "viewCode": "topic-seq_arithmetic_diff_from_terms_basic"
+    },
+    {
+      "id": "stats_sample_mean_basic",
+      "title": "標本平均（基本）",
+      "description": "共通テスト頻出: データの平均を求める",
+      "viewCode": "topic-stats_sample_mean_basic"
+    },
+    {
+      "id": "stats_sampling_mean_basic",
+      "title": "標本平均の平均（基本）",
+      "description": "共通テスト頻出: 標本平均の期待値が母平均に等しいことを使う",
+      "viewCode": "topic-stats_sampling_mean_basic"
+    },
+    {
+      "id": "stats_standard_error_basic",
+      "title": "標準誤差（基本）",
+      "description": "共通テスト頻出: 標準誤差 $\\sigma/\\sqrt{n}$ を求める",
+      "viewCode": "topic-stats_standard_error_basic"
+    },
+    {
+      "id": "stats_confidence_interval_basic",
+      "title": "信頼区間の幅（基本）",
+      "description": "共通テスト頻出: 幅（片側）$z\\cdot \\text{SE}$ を求める",
+      "viewCode": "topic-stats_confidence_interval_basic"
+    },
+    {
+      "id": "stats_scatter_basic",
+      "title": "散布図（基本）",
+      "description": "共通テスト頻出: 散布図から相関の向きを読み取る",
+      "viewCode": "topic-stats_scatter_basic"
+    },
+    {
+      "id": "stats_covariance_basic",
+      "title": "共分散（基本）",
+      "description": "共通テスト頻出: 共分散を計算して関係の向きを判断する",
+      "viewCode": "topic-stats_covariance_basic"
+    },
+    {
+      "id": "stats_correlation_basic",
+      "title": "相関係数（基本）",
+      "description": "共通テスト頻出: 相関係数を計算して強さを読み取る",
+      "viewCode": "topic-stats_correlation_basic"
+    },
+    {
+      "id": "stats_regression_basic",
+      "title": "回帰直線（基本）",
+      "description": "共通テスト頻出: 回帰直線の式から推定値を求める",
+      "viewCode": "topic-stats_regression_basic"
+    },
+    {
+      "id": "stats_inference_basic",
+      "title": "統計的推定（基本）",
+      "description": "共通テスト頻出: 信頼区間の中心を読み取り点推定に慣れる",
+      "viewCode": "topic-stats_inference_basic"
+    },
+    {
+      "id": "vector_operations_basic",
+      "title": "ベクトルの演算（基本）",
+      "description": "共通テスト頻出: 成分表示でのベクトル演算に慣れる",
+      "viewCode": "topic-vector_operations_basic"
+    },
+    {
+      "id": "vector_inner_basic",
+      "title": "内積（基本）",
+      "description": "共通テスト頻出: 内積の計算と直交条件を確認する",
+      "viewCode": "topic-vector_inner_basic"
+    },
+    {
+      "id": "seq_recurrence_basic",
+      "title": "漸化式（基本）",
+      "description": "共通テスト頻出: 一次の漸化式から一般項を求める基本問題に取り組む",
+      "viewCode": "topic-seq_recurrence_basic"
+    },
+    {
+      "id": "seq_recurrence_term_basic",
+      "title": "漸化式の項（基本）",
+      "description": "共通テスト頻出: 漸化式から具体的な項を求める",
+      "viewCode": "topic-seq_recurrence_term_basic"
+    },
+    {
+      "id": "vector_length_basic",
+      "title": "ベクトルの長さ（基本）",
+      "description": "共通テスト頻出: 成分表示のベクトルの長さ（長さの二乗）を求める",
+      "viewCode": "topic-vector_length_basic"
+    },
+    {
+      "id": "vector_unit_basic",
+      "title": "単位ベクトル（基本）",
+      "description": "共通テスト頻出: ベクトルを長さで割って単位ベクトルにする",
+      "viewCode": "topic-vector_unit_basic"
+    },
+    {
+      "id": "vector_parallel_basic",
+      "title": "平行条件（基本）",
+      "description": "共通テスト頻出: 平行なベクトルの比例係数を求める",
+      "viewCode": "topic-vector_parallel_basic"
+    },
+    {
+      "id": "vector_component_basic",
+      "title": "成分（基本）",
+      "description": "共通テスト頻出: ベクトルの成分を読み取る",
+      "viewCode": "topic-vector_component_basic"
+    },
+    {
+      "id": "vector_line_point_basic",
+      "title": "直線上の点（基本）",
+      "description": "共通テスト頻出: パラメータから座標を求める",
+      "viewCode": "topic-vector_line_point_basic"
+    },
+    {
+      "id": "vector_orthogonal_condition_basic",
+      "title": "直交条件（基本）",
+      "description": "共通テスト頻出: 内積が0になる条件で未知数を求める",
+      "viewCode": "topic-vector_orthogonal_condition_basic"
+    },
+    {
+      "id": "vector_distance_plane_basic",
+      "title": "平面との距離（基本）",
+      "description": "共通テスト頻出: 点と平面の距離を求める",
+      "viewCode": "topic-vector_distance_plane_basic"
+    },
+    {
+      "id": "vector_plane_normal_basic",
+      "title": "法線ベクトル（基本）",
+      "description": "共通テスト頻出: 平面の法線ベクトルの成分を読む",
+      "viewCode": "topic-vector_plane_normal_basic"
+    },
+    {
+      "id": "vector_midpoint_basic",
+      "title": "中点（基本）",
+      "description": "共通テスト頻出: 2点の中点の座標を求める",
+      "viewCode": "topic-vector_midpoint_basic"
+    },
+    {
+      "id": "vector_inner_from_angle_basic",
+      "title": "内積と角（基本）",
+      "description": "共通テスト頻出: 大きさと角から内積を求める",
+      "viewCode": "topic-vector_inner_from_angle_basic"
+    },
+    {
+      "id": "vector_section_basic",
+      "title": "内分・外分（基本）",
+      "description": "共通テスト頻出: 線分の内分点・外分点の座標を求める",
+      "viewCode": "topic-vector_section_basic"
+    },
+    {
+      "id": "vector_space_basic",
+      "title": "空間ベクトル（基本）",
+      "description": "共通テスト頻出: 空間ベクトルの成分計算に慣れる",
+      "viewCode": "topic-vector_space_basic"
+    },
+    {
+      "id": "vector_distance_basic",
+      "title": "空間距離（基本）",
+      "description": "共通テスト頻出: 2点間の距離（距離の二乗）を求める",
+      "viewCode": "topic-vector_distance_basic"
+    },
+    {
+      "id": "vector_plane_basic",
+      "title": "平面の方程式（基本）",
+      "description": "共通テスト頻出: 法線ベクトルと通過点から平面方程式を作る",
+      "viewCode": "topic-vector_plane_basic"
+    },
+    {
+      "id": "vector_orthogonality_basic",
+      "title": "直交条件（基本）",
+      "description": "共通テスト頻出: 内積が0になる条件から未知数を求める",
+      "viewCode": "topic-vector_orthogonality_basic"
+    },
+    {
+      "id": "vector_angle_basic",
+      "title": "ベクトルのなす角（基本）",
+      "description": "共通テスト頻出: 内積から cosθ を求める",
+      "viewCode": "topic-vector_angle_basic"
+    },
+    {
+      "id": "vector_projection_basic",
+      "title": "射影（基本）",
+      "description": "共通テスト頻出: 射影の長さの二乗を求める",
+      "viewCode": "topic-vector_projection_basic"
+    },
+    {
+      "id": "vector_line_basic",
+      "title": "直線のパラメータ（基本）",
+      "description": "共通テスト頻出: 方向ベクトルを使って点を求める",
+      "viewCode": "topic-vector_line_basic"
+    },
+    {
+      "id": "vector_area_basic",
+      "title": "面積（基本）",
+      "description": "共通テスト頻出: 平行四辺形の面積を求める",
+      "viewCode": "topic-vector_area_basic"
+    },
+    {
+      "id": "vector_equation_basic",
+      "title": "ベクトル方程式（基本）",
+      "description": "共通テスト頻出: ベクトル方程式から係数や座標を求める",
+      "viewCode": "topic-vector_equation_basic"
+    }
+  ]
+}

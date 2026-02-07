@@ -1,0 +1,45 @@
+{
+  "courseId": "hs_ia_data",
+  "title": "高校数学IA：データ・統計",
+  "topics": [
+    {
+      "id": "data_summary_basic",
+      "title": "データの代表値",
+      "description": "平均・中央値・最頻値・範囲を求める",
+      "viewCode": "centertest-data-summary-basic"
+    },
+    {
+      "id": "data_variance_sd_basic",
+      "title": "分散・標準偏差（基本）",
+      "description": "母分散と標準偏差を求める",
+      "viewCode": "centertest-data-variance-sd-basic"
+    },
+    {
+      "id": "data_scatter_basic",
+      "title": "散布図と傾向（基本）",
+      "description": "散布図から相関の向きを判断する",
+      "viewCode": "centertest-data-scatter-basic"
+    },
+    {
+      "id": "data_covariance_basic",
+      "title": "共分散（基本）",
+      "description": "共分散を計算して関係の向きを判断する",
+      "viewCode": "centertest-data-covariance-basic"
+    },
+    {
+      "id": "data_correlation_basic",
+      "title": "相関係数（基本）",
+      "description": "相関係数の値から相関の強さを読み取る",
+      "viewCode": "centertest-data-correlation-basic"
+    },
+    {
+      "id": "data_regression_basic",
+      "title": "回帰直線（基本）",
+      "description": "回帰直線を使って近似値を求める",
+      "viewCode": "centertest-data-regression-basic"
+    }
+  ],
+  "units": [
+    "math1"
+  ]
+}

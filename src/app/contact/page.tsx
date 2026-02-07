@@ -1,0 +1,37 @@
+import Link from "next/link";
+
+export default function ContactPage() {
+  return (
+    <div className="max-w-3xl mx-auto px-4 py-8 space-y-6">
+      <header className="space-y-2">
+        <h1 className="text-2xl font-semibold">お問い合わせ</h1>
+        <p className="text-sm text-slate-600">
+          不具合報告・ご要望・その他のご連絡はこちらからお願いします。
+        </p>
+      </header>
+
+      <section className="rounded-2xl border bg-white p-4 sm:p-6 space-y-3">
+        <h2 className="text-base font-semibold">お問い合わせ方法</h2>
+        <ul className="list-disc pl-5 text-sm text-slate-700 space-y-1">
+          <li>お問い合わせ先: <a className="underline" href="mailto:info.manganews@gmail.com">info.manganews@gmail.com</a></li>
+          <li>内容によっては返信に数日いただく場合があります。</li>
+          <li>学習相談や質問は「知恵袋」や「掲示板」もご利用ください。</li>
+        </ul>
+      </section>
+
+      <section className="rounded-2xl border bg-white p-4 sm:p-6 space-y-3">
+        <h2 className="text-base font-semibold">よくあるお問い合わせ</h2>
+        <div className="text-sm text-slate-700 space-y-2">
+          <p>・ログインできない / パスワードを忘れた</p>
+          <p>・学習履歴が反映されない</p>
+          <p>・投稿の削除依頼</p>
+        </div>
+      </section>
+
+      <div className="text-sm text-slate-600">
+        <Link href="/terms" className="underline">利用規約</Link> ・{" "}
+        <Link href="/privacy" className="underline">プライバシーポリシー</Link>
+      </div>
+    </div>
+  );
+}

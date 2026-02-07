@@ -1,0 +1,248 @@
+{
+  "courseId": "hs_ia",
+  "title": "高校数学IA",
+  "topics": [
+    {
+      "id": "algebra_expand_basic",
+      "title": "数と式：展開（基本）",
+      "description": "分配法則・展開を、代入値で確認しながら身につける",
+      "viewCode": "centertest-algebra-expand-basic"
+    },
+    {
+      "id": "algebra_factor_basic",
+      "title": "数と式：因数分解（基本）",
+      "description": "因数分解をして、代入で確かめる",
+      "viewCode": "centertest-algebra-factor-basic"
+    },
+    {
+      "id": "algebra_linear_eq_basic",
+      "title": "数と式：一次方程式（基本）",
+      "description": "移項して解く一次方程式（整数解中心）",
+      "viewCode": "centertest-algebra-linear-eq-basic"
+    },
+    {
+      "id": "algebra_ineq_basic",
+      "title": "数と式：一次不等式（基本）",
+      "description": "一次不等式を解き、最小の整数解を答える",
+      "viewCode": "centertest-algebra-ineq-basic"
+    },
+    {
+      "id": "set_operations_basic",
+      "title": "集合の基本と演算（基本）",
+      "description": "和集合・共通部分・補集合などを学ぶ",
+      "viewCode": "centertest-set-operations-basic"
+    },
+    {
+      "id": "prop_proposition_basic",
+      "title": "命題と条件（基本）",
+      "description": "逆・裏・対偶、必要条件・十分条件を確認する",
+      "viewCode": "centertest-proposition-basic"
+    },
+    {
+      "id": "quad_solve_basic",
+      "title": "二次方程式の解（基本）",
+      "description": "判別式で実数解の個数と解を判断する",
+      "viewCode": "centertest-quad-solve-basic"
+    },
+    {
+      "id": "quad_discriminant_basic",
+      "title": "判別式と解の個数（基本）",
+      "description": "判別式 D=b^2-4ac を計算して個数判定する",
+      "viewCode": "centertest-quad-discriminant-basic"
+    },
+    {
+      "id": "quad_roots_relations_basic",
+      "title": "解と係数の関係（基本）",
+      "description": "解の和・積（-b/a, c/a）を使って値を求める",
+      "viewCode": "centertest-quad-roots-relations-basic"
+    },
+    {
+      "id": "quad_inequality_basic",
+      "title": "二次不等式（基本）",
+      "description": "因数分解と符号の変化から解の範囲を判断する",
+      "viewCode": "centertest-quad-inequality-basic"
+    },
+
+    {
+      "id": "quad_graph_basic",
+      "title": "二次関数のグラフと頂点",
+      "description": "軸・頂点・グラフの形を押さえる",
+      "viewCode": "centertest-mathA-core"
+    },
+    {
+      "id": "quad_maxmin_basic",
+      "title": "二次関数の最大・最小（基本）",
+      "description": "平方完成で最大値・最小値を求める",
+      "viewCode": "centertest-quad-maxmin-basic"
+    },
+    {
+      "id": "trig_ratio_basic",
+      "title": "三角比（直角三角形）",
+      "description": "直角三角形の sin・cos・tan を求める",
+      "viewCode": "centertest-trig-ratio-basic"
+    },
+    {
+      "id": "trig_special_angles_basic",
+      "title": "特殊角の三角比",
+      "description": "30°・45°・60°の値を確認する",
+      "viewCode": "centertest-trig-special-angles-basic"
+    },
+    {
+      "id": "geo_measure_right_triangle_basic",
+      "title": "直角三角形の計量（基本）",
+      "description": "三角比で高さ・距離を求める",
+      "viewCode": "centertest-geo-right-triangle-basic"
+    },
+    {
+      "id": "geo_sine_cosine_law_basic",
+      "title": "正弦定理・余弦定理（基本）",
+      "description": "一般三角形の辺・角を求める",
+      "viewCode": "centertest-geo-sine-cosine-basic"
+    },
+    {
+      "id": "data_summary_basic",
+      "title": "データの代表値",
+      "description": "平均・中央値・最頻値・範囲を求める",
+      "viewCode": "centertest-data-summary-basic"
+    },
+    {
+      "id": "data_variance_sd_basic",
+      "title": "分散・標準偏差（基本）",
+      "description": "母分散と標準偏差を求める",
+      "viewCode": "centertest-data-variance-sd-basic"
+    },
+    {
+      "id": "data_scatter_basic",
+      "title": "散布図と傾向（基本）",
+      "description": "散布図から相関の向きを判断する",
+      "viewCode": "centertest-data-scatter-basic"
+    },
+    {
+      "id": "data_covariance_basic",
+      "title": "共分散（基本）",
+      "description": "共分散を計算して関係の向きを判断する",
+      "viewCode": "centertest-data-covariance-basic"
+    },
+    {
+      "id": "data_correlation_basic",
+      "title": "相関係数（基本）",
+      "description": "相関係数の値から相関の強さを読み取る",
+      "viewCode": "centertest-data-correlation-basic"
+    },
+    {
+      "id": "data_regression_basic",
+      "title": "回帰直線（基本）",
+      "description": "回帰直線を使って近似値を求める",
+      "viewCode": "centertest-data-regression-basic"
+    },
+
+    {
+      "id": "combi_basic",
+      "title": "場合の数（基本）",
+      "description": "和の法則・積の法則・順列・組合せの入口",
+      "viewCode": "centertest-combi-basic"
+    },
+    {
+      "id": "combi_permutation_basic",
+      "title": "順列（基本）",
+      "description": "順列 ${}_nP_r$ を使って並べ方の数を求める",
+      "viewCode": "centertest-combi-permutation-basic"
+    },
+    {
+      "id": "prob_basic",
+      "title": "確率の基本",
+      "description": "起こりうる場合の数と有利な場合の数で求める",
+      "viewCode": "centertest-prob-basic"
+    },
+    {
+      "id": "prob_complement_basic",
+      "title": "補集合と確率",
+      "description": "余事象を使って確率を求める",
+      "viewCode": "centertest-prob-complement-basic"
+    },
+    {
+      "id": "combi_conditions_basic",
+      "title": "条件付きの数え上げ",
+      "description": "少なくとも・含まないなどの条件で数える",
+      "viewCode": "centertest-combi-conditions-basic"
+    },
+    {
+      "id": "prob_combi_basic",
+      "title": "組合せと確率",
+      "description": "組合せで有利・全体を数えて確率を求める",
+      "viewCode": "centertest-prob-combi-basic"
+    },
+    {
+      "id": "int_divisor_multiple_basic",
+      "title": "約数・倍数・最大公約数・最小公倍数",
+      "description": "約数の個数、最大公約数、最小公倍数を求める",
+      "viewCode": "centertest-int-divisor-multiple-basic"
+    },
+    {
+      "id": "int_remainder_basic",
+      "title": "余りと剰余",
+      "description": "割り算の余りと簡単な剰余を学ぶ",
+      "viewCode": "centertest-int-remainder-basic"
+    },
+    {
+      "id": "int_prime_factor_basic",
+      "title": "素因数分解と素数判定",
+      "description": "素因数分解・素数/合成数・約数の個数を学ぶ",
+      "viewCode": "centertest-int-prime-factor-basic"
+    },
+    {
+      "id": "int_divisibility_tests_basic",
+      "title": "整除性の判定",
+      "description": "2,3,4,5,8,9,11 の判定法を使う",
+      "viewCode": "centertest-int-divisibility-basic"
+    },
+    {
+      "id": "int_gcd_lcm_applications_basic",
+      "title": "最大公約数・最小公倍数の応用",
+      "description": "周期や分け方の問題で gcd/lcm を使う",
+      "viewCode": "centertest-int-gcd-lcm-app-basic"
+    },
+    {
+      "id": "int_diophantine_basic",
+      "title": "一次不定方程式（基本）",
+      "description": "一次不定方程式の整数解の有無を判定する",
+      "viewCode": "centertest-int-diophantine-basic"
+    },
+    {
+      "id": "int_mod_arithmetic_intro",
+      "title": "剰余の入門",
+      "description": "簡単な合同式・下1桁の周期を扱う",
+      "viewCode": "centertest-int-mod-intro"
+    },
+    {
+      "id": "geo_ratio_theorems",
+      "title": "比の定理",
+      "description": "角の二等分線・中点連結・チェバ・メネラウス・面積比を扱う",
+      "viewCode": "centertest-geo-ratio-theorems"
+    },
+    {
+      "id": "geo_circle_geometry",
+      "title": "円の性質",
+      "description": "内接四角形・接弦定理・円の冪で角度や長さを求める",
+      "viewCode": "centertest-geo-circle-geometry"
+    },
+    {
+      "id": "geo_triangle_centers",
+      "title": "三角形の中心",
+      "description": "重心・内心・外心の性質を使って比や長さを求める",
+      "viewCode": "centertest-geo-triangle-centers"
+    },
+    {
+      "id": "geo_circle_relations",
+      "title": "2円の位置関係",
+      "description": "中心間距離と半径の和・差で交点や共通接線を判断する",
+      "viewCode": "centertest-geo-circle-relations"
+    },
+    {
+      "id": "induction_basic",
+      "title": "数学的帰納法（基本）",
+      "description": "初期条件と帰納法のステップを確認する",
+      "viewCode": "centertest-induction-basic"
+    }
+  ]
+}

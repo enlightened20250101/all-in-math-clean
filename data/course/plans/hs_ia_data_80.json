@@ -1,0 +1,8 @@
+{
+  "courseId": "hs_ia_data",
+  "goal": 80,
+  "topicOrder": [
+    "data_summary_basic",
+    "data_variance_sd_basic"
+  ]
+}

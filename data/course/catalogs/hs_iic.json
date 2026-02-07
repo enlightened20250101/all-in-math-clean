@@ -1,0 +1,618 @@
+{
+  "courseId": "hs_iic",
+  "title": "高校数学C",
+  "topics": [
+    {
+      "id": "complex_basic",
+      "title": "複素数の計算（基本）",
+      "description": "複素数の加減乗の基本計算に取り組む",
+      "viewCode": "topic-complex_basic"
+    },
+    {
+      "id": "complex_modulus_basic",
+      "title": "複素数の絶対値（基本）",
+      "description": "複素数の絶対値（大きさ）の計算に取り組む",
+      "viewCode": "topic-complex_modulus_basic"
+    },
+    {
+      "id": "complex_plane_basic",
+      "title": "複素数平面（基本）",
+      "description": "複素数平面での点の対応を確認する",
+      "viewCode": "topic-complex_plane_basic"
+    },
+    {
+      "id": "complex_conjugate_basic",
+      "title": "共役複素数（基本）",
+      "description": "共役複素数の性質を使った計算に取り組む",
+      "viewCode": "topic-complex_conjugate_basic"
+    },
+    {
+      "id": "complex_rotation_basic",
+      "title": "複素数の回転（基本）",
+      "description": "$i$ 倍による90度回転の理解を深める",
+      "viewCode": "topic-complex_rotation_basic"
+    },
+    {
+      "id": "complex_polar_basic",
+      "title": "極形式（基本）",
+      "description": "複素数を極形式で表す",
+      "viewCode": "topic-complex_polar_basic"
+    },
+    {
+      "id": "complex_distance_basic",
+      "title": "複素数平面の距離（基本）",
+      "description": "2点の距離（距離の二乗）を求める",
+      "viewCode": "topic-complex_distance_basic"
+    },
+    {
+      "id": "complex_midpoint_basic",
+      "title": "複素数平面の中点（基本）",
+      "description": "2点の中点の座標を求める",
+      "viewCode": "topic-complex_midpoint_basic"
+    },
+    {
+      "id": "complex_square_real_basic",
+      "title": "複素数の平方（実部）（基本）",
+      "description": "平方の実部 $a^2-b^2$ を求める",
+      "viewCode": "topic-complex_square_real_basic"
+    },
+    {
+      "id": "complex_power_i_basic",
+      "title": "iの累乗（基本）",
+      "description": "$i^n$ を求める",
+      "viewCode": "topic-complex_power_i_basic"
+    },
+    {
+      "id": "complex_conjugate_product_basic",
+      "title": "共役積（基本）",
+      "description": "$z\\overline{z}$ を求める",
+      "viewCode": "topic-complex_conjugate_product_basic"
+    },
+    {
+      "id": "complex_modulus_square_basic",
+      "title": "絶対値の二乗（基本）",
+      "description": "$|z|^2$ を求める",
+      "viewCode": "topic-complex_modulus_square_basic"
+    },
+    {
+      "id": "conic_circle_basic",
+      "title": "円の方程式（基本）",
+      "description": "円の中心・半径の読み取りに慣れる",
+      "viewCode": "topic-conic_circle_basic"
+    },
+    {
+      "id": "conic_circle_center_basic",
+      "title": "円の中心（基本）",
+      "description": "円の中心の座標を読み取る",
+      "viewCode": "topic-conic_circle_center_basic"
+    },
+    {
+      "id": "conic_intersection_basic",
+      "title": "交点の判別（基本）",
+      "description": "円と直線の交点の個数を判定する",
+      "viewCode": "topic-conic_intersection_basic"
+    },
+    {
+      "id": "conic_tangent_basic",
+      "title": "接線の条件（基本）",
+      "description": "円に接する直線の条件を判定する",
+      "viewCode": "topic-conic_tangent_basic"
+    },
+    {
+      "id": "conic_parabola_basic",
+      "title": "放物線の基本（焦点）",
+      "description": "放物線の標準形から焦点を求める",
+      "viewCode": "topic-conic_parabola_basic"
+    },
+    {
+      "id": "conic_parabola_directrix_basic",
+      "title": "放物線の準線（基本）",
+      "description": "放物線の準線を求める",
+      "viewCode": "topic-conic_parabola_directrix_basic"
+    },
+    {
+      "id": "conic_parabola_focus_basic",
+      "title": "放物線の焦点（基本）",
+      "description": "放物線の焦点を求める",
+      "viewCode": "topic-conic_parabola_focus_basic"
+    },
+    {
+      "id": "conic_parabola_latus_rectum_basic",
+      "title": "放物線の準弦（基本）",
+      "description": "準弦の長さを求める",
+      "viewCode": "topic-conic_parabola_latus_rectum_basic"
+    },
+    {
+      "id": "conic_parabola_tangent_slope_basic",
+      "title": "放物線の接線の傾き（基本）",
+      "description": "接線の傾きを求める",
+      "viewCode": "topic-conic_parabola_tangent_slope_basic"
+    },
+    {
+      "id": "conic_parabola_vertex_basic",
+      "title": "放物線の頂点（基本）",
+      "description": "頂点の座標を読み取る",
+      "viewCode": "topic-conic_parabola_vertex_basic"
+    },
+    {
+      "id": "conic_circle_radius_basic",
+      "title": "円の半径（基本）",
+      "description": "円の半径を求める",
+      "viewCode": "topic-conic_circle_radius_basic"
+    },
+    {
+      "id": "conic_ellipse_axis_basic",
+      "title": "楕円の軸（基本）",
+      "description": "長軸がどの軸か判定する",
+      "viewCode": "topic-conic_ellipse_axis_basic"
+    },
+    {
+      "id": "conic_hyperbola_vertex_basic",
+      "title": "双曲線の頂点（基本）",
+      "description": "双曲線の頂点の座標を求める",
+      "viewCode": "topic-conic_hyperbola_vertex_basic"
+    },
+    {
+      "id": "complex_argument_axis_basic",
+      "title": "偏角（軸上）（基本）",
+      "description": "軸上の点の偏角を求める",
+      "viewCode": "topic-complex_argument_axis_basic"
+    },
+    {
+      "id": "complex_argument_quadrant_basic",
+      "title": "偏角（象限）（基本）",
+      "description": "象限から偏角を求める",
+      "viewCode": "topic-complex_argument_quadrant_basic"
+    },
+    {
+      "id": "complex_argument_degree_basic",
+      "title": "偏角（度数法）（基本）",
+      "description": "度数法で偏角を求める",
+      "viewCode": "topic-complex_argument_degree_basic"
+    },
+    {
+      "id": "complex_polar_value_basic",
+      "title": "極形式の実部（基本）",
+      "description": "極形式から実部を求める",
+      "viewCode": "topic-complex_polar_value_basic"
+    },
+    {
+      "id": "complex_de_moivre_basic",
+      "title": "ド・モアブル（基本）",
+      "description": "ド・モアブルで実部を求める",
+      "viewCode": "topic-complex_de_moivre_basic"
+    },
+    {
+      "id": "complex_root_unity_basic",
+      "title": "n乗根の偏角（基本）",
+      "description": "n乗根の偏角を求める",
+      "viewCode": "topic-complex_root_unity_basic"
+    },
+    {
+      "id": "complex_multiply_real_basic",
+      "title": "積の実部（基本）",
+      "description": "複素数の積の実部を求める",
+      "viewCode": "topic-complex_multiply_real_basic"
+    },
+    {
+      "id": "complex_multiply_imag_basic",
+      "title": "積の虚部（基本）",
+      "description": "複素数の積の虚部を求める",
+      "viewCode": "topic-complex_multiply_imag_basic"
+    },
+    {
+      "id": "complex_modulus_product_basic",
+      "title": "積の絶対値（基本）",
+      "description": "|z1z2|=|z1||z2| を使う",
+      "viewCode": "topic-complex_modulus_product_basic"
+    },
+    {
+      "id": "complex_equation_abs_basic",
+      "title": "絶対値（基本）",
+      "description": "複素数の絶対値を求める",
+      "viewCode": "topic-complex_equation_abs_basic"
+    },
+    {
+      "id": "complex_equation_real_imag_basic",
+      "title": "実部（基本）",
+      "description": "複素数の実部を求める",
+      "viewCode": "topic-complex_equation_real_imag_basic"
+    },
+    {
+      "id": "complex_equation_conjugate_basic",
+      "title": "共役の和（基本）",
+      "description": "z+\\overline{z} を求める",
+      "viewCode": "topic-complex_equation_conjugate_basic"
+    },
+    {
+      "id": "complex_rotation_real_basic",
+      "title": "回転の実部（基本）",
+      "description": "回転後の実部を求める",
+      "viewCode": "topic-complex_rotation_real_basic"
+    },
+    {
+      "id": "complex_rotation_imag_basic",
+      "title": "回転の虚部（基本）",
+      "description": "回転後の虚部を求める",
+      "viewCode": "topic-complex_rotation_imag_basic"
+    },
+    {
+      "id": "complex_rotation_180_basic",
+      "title": "180度回転（基本）",
+      "description": "180度回転後の実部を求める",
+      "viewCode": "topic-complex_rotation_180_basic"
+    },
+    {
+      "id": "complex_division_real_basic",
+      "title": "除法の実部（基本）",
+      "description": "複素数の除法の実部を求める",
+      "viewCode": "topic-complex_division_real_basic"
+    },
+    {
+      "id": "complex_modulus_sum_basic",
+      "title": "絶対値の和（基本）",
+      "description": "|z_1|+|z_2| を求める",
+      "viewCode": "topic-complex_modulus_sum_basic"
+    },
+    {
+      "id": "complex_polar_imag_basic",
+      "title": "極形式の虚部（基本）",
+      "description": "極形式から虚部を求める",
+      "viewCode": "topic-complex_polar_imag_basic"
+    },
+    {
+      "id": "complex_conjugate_modulus_basic",
+      "title": "共役の絶対値（基本）",
+      "description": "|\\overline{z}| を求める",
+      "viewCode": "topic-complex_conjugate_modulus_basic"
+    },
+    {
+      "id": "complex_add_modulus_square_basic",
+      "title": "和の絶対値（基本）",
+      "description": "|z_1+z_2|^2 を求める",
+      "viewCode": "topic-complex_add_modulus_square_basic"
+    },
+    {
+      "id": "complex_sub_modulus_square_basic",
+      "title": "差の絶対値（基本）",
+      "description": "|z_1-z_2|^2 を求める",
+      "viewCode": "topic-complex_sub_modulus_square_basic"
+    },
+    {
+      "id": "complex_triangle_area_basic",
+      "title": "三角形の面積（基本）",
+      "description": "複素数平面上の三角形の面積を求める",
+      "viewCode": "topic-complex_triangle_area_basic"
+    },
+    {
+      "id": "complex_midpoint_distance_basic",
+      "title": "中点と距離（基本）",
+      "description": "中点と距離を求める",
+      "viewCode": "topic-complex_midpoint_distance_basic"
+    },
+    {
+      "id": "complex_parallel_condition_basic",
+      "title": "平行条件（基本）",
+      "description": "z1/z2 が実数かを判定する",
+      "viewCode": "topic-complex_parallel_condition_basic"
+    },
+    {
+      "id": "complex_perpendicular_condition_basic",
+      "title": "直交条件（基本）",
+      "description": "z1/z2 が純虚数かを判定する",
+      "viewCode": "topic-complex_perpendicular_condition_basic"
+    },
+    {
+      "id": "complex_locus_circle_radius_basic",
+      "title": "軌跡の半径（基本）",
+      "description": "|z-(a+bi)|=r の半径を求める",
+      "viewCode": "topic-complex_locus_circle_radius_basic"
+    },
+    {
+      "id": "complex_locus_circle_center_basic",
+      "title": "軌跡の中心（基本）",
+      "description": "|z-(a+bi)|=r の中心を求める",
+      "viewCode": "topic-complex_locus_circle_center_basic"
+    },
+    {
+      "id": "complex_argument_product_basic",
+      "title": "偏角の加法（基本）",
+      "description": "積の偏角は和になる",
+      "viewCode": "topic-complex_argument_product_basic"
+    },
+    {
+      "id": "complex_argument_quotient_basic",
+      "title": "偏角の減法（基本）",
+      "description": "商の偏角は差になる",
+      "viewCode": "topic-complex_argument_quotient_basic"
+    },
+    {
+      "id": "complex_rotation_90_matrix_basic",
+      "title": "90度回転（基本）",
+      "description": "90度回転の座標を求める",
+      "viewCode": "topic-complex_rotation_90_matrix_basic"
+    },
+    {
+      "id": "complex_argument_power_basic",
+      "title": "偏角のべき（基本）",
+      "description": "偏角のべきで nθ を求める",
+      "viewCode": "topic-complex_argument_power_basic"
+    },
+    {
+      "id": "complex_modulus_power_basic",
+      "title": "絶対値のべき（基本）",
+      "description": "|z|^n を求める",
+      "viewCode": "topic-complex_modulus_power_basic"
+    },
+    {
+      "id": "complex_locus_bisector_basic",
+      "title": "垂直二等分線（基本）",
+      "description": "2点の等距離の軌跡を求める",
+      "viewCode": "topic-complex_locus_bisector_basic"
+    },
+    {
+      "id": "complex_locus_vertical_line_basic",
+      "title": "垂直二等分線（実軸）（基本）",
+      "description": "実軸上の2点の等距離の軌跡を求める",
+      "viewCode": "topic-complex_locus_vertical_line_basic"
+    },
+    {
+      "id": "complex_argument_conjugate_basic",
+      "title": "共役の偏角（基本）",
+      "description": "共役の偏角を求める",
+      "viewCode": "topic-complex_argument_conjugate_basic"
+    },
+    {
+      "id": "complex_argument_inverse_basic",
+      "title": "逆数の偏角（基本）",
+      "description": "1/z の偏角を求める",
+      "viewCode": "topic-complex_argument_inverse_basic"
+    },
+    {
+      "id": "complex_locus_horizontal_line_basic",
+      "title": "垂直二等分線（虚軸対称）（基本）",
+      "description": "上下対称な2点の等距離の軌跡を求める",
+      "viewCode": "topic-complex_locus_horizontal_line_basic"
+    },
+    {
+      "id": "complex_section_internal_basic",
+      "title": "内分点（基本）",
+      "description": "2点を内分する点の座標を求める",
+      "viewCode": "topic-complex_section_internal_basic"
+    },
+    {
+      "id": "complex_section_external_basic",
+      "title": "外分点（基本）",
+      "description": "2点を外分する点の座標を求める",
+      "viewCode": "topic-complex_section_external_basic"
+    },
+    {
+      "id": "complex_line_point_basic",
+      "title": "線分上の点（基本）",
+      "description": "線分を比で内分する点を求める",
+      "viewCode": "topic-complex_line_point_basic"
+    },
+    {
+      "id": "conic_ellipse_basic",
+      "title": "楕円の基本（長軸）",
+      "description": "楕円の標準形から長軸の長さを求める",
+      "viewCode": "topic-conic_ellipse_basic"
+    },
+    {
+      "id": "conic_ellipse_major_axis_basic",
+      "title": "楕円の長軸（基本）",
+      "description": "長軸の長さを求める",
+      "viewCode": "topic-conic_ellipse_major_axis_basic"
+    },
+    {
+      "id": "conic_ellipse_minor_axis_basic",
+      "title": "楕円の短軸（基本）",
+      "description": "短軸の長さを求める",
+      "viewCode": "topic-conic_ellipse_minor_axis_basic"
+    },
+    {
+      "id": "conic_ellipse_tangent_basic",
+      "title": "楕円の接線（基本）",
+      "description": "接線の係数を求める",
+      "viewCode": "topic-conic_ellipse_tangent_basic"
+    },
+    {
+      "id": "conic_ellipse_focus_basic",
+      "title": "楕円の焦点（基本）",
+      "description": "楕円の焦点距離 $c$ を求める",
+      "viewCode": "topic-conic_ellipse_focus_basic"
+    },
+    {
+      "id": "conic_hyperbola_basic",
+      "title": "双曲線の基本（焦点）",
+      "description": "双曲線の標準形から焦点距離を求める",
+      "viewCode": "topic-conic_hyperbola_basic"
+    },
+    {
+      "id": "conic_hyperbola_asymptote_basic",
+      "title": "双曲線の漸近線（基本）",
+      "description": "漸近線の傾きを求める",
+      "viewCode": "topic-conic_hyperbola_asymptote_basic"
+    },
+    {
+      "id": "conic_hyperbola_asymptote_slope_basic",
+      "title": "双曲線の漸近線の傾き（基本）",
+      "description": "漸近線の傾きを求める",
+      "viewCode": "topic-conic_hyperbola_asymptote_slope_basic"
+    },
+    {
+      "id": "conic_hyperbola_transverse_axis_basic",
+      "title": "双曲線の実軸（基本）",
+      "description": "実軸の長さを求める",
+      "viewCode": "topic-conic_hyperbola_transverse_axis_basic"
+    },
+    {
+      "id": "conic_circle_tangent_slope_basic",
+      "title": "円の接線の傾き（基本）",
+      "description": "接線と半径の関係を使う",
+      "viewCode": "topic-conic_circle_tangent_slope_basic"
+    },
+    {
+      "id": "conic_line_intersection_count_basic",
+      "title": "円と直線の交点（基本）",
+      "description": "交点の個数を判定する",
+      "viewCode": "topic-conic_line_intersection_count_basic"
+    },
+    {
+      "id": "conic_circle_general_radius_basic",
+      "title": "円の一般形の半径（基本）",
+      "description": "一般形から半径を求める",
+      "viewCode": "topic-conic_circle_general_radius_basic"
+    },
+    {
+      "id": "conic_circle_general_center_basic",
+      "title": "円の一般形の中心（基本）",
+      "description": "一般形から中心を求める",
+      "viewCode": "topic-conic_circle_general_center_basic"
+    },
+    {
+      "id": "conic_hyperbola_foci_distance_basic",
+      "title": "双曲線の焦点間距離（基本）",
+      "description": "2焦点間の距離を求める",
+      "viewCode": "topic-conic_hyperbola_foci_distance_basic"
+    },
+    {
+      "id": "conic_ellipse_c_basic",
+      "title": "楕円の焦点距離（基本）",
+      "description": "c^2=a^2-b^2 を使う",
+      "viewCode": "topic-conic_ellipse_c_basic"
+    },
+    {
+      "id": "conic_hyperbola_c_basic",
+      "title": "双曲線の焦点距離（基本）",
+      "description": "c^2=a^2+b^2 を使う",
+      "viewCode": "topic-conic_hyperbola_c_basic"
+    },
+    {
+      "id": "conic_parabola_line_intersection_count_basic",
+      "title": "放物線と直線の交点（基本）",
+      "description": "交点の個数を判定する",
+      "viewCode": "topic-conic_parabola_line_intersection_count_basic"
+    },
+    {
+      "id": "conic_ellipse_value_basic",
+      "title": "楕円の代入値（基本）",
+      "description": "式に点を代入した値を求める",
+      "viewCode": "topic-conic_ellipse_value_basic"
+    },
+    {
+      "id": "conic_hyperbola_value_basic",
+      "title": "双曲線の代入値（基本）",
+      "description": "式に点を代入した値を求める",
+      "viewCode": "topic-conic_hyperbola_value_basic"
+    },
+    {
+      "id": "conic_parabola_general_focus_basic",
+      "title": "放物線の焦点（一般形）（基本）",
+      "description": "平行移動した放物線の焦点を求める",
+      "viewCode": "topic-conic_parabola_general_focus_basic"
+    },
+    {
+      "id": "conic_parabola_vertex_shift_basic",
+      "title": "放物線の頂点（平行移動）（基本）",
+      "description": "平行移動した放物線の頂点を求める",
+      "viewCode": "topic-conic_parabola_vertex_shift_basic"
+    },
+    {
+      "id": "conic_circle_tangent_point_basic",
+      "title": "円の接点（基本）",
+      "description": "与えられた接点の座標を答える",
+      "viewCode": "topic-conic_circle_tangent_point_basic"
+    },
+    {
+      "id": "conic_parabola_focus_vertical_basic",
+      "title": "放物線の焦点（縦）（基本）",
+      "description": "x^2=4py の焦点を求める",
+      "viewCode": "topic-conic_parabola_focus_vertical_basic"
+    },
+    {
+      "id": "conic_parabola_directrix_vertical_basic",
+      "title": "放物線の準線（縦）（基本）",
+      "description": "x^2=4py の準線を求める",
+      "viewCode": "topic-conic_parabola_directrix_vertical_basic"
+    },
+    {
+      "id": "conic_ellipse_focus_distance_basic",
+      "title": "楕円の焦点間距離（基本）",
+      "description": "2焦点間距離を求める",
+      "viewCode": "topic-conic_ellipse_focus_distance_basic"
+    },
+    {
+      "id": "conic_circle_point_on_basic",
+      "title": "円上の点判定（基本）",
+      "description": "点が円上か判定する",
+      "viewCode": "topic-conic_circle_point_on_basic"
+    },
+    {
+      "id": "conic_parabola_tangent_intercept_basic",
+      "title": "放物線の接線の切片（基本）",
+      "description": "接線の切片を求める",
+      "viewCode": "topic-conic_parabola_tangent_intercept_basic"
+    },
+    {
+      "id": "conic_ellipse_center_basic",
+      "title": "楕円の中心（基本）",
+      "description": "標準形から中心を求める",
+      "viewCode": "topic-conic_ellipse_center_basic"
+    },
+    {
+      "id": "conic_hyperbola_center_basic",
+      "title": "双曲線の中心（基本）",
+      "description": "標準形から中心を求める",
+      "viewCode": "topic-conic_hyperbola_center_basic"
+    },
+    {
+      "id": "conic_hyperbola_asymptote_equation_basic",
+      "title": "双曲線の漸近線の式（基本）",
+      "description": "漸近線の係数を求める",
+      "viewCode": "topic-conic_hyperbola_asymptote_equation_basic"
+    },
+    {
+      "id": "prob_binomial_expectation_basic",
+      "title": "二項分布の期待値（基本）",
+      "description": "二項分布の期待値を求める基本問題に取り組む",
+      "viewCode": "topic-prob_binomial_expectation_basic"
+    },
+    {
+      "id": "prob_binomial_probability_basic",
+      "title": "二項分布の確率（基本）",
+      "description": "二項分布の確率 $\\binom{n}{k}p^k(1-p)^{n-k}$ を使う",
+      "viewCode": "topic-prob_binomial_probability_basic"
+    },
+    {
+      "id": "prob_binomial_variance_basic",
+      "title": "二項分布の分散（基本）",
+      "description": "二項分布の分散 $np(1-p)$ を使う基本問題に取り組む",
+      "viewCode": "topic-prob_binomial_variance_basic"
+    },
+    {
+      "id": "normal_distribution_basic",
+      "title": "正規分布の平均・分散（基本）",
+      "description": "正規分布の平均と分散を読み取る",
+      "viewCode": "topic-normal_distribution_basic"
+    },
+    {
+      "id": "normal_standardization_basic",
+      "title": "標準化（基本）",
+      "description": "正規分布の標準化で $z$ を求める",
+      "viewCode": "topic-normal_standardization_basic"
+    },
+    {
+      "id": "normal_backsolve_basic",
+      "title": "標準化の逆（基本）",
+      "description": "$z$ から $x$ を求める",
+      "viewCode": "topic-normal_backsolve_basic"
+    },
+    {
+      "id": "complex_argument_basic",
+      "title": "偏角（基本）",
+      "description": "複素数の偏角を基本角で答える",
+      "viewCode": "topic-complex_argument_basic"
+    }
+  ]
+}
