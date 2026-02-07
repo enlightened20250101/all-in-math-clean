@@ -494,7 +494,7 @@ export default function CourseSettingsClient() {
               />
               <div className="max-h-64 space-y-2 overflow-y-auto pr-1">
                 {filteredMasteredTopics.map((topic) => {
-                  const meta = topicMetaMap.get(topic.id);
+                  const meta = topicMetaMap.get(topic.id as TopicId);
                   const unitLabel = meta?.unit ? UNIT_LABELS[meta.unit] ?? meta.unit : "その他";
                   const checked = masteredTopicIds.includes(topic.id);
                   return (
