@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { TOPICS, type UnitId } from '../src/lib/course/topics';
+import { TOPICS, type UnitId, type TopicId } from '../src/lib/course/topics';
 
 type CatalogTopic = { id: string; viewCode?: string; section?: string };
 
