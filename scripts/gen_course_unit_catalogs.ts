@@ -64,7 +64,7 @@ function sectionLabel(section: string) {
 
 function computeUnits(topics: CatalogTopic[]): UnitId[] {
   const units = topics
-    .map((t) => topicInfo.get(t.id)?.unit)
+    .map((t) => topicInfo.get(t.id as TopicId)?.unit)
     .filter(Boolean) as UnitId[];
   return uniq(units);
 }
