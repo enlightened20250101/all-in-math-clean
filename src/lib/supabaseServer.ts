@@ -5,6 +5,12 @@ import { createServerClient } from "@supabase/ssr";
 /** 読み取り専用 */
 export async function supabaseServerReadOnly() {
   const cookieStore = await cookies();
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? process.env.SUPABASE_URL;
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? process.env.SUPABASE_ANON_KEY;
+  if (!supabaseUrl || !supabaseKey) {
+    throw new Error('supabase env missing');
+  }
+
   // 1) sb-access-token（httpOnly）を最優先
   let access = cookieStore.get("sb-access-token")?.value || null;
 
@@ -17,8 +23,8 @@ export async function supabaseServerReadOnly() {
   }
 
   return createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    supabaseUrl,
+    supabaseKey,
     {
       // cookies.get は refresh 系を SSR に見せない（勝手なリフレッシュ防止）
       cookies: {
@@ -45,6 +51,12 @@ export async function supabaseServerReadOnly() {
 /** Route Handler / Action 向け（書き込み可）も同様に */
 export async function supabaseServerAction() {
   const cookieStore = await cookies();
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? process.env.SUPABASE_URL;
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? process.env.SUPABASE_ANON_KEY;
+  if (!supabaseUrl || !supabaseKey) {
+    throw new Error('supabase env missing');
+  }
+
   let access = cookieStore.get("sb-access-token")?.value || null;
   if (!access) {
     const raw = cookieStore.get("supabase-auth-token")?.value;
@@ -54,8 +66,8 @@ export async function supabaseServerAction() {
   }
 
   return createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    supabaseUrl,
+    supabaseKey,
     {
       cookies: {
         getAll: () =>
