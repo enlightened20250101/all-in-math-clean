@@ -35,7 +35,13 @@ function buildTemplate(c: PassageCase): QuestionTemplate {
     { id: "q1", label: "問1", answerKind: "numeric", placeholder: "xの平均" },
     { id: "q2", label: "問2", answerKind: "numeric", placeholder: "yの平均" },
     { id: "q3", label: "問3", answerKind: "choice", choices: [...CHOICES] },
-  ];
+  ] as const;
+
+  const subQuestionsTyped = subQuestions.map((q) => ({
+    ...q,
+    answerKind: q.answerKind as "numeric" | "choice" | "multi_numeric",
+    choices: q.answerKind === "choice" ? [...q.choices] : undefined,
+  }));
 
   return {
     meta: {
@@ -50,7 +56,7 @@ function buildTemplate(c: PassageCase): QuestionTemplate {
         templateId: c.id,
         statement,
         answerKind: "multi",
-        subQuestions: [...subQuestions],
+        subQuestions: subQuestionsTyped,
         params: {},
       };
     },
