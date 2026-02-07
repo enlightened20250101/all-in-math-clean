@@ -5,7 +5,7 @@ import { gradeNumeric } from "../_shared/utils";
 type LimitCase = {
   id: string;
   title: string;
-  a1: number;
+  a1?: number;
   r: number;
   ask: "sum" | "a1";
   sum?: number;
