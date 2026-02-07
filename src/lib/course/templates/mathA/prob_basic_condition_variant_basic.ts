@@ -79,11 +79,15 @@ export const probBasicConditionVariantTemplates: QuestionTemplate[] = CASES.map(
     ...base,
     generate() {
       const q = base.generate();
-      const uniqueChoices = Array.from(
-        new Map(
-          (q.choices ?? []).map((c) => [typeof c === 'string' ? c : c.id, c])
-        ).values()
-      );
+      const choices = q.choices ?? [];
+      const uniqueChoices =
+        choices.length && typeof choices[0] === "string"
+          ? Array.from(new Set(choices as string[]))
+          : Array.from(
+              new Map(
+                (choices as { id: string; label: string }[]).map((c) => [c.id, c])
+              ).values()
+            );
       return { ...q, choices: uniqueChoices };
     },
   };
