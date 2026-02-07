@@ -22,6 +22,7 @@ type Question = {
 type GradeResult = {
   isCorrect: boolean;
   correctAnswer: string;
+  partResults?: Record<string, { isCorrect: boolean; correctAnswer: string }>;
 };
 
 export default function TopicQuickCheckClient({ topicId }: { topicId: string }) {
