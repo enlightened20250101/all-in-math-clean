@@ -46,7 +46,7 @@ export default function MessagesPage() {
       setLoading(false);
       return;
     }
-    const list = (data || []) as GroupRow[];
+    const list = ((data || []) as unknown) as GroupRow[];
     setRows(list);
 
     const dmGroupIds = list
