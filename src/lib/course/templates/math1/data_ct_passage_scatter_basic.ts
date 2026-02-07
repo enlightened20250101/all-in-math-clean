@@ -35,7 +35,7 @@ function buildTemplate(c: PassageCase): QuestionTemplate {
     { id: "q1", label: "問1", answerKind: "numeric", placeholder: "xの平均" },
     { id: "q2", label: "問2", answerKind: "numeric", placeholder: "yの平均" },
     { id: "q3", label: "問3", answerKind: "choice", choices: [...CHOICES] },
-  ] as const;
+  ];
 
   return {
     meta: {
