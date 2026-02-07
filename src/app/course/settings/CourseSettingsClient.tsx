@@ -8,7 +8,7 @@ import { getCourseElectiveOptions, normalizeElectiveSelection } from "@/lib/cour
 import { cachedFetchJson, invalidateCache } from "@/lib/course/clientFetchCache";
 import { useCourseIndex } from "@/lib/course/useCourseIndex";
 import type { UserCourse } from "@/lib/course/userCourses";
-import { TOPICS } from "@/lib/course/topics";
+import { TOPICS, type TopicId } from "@/lib/course/topics";
 
 type Settings = {
   courseId: string;
