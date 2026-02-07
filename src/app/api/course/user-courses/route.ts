@@ -42,7 +42,7 @@ export async function GET() {
     return NextResponse.json({ ok: false, error: selErr.message }, { status: 500 });
   }
 
-  const courses = (data ?? []).map((row) => ({
+  const courses = (data ?? []).map((row: any) => ({
     id: row.id ? String(row.id) : null,
     name: row.name,
     baseCourseId: row.base_course_id,
