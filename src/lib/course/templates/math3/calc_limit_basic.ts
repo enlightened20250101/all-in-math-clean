@@ -637,6 +637,7 @@ $$
     },
     explain(params) {
       const { a, k, value } = params as { a: number; k: number; value: number };
+      const numerator = texPoly2(a, -a * k, 0);
       return `
 ### この問題の解説
 $$
