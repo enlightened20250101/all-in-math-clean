@@ -8,7 +8,18 @@ export async function supabaseServerReadOnly() {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? process.env.SUPABASE_URL;
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? process.env.SUPABASE_ANON_KEY;
   if (!supabaseUrl || !supabaseKey) {
-    throw new Error('supabase env missing');
+    return {
+      auth: {
+        getUser: async () => ({ data: { user: null }, error: { message: 'supabase_disabled' } }),
+      },
+      from: () => ({
+        select: () => ({ data: null, error: { message: 'supabase_disabled' } }),
+        insert: () => ({ data: null, error: { message: 'supabase_disabled' } }),
+        update: () => ({ data: null, error: { message: 'supabase_disabled' } }),
+        upsert: () => ({ data: null, error: { message: 'supabase_disabled' } }),
+      }),
+      rpc: async () => ({ data: null, error: { message: 'supabase_disabled' } }),
+    } as any;
   }
 
   // 1) sb-access-token（httpOnly）を最優先
