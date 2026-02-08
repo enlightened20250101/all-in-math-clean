@@ -2,31 +2,47 @@
 import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
 
-/** 読み取り専用 */
-export async function supabaseServerReadOnly() {
-  const cookieStore = await cookies();
-  const supabaseUrl =
+const normalizeEnvValue = (value?: string | null) => {
+  if (!value) return "";
+  const trimmed = value.trim();
+  const unquoted = trimmed.replace(/^"(.*)"$/, "$1");
+  return unquoted.trim();
+};
+
+const getSupabaseEnv = () => {
+  const rawUrl =
     process.env.NEXT_PUBLIC_SUPABASE_URL ||
     process.env.SUPABASE_URL ||
     "";
-  const supabaseKey =
+  const rawKey =
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
     process.env.SUPABASE_ANON_KEY ||
     "";
+  const supabaseUrl = normalizeEnvValue(rawUrl);
+  const supabaseKey = normalizeEnvValue(rawKey);
+  return { supabaseUrl, supabaseKey };
+};
+
+const supabaseStub = {
+  auth: {
+    getUser: async () => ({ data: { user: null }, error: { message: "supabase_disabled" } }),
+  },
+  from: () => ({
+    select: () => ({ data: null, error: { message: "supabase_disabled" } }),
+    insert: () => ({ data: null, error: { message: "supabase_disabled" } }),
+    update: () => ({ data: null, error: { message: "supabase_disabled" } }),
+    upsert: () => ({ data: null, error: { message: "supabase_disabled" } }),
+  }),
+  rpc: async () => ({ data: null, error: { message: "supabase_disabled" } }),
+} as any;
+
+/** 読み取り専用 */
+export async function supabaseServerReadOnly() {
+  const cookieStore = await cookies();
+  const { supabaseUrl, supabaseKey } = getSupabaseEnv();
 
   if (!supabaseUrl || !supabaseKey) {
-    return {
-      auth: {
-        getUser: async () => ({ data: { user: null }, error: { message: "supabase_disabled" } }),
-      },
-      from: () => ({
-        select: () => ({ data: null, error: { message: "supabase_disabled" } }),
-        insert: () => ({ data: null, error: { message: "supabase_disabled" } }),
-        update: () => ({ data: null, error: { message: "supabase_disabled" } }),
-        upsert: () => ({ data: null, error: { message: "supabase_disabled" } }),
-      }),
-      rpc: async () => ({ data: null, error: { message: "supabase_disabled" } }),
-    } as any;
+    return supabaseStub;
   }
 
   // 1) sb-access-token（httpOnly）を最優先
@@ -67,28 +83,10 @@ export async function supabaseServerReadOnly() {
 /** Route Handler / Action 向け（書き込み可）も同様に */
 export async function supabaseServerAction() {
   const cookieStore = await cookies();
-  const supabaseUrl =
-    process.env.NEXT_PUBLIC_SUPABASE_URL ||
-    process.env.SUPABASE_URL ||
-    "";
-  const supabaseKey =
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
-    process.env.SUPABASE_ANON_KEY ||
-    "";
+  const { supabaseUrl, supabaseKey } = getSupabaseEnv();
 
   if (!supabaseUrl || !supabaseKey) {
-    return {
-      auth: {
-        getUser: async () => ({ data: { user: null }, error: { message: "supabase_disabled" } }),
-      },
-      from: () => ({
-        select: () => ({ data: null, error: { message: "supabase_disabled" } }),
-        insert: () => ({ data: null, error: { message: "supabase_disabled" } }),
-        update: () => ({ data: null, error: { message: "supabase_disabled" } }),
-        upsert: () => ({ data: null, error: { message: "supabase_disabled" } }),
-      }),
-      rpc: async () => ({ data: null, error: { message: "supabase_disabled" } }),
-    } as any;
+    return supabaseStub;
   }
 
   let access = cookieStore.get("sb-access-token")?.value || null;
