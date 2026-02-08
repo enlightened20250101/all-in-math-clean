@@ -35,7 +35,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `複素数 $z=r(\\cos\\theta+i\\sin\\theta)$ を $z^${params.n}$ にしたとき、実部を求めよ。ここで $r=${params.r},\\ \\theta=${params.theta}^\\circ$ とする。`;
+      const statement = `観測点を表す複素数 $z=r(\\cos\\theta+i\\sin\\theta)$ を $z^${params.n}$ にしたとき、実部を求めよ。ここで $r=${params.r},\\ \\theta=${params.theta}^\\circ$ とする。`;
       return {
         templateId: id,
         statement,

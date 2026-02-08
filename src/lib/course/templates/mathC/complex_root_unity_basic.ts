@@ -57,11 +57,11 @@ $n$ 乗根は $\\theta=\\frac{360^\\circ k}{n}$。
 }
 
 export const complexRootUnityTemplates: QuestionTemplate[] = Array.from({ length: 6 }, (_, i) =>
-  buildTemplate(`complex_root_unity_basic_${i + 1}`, `n乗根 ${i + 1}`)
+  buildTemplate(`complex_root_unity_basic_${i + 1}`, `正n角形の頂点を表すn乗根 ${i + 1}`)
 );
 
 const extraRootUnityTemplates: QuestionTemplate[] = Array.from({ length: 44 }, (_, i) =>
-  buildTemplate(`complex_root_unity_basic_${i + 7}`, `n乗根 追加${i + 1}`)
+  buildTemplate(`complex_root_unity_basic_${i + 7}`, `正n角形の頂点を表すn乗根 追加${i + 1}`)
 );
 
 complexRootUnityTemplates.push(...extraRootUnityTemplates);

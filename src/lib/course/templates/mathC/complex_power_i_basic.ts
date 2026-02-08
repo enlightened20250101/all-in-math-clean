@@ -35,7 +35,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const caseId = Math.floor(Math.random() * CASES.length);
       const c = CASES[caseId];
-      const statement = `次を計算せよ。$i^{${c.n}}$`; 
+      const statement = `回転操作を考えて次を計算せよ。$i^{${c.n}}$`; 
       return {
         templateId: id,
         statement,

@@ -34,7 +34,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `複素数 $z=r(\\cos\\theta+i\\sin\\theta)$ で $r=${params.r},\\ \\theta=${params.theta}^\\circ$ のとき、$z$ の虚部を求めよ。`;
+      const statement = `観測点を表す複素数 $z=r(\\cos\\theta+i\\sin\\theta)$ で $r=${params.r},\\ \\theta=${params.theta}^\\circ$ のとき、$z$ の虚部を求めよ。`;
       return {
         templateId: id,
         statement,

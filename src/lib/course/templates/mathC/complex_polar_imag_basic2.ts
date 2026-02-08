@@ -30,7 +30,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `複素数 $z=${params.r}(\\cos ${params.theta}^\\circ + i\\sin ${params.theta}^\\circ)$ の虚部を求めよ。`;
+      const statement = `観測点を表す複素数 $z=${params.r}(\\cos ${params.theta}^\\circ + i\\sin ${params.theta}^\\circ)$ の虚部を求めよ。`;
       return {
         templateId: id,
         statement,

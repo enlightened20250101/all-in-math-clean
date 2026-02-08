@@ -32,7 +32,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const params = buildParams();
       const label = params.ask === 0 ? "x" : "y";
-      const statement = `複素数 $z=${params.r}(\\cos ${params.theta}^\\circ + i\\sin ${params.theta}^\\circ)$ の ${label} 座標を求めよ。`;
+      const statement = `観測点を表す複素数 $z=${params.r}(\\cos ${params.theta}^\\circ + i\\sin ${params.theta}^\\circ)$ の ${label} 座標を求めよ。`;
       return {
         templateId: id,
         statement,

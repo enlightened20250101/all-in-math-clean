@@ -40,7 +40,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const caseId = Math.floor(Math.random() * CASES.length);
       const c = CASES[caseId];
-      const statement = `複素数 $z=${c.a}${c.b >= 0 ? "+" : ""}${c.b}i$ を極形式で表したものとして正しいものを選べ。`;
+      const statement = `観測点を表す複素数 $z=${c.a}${c.b >= 0 ? "+" : ""}${c.b}i$ を極形式で表したものとして正しいものを選べ。`;
       return {
         templateId: id,
         statement,
