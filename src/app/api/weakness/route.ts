@@ -43,7 +43,7 @@ export async function GET() {
       .order("created_at", { ascending: true });
 
     const bySkill: Record<string, any[]> = {};
-    (probs||[]).forEach(p=>{
+    (probs||[]).forEach((p: any) =>{
       (bySkill[p.skill_id] ||= []).push(p);
     });
 
