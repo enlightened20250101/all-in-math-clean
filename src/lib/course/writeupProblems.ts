@@ -116,46 +116,49 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "標本空間は起こりうる全結果の集合で、事象はその部分集合。確率は部分集合の大きさの比として考える。",
     level: 1,
   },
-  {
+    {
     id: "writeup_exp_log_1",
     topicId: "exp_log_basic",
     title: "指数・対数の関係",
-    statement: "$\\log_a b = c$ と $a^c=b$ の関係を説明せよ。",
+    statement:
+      "$\log_a b = c$ を満たすとき、$a$ と $b$ の関係を用いて $b$ を指数で表し、数値例 $a=2,\ c=3$ のときの $b$ を求めよ。途中式を簡潔に示せ。",
     rubric: [
-      "対数の定義を明確に書いている",
-      "$a>0, a\\neq 1, b>0$ の条件を言及している",
-      "指数と対数が逆関係であることを述べている",
+      "対数の定義から $b=a^c$ を導いている",
+      "数値例で $b=2^3=8$ を計算している",
+      "途中式と結論が簡潔に書けている",
     ],
     solution:
-      "$\\log_a b=c$ は $a^c=b$ を意味する。$a>0, a\\neq 1, b>0$ の条件下で指数関数と対数関数は逆関係。",
+      "$\log_a b=c$ なら対数の定義より $b=a^c$。例として $a=2, c=3$ なら $b=2^3=8$。",
     level: 1,
   },
-  {
+    {
     id: "writeup_trig_identity_1",
     topicId: "trig_identities_basic",
     title: "三角恒等式の利用",
-    statement: "$\\sin^2\\theta+\\cos^2\\theta=1$ をどのように式変形に利用するか説明せよ。",
+    statement:
+      "$\sin^2\theta+\cos^2\theta=1$ を用いて、$\sin^2\theta$ を $\cos\theta$ だけの式に変形せよ。途中式を示せ。",
     rubric: [
-      "sin^2 または cos^2 を 1 から置き換える方針がある",
-      "式変形の目的（整理・置換）に触れている",
-      "具体的な置き換え例がある",
+      "$\sin^2\theta=1-\cos^2\theta$ と変形している",
+      "恒等式を使った置換であることが分かる",
+      "結論が簡潔に書けている",
     ],
     solution:
-      "$\\sin^2\\theta=1-\\cos^2\\theta$ のように置き換えることで、式を整理して一つの関数に統一できる。",
+      "$\sin^2\theta+\cos^2\theta=1$ より $\sin^2\theta=1-\cos^2\theta$。",
     level: 1,
   },
-  {
+    {
     id: "writeup_vector_inner_1",
     topicId: "vector_inner_basic",
     title: "内積と直交",
-    statement: "ベクトルの内積を使って直交条件を説明せよ。",
+    statement:
+      "ベクトル $\vec{a}=(1,2)$, $\vec{b}=(2,-1)$ について内積を計算し、直交しているか判定せよ。途中式を示せ。",
     rubric: [
-      "内積の定義を式で示している",
-      "直交条件 $\\vec{a}\\cdot\\vec{b}=0$ を明記",
-      "成分表示での判断に言及している",
+      "内積 $1\cdot2+2\cdot(-1)$ を計算している",
+      "内積が0かどうかで直交判定している",
+      "結論が簡潔に書けている",
     ],
     solution:
-      "内積 $\\vec{a}\\cdot\\vec{b}=a_xb_x+a_yb_y(+a_zb_z)$。直交なら内積が0になる。",
+      "$\vec{a}\cdot\vec{b}=1\cdot2+2\cdot(-1)=0$ より直交。",
     level: 1,
   },
   {
