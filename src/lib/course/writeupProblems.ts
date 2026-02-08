@@ -3338,7 +3338,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
   },
   {
     id: "writeup_seq_recurrence_1",
-    topicId: "sequence_recurrence_basic",
+    topicId: "seq_recurrence_basic",
     title: "漸化式と一般項",
     statement:
       "数列 $a_{n+1}=2a_n+3$、$a_1=1$ の一般項を求めよ。",
