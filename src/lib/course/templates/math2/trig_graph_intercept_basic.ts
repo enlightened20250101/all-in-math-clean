@@ -40,7 +40,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const func = params.funcId === 0 ? "sin" : "cos";
       const aTerm = texTerm(params.a, `\\${func} x`, true);
       const shift = texConst(params.c);
-      const statement = `関数 $y=${aTerm}${shift ? ` ${shift}` : ""}$ の $x=0$ における値を求めよ。`;
+      const statement = `振動の初期値として、関数 $y=${aTerm}${shift ? ` ${shift}` : ""}$ の $x=0$ における値を求めよ。`;
       return {
         templateId: id,
         statement,

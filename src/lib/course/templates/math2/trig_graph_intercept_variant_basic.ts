@@ -21,7 +21,7 @@ function buildTemplate(c: Case): QuestionTemplate {
     generate() {
       return {
         templateId: c.id,
-        statement: `関数 $y=\\sin ${c.b}x$ の $0^\\circ<x<360^\\circ$ における最小の正の $x$ 切片を求めよ。`,
+        statement: `振動が 0 になる最初の時刻を求める。関数 $y=\\sin ${c.b}x$ の $0^\\circ<x<360^\\circ$ における最小の正の $x$ 切片を求めよ。`,
         answerKind: "numeric",
         params: { firstZero },
       };

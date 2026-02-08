@@ -22,7 +22,7 @@ function buildTemplate(c: Case): QuestionTemplate {
       const kx = c.b === 1 ? "x" : `${c.b}x`;
       return {
         templateId: c.id,
-        statement: `関数 $y=\\cos ${kx}$ の $0^\\circ<x<360^\\circ$ における最小の正の $x$ 切片を求めよ。`,
+        statement: `振動が 0 になる最初の時刻を求める。関数 $y=\\cos ${kx}$ の $0^\\circ<x<360^\\circ$ における最小の正の $x$ 切片を求めよ。`,
         answerKind: "numeric",
         params: { firstZero },
       };
