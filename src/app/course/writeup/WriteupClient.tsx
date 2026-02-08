@@ -3,6 +3,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
+import MathMarkdown from "@/components/MathMarkdown";
 import { getDefaultRubric, getWriteupProblemsByTopic } from "@/lib/course/writeupProblems";
 import type { TopicId } from "@/lib/course/topics";
 
@@ -268,9 +269,10 @@ export default function WriteupClient({ topicTitle, topicId }: WriteupClientProp
             <div className="text-xs font-semibold text-slate-500">問題</div>
             <div className="mt-3 text-sm leading-relaxed">
               {activeProblem?.title ? <div className="text-sm font-semibold mb-1">{activeProblem.title}</div> : null}
-              {problemText}
-              <br />
-              解答は方針・式の変形・結論を含めて簡潔にまとめよ。
+              <MathMarkdown content={problemText} className="text-sm" />
+              <div className="mt-2 text-[11px] text-slate-500">
+                解答は方針・式の変形・結論を含めて簡潔にまとめよ。
+              </div>
             </div>
             {visibleProblems.length === 0 ? (
               <div className="mt-4 rounded-2xl border border-dashed border-slate-200 bg-slate-50/60 px-4 py-3 text-[11px] text-slate-500">
@@ -513,12 +515,12 @@ export default function WriteupClient({ topicTitle, topicId }: WriteupClientProp
                       <span className="mt-[2px] inline-flex h-5 w-5 items-center justify-center rounded-full bg-slate-900 text-[10px] font-semibold text-white">
                         {index + 1}
                       </span>
-                      <span>{step}</span>
+                      <MathMarkdown content={step} className="text-sm" />
                     </li>
                   ))}
                 </ol>
               ) : (
-                solutionText
+                <MathMarkdown content={solutionText} className="text-sm" />
               )}
             </div>
           </div>
