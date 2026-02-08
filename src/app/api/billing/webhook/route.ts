@@ -1,12 +1,11 @@
 // src/app/api/billing/webhook/route.ts
 export const runtime = 'nodejs';
+export const dynamic = "force-dynamic";
 
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { headers } from 'next/headers';
 import { createClient as createSbClient } from '@supabase/supabase-js';
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2025-08-27.basil' });
 
 const CREDIT_PACKS: Record<string, number> = { credits_1000: 10_000 };
 const MONTHLY_LIMIT_BY_PLAN: Record<string, number> = { basic: 100_000 };
@@ -15,16 +14,23 @@ const log  = (...a:any[]) => console.log('[webhook]', ...a);
 const elog = (...a:any[]) => console.error('[webhook]', ...a);
 
 export async function POST(req: Request) {
+  const stripeSecret = process.env.STRIPE_SECRET_KEY;
+  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+  if (!stripeSecret || !webhookSecret) {
+    return NextResponse.json({ error: 'billing_disabled' }, { status: 503 });
+  }
+  const stripe = new Stripe(stripeSecret, { apiVersion: '2025-08-27.basil' });
+
   try {
     const sig = (await headers()).get('stripe-signature')!;
     const raw = await req.text();
-    const event = stripe.webhooks.constructEvent(raw, sig, process.env.STRIPE_WEBHOOK_SECRET!);
+    const event = stripe.webhooks.constructEvent(raw, sig, webhookSecret);
     log('event', event.type);
 
-    const supabase = createSbClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY! // Service Role（サーバ専用）
-    );
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    const supabase =
+      supabaseUrl && serviceKey ? createSbClient(supabaseUrl, serviceKey) : null;
 
     if (event.type === 'checkout.session.completed') {
       const s0 = event.data.object as Stripe.Checkout.Session;
@@ -42,8 +48,8 @@ export async function POST(req: Request) {
       }
 
       log('session', { id: session.id, mode: session.mode, priceId, userId, kind });
-      if (!userId || !kind) {
-        elog('missing userId/kind');
+      if (!userId || !kind || !supabase) {
+        elog('missing userId/kind or supabase');
         return NextResponse.json({ ok: true });
       }
 
