@@ -50,7 +50,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const params = buildParams();
       const z1 = texComplex(params.a1, params.b1);
       const z2 = texComplex(params.a2, params.b2);
-      const statement = `複素数 $z_1=${z1}$, $z_2=${z2}$ に対応する点の距離の二乗を求めよ。`;
+      const statement = `座標平面上の点を表す複素数 $z_1=${z1}$, $z_2=${z2}$ に対応する点の距離の二乗を求めよ。`;
       return {
         templateId: id,
         statement,

@@ -31,7 +31,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const c = pick(CASES);
-      const statement = `複素数 $z=${texComplex(c.a, c.b)}$ の偏角を答えよ（$0^\\circ \\le \\theta < 360^\\circ$）。`;
+      const statement = `座標平面上の点を表す複素数 $z=${texComplex(c.a, c.b)}$ の偏角を答えよ（$0^\\circ \\le \\theta < 360^\\circ$）。`;
       return {
         templateId: id,
         statement,

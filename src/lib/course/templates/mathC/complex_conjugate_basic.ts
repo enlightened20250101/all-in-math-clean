@@ -47,7 +47,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `複素数 $z=${texComplex(params.a, params.b)}$ について、$z\\overline{z}$ を求めよ。`;
+      const statement = `座標平面上の点を表す複素数 $z=${texComplex(params.a, params.b)}$ について、$z\\overline{z}$ を求めよ。`;
       return {
         templateId: id,
         statement,
@@ -66,12 +66,12 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
 
 export const complexConjugateTemplates: QuestionTemplate[] = Array.from(
   { length: 20 },
-  (_, i) => buildTemplate(`complex_conjugate_basic_${i + 1}`, `共役複素数 ${i + 1}`)
+  (_, i) => buildTemplate(`complex_conjugate_basic_${i + 1}`, `共役座標平面上の点を表す複素数 ${i + 1}`)
 );
 
 const extraComplexConjugateTemplates: QuestionTemplate[] = Array.from(
   { length: 30 },
-  (_, i) => buildTemplate(`complex_conjugate_basic_${i + 21}`, `共役複素数 追加${i + 1}`)
+  (_, i) => buildTemplate(`complex_conjugate_basic_${i + 21}`, `共役座標平面上の点を表す複素数 追加${i + 1}`)
 );
 
 complexConjugateTemplates.push(...extraComplexConjugateTemplates);

@@ -35,7 +35,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `複素数 $z=${formatComplex(params.a, params.b)}$ の絶対値 $|z|$ を求めよ。`;
+      const statement = `座標平面上の点を表す複素数 $z=${formatComplex(params.a, params.b)}$ の絶対値 $|z|$ を求めよ。`;
       return {
         templateId: id,
         statement,

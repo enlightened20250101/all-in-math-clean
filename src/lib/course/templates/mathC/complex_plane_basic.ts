@@ -38,8 +38,8 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const params = buildParams();
       const statement =
         params.ask === 0
-          ? `複素数 $z=${texComplex(params.a, params.b)}$ の実部を求めよ。`
-          : `複素数 $z=${texComplex(params.a, params.b)}$ の虚部を求めよ。`;
+          ? `座標平面上の点を表す複素数 $z=${texComplex(params.a, params.b)}$ の実部を求めよ。`
+          : `座標平面上の点を表す複素数 $z=${texComplex(params.a, params.b)}$ の虚部を求めよ。`;
       return {
         templateId: id,
         statement,

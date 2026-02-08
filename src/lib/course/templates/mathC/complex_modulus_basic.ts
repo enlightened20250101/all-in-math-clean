@@ -48,7 +48,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `複素数 $${texComplex(params.a, params.b)}$ の絶対値の二乗 $|z|^2$ を求めよ。`;
+      const statement = `座標平面上の点を表す複素数 $${texComplex(params.a, params.b)}$ の絶対値の二乗 $|z|^2$ を求めよ。`;
       return {
         templateId: id,
         statement,
