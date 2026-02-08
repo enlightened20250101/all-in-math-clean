@@ -9,13 +9,14 @@ type RegCase = {
   b: number;
   y: number;
   answer: number;
+  context?: string;
   difficulty: 1 | 2 | 3;
 };
 
 const CASES: RegCase[] = [
-  { id: "data_reg_var_1", a: 2, b: 1, y: 9, answer: 4, difficulty: 1 },
-  { id: "data_reg_var_2", a: -1, b: 6, y: 2, answer: 4, difficulty: 1 },
-  { id: "data_reg_var_3", a: 3, b: -3, y: 6, answer: 3, difficulty: 1 },
+  { id: "data_reg_var_1", a: 2, b: 1, y: 9, answer: 4, context: "学習時間 $x$ (時間) と得点 $y$ (点) の回帰直線が与えられている。", difficulty: 1 },
+  { id: "data_reg_var_2", a: -1, b: 6, y: 2, answer: 4, context: "気温 $x$ (℃) と暖房使用量 $y$ の回帰直線が与えられている。", difficulty: 1 },
+  { id: "data_reg_var_3", a: 3, b: -3, y: 6, answer: 3, context: "広告費 $x$ (万円) と売上 $y$ (万円) の回帰直線が与えられている。", difficulty: 1 },
 ];
 
 export const dataRegressionVariantTemplates: QuestionTemplate[] = Array.from({ length: 30 }, (_, i) => {
@@ -31,9 +32,10 @@ export const dataRegressionVariantTemplates: QuestionTemplate[] = Array.from({ l
     },
     generate() {
       const line = texLinear(c.a, c.b);
+      const lead = c.context ? `${c.context}\\n\\n` : "";
       return {
         templateId,
-        statement: `回帰直線 $y=${line}$ において、$y=${c.y}$ となる $x$ を求めよ。`,
+        statement: `${lead}回帰直線 $y=${line}$ において、$y=${c.y}$ となる $x$ を求めよ。`,
         answerKind: "numeric",
         params: {},
       };

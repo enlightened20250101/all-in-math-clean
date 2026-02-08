@@ -5,6 +5,7 @@ type ScatterCase = {
   id: string;
   points: Array<[number, number]>;
   correct: string;
+  context?: string;
   difficulty: 1 | 2 | 3;
 };
 
@@ -13,9 +14,9 @@ function pointsText(points: Array<[number, number]>): string {
 }
 
 const CASES: ScatterCase[] = [
-  { id: "data_scatter_var_1", points: [[1, 3], [2, 4], [3, 4], [4, 5]], correct: "正の相関", difficulty: 1 },
-  { id: "data_scatter_var_2", points: [[1, 5], [2, 4], [3, 3], [4, 3]], correct: "負の相関", difficulty: 1 },
-  { id: "data_scatter_var_3", points: [[1, 2], [2, 3], [3, 2], [4, 3]], correct: "相関なし", difficulty: 1 },
+  { id: "data_scatter_var_1", points: [[1, 3], [2, 4], [3, 4], [4, 5]], correct: "正の相関", context: "勉強時間 $x$ と得点 $y$ の関係を調べた。", difficulty: 1 },
+  { id: "data_scatter_var_2", points: [[1, 5], [2, 4], [3, 3], [4, 3]], correct: "負の相関", context: "気温 $x$ と暖房使用量 $y$ の関係を調べた。", difficulty: 1 },
+  { id: "data_scatter_var_3", points: [[1, 2], [2, 3], [3, 2], [4, 3]], correct: "相関なし", context: "身長 $x$ とテスト順位 $y$ の関係を調べた。", difficulty: 1 },
 ];
 
 export const dataScatterVariantTemplates: QuestionTemplate[] = Array.from({ length: 30 }, (_, i) => {
@@ -30,9 +31,10 @@ export const dataScatterVariantTemplates: QuestionTemplate[] = Array.from({ leng
       tags: ["data", "scatter"],
     },
     generate() {
+      const lead = c.context ? `${c.context}\\n\\n` : "";
       return {
         templateId,
-        statement: `次のデータの散布図の傾向として正しいものを選べ。\\n\\nデータ: ${pointsText(c.points)}`,
+        statement: `${lead}次のデータの散布図の傾向として正しいものを選べ。\\n\\nデータ: ${pointsText(c.points)}`,
         answerKind: "choice",
         choices: ["正の相関", "負の相関", "相関なし"],
         params: { caseId: i % CASES.length },
