@@ -28,7 +28,7 @@ export const expLogUnknownExponentTemplates: QuestionTemplate[] = Array.from({ l
     },
     generate() {
       const params = buildParams();
-      const statement = `次を満たす $n$ を求めよ。\\n\\n$$${texPow(String(params.a), "n")}=${params.value}$$`;
+      const statement = `成長モデルとして次を満たす $n$ を求めよ。\\n\\n$$${texPow(String(params.a), "n")}=${params.value}$$`;
       return {
         templateId,
         statement,

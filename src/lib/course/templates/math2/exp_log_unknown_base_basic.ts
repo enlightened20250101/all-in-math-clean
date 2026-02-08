@@ -27,7 +27,7 @@ export const expLogUnknownBaseTemplates: QuestionTemplate[] = Array.from({ lengt
     },
     generate() {
       const params = buildParams();
-      const statement = `次を満たす $a$ を求めよ。\\n\\n$$a^{${params.n}}=${params.value}$$`;
+      const statement = `成長モデルとして次を満たす $a$ を求めよ。\\n\\n$$a^{${params.n}}=${params.value}$$`;
       return {
         templateId,
         statement,
