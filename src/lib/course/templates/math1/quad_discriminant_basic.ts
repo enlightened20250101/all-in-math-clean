@@ -9,6 +9,13 @@ type DiscParams = {
   c: number;
 };
 
+const CONTEXTS: Record<string, string> = {
+  quad_disc_value_1: "放物線と$x$軸の交点の個数を判別する前に$D$を求める。",
+  quad_disc_value_2: "解の個数を判断するための判別式を計算する。",
+  quad_disc_roots_1: "実数解の個数を判定するために$D$を使う。",
+  quad_disc_roots_2: "二次関数のグラフと$x$軸の交点の数を判断する。",
+};
+
 function calcD(a: number, b: number, c: number) {
   return b * b - 4 * a * c;
 }
@@ -63,9 +70,10 @@ function buildDiscValueTemplate(
     generate() {
       const params = paramsFactory();
       const poly = texPoly2(params.a, params.b, params.c);
+      const lead = CONTEXTS[id] ? `${CONTEXTS[id]}\n` : "";
       return {
         templateId: id,
-        statement: `次の二次方程式の判別式 $D$ を求めよ。\n\n$$\n${poly} = 0\n$$`,
+        statement: `${lead}次の二次方程式の判別式 $D$ を求めよ。\n\n$$\n${poly} = 0\n$$`,
         answerKind: "numeric",
         params,
       };
@@ -110,9 +118,10 @@ function buildRootCountTemplate(
     generate() {
       const params = paramsFactory();
       const poly = texPoly2(params.a, params.b, params.c);
+      const lead = CONTEXTS[id] ? `${CONTEXTS[id]}\n` : "";
       return {
         templateId: id,
-        statement: `次の二次方程式の実数解の個数を答えよ（$2/1/0$）。\n\n$$\n${poly} = 0\n$$`,
+        statement: `${lead}次の二次方程式の実数解の個数を答えよ（$2/1/0$）。\n\n$$\n${poly} = 0\n$$`,
         answerKind: "numeric",
         params,
       };

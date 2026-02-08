@@ -12,6 +12,13 @@ type SolveParams = {
   caseType: number; // 0: two roots, 1: double root, 2: none
 };
 
+const CONTEXTS: Record<string, string> = {
+  quad_solve_distinct_1: "放物線と$x$軸の交点を考える。",
+  quad_solve_distinct_2: "二次関数の解を座標の切片として求める。",
+  quad_solve_double_1: "接する場合（重解）の判定として解を求める。",
+  quad_solve_none_1: "実数解がないかどうかを確認するために解を求める。",
+};
+
 function buildFromDistinctRoots(rootRange: number[], aChoices: number[]) {
   const a = pick(aChoices);
   let r1 = pick(rootRange);
@@ -120,9 +127,10 @@ function buildTemplate(id: string, title: string, paramsFactory: () => SolvePara
     generate() {
       const params = paramsFactory();
       const poly = texPoly2(params.a, params.b, params.c);
+      const lead = CONTEXTS[id] ? `${CONTEXTS[id]}\n` : "";
       return {
         templateId: id,
-        statement: `次の二次方程式を解け。\\n\\n$$${poly} = 0$$`,
+        statement: `${lead}次の二次方程式を解け。\\n\\n$$${poly} = 0$$`,
         answerKind: "multi_numeric",
         params,
       };

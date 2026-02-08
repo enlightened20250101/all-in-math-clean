@@ -39,7 +39,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const params = buildParams();
       const { x1, y1, x2, y2 } = params;
-      const statement = `2点 $A(${x1},${y1})$, $B(${x2},${y2})$ を通る直線の傾きを求めよ。`;
+      const statement = `地図上の2地点 $A(${x1},${y1})$, $B(${x2},${y2})$ を結ぶ直線の傾きを求めよ。`;
       return {
         templateId: id,
         statement,

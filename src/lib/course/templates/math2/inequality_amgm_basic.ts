@@ -40,7 +40,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `正の数 $a=${params.a}, b=${params.b}$ とするとき、相加平均と相乗平均の差 $\\frac{a+b}{2}-\\sqrt{ab}$ を求めよ。`;
+      const statement = `2種類の面積 $a=${params.a}, b=${params.b}$ を平均化するとき、相加平均と相乗平均の差 $\\frac{a+b}{2}-\\sqrt{ab}$ を求めよ。`;
       return {
         templateId: id,
         statement,
