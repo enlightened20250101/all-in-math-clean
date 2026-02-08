@@ -82,6 +82,30 @@ export default function WriteupClient({ topicTitle, topicId }: WriteupClientProp
   const [historyFilter, setHistoryFilter] = useState<"all" | "topic">("all");
   const [orderMode, setOrderMode] = useState<"recommended" | "shuffle">("recommended");
   const [solutionView, setSolutionView] = useState<"full" | "steps">("full");
+  const combinedAnswer = useMemo(() => {
+    if (mode === "summary") return summary;
+    return [plan, work, conclusion].filter(Boolean).join("\n");
+  }, [mode, summary, plan, work, conclusion]);
+
+  const rubricChecks = useMemo(() => {
+    const normalizedAnswer = normalizeText(combinedAnswer);
+    return rubric.map((item) => {
+      const tokens = extractTokens(item);
+      const mathTokens = extractMathTokens(item);
+      const hitByText = tokens.some((token) => normalizedAnswer.includes(token));
+      const hitByMath = mathTokens.some((token) => normalizedAnswer.includes(token));
+      return {
+        item,
+        hit: combinedAnswer.trim().length > 0 && (hitByText || hitByMath),
+      };
+    });
+  }, [rubric, combinedAnswer]);
+
+  const rubricScore = useMemo(() => {
+    if (rubricChecks.length === 0) return 0;
+    const hits = rubricChecks.filter((check) => check.hit).length;
+    return Math.round((hits / rubricChecks.length) * 100);
+  }, [rubricChecks]);
 
   useEffect(() => {
     setEntries(loadEntries());
@@ -465,12 +489,21 @@ export default function WriteupClient({ topicTitle, topicId }: WriteupClientProp
             </div>
           </div>
           <div className="rounded-[24px] border border-slate-200/80 bg-white/90 p-5 shadow-sm">
-            <div className="text-xs font-semibold text-slate-500">必要要素（例）</div>
+            <div className="flex items-center justify-between gap-2">
+              <div className="text-xs font-semibold text-slate-500">必要要素（例）</div>
+              <div className="text-[11px] font-semibold text-slate-500">
+                簡易採点: {rubricScore}%
+              </div>
+            </div>
             <ul className="mt-3 space-y-2 text-sm text-slate-700">
-              {rubric.map((item) => (
-                <li key={item} className="flex items-center gap-2">
-                  <span className="h-2 w-2 rounded-full bg-slate-300" />
-                  <MathMarkdown content={item} className="text-sm" />
+              {rubricChecks.map((check) => (
+                <li key={check.item} className="flex items-center gap-2">
+                  <span
+                    className={`h-2 w-2 rounded-full ${
+                      check.hit ? "bg-emerald-500" : "bg-slate-300"
+                    }`}
+                  />
+                  <MathMarkdown content={check.item} className="text-sm" />
                 </li>
               ))}
             </ul>
@@ -618,4 +651,30 @@ export default function WriteupClient({ topicTitle, topicId }: WriteupClientProp
       </div>
     </div>
   );
+}
+
+function normalizeText(value: string): string {
+  return value
+    .toLowerCase()
+    .replace(/\s+/g, "")
+    .replace(/[、。,.!?]/g, "");
+}
+
+function extractTokens(value: string): string[] {
+  const matches = value.match(/[一-龥ぁ-んァ-ンa-zA-Z0-9]+/g) ?? [];
+  return matches
+    .map((token) => normalizeText(token))
+    .filter((token) => token.length >= 2);
+}
+
+function extractMathTokens(value: string): string[] {
+  const tokens: string[] = [];
+  const patterns = [/\$([^$]+)\$/g, /\\\(([^)]+)\\\)/g, /\\\[([\s\S]+?)\\\]/g];
+  for (const pattern of patterns) {
+    let match: RegExpExecArray | null;
+    while ((match = pattern.exec(value))) {
+      tokens.push(normalizeText(match[1]));
+    }
+  }
+  return tokens.filter(Boolean);
 }
