@@ -37,7 +37,7 @@ export async function GET() {
     if (rErr) return NextResponse.json({ ok: false, error: rErr.message }, { status: 500 });
 
     // 2) mastery を引いてノードを整形
-    const allNodes = (roads || []).flatMap(r => Array.isArray(r.nodes_json) ? r.nodes_json.map((n: any) => n.skill_id) : []);
+    const allNodes = (roads || []).flatMap((r: any) => Array.isArray(r.nodes_json) ? r.nodes_json.map((n: any) => n.skill_id) : []);
     const skillIds = Array.from(new Set(allNodes));
     const masteryMap = new Map<string, any>();
     if (skillIds.length) {
