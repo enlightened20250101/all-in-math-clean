@@ -33,7 +33,9 @@ export const calcIntegralLinearBacksolveTemplates: QuestionTemplate[] = Array.fr
     generate() {
       const params = buildParams();
       const fx = `${texLinear(params.a, 0)}+b`;
-      const statement = `次を満たす $b$ を求めよ。\\n\\n$$\\int_${params.p}^{${params.q}} (${fx})\\,dx=${params.value}$$`;
+      const statement =
+        `直線 $y=${fx}$ の区間 $[${params.p},${params.q}]$ における面積が ${params.value} となるように` +
+        ` $b$ を求めよ。\\n\\n$$\\int_${params.p}^{${params.q}} (${fx})\\,dx=${params.value}$$`;
       return {
         templateId,
         statement,

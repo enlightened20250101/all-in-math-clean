@@ -32,7 +32,9 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const params = buildParams();
       const fx = texLinear(params.a, params.b);
-      const statement = `次を計算せよ。\\n\\n$$\\int_${params.p}^{${params.q}} ${fx}\\,dx$$`;
+      const statement =
+        `直線 $y=${fx}$ の区間 $[${params.p},${params.q}]$ における面積を求めよ。\\n\\n` +
+        `$$\\int_${params.p}^{${params.q}} ${fx}\\,dx$$`;
       return {
         templateId: id,
         statement,

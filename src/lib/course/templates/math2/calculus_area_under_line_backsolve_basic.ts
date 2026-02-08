@@ -29,7 +29,9 @@ export const calcAreaUnderLineBacksolveTemplates: QuestionTemplate[] = Array.fro
     generate() {
       const params = buildParams();
       const fx = texLinear(params.m, 0);
-      const statement = `関数 $y=${fx}$ と $x$ 軸で囲まれた面積が ${params.area} のとき、区間 $[0,b]$ の $b$ を求めよ。`;
+      const statement =
+        `直線 $y=${fx}$ と $x$ 軸で囲まれた面積が ${params.area} のとき、` +
+        `区間 $[0,b]$ の $b$ を求めよ。`;
       return {
         templateId,
         statement,

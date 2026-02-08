@@ -38,7 +38,9 @@ export const calcAreaBetweenLinesBacksolveTemplates: QuestionTemplate[] = Array.
       const params = buildParams();
       const f = texLinear(params.m, params.b1);
       const g = `${texLinear(params.m, 0)}+b`;
-      const statement = `区間 $[${params.p},${params.q}]$ における $y=${f}$ と $y=${g}$ に囲まれた面積が ${params.area} のとき、$b$ を求めよ。`;
+      const statement =
+        `2本の平行な直線 $y=${f}$ と $y=${g}$ に挟まれた面積が ${params.area} のとき、` +
+        `$b$ を求めよ。区間は $[${params.p},${params.q}]$ とする。`;
       return {
         templateId,
         statement,
