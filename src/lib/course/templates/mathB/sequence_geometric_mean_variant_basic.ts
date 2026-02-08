@@ -22,7 +22,9 @@ function buildTemplate(c: Case): QuestionTemplate {
     generate() {
       return {
         templateId: c.id,
-        statement: `等比数列で $a_1=${c.a1}$, $a_3=${c.a3}$ のとき、$a_2$ を求めよ。`,
+        statement:
+          `一定倍率で変化する量を考える。` +
+          `$a_1=${c.a1}$, $a_3=${c.a3}$ のとき、$a_2$ を求めよ。`,
         answerKind: "numeric",
         params: {},
       };

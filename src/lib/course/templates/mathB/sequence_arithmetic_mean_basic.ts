@@ -27,7 +27,9 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `等差数列で $a_1=${params.a1}$, $a_3=${params.a3}$ のとき、$a_2$ を求めよ。`;
+      const statement =
+        `等間隔に増減する記録を考える。` +
+        `$a_1=${params.a1}$, $a_3=${params.a3}$ のとき、$a_2$ を求めよ。`;
       return {
         templateId: id,
         statement,
