@@ -32,7 +32,9 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const params = buildParams();
       const fx = texLinear(params.m, 0);
-      const statement = `関数 $y=${fx}$ と $x$ 軸で囲まれた面積（区間 $[0,${params.b}]$）を求めよ。`;
+      const statement =
+        `直線 $y=${fx}$ と $x$ 軸で囲まれる三角形の面積を求めよ。` +
+        `ただし区間は $[0,${params.b}]$ とする。`;
       return {
         templateId: id,
         statement,

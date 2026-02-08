@@ -35,7 +35,9 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const params = buildParams();
       const poly = texPoly2(params.a, params.b, params.c);
-      const statement = `関数 $f(x)=${poly}$ の $x=${params.x0}$ における接線を $y=mx+k$ とする。$k$ を求めよ。`;
+      const statement =
+        `放物線 $f(x)=${poly}$ 上の点 $x=${params.x0}$ における接線を $y=mx+k$ とする。` +
+        `切片 $k$ を求めよ。`;
       return {
         templateId: id,
         statement,

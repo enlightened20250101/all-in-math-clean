@@ -27,7 +27,9 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const params = buildParams();
       const fx = texLinear(params.a, params.b);
-      const statement = `関数 $f(x)=${fx}$ の導関数 $f'(x)$ を求めよ。`;
+      const statement =
+        `一次で変化する料金モデルを $f(x)=${fx}$ とする。` +
+        `変化率（導関数）$f'(x)$ を求めよ。`;
       return {
         templateId: id,
         statement,

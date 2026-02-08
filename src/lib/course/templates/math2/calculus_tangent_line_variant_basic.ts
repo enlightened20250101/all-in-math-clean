@@ -31,7 +31,9 @@ export const tangentLineVariantTemplates: QuestionTemplate[] = Array.from({ leng
     generate() {
       const params = buildParams();
       const fx = texLinear(params.a, params.b);
-      const statement = `関数 $f(x)=${fx}$ の $x=${params.x0}$ における接線を $y=mx+k$ とする。$k$ を求めよ。`;
+      const statement =
+        `一次関数 $f(x)=${fx}$ の接線を $y=mx+k$ とする。` +
+        `$x=${params.x0}$ における $k$ を求めよ。`;
       return {
         templateId,
         statement,

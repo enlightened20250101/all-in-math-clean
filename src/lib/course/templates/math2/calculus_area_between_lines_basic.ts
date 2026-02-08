@@ -36,7 +36,9 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const params = buildParams();
       const f = texLinear(params.m, params.b1);
       const g = texLinear(params.m, params.b2);
-      const statement = `区間 $[${params.p},${params.q}]$ における $y=${f}$ と $y=${g}$ に囲まれた面積を求めよ。`;
+      const statement =
+        `2本の平行な直線 $y=${f}$ と $y=${g}$ に挟まれた帯の面積を求めよ。` +
+        `区間は $[${params.p},${params.q}]$ とする。`;
       return {
         templateId: id,
         statement,

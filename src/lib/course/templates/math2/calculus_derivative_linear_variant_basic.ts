@@ -24,7 +24,9 @@ function buildTemplate(c: DerivCase): QuestionTemplate {
     generate() {
       return {
         templateId: c.id,
-        statement: `関数 $f(x)=${fx}$ の $x=${c.x}$ における導関数の値を求めよ。`,
+        statement:
+          `温度が一次で変化するモデルを $f(x)=${fx}$ とする。` +
+          `$x=${c.x}$ における変化率（導関数の値）を求めよ。`,
         answerKind: "numeric",
         params: { a: c.a },
       };

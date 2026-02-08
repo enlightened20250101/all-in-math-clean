@@ -31,7 +31,9 @@ export const calcAreaUnderLineVariantTemplates: QuestionTemplate[] = Array.from(
     generate() {
       const params = buildParams();
       const line = texLinear(params.m, params.b);
-      const statement = `直線 $y=${line}$ と $x$ 軸に囲まれる部分のうち、$0\\le x\\le ${params.a}$ の面積を求めよ。`;
+      const statement =
+        `直線 $y=${line}$ と $x$ 軸に囲まれる部分のうち、` +
+        `$0\\le x\\le ${params.a}$ の面積を求めよ。`;
       return {
         templateId,
         statement,
