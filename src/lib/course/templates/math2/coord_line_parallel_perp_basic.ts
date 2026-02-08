@@ -33,7 +33,9 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const params = buildParams();
       const label = params.ask === 1 ? "平行" : "垂直";
       const rhs = texLinear(params.m, params.c, "x");
-      const statement = `直線 $y=${rhs}$ に${label}な直線の傾きを求めよ。`;
+      const statement =
+        `道路の向きを直線で表すとする。` +
+        `直線 $y=${rhs}$ に${label}な直線の傾きを求めよ。`;
       return {
         templateId: id,
         statement,
