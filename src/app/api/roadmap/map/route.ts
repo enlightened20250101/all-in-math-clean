@@ -158,10 +158,10 @@ export async function GET() {
 
     return NextResponse.json({
       ok: true,
-      goals: roadmaps.map(r => ({
+      goals: roadmaps.map((r: any) => ({
         roadmap_id: r.roadmap_id,
         goal_id: r.goal_id,
-        items: r.nodes.map(n => n.skill_id),
+        items: r.nodes.map((n: any) => n.skill_id),
       })),
       map: { nodes: nodesOut, edges },
       counts: {
