@@ -36,7 +36,7 @@ export default function CopyLinkButton({ href, label = 'リンクをコピー', 
     <button
       type="button"
       onClick={onClick}
-      className={`border rounded px-2.5 py-1 text-[10px] sm:text-xs bg-white hover:bg-gray-50 ${className}`}
+      className={`border rounded px-2.5 py-1 text-[10px] sm:text-xs bg-white text-slate-700 border-slate-200 hover:bg-slate-50 ${className}`}
       aria-live="polite"
     >
       {copied ? 'コピーしました' : label}

@@ -9,7 +9,7 @@ import CommentForm from "./CommentForm";
 import CommentItem from "./CommentItem";
 import CommentsList from "./CommentsList";
 import InlineMathText from "@/components/InlineMathText";
-import ReportButton from "@/components/ReportButton";
+import ReportMenuButton from "@/components/ReportMenuButton";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -103,7 +103,7 @@ export default async function PostDetailPage({ params }: Props) {
           <span className="text-gray-400">コメント: {(comments ?? []).length}</span>
           <CopyLinkButton href={`/posts/${post.id}`} className="ml-0 sm:ml-2" />
           <LocalSaveButton storageKey="saved:posts" value={post.id} />
-          <ReportButton targetType="post" targetId={post.id} className="ml-2 text-[11px] sm:text-sm text-rose-600 hover:underline" />
+          <ReportMenuButton targetType="post" targetId={post.id} />
         </div>
         {Array.isArray(post.tags) && post.tags.length > 0 && (
           <div className="flex flex-wrap gap-1.5 text-[11px] sm:text-xs">

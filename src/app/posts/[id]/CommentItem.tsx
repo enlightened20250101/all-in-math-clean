@@ -1,7 +1,7 @@
 "use client";
 
 import MarkdownRenderer from "@/components/MarkdownRenderer";
-import ReportButton from "@/components/ReportButton";
+import ReportMenuButton from "@/components/ReportMenuButton";
 import { action_voteComment, action_markBestAnswer } from "@/app/actions/post";
 import { useEffect, useState } from "react";
 
@@ -74,7 +74,7 @@ export default function CommentItem({
       <div className="mt-2 text-[11px] sm:text-xs text-gray-500 flex flex-wrap items-center gap-2">
         <span>{new Date(c.created_at).toLocaleString()}</span>
         <div className="ml-auto flex items-center gap-2">
-          <ReportButton targetType="comment" targetId={c.id} />
+          <ReportMenuButton targetType="comment" targetId={c.id} />
           <button className="border rounded px-2.5 py-1 text-[11px] sm:text-xs" onClick={() => vote(1)}>＋</button>
           <span className="min-w-6 text-center">{v}</span>
           <button className="border rounded px-2.5 py-1 text-[11px] sm:text-xs" onClick={() => vote(-1)} disabled={v <= 0}>−</button>

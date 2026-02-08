@@ -11,7 +11,7 @@ import ImageUploader from '@/components/ImageUploader';
 import CopyLinkButton from '@/components/CopyLinkButton';
 import LocalSaveButton from '@/components/LocalSaveButton';
 import InlineMathText from "@/components/InlineMathText";
-import ReportButton from "@/components/ReportButton";
+import ReportMenuButton from "@/components/ReportMenuButton";
 
 type ThreadPost = {
   id: number;
@@ -294,7 +294,7 @@ export default function ThreadDetailPage() {
             <span className="text-white/95">返信: {replies.length}</span>
             <CopyLinkButton href={`/threads/${slug}`} />
             <LocalSaveButton storageKey="saved:threads" value={slug} />
-            <ReportButton targetType="thread" targetId={thread.id} className="text-[11px] sm:text-xs text-rose-200 hover:underline" />
+            <ReportMenuButton targetType="thread" targetId={thread.id} />
           </div>
           {Array.isArray(thread.tags) && thread.tags.length > 0 && (
             <div className="flex flex-wrap gap-1.5 text-[11px] sm:text-xs">
@@ -376,7 +376,7 @@ export default function ThreadDetailPage() {
             )}
             <div className="mt-2 flex items-center gap-2 text-[10px] sm:text-xs text-gray-500">
               <span>{new Date(featured.created_at).toLocaleString()}</span>
-              <ReportButton targetType="thread_post" targetId={featured.id} />
+              <ReportMenuButton targetType="thread_post" targetId={featured.id} />
             </div>
           </article>
         </section>
@@ -407,7 +407,7 @@ export default function ThreadDetailPage() {
 
             <div className="mt-2 flex items-center gap-2 text-[11px] sm:text-xs text-gray-500">
               <span>{new Date(p.created_at).toLocaleString()}</span>
-              <ReportButton targetType="thread_post" targetId={p.id} />
+              <ReportMenuButton targetType="thread_post" targetId={p.id} />
             </div>
           </article>
         ))}

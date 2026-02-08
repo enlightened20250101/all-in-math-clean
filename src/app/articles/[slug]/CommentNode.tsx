@@ -7,7 +7,7 @@ import MarkdownEditor from "@/components/MarkdownEditor";
 import ImageUploader from "@/components/ImageUploader";
 import type { AComment } from "./CommentsThread";
 import { useArticleCommentLike } from "@/components/useArticleCommentLike";
-import ReportButton from "@/components/ReportButton";
+import ReportMenuButton from "@/components/ReportMenuButton";
 
 export default function CommentNode({
   node,
@@ -113,7 +113,7 @@ function CommentFooter({
       <time dateTime={createdAt}>{new Date(createdAt).toLocaleString()}</time>
 
       <div className="ml-auto grid gap-2 w-full sm:w-auto sm:flex sm:items-center">
-        <ReportButton targetType="article_comment" targetId={commentId} />
+        <ReportMenuButton targetType="article_comment" targetId={commentId} />
         <button
           className={`px-3 py-2 border rounded-full text-[11px] sm:text-xs transition active:scale-[0.98] active:shadow-inner ${mine ? "text-rose-700 border-rose-300 bg-rose-50" : "hover:bg-gray-50"}`}
           onClick={toggle}
