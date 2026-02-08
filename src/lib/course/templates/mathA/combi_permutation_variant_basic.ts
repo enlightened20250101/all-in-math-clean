@@ -79,6 +79,34 @@ const CASES: Case[] = [
     answer: 100,
     explain: `### この問題の解説\n百の位は1〜5の5通り、残りは5通り・4通り。$5\\cdot5\\cdot4=100$。`,
   },
+  {
+    id: "perm_word_rep_1",
+    title: "暗証番号（重複可）",
+    statement: `0〜9の数字を重複を許して3桁の暗証番号を作るとき、何通りあるか。`,
+    answer: 1000,
+    explain: `### この問題の解説\n各桁10通りずつなので $10^3=1000$。`,
+  },
+  {
+    id: "perm_word_rep_2",
+    title: "文字列（重複可）",
+    statement: `A,B,C,Dの4文字を使い、重複を許して5文字の列を作るとき、何通りあるか。`,
+    answer: 1024,
+    explain: `### この問題の解説\n各位置4通りなので $4^5=1024$。`,
+  },
+  {
+    id: "perm_word_rep_3",
+    title: "旗（重複可）",
+    statement: `赤・青・白の3色の旗を重複を許して4枚並べるとき、何通りあるか。`,
+    answer: 81,
+    explain: `### この問題の解説\n各位置3通りなので $3^4=81$。`,
+  },
+  {
+    id: "perm_word_rep_4",
+    title: "3桁整数（先頭0不可・重複可）",
+    statement: `0〜9の数字を重複を許して3桁の整数を作るとき、何通りあるか。`,
+    answer: 900,
+    explain: `### この問題の解説\n百の位は1〜9の9通り、残りは10通りずつ。$9\\cdot10\\cdot10=900$。`,
+  },
 ];
 
 export const combiPermutationVariantTemplates: QuestionTemplate[] = CASES.map(buildTemplate);
