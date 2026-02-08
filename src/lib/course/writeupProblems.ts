@@ -681,6 +681,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "一般項があれば任意の項を直接求められると述べている",
       "簡単な例があると良い",
     ],
+    rubricKeywords: [["一次線形", "特解"], ["初期条件", "定数"], ["一般項", "2^{n-1}"]],
     solution:
       "漸化式は前の項と次の項を結ぶ関係式。一般項が求まれば第$n$項を直接計算できる。",
     level: 1,
@@ -2917,6 +2918,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "補集合の和と共通部分の入れ替えに触れている",
       "記号で示せている",
     ],
+    rubricKeywords: [["補集合", "∪", "∩"], ["(A∪B)^c", "(A∩B)^c"], ["記号"]],
     solution:
       "補集合に対して $(A\\cup B)^c=A^c\\cap B^c$、$(A\\cap B)^c=A^c\\cup B^c$ が成り立つ。",
     level: 3,
@@ -2930,6 +2932,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "形を揃える方針に触れている",
       "既知の公式に合わせると述べている",
     ],
+    rubricKeywords: [["形を揃える", "公式"], ["置換", "恒等式"], ["戦略"]],
     solution:
       "目標の形や既知の公式に合わせるように式を変形し、恒等式で置き換えるのが基本。",
     level: 3,
@@ -2943,6 +2946,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "中心からの距離が一定と述べている",
       "距離公式に触れている",
     ],
+    rubricKeywords: [["中心", "距離一定"], ["距離公式"], ["r^2", "結論"]],
     solution:
       "中心 $(a,b)$ からの距離が一定 $r$ である条件が $(x-a)^2+(y-b)^2=r^2$ となる。",
     level: 3,
@@ -2956,6 +2960,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "平方完成を用いると述べている",
       "軸 $x=-\\frac{b}{2a}$ を示している",
     ],
+    rubricKeywords: [["平方完成"], ["軸", "x=-b/2a"], ["頂点"]],
     solution:
       "平方完成で $y=a(x+\\frac{b}{2a})^2+\\cdots$ とし、軸 $x=-\\frac{b}{2a}$ と頂点を求める。",
     level: 3,
@@ -2969,6 +2974,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "正弦定理は角が2通りになる場合があると述べている",
       "余弦定理は一意に決まると触れている",
     ],
+    rubricKeywords: [["正弦定理", "2通り"], ["余弦定理", "一意"], ["判断"]],
     solution:
       "正弦定理は角の正弦が同じになる場合があり2通りが生じることがある。余弦定理は三辺が決まれば角は一意。",
     level: 3,
@@ -2982,6 +2988,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "重複する分を割ると述べている",
       "同一の並び替えをまとめることに触れている",
     ],
+    rubricKeywords: [["重複", "割る"], ["並び替え", "同一"], ["除く"]],
     solution:
       "重複する並び替えは同一とみなすため、その重複数だけ割って除く。",
     level: 3,
@@ -2995,6 +3002,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "標本空間を条件で絞ると述べている",
       "式 $P(A|B)=\\frac{P(A\\cap B)}{P(B)}$ に触れている",
     ],
+    rubricKeywords: [["条件付き", "標本空間"], ["P(A|B)", "P(A∩B)/P(B)"], ["割合"]],
     solution:
       "条件 $B$ が起きたと仮定して標本空間を絞り、その中で $A$ が起きる割合を考える。",
     level: 3,
@@ -3008,6 +3016,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "角度や射影の計算に触れている",
       "直交判定に使えると述べている",
     ],
+    rubricKeywords: [["角度", "射影"], ["直交判定"], ["利用"]],
     solution:
       "内積は角度や射影の計算、直交判定などに使える。",
     level: 3,
@@ -3021,6 +3030,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "積分区間を確認すると述べている",
       "原始関数を求めて差を取ると述べている",
     ],
+    rubricKeywords: [["区間確認"], ["原始関数"], ["上端-下端"]],
     solution:
       "積分区間を確認し、原始関数を求めて上端-下端の差を取る。",
     level: 3,
@@ -3034,6 +3044,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "周期ごとに同じ形が繰り返されると述べている",
       "横方向の伸縮と関連付けている",
     ],
+    rubricKeywords: [["周期", "繰り返し"], ["横方向", "伸縮"], ["係数"]],
     solution:
       "周期ごとに同じ形が繰り返される。係数があると横方向の伸縮が起き、周期が変化する。",
     level: 3,
@@ -3047,6 +3058,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "|zw|=|z||w| に触れている",
       "幾何学的意味に触れている",
     ],
+    rubricKeywords: [["|zw|=|z||w|"], ["幾何学的", "距離"], ["倍率"]],
     solution:
       "複素数の積では絶対値が掛け算される。距離（大きさ）が倍率として作用する。",
     level: 3,
@@ -3060,6 +3072,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "剰余条件を式にすることを述べている",
       "代入で条件を立てると述べている",
     ],
+    rubricKeywords: [["P(a)=r", "剰余定理"], ["条件式"], ["パラメータ"]],
     solution:
       "剰余が与えられる場合は $P(a)=r$ の形で条件式を作り、パラメータを決める。",
     level: 3,
@@ -3073,6 +3086,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "形を整えて既知の型にすることを述べている",
       "初期条件で定数を決めると述べている",
     ],
+    rubricKeywords: [["型に整える"], ["初期条件"], ["一般項"]],
     solution:
       "漸化式を既知の型に整えて一般項を求め、初期条件で定数を決める。",
     level: 3,
@@ -3205,6 +3219,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "判別式を $a$ について整理している",
       "範囲を結論として示している",
     ],
+    rubricKeywords: [["判別式", "常に非負"], ["a^2-a-3", "4a^2-4a-12"], ["範囲", "√13"]],
     solution:
       "判別式 $D=( -2a)^2-4(a+3)=4a^2-4a-12\\le 0$ より $a^2-a-3\\le 0$。したがって $\\frac{1-\\sqrt{13}}{2}\\le a\\le \\frac{1+\\sqrt{13}}{2}$。",
     level: 3,
@@ -3220,6 +3235,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "平方完成または軸で最小値を求める方針を示している",
       "最小値を結論として示している",
     ],
+    rubricKeywords: [["2点", "連立"], ["平方完成", "軸", "頂点"], ["最小値", "1-a"]],
     solution:
       "条件より $a+b+c=2$, $9a+3b+c=0$。差を取って $8a+2b=-2$ なので $4a+b=-1$、よって $b=-1-4a$。すると $c=2-a-b=3+3a$。よって $y=a(x^2-4x+3)-x+3+3a=a(x-2)^2+(-x+3-a)$. 頂点は $x=2$ で $y= a(0)+(-2+3-a)=1-a$。また $a>0$ のとき最小値は $1-a$。$a<0$ なら最大値なので不適、よって $a>0$ を満たすとき最小値は $1-a$。",
     level: 3,
@@ -3235,6 +3251,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "A,Bの条件を場合分けして数えている",
       "合計の選び方を結論として示している",
     ],
+    rubricKeywords: [["C固定", "必ず"], ["A,B", "同時", "場合分け"], ["合計", "通り"]],
     solution:
       "Cを固定し残り2人を選ぶ。Aを含む場合はBを除いて残り3人から1人選ぶので $3$ 通り。Aを含まない場合はBを含む/含まないで、A,Bを除いた3人から2人選ぶので $\\binom{3}{2}=3$ 通り。合計 $6$ 通り。",
     level: 3,
@@ -3250,6 +3267,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "全事象と条件事象を組合せで数えている",
       "計算結果を結論として示している",
     ],
+    rubricKeywords: [["条件付き確率", "P(A|B)"], ["組合せ", "C(5,2)", "C(3,2)"], ["1/3", "結論"]],
     solution:
       "全体は $\\binom{5}{2}=10$。2個とも赤は $\\binom{3}{2}=3$。少なくとも1個赤は $10-\\binom{2}{2}=9$。よって $\\frac{3}{9}=\\frac{1}{3}$。",
     level: 3,
@@ -3265,6 +3283,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "一般解を $x=x_0+5t, y=y_0-3t$ の形で示している",
       "整数解であることを明記している",
     ],
+    rubricKeywords: [["一次不定", "1組"], ["一般解", "x=", "y="], ["整数解", "t∈Z"]],
     solution:
       "$3(2)+5(-1)=1$ より $(x_0,y_0)=(2,-1)$。一般解は $x=2+5t, y=-1-3t$（$t\\in\\mathbb{Z}$）。",
     level: 3,
@@ -3280,6 +3299,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "対数の和を積にまとめて解いている",
       "解が定義域を満たすか確認している",
     ],
+    rubricKeywords: [["定義域", "x>3"], ["対数の和", "積"], ["x=2+", "確認"]],
     solution:
       "定義域は $x>3$。左辺は $\\log_a((x-1)(x-3))=1$ より $(x-1)(x-3)=a$。$x^2-4x+3-a=0$ を解いて $x=2\\pm\\sqrt{1+a}$。定義域より $x=2+\\sqrt{1+a}$。",
     level: 3,
@@ -3295,6 +3315,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "解の範囲を考えて列挙している",
       "結論を範囲内の角で示している",
     ],
+    rubricKeywords: [["合成", "√2"], ["解の範囲", "0≤θ<2π"], ["解", "結論"]],
     solution:
       "$\\sin\\theta+\\cos\\theta=\\sqrt{2}\\sin(\\theta+\\frac{\\pi}{4})=\\frac{1}{2}$ より $\\sin(\\theta+\\frac{\\pi}{4})=\\frac{1}{2\\sqrt{2}}$。$0\\le\\theta<2\\pi$ を満たす解を列挙する。",
     level: 3,
@@ -3310,6 +3331,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "区間で $f'(x)\\ge 0$ の条件を立てている",
       "範囲を結論として示している",
     ],
+    rubricKeywords: [["導関数"], [">=0", "区間"], ["m>=5", "結論"]],
     solution:
       "$f'(x)=3x^2-6x+(m-2)$。$[0,2]$ で最小は $x=1$ なので $f'(1)=m-5\\ge 0$ より $m\\ge 5$。",
     level: 3,
@@ -3340,6 +3362,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "予測値がデータの推定であることを述べている",
       "結論が簡潔に書けている",
     ],
+    rubricKeywords: [["回帰直線", "代入"], ["予測値", "推定"], ["29", "結論"]],
     solution:
       "$y=0.8\\cdot30+5=29$。$x=30$ のときの推定値は $29$ となる。",
     level: 3,
@@ -3355,6 +3378,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "符号に応じて積分を分割している",
       "面積として正の値で結論を示している",
     ],
+    rubricKeywords: [["交点", "√3", "区間分割"], ["符号", "分割積分"], ["面積", "正"]],
     solution:
       "$x^3-3x=0$ より $x=-\\sqrt{3},0,\\sqrt{3}$。符号が変わるので区間を分割し、面積は $2\\int_0^{\\sqrt{3}}(3x-x^3)dx$。",
     level: 3,
@@ -3370,6 +3394,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "平行条件 $f'(1)=f'(2)$ を立てている",
       "連立を解いて $a,b$ を結論として示している",
     ],
+    rubricKeywords: [["導関数", "傾き"], ["平行", "f(1)=f(2)"], ["a,b", "連立"]],
     solution:
       "$f'(x)=3x^2+2ax+b$。$f'(1)=3+2a+b$, $f'(2)=12+4a+b$ より $3+2a+b=12+4a+b$、$a=-\\frac{9}{2}$。",
     level: 3,
@@ -3385,6 +3410,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "2点の垂直二等分線になることを示している",
       "結論を直線の式で示している",
     ],
+    rubricKeywords: [["z=x+iy", "整理"], ["垂直二等分線", "等距離"], ["x-y=2", "直線"]],
     solution:
       "$z=x+iy$ とすると $(x-1)^2+(y-1)^2=(x-3)^2+(y+1)^2$。整理して $x-y=2$。",
     level: 3,
@@ -3400,6 +3426,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "距離公式 $\\frac{|ax_0+by_0+cz_0-d|}{\\sqrt{a^2+b^2+c^2}}$ を使っている",
       "数値を代入して結論を示している",
     ],
+    rubricKeywords: [["法線ベクトル", "距離公式"], ["ax0+by0+cz0-d"], ["5/3", "結論"]],
     solution:
       "距離は $\\frac{|1+4-6-4|}{\\sqrt{1^2+2^2+(-2)^2}}=\\frac{5}{3}$。",
     level: 3,
