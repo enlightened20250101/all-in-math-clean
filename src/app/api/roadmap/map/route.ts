@@ -106,7 +106,7 @@ export async function GET() {
         .select("skill_id, mastery_level")
         .eq("user_id", user.id)
         .in("skill_id", showSkillIds);
-      (masteryRows || []).forEach(m => mastery.set(m.skill_id, m.mastery_level ?? 0));
+      (masteryRows || []).forEach((m: any) => mastery.set(m.skill_id, m.mastery_level ?? 0));
     }
 
     // 8) depth（スタートからの距離）
