@@ -80,6 +80,7 @@ export default function WriteupClient({ topicTitle, topicId }: WriteupClientProp
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [lastSavedAt, setLastSavedAt] = useState<string | null>(null);
+  const [submitNotice, setSubmitNotice] = useState<string | null>(null);
   const [historyFilter, setHistoryFilter] = useState<"all" | "topic">("all");
   const [orderMode, setOrderMode] = useState<"recommended" | "shuffle">("recommended");
   const [solutionView, setSolutionView] = useState<"full" | "steps">("full");
@@ -151,26 +152,34 @@ export default function WriteupClient({ topicTitle, topicId }: WriteupClientProp
   const draftKey = `${DRAFT_KEY_PREFIX}:${topicId ?? "common"}:${activeProblem?.id ?? "default"}`;
 
   function handleSubmit() {
-    const newEntry: WriteupEntry = {
-      id: editingId ?? crypto.randomUUID(),
-      problemId: activeProblem?.id,
-      topicId,
-      topicTitle,
-      problemTitle: activeProblem?.title,
-      mode,
-      summary,
-      steps: { plan, work, conclusion },
-      imageDataUrl: imagePreview,
-      createdAt: new Date().toISOString(),
-    };
-    const filtered = entries.filter((entry) => entry.id !== newEntry.id);
-    const next = [newEntry, ...filtered];
-    setEntries(next);
-    saveEntries(next);
-    setEditingId(null);
-    setImagePreview(null);
-    if (typeof window !== "undefined") {
-      window.localStorage.removeItem(draftKey);
+    try {
+      const fallbackId = `${Date.now()}-${Math.random().toString(16).slice(2, 8)}`;
+      const newEntry: WriteupEntry = {
+        id: editingId ?? globalThis.crypto?.randomUUID?.() ?? fallbackId,
+        problemId: activeProblem?.id,
+        topicId,
+        topicTitle,
+        problemTitle: activeProblem?.title,
+        mode,
+        summary,
+        steps: { plan, work, conclusion },
+        imageDataUrl: imagePreview,
+        createdAt: new Date().toISOString(),
+      };
+      const filtered = entries.filter((entry) => entry.id !== newEntry.id);
+      const next = [newEntry, ...filtered];
+      setEntries(next);
+      saveEntries(next);
+      setEditingId(null);
+      setImagePreview(null);
+      if (typeof window !== "undefined") {
+        window.localStorage.removeItem(draftKey);
+      }
+      setSubmitNotice("保存しました");
+      window.setTimeout(() => setSubmitNotice(null), 1800);
+    } catch {
+      setSubmitNotice("保存に失敗しました。もう一度お試しください。");
+      window.setTimeout(() => setSubmitNotice(null), 2200);
     }
   }
 
@@ -455,6 +464,9 @@ export default function WriteupClient({ topicTitle, topicId }: WriteupClientProp
             >
               {editingId ? "編集内容を保存" : "提出して保存する"}
             </button>
+            {submitNotice ? (
+              <div className="text-[11px] text-slate-500">{submitNotice}</div>
+            ) : null}
             <button
               type="button"
               onClick={clearForm}

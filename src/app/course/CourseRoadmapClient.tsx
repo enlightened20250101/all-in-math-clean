@@ -729,15 +729,19 @@ export default function CourseRoadmapClient() {
     if (!applyTodayFocus || !applyTodayFocus.length) return "";
     const first = applyTodayFocus[0];
     if (lockedSet.has(first.id)) return "";
-    return `/course/practice/session?topic=${encodeURIComponent(first.id)}&mode=review`;
-  }, [applyTodayFocus, lockedSet]);
+    return `/course/practice/session?topic=${encodeURIComponent(first.id)}&mode=review&course=${encodeURIComponent(
+      settings.courseId
+    )}`;
+  }, [applyTodayFocus, lockedSet, settings.courseId]);
 
   const todayQuickHref = useMemo(() => {
     if (!applyTodayFocus || !applyTodayFocus.length) return "";
     const first = applyTodayFocus[0];
     if (lockedSet.has(first.id)) return "";
-    return `/course/practice/session?topic=${encodeURIComponent(first.id)}&mode=review&limit=3`;
-  }, [applyTodayFocus, lockedSet]);
+    return `/course/practice/session?topic=${encodeURIComponent(first.id)}&mode=review&limit=3&course=${encodeURIComponent(
+      settings.courseId
+    )}`;
+  }, [applyTodayFocus, lockedSet, settings.courseId]);
 
   const todayPrereqHref = useMemo(() => {
     if (!applyTodayFocus || !applyTodayFocus.length) return "";
