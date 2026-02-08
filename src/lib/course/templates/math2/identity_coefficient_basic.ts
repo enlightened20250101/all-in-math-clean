@@ -33,7 +33,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const params = buildParams();
       const poly = texPoly2(params.p, params.q, params.r);
-      const statement = `恒等式 $(${poly})(x-2)\\equiv ax^3+\\cdots$ が成り立つとき、$a$ を求めよ。`;
+      const statement = `面積の式を整理して恒等式 $(${poly})(x-2)\\equiv ax^3+\\cdots$ が成り立つとき、$a$ を求めよ。`;
       return {
         templateId: id,
         statement,

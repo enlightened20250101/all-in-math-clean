@@ -54,7 +54,7 @@ function buildExpTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const params = buildExpParams();
       const statement =
-        `ある倍率の計算として次を求めよ。\\n\\n$$${texPow(String(params.a), params.n)}$$`;
+        `成長倍率の計算として次を求めよ。\\n\\n$$${texPow(String(params.a), params.n)}$$`;
       return {
         templateId: id,
         statement,

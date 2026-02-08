@@ -26,7 +26,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const cTerm = texConst(params.c);
       const quad = `${aTerm} + bx${cTerm ? ` ${cTerm}` : ""}`;
       const rhs = `${texTerm(params.a, "x^3", true)} ${texTerm(params.k, "x^2", false)}`;
-      const statement = `(x+1)(${quad})\\equiv ${rhs}+\\cdots が成り立つとき、$b$ を求めよ。`;
+      const statement = `面積の式を整理して $(x+1)(${quad})\\equiv ${rhs}+\\cdots が成り立つとき、$b$ を求めよ。`;
       return {
         templateId: id,
         statement,

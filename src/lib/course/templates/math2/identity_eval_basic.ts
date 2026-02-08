@@ -26,7 +26,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `恒等式 $(x+y)^2+(x-y)^2=2(x^2+y^2)$ が成り立つとき、$x=${params.x},y=${params.y}$ の値を求めよ。`;
+      const statement = `距離の計算で現れる恒等式 $(x+y)^2+(x-y)^2=2(x^2+y^2)$ が成り立つとき、$x=${params.x},y=${params.y}$ の値を求めよ。`;
       return {
         templateId: id,
         statement,

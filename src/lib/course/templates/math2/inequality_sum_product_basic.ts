@@ -21,7 +21,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `正の数 $x,y$ が $x+y=${params.s}$ を満たすとき、$xy$ の最大値を求めよ。`;
+      const statement = `長方形の縦横の長さを正の数 $x,y$ とし、周の長さが一定で $x+y=${params.s}$ を満たすとき、面積 $xy$ の最大値を求めよ。`;
       return {
         templateId: id,
         statement,

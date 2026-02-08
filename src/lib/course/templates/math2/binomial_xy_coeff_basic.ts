@@ -37,7 +37,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const params = buildParams();
       const statement =
-        `展開式 $(x+y)^{${params.n}}$ における $x^{${params.k}}y^{${params.n - params.k}}$ の係数を求めよ（展開係数）。`;
+        `組合せの数え上げとして、展開式 $(x+y)^{${params.n}}$ における $x^{${params.k}}y^{${params.n - params.k}}$ の係数を求めよ。`;
       return {
         templateId: id,
         statement,
