@@ -77,7 +77,7 @@ export const highDifficultyTemplates: QuestionTemplate[] = [
   {
     meta: {
       id: "hd_sequence_recurrence_1",
-      topicId: "sequence_recurrence_basic",
+      topicId: "seq_recurrence_basic",
       title: "漸化式（難）",
       difficulty: 3,
       tags: ["recurrence"],
