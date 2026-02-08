@@ -35,7 +35,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const params = buildParams();
       const statement =
-        `一定の差で増える記録を考える。` +
+        `調査で得た記録が一定の差で増えるとする。` +
         `$a_1=${params.a1}$, $a_4=${params.a4}$ のとき、公差 $d$ を求めよ。`;
       return {
         templateId: id,
