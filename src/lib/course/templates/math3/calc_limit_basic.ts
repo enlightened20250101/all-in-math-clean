@@ -96,7 +96,7 @@ const extraLimitTemplates: QuestionTemplate[] = Array.from({ length: 30 }, (_, i
         const fk = a * k * k + b * k + c;
         return {
           templateId,
-          statement: `次の極限を求めよ。\\n\\n$$\\lim_{x\\to ${k}} \\frac{${subtractConst(fx, fk)}}{${xMinus(k)}}$$`,
+          statement: `変化率の極限として、次の極限を求めよ。\\n\\n$$\\lim_{x\\to ${k}} \\frac{${subtractConst(fx, fk)}}{${xMinus(k)}}$$`,
           answerKind: "numeric",
           params: { k, value: 2 * a * k + b },
         };
@@ -106,7 +106,7 @@ const extraLimitTemplates: QuestionTemplate[] = Array.from({ length: 30 }, (_, i
         const { k } = params;
         return {
           templateId,
-          statement: `次の極限を求めよ。\\n\\n$$\\lim_{x\\to ${k}} \\frac{x^3-${wrapNum(k)}^3}{${xMinus(k)}}$$`,
+          statement: `変化率の極限として、次の極限を求めよ。\\n\\n$$\\lim_{x\\to ${k}} \\frac{x^3-${wrapNum(k)}^3}{${xMinus(k)}}$$`,
           answerKind: "numeric",
           params,
         };
@@ -117,7 +117,7 @@ const extraLimitTemplates: QuestionTemplate[] = Array.from({ length: 30 }, (_, i
       const fk = a * k * k + b * k + c;
       return {
         templateId,
-        statement: `次の極限を求めよ。\\n\\n$$\\lim_{x\\to ${k}} \\frac{${subtractConst(fx, fk)}}{${xMinus(k)}}$$`,
+        statement: `変化率の極限として、次の極限を求めよ。\\n\\n$$\\lim_{x\\to ${k}} \\frac{${subtractConst(fx, fk)}}{${xMinus(k)}}$$`,
         answerKind: "numeric",
         params,
       };
@@ -153,7 +153,7 @@ export const calcLimitBasicTemplates: QuestionTemplate[] = [
       const { k } = params;
       return {
         templateId: "calc_limit_basic_1",
-        statement: `次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} \\frac{x^2-${k}^2}{x-${k}}$$`,
+        statement: `変化率の極限として、次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} \\frac{x^2-${k}^2}{x-${k}}$$`,
         answerKind: "numeric",
         params,
       };
@@ -190,7 +190,7 @@ $$
       const fx = texLinear(a, b);
       return {
         templateId: "calc_limit_basic_2",
-        statement: `次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} (${fx})$$`,
+        statement: `変化率の極限として、次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} (${fx})$$`,
         answerKind: "numeric",
         params,
       };
@@ -225,7 +225,7 @@ $$
       const numerator = texPoly2(1, -k, 0);
       return {
         templateId: "calc_limit_basic_3",
-        statement: `次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} \\frac{${numerator}}{${xMinus(k)}}$$`,
+        statement: `変化率の極限として、次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} \\frac{${numerator}}{${xMinus(k)}}$$`,
         answerKind: "numeric",
         params,
       };
@@ -265,7 +265,7 @@ $$
       const fx = texLinear(a + 1, b);
       return {
         templateId: "calc_limit_basic_4",
-        statement: `次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} \\left(${fx}\\right)$$`,
+        statement: `変化率の極限として、次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} \\left(${fx}\\right)$$`,
         answerKind: "numeric",
         params,
       };
@@ -301,7 +301,7 @@ $$
       const { k } = params;
       return {
         templateId: "calc_limit_basic_5",
-        statement: `次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} \\frac{x^2-${k}^2}{x-${k}}$$`,
+        statement: `変化率の極限として、次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} \\frac{x^2-${k}^2}{x-${k}}$$`,
         answerKind: "numeric",
         params,
       };
@@ -338,7 +338,7 @@ $$
       const fx = texLinear(a, b + a);
       return {
         templateId: "calc_limit_basic_6",
-        statement: `次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} \\left(${fx}\\right)$$`,
+        statement: `変化率の極限として、次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} \\left(${fx}\\right)$$`,
         answerKind: "numeric",
         params,
       };
@@ -375,7 +375,7 @@ $$
       const numerator = texPoly2(1, -k, 0);
       return {
         templateId: "calc_limit_basic_7",
-        statement: `次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} \\frac{${numerator}}{${xMinus(k)}}$$`,
+        statement: `変化率の極限として、次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} \\frac{${numerator}}{${xMinus(k)}}$$`,
         answerKind: "numeric",
         params,
       };
@@ -413,7 +413,7 @@ $$
       const fx = texLinear(a, 0);
       return {
         templateId: "calc_limit_basic_8",
-        statement: `次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} \\left(${fx}\\right)$$`,
+        statement: `変化率の極限として、次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} \\left(${fx}\\right)$$`,
         answerKind: "numeric",
         params,
       };
@@ -449,7 +449,7 @@ $$
       const { k } = params;
       return {
         templateId: "calc_limit_basic_9",
-        statement: `次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} \\frac{x^2-${k}^2}{x-${k}}$$`,
+        statement: `変化率の極限として、次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} \\frac{x^2-${k}^2}{x-${k}}$$`,
         answerKind: "numeric",
         params,
       };
@@ -486,7 +486,7 @@ $$
       const fx = texLinear(a, 2 * b);
       return {
         templateId: "calc_limit_basic_10",
-        statement: `次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} \\left(${fx}\\right)$$`,
+        statement: `変化率の極限として、次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} \\left(${fx}\\right)$$`,
         answerKind: "numeric",
         params,
       };
@@ -523,7 +523,7 @@ $$
       const fx = texPoly2(a, b, c);
       return {
         templateId: "calc_limit_basic_11",
-        statement: `次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} (${fx})$$`,
+        statement: `変化率の極限として、次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} (${fx})$$`,
         answerKind: "numeric",
         params,
       };
@@ -556,7 +556,7 @@ $$
       const k = pick([1, 2, -1, -2]);
       return {
         templateId: "calc_limit_basic_12",
-        statement: `次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} \\frac{${texLinear(a, 0)}}{x}$$`,
+        statement: `変化率の極限として、次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} \\frac{${texLinear(a, 0)}}{x}$$`,
         answerKind: "numeric",
         params: { a, k, value: a },
       };
@@ -589,7 +589,7 @@ $$
       const { k } = params;
       return {
         templateId: "calc_limit_basic_13",
-        statement: `次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} \\frac{x^2-${k}^2}{${xMinus(k)}}$$`,
+        statement: `変化率の極限として、次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} \\frac{x^2-${k}^2}{${xMinus(k)}}$$`,
         answerKind: "numeric",
         params,
       };
@@ -627,7 +627,7 @@ $$
       const numerator = texPoly2(a, -a * k, 0);
       return {
         templateId: "calc_limit_basic_14",
-        statement: `次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} \\frac{${numerator}}{${xMinus(k)}}$$`,
+        statement: `変化率の極限として、次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} \\frac{${numerator}}{${xMinus(k)}}$$`,
         answerKind: "numeric",
         params: { a, k, value },
       };
@@ -665,7 +665,7 @@ $$
       const fx = texLinear(a - 1, b);
       return {
         templateId: "calc_limit_basic_15",
-        statement: `次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} \\left(${fx}\\right)$$`,
+        statement: `変化率の極限として、次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} \\left(${fx}\\right)$$`,
         answerKind: "numeric",
         params,
       };
@@ -702,7 +702,7 @@ $$
       const fx = texLinear(a, b + a);
       return {
         templateId: "calc_limit_basic_16",
-        statement: `次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} \\left(${fx}\\right)$$`,
+        statement: `変化率の極限として、次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} \\left(${fx}\\right)$$`,
         answerKind: "numeric",
         params,
       };
@@ -739,7 +739,7 @@ $$
       const numerator = texPoly2(1, -k, 0);
       return {
         templateId: "calc_limit_basic_17",
-        statement: `次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} \\frac{${numerator}}{${xMinus(k)}}$$`,
+        statement: `変化率の極限として、次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} \\frac{${numerator}}{${xMinus(k)}}$$`,
         answerKind: "numeric",
         params,
       };
@@ -776,7 +776,7 @@ $$
       const b = pick([1, 2, -1, -2]);
       return {
         templateId: "calc_limit_basic_18",
-        statement: `次の極限を求めよ。\n\n$$\\lim_{x\\to 1} \\frac{${texLinear(a, b)}}{x}$$`,
+        statement: `変化率の極限として、次の極限を求めよ。\n\n$$\\lim_{x\\to 1} \\frac{${texLinear(a, b)}}{x}$$`,
         answerKind: "numeric",
         params: { a, b, value: a + b },
       };
@@ -810,7 +810,7 @@ $$
       const fx = texLinear(a, 2 * b);
       return {
         templateId: "calc_limit_basic_19",
-        statement: `次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} \\left(${fx}\\right)$$`,
+        statement: `変化率の極限として、次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} \\left(${fx}\\right)$$`,
         answerKind: "numeric",
         params,
       };
@@ -847,7 +847,7 @@ $$
       const fx = texPoly2(a, b, c);
       return {
         templateId: "calc_limit_basic_20",
-        statement: `次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} (${fx})$$`,
+        statement: `変化率の極限として、次の極限を求めよ。\n\n$$\\lim_{x\\to ${k}} (${fx})$$`,
         answerKind: "numeric",
         params,
       };
