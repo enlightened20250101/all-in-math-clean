@@ -170,7 +170,7 @@ $$
       const poly = texPoly2(a, b, c);
       return {
         templateId: "quad_min_value_unbounded_easy",
-        statement: `二次関数 $y = ${poly}$ の最小値を求めなさい。`,
+        statement: `放物線の谷の深さを求める。二次関数 $y = ${poly}$ の最小値を求めなさい。`,
         answerKind: "numeric",
         params: { a, b, c, q },
       };
@@ -198,7 +198,7 @@ $a>0$ なので頂点で最小値を取ります。最小値は ${params.q} で�
       const poly = texPoly2(a, b, c);
       return {
         templateId: "quad_max_value_unbounded_easy",
-        statement: `二次関数 $y = ${poly}$ の最大値を求めなさい。`,
+        statement: `放物線の頂点の高さを求める。二次関数 $y = ${poly}$ の最大値を求めなさい。`,
         answerKind: "numeric",
         params: { a, b, c, q },
       };
@@ -226,7 +226,7 @@ $a<0$ なので頂点で最大値を取ります。最大値は ${params.q} で�
       const form = texQuadraticVertex(a, p, q);
       return {
         templateId: "quad_min_x_vertex_form",
-        statement: `二次関数 $y = ${form}$ が最小値をとるときの $x$ の値を求めなさい。`,
+        statement: `頂点の $x$ 座標を求める。二次関数 $y = ${form}$ が最小値をとるときの $x$ の値を求めなさい。`,
         answerKind: "numeric",
         params: { a, p, q },
       };
@@ -256,7 +256,7 @@ $y=${form}$ の軸は $${axis}=0$ なので、最小になる$x$は ${params.p} 
       const form = texQuadraticVertex(a, p, q);
       return {
         templateId: "quad_max_x_vertex_form",
-        statement: `二次関数 $y = ${form}$ が最大値をとるときの $x$ の値を求めなさい。`,
+        statement: `頂点の $x$ 座標を求める。二次関数 $y = ${form}$ が最大値をとるときの $x$ の値を求めなさい。`,
         answerKind: "numeric",
         params: { a, p, q },
       };
@@ -288,7 +288,7 @@ $y=${form}$ の軸は $${axis}=0$ なので、最大になる$x$は ${params.p} 
       const poly = texPoly2(a, b, c);
       return {
         templateId: "quad_min_value_interval_inside",
-        statement: `二次関数 $y = ${poly}$ について、区間 $${L} \\le x \\le ${R}$ での最小値を求めなさい。`,
+        statement: `区間内に頂点がある場合の最小値を求める。二次関数 $y = ${poly}$ について、区間 $${L} \\le x \\le ${R}$ での最小値を求めなさい。`,
         answerKind: "numeric",
         params: { a, b, c, p, q, L, R },
       };
@@ -318,7 +318,7 @@ $y=${form}$ の軸は $${axis}=0$ なので、最大になる$x$は ${params.p} 
       const poly = texPoly2(a, b, c);
       return {
         templateId: "quad_max_value_interval_inside",
-        statement: `二次関数 $y = ${poly}$ について、区間 $${L} \\le x \\le ${R}$ での最大値を求めなさい。`,
+        statement: `区間内に頂点がある場合の最大値を求める。二次関数 $y = ${poly}$ について、区間 $${L} \\le x \\le ${R}$ での最大値を求めなさい。`,
         answerKind: "numeric",
         params: { a, b, c, p, q, L, R },
       };
@@ -349,7 +349,7 @@ $y=${form}$ の軸は $${axis}=0$ なので、最大になる$x$は ${params.p} 
       const yL = yAt(a, b, c, L);
       return {
         templateId: "quad_min_value_interval_left",
-        statement: `二次関数 $y = ${poly}$ について、区間 $${L} \\le x \\le ${R}$ での最小値を求めなさい。`,
+        statement: `頂点が区間の左にある場合の最小値を求める。二次関数 $y = ${poly}$ について、区間 $${L} \\le x \\le ${R}$ での最小値を求めなさい。`,
         answerKind: "numeric",
         params: { a, b, c, p, L, R, yL },
       };
@@ -381,7 +381,7 @@ $y=${form}$ の軸は $${axis}=0$ なので、最大になる$x$は ${params.p} 
       const yR = yAt(a, b, c, R);
       return {
         templateId: "quad_min_value_interval_right",
-        statement: `二次関数 $y = ${poly}$ について、区間 $${L} \\le x \\le ${R}$ での最小値を求めなさい。`,
+        statement: `頂点が区間の右にある場合の最小値を求める。二次関数 $y = ${poly}$ について、区間 $${L} \\le x \\le ${R}$ での最小値を求めなさい。`,
         answerKind: "numeric",
         params: { a, b, c, p, L, R, yR },
       };
@@ -413,7 +413,7 @@ $y=${form}$ の軸は $${axis}=0$ なので、最大になる$x$は ${params.p} 
       const yL = yAt(a, b, c, L);
       return {
         templateId: "quad_max_value_interval_left",
-        statement: `二次関数 $y = ${poly}$ について、区間 $${L} \\le x \\le ${R}$ での最大値を求めなさい。`,
+        statement: `頂点が区間の左にある場合の最大値を求める。二次関数 $y = ${poly}$ について、区間 $${L} \\le x \\le ${R}$ での最大値を求めなさい。`,
         answerKind: "numeric",
         params: { a, b, c, p, L, R, yL },
       };
@@ -445,7 +445,7 @@ $y=${form}$ の軸は $${axis}=0$ なので、最大になる$x$は ${params.p} 
       const yR = yAt(a, b, c, R);
       return {
         templateId: "quad_max_value_interval_right",
-        statement: `二次関数 $y = ${poly}$ について、区間 $${L} \\le x \\le ${R}$ での最大値を求めなさい。`,
+        statement: `頂点が区間の右にある場合の最大値を求める。二次関数 $y = ${poly}$ について、区間 $${L} \\le x \\le ${R}$ での最大値を求めなさい。`,
         answerKind: "numeric",
         params: { a, b, c, p, L, R, yR },
       };
@@ -476,7 +476,7 @@ $y=${form}$ の軸は $${axis}=0$ なので、最大になる$x$は ${params.p} 
       const poly = texPoly2(a, b, c);
       return {
         templateId: "quad_min_x_interval",
-        statement: `二次関数 $y = ${poly}$ について、区間 $${L} \\le x \\le ${R}$ で最小値をとる $x$ を求めなさい。`,
+        statement: `区間内で最小となる $x$ を求める。二次関数 $y = ${poly}$ について、区間 $${L} \\le x \\le ${R}$ で最小値をとる $x$ を求めなさい。`,
         answerKind: "numeric",
         params: { a, b, c, p, L, R },
       };
@@ -506,7 +506,7 @@ $y=${form}$ の軸は $${axis}=0$ なので、最大になる$x$は ${params.p} 
       const poly = texPoly2(a, b, c);
       return {
         templateId: "quad_max_x_interval",
-        statement: `二次関数 $y = ${poly}$ について、区間 $${L} \\le x \\le ${R}$ で最大値をとる $x$ を求めなさい。`,
+        statement: `区間内で最大となる $x$ を求める。二次関数 $y = ${poly}$ について、区間 $${L} \\le x \\le ${R}$ で最大値をとる $x$ を求めなさい。`,
         answerKind: "numeric",
         params: { a, b, c, p, L, R },
       };
@@ -536,7 +536,7 @@ $y=${form}$ の軸は $${axis}=0$ なので、最大になる$x$は ${params.p} 
       const yk = yAt(a, b, c, k);
       return {
         templateId: "quad_min_value_halfline",
-        statement: `二次関数 $y = ${poly}$ について、$x \\ge ${k}$ のときの最小値を求めなさい。`,
+        statement: `右側の半直線での最小値を求める。二次関数 $y = ${poly}$ について、$x \\ge ${k}$ のときの最小値を求めなさい。`,
         answerKind: "numeric",
         params: { a, b, c, p, k, yk },
       };
@@ -567,7 +567,7 @@ $y=${form}$ の軸は $${axis}=0$ なので、最大になる$x$は ${params.p} 
       const yk = yAt(a, b, c, k);
       return {
         templateId: "quad_max_value_halfline",
-        statement: `二次関数 $y = ${poly}$ について、$x \\le ${k}$ のときの最大値を求めなさい。`,
+        statement: `左側の半直線での最大値を求める。二次関数 $y = ${poly}$ について、$x \\le ${k}$ のときの最大値を求めなさい。`,
         answerKind: "numeric",
         params: { a, b, c, p, k, yk },
       };
@@ -596,7 +596,7 @@ $y=${form}$ の軸は $${axis}=0$ なので、最大になる$x$は ${params.p} 
       const form = texQuadraticVertex(a, p, q);
       return {
         templateId: "quad_min_value_vertex_form",
-        statement: `二次関数 $y = ${form}$ の最小値を求めなさい。`,
+        statement: `頂点形式から最小値を読み取る。二次関数 $y = ${form}$ の最小値を求めなさい。`,
         answerKind: "numeric",
         params: { a, p, q },
       };
@@ -631,7 +631,7 @@ const extraMaxMinTemplates: QuestionTemplate[] = Array.from({ length: 32 }, (_, 
         const poly = texPoly2(a, b, c);
         return {
           templateId: id,
-          statement: `二次関数 $y = ${poly}$ の最小値を求めなさい。`,
+          statement: `谷の深さ（最小値）を求める。二次関数 $y = ${poly}$ の最小値を求めなさい。`,
           answerKind: "numeric",
           params: { a, b, c, q },
         };
@@ -661,7 +661,7 @@ $a>0$ なので頂点で最小値を取ります。答えは ${(params as any).q
         const poly = texPoly2(a, b, c);
         return {
           templateId: id,
-          statement: `二次関数 $y = ${poly}$ の最大値を求めなさい。`,
+          statement: `山の高さ（最大値）を求める。二次関数 $y = ${poly}$ の最大値を求めなさい。`,
           answerKind: "numeric",
           params: { a, b, c, q },
         };
@@ -690,13 +690,13 @@ $a<0$ なので頂点で最大値を取ります。答えは ${(params as any).q
       const L = p - 3;
       const R = p + 1;
       const poly = texPoly2(a, b, c);
-      return {
-        templateId: id,
-        statement: `二次関数 $y = ${poly}$ について、区間 $${L} \\le x \\le ${R}$ での最小値を求めなさい。`,
-        answerKind: "numeric",
-        params: { a, b, c, p, q, L, R },
-      };
-    },
+        return {
+          templateId: id,
+          statement: `区間内の最小値を比較する。二次関数 $y = ${poly}$ について、区間 $${L} \\le x \\le ${R}$ での最小値を求めなさい。`,
+          answerKind: "numeric",
+          params: { a, b, c, p, q, L, R },
+        };
+      },
     grade(params, userAnswer) {
       return gradeNumeric(userAnswer, (params as any).q);
     },
