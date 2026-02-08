@@ -65,6 +65,20 @@ const CASES: Case[] = [
     answer: 120,
     explain: `### この問題の解説\n$6P3=6\\cdot5\\cdot4=120$。`,
   },
+  {
+    id: "perm_word_5",
+    title: "席順（6人）",
+    statement: `6人が横一列に並ぶときの並べ方は何通りか。`,
+    answer: 720,
+    explain: `### この問題の解説\n$6! = 720$。`,
+  },
+  {
+    id: "perm_word_6",
+    title: "番号札",
+    statement: `0〜5の数字を重複なく使って3桁の整数を作るとき、何通りあるか。`,
+    answer: 100,
+    explain: `### この問題の解説\n百の位は1〜5の5通り、残りは5通り・4通り。$5\\cdot5\\cdot4=100$。`,
+  },
 ];
 
 export const combiPermutationVariantTemplates: QuestionTemplate[] = CASES.map(buildTemplate);

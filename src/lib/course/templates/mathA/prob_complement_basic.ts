@@ -160,6 +160,36 @@ $$
 `,
   },
   {
+    id: "prob_comp_cards_1",
+    title: "カード：少なくとも1枚A",
+    statement: `Aが2枚、Bが4枚ある6枚のカードから2枚引く（戻さない）。次の確率を求めよ。\n\n$$\n${texProb("\\text{少なくとも1枚A}")}\n$$`,
+    correct: texFrac(3, 5),
+    choices: [texFrac(3, 5), texFrac(2, 5), texFrac(1, 3), texFrac(4, 5)],
+    explain: `
+### この問題の解説
+補集合は「2枚ともB」。$\\frac{4}{6}\\cdot\\frac{3}{5}=\\frac{2}{5}$ なので
+
+$$
+${texProb("\\text{少なくとも1枚A}")} = 1 - \\frac{2}{5} = \\frac{3}{5}
+$$
+`,
+  },
+  {
+    id: "prob_comp_die_4",
+    title: "サイコロ3回：1が出ない",
+    statement: `サイコロを3回投げる。次の確率を求めよ。\n\n$$\n${texProb("\\text{1が1回も出ない}")}\n$$`,
+    correct: texFrac(125, 216),
+    choices: [texFrac(125, 216), texFrac(91, 216), texFrac(5, 6), texFrac(4, 5)],
+    explain: `
+### この問題の解説
+1以外が出る確率は $\\frac{5}{6}$。独立より
+
+$$
+${texProb("\\text{1が1回も出ない}")} = \\left(\\frac{5}{6}\\right)^3 = \\frac{125}{216}
+$$
+`,
+  },
+  {
     id: "prob_comp_die_4",
     title: "サイコロ2回：1回も1が出ない",
     statement: `サイコロを2回投げる。次の確率を求めよ。\n\n$$\n${texProb("\\text{1が1回も出ない}")}\n$$`,

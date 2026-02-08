@@ -7,6 +7,7 @@ type PermCase = {
   title: string;
   n: number;
   r: number;
+  context?: string;
   difficulty: 1 | 2 | 3;
 };
 
@@ -29,9 +30,10 @@ function buildTemplate(c: PermCase): QuestionTemplate {
       tags: ["combinatorics", "permutation"],
     },
     generate() {
+      const lead = c.context ? `${c.context}\n\n` : "";
       return {
         templateId: c.id,
-        statement: `順列 ${c.n}P${c.r} の値を求めよ。`,
+        statement: `${lead}順列 ${c.n}P${c.r} の値を求めよ。`,
         answerKind: "numeric",
         params: {},
       };
@@ -46,9 +48,9 @@ function buildTemplate(c: PermCase): QuestionTemplate {
 }
 
 const CASES: PermCase[] = [
-  { id: "perm_1", title: "順列 1", n: 5, r: 2, difficulty: 1 },
-  { id: "perm_2", title: "順列 2", n: 6, r: 3, difficulty: 1 },
-  { id: "perm_3", title: "順列 3", n: 7, r: 2, difficulty: 1 },
+  { id: "perm_1", title: "順列 1", n: 5, r: 2, context: "5人から2人を選び順に並べるときの通り数に対応する。", difficulty: 1 },
+  { id: "perm_2", title: "順列 2", n: 6, r: 3, context: "6人から3人を選び順に並べるときの通り数に対応する。", difficulty: 1 },
+  { id: "perm_3", title: "順列 3", n: 7, r: 2, context: "7冊の本から2冊を順に並べるときの通り数に対応する。", difficulty: 1 },
   { id: "perm_4", title: "順列 4", n: 8, r: 3, difficulty: 1 },
   { id: "perm_5", title: "順列 5", n: 9, r: 4, difficulty: 1 },
   { id: "perm_6", title: "順列 6", n: 4, r: 3, difficulty: 1 },
