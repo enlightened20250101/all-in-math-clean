@@ -166,6 +166,79 @@ $$
 `;
     },
   },
+  {
+    meta: {
+      id: "combi_word_committee_1",
+      topicId: "combi_basic",
+      title: "委員選び",
+      difficulty: 1,
+      tags: ["combination"],
+    },
+    generate() {
+      const n = pick([6, 7, 8, 9, 10]);
+      return {
+        templateId: "combi_word_committee_1",
+        statement: `${n}人の中から委員を2人選ぶ方法は何通りか。`,
+        answerKind: "numeric",
+        params: { n },
+      };
+    },
+    grade(params, userAnswer) {
+      return gradeNumeric(userAnswer, comb(params.n, 2));
+    },
+    explain(params) {
+      return `### この問題の解説\n順序を区別しないので $\\binom{${params.n}}{2}$。`;
+    },
+  },
+  {
+    meta: {
+      id: "combi_word_seating_1",
+      topicId: "combi_basic",
+      title: "並べ方",
+      difficulty: 1,
+      tags: ["permutation"],
+    },
+    generate() {
+      const n = pick([5, 6, 7]);
+      return {
+        templateId: "combi_word_seating_1",
+        statement: `${n}人の中から3人を選び、前から順に並べる方法は何通りか。`,
+        answerKind: "numeric",
+        params: { n },
+      };
+    },
+    grade(params, userAnswer) {
+      return gradeNumeric(userAnswer, perm(params.n, 3));
+    },
+    explain(params) {
+      return `### この問題の解説\n順序を区別するので ${params.n}P3。`;
+    },
+  },
+  {
+    meta: {
+      id: "combi_word_sum_rule_1",
+      topicId: "combi_basic",
+      title: "和の法則",
+      difficulty: 1,
+      tags: ["rule"],
+    },
+    generate() {
+      const a = randInt(3, 8);
+      const b = randInt(3, 8);
+      return {
+        templateId: "combi_word_sum_rule_1",
+        statement: `赤い鉛筆が ${a} 本、青い鉛筆が ${b} 本ある。どれか1本選ぶとき、何通りか。`,
+        answerKind: "numeric",
+        params: { a, b },
+      };
+    },
+    grade(params, userAnswer) {
+      return gradeNumeric(userAnswer, params.a + params.b);
+    },
+    explain(params) {
+      return `### この問題の解説\n赤か青のいずれかなので和の法則。${params.a}+${params.b}通り。`;
+    },
+  },
 
   {
     meta: {

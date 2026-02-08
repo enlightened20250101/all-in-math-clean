@@ -1011,6 +1011,36 @@ ${texProb("S\\ge 8")} = \\frac{15}{36} = \\frac{5}{12}
 $$
 `,
   },
+  {
+    id: "prob_basic_ball_red",
+    title: "玉：赤が出る",
+    statement: `赤玉が3個、白玉が2個入った袋から1個取り出す。次の確率を求めよ。\n\n$$\n${texProb("\\text{赤}")}\n$$`,
+    correct: texFrac(3, 5),
+    choices: [texFrac(3, 5), texFrac(2, 5), texFrac(1, 2), texFrac(1, 3)],
+    explain: `
+### この問題の解説
+全体5個のうち赤は3個です。
+
+$$
+${texProb("\\text{赤}")} = \\frac{3}{5}
+$$
+`,
+  },
+  {
+    id: "prob_basic_ball_blue",
+    title: "玉：青が出る",
+    statement: `青玉が1個、黄玉が4個入った袋から1個取り出す。次の確率を求めよ。\n\n$$\n${texProb("\\text{青}")}\n$$`,
+    correct: texFrac(1, 5),
+    choices: [texFrac(1, 5), texFrac(4, 5), texFrac(1, 4), texFrac(1, 6)],
+    explain: `
+### この問題の解説
+全体5個のうち青は1個です。
+
+$$
+${texProb("\\text{青}")} = \\frac{1}{5}
+$$
+`,
+  },
 ];
 
 export const probBasicTemplates: QuestionTemplate[] = CASES.map(buildTemplate);
