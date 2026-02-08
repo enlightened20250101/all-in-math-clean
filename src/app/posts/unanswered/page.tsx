@@ -6,7 +6,7 @@ import { supabaseServerReadOnly } from "@/lib/supabaseServer";
 export default async function UnansweredPage() {
   const sb = await supabaseServerReadOnly();
   const { data: stats } = await sb.from("posts_stats").select("id").eq("solved", false);
-  const ids = (stats ?? []).map(s => s.id);
+  const ids = (stats ?? []).map((s: any) => s.id);
   const { data: rows } = ids.length
     ? await sb.from("posts").select("id,title,tags,level,created_at").in("id", ids).order("created_at", { ascending: false })
     : { data: [] as any[] };
