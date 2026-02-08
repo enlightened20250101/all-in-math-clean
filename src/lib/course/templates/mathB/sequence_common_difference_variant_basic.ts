@@ -23,7 +23,7 @@ function buildTemplate(c: Case): QuestionTemplate {
       return {
         templateId: c.id,
         statement:
-          `一定の差で増減する量を考える。` +
+          `測定で得た等差数列として、一定の差で増減する量を考える。` +
           `$a_1=${c.a1}$, $a_5=${c.a5}$ のとき、公差 $d$ を求めよ。`,
         answerKind: "numeric",
         params: { d },

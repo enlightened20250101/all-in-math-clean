@@ -33,7 +33,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const params = buildParams();
       const at2 = texTerm(params.a, "t^2", true);
       const line = at2.startsWith("-") ? `ty=x ${at2}` : `ty=x+${at2}`;
-      const statement = `放物線 $y^2=4${params.a}x$ の接線 $${line}$ について、$x$ 切片を求めよ。（$t=${params.t}$）`;
+      const statement = `測定で得た放物線として、放物線 $y^2=4${params.a}x$ の接線 $${line}$ について、$x$ 切片を求めよ。（$t=${params.t}$）`;
       return {
         templateId: id,
         statement,

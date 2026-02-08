@@ -37,7 +37,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `$i^{${params.n}}$ の実部を求めよ。`;
+      const statement = `回転操作として、$i^{${params.n}}$ の実部を求めよ。`;
       return {
         templateId: id,
         statement,

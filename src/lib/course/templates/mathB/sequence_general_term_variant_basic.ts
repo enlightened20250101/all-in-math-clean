@@ -24,7 +24,7 @@ function buildTemplate(c: Case): QuestionTemplate {
       return {
         templateId: c.id,
         statement:
-          `一定の差で増減する記録を等差数列とみなす。` +
+          `調査で得た数列として、一定の差で増減する記録を等差数列とみなす。` +
           `$a_1=${c.a1}$, 公差 $d=${c.d}$ のとき、$a_${c.n}$ を求めよ。`,
         answerKind: "numeric",
         params: { an },

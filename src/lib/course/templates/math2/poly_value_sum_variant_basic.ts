@@ -33,7 +33,7 @@ function buildTemplate(c: ValueCase): QuestionTemplate {
     generate() {
       return {
         templateId: c.id,
-        statement: `多項式 $f(x)=${poly}$ について $f(${c.x1})+f(${c.x2})$ を求めよ。`,
+        statement: `費用の条件から得た多項式として、多項式 $f(x)=${poly}$ について $f(${c.x1})+f(${c.x2})$ を求めよ。`,
         answerKind: "numeric",
         params: { a: c.a, b: c.b, c: c.c, x1: c.x1, x2: c.x2, val },
       };

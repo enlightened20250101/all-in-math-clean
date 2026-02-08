@@ -27,7 +27,7 @@ function buildTemplate(c: RootCase): QuestionTemplate {
     generate() {
       return {
         templateId: c.id,
-        statement: `二次方程式の解が $x=${c.r1},\\ x=${c.r2}$ で、最高次係数が ${c.a} のとき、定数項を求めよ。`,
+        statement: `面積条件から得た多項式として、二次方程式の解が $x=${c.r1},\\ x=${c.r2}$ で、最高次係数が ${c.a} のとき、定数項を求めよ。`,
         answerKind: "numeric",
         params: { a: c.a, r1: c.r1, r2: c.r2, constTerm },
       };
