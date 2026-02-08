@@ -23,7 +23,9 @@ function buildTemplate(c: Case): QuestionTemplate {
       const shift = texConst(c.d);
       return {
         templateId: c.id,
-        statement: `関数 $y=${aTerm}${shift ? ` ${shift}` : ""}$ の中線（平均値）を求めよ。`,
+        statement:
+          `1周期の平均的な高さを考える。` +
+          `関数 $y=${aTerm}${shift ? ` ${shift}` : ""}$ の中線（平均値）を求めよ。`,
         answerKind: "numeric",
         params: { d: c.d },
       };

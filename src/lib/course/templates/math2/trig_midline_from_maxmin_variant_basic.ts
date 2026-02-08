@@ -22,7 +22,7 @@ function buildTemplate(c: Case): QuestionTemplate {
     generate() {
       return {
         templateId: c.id,
-        statement: `三角関数のグラフの最大値が ${c.max}、最小値が ${c.min} のとき、中線（平均値）を求めよ。`,
+        statement: `観測された最大値が ${c.max}、最小値が ${c.min} のとき、中線（平均値）を求めよ。`,
         answerKind: "numeric",
         params: { mid },
       };

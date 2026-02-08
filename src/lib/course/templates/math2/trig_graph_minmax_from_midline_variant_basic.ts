@@ -23,7 +23,7 @@ function buildTemplate(c: Case): QuestionTemplate {
     generate() {
       return {
         templateId: c.id,
-        statement: `中線が ${c.mid}、振幅が ${c.amp} の三角関数の${c.kind === "max" ? "最大値" : "最小値"}を求めよ。`,
+        statement: `平均値が ${c.mid}、振幅が ${c.amp} の波形の${c.kind === "max" ? "最大値" : "最小値"}を求めよ。`,
         answerKind: "numeric",
         params: { value },
       };

@@ -25,7 +25,9 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const params = buildParams();
       const aTerm = texTerm(2, "\\sin x", true);
       const shift = texConst(params.c);
-      const statement = `関数 $y=${aTerm}${shift ? ` ${shift}` : ""}$ の中心線を求めよ。`;
+      const statement =
+        `波の高さを表す関数 $y=${aTerm}${shift ? ` ${shift}` : ""}$ を考える。` +
+        `中心線を求めよ。`;
       return {
         templateId: id,
         statement,
