@@ -36,7 +36,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `方程式 $\\log_{${params.a}} x=${params.answer}$ を解け。`;
+      const statement = `対数の定義を用いて $\\log_{${params.a}} x=${params.answer}$ を解け。`;
       return {
         templateId: id,
         statement,

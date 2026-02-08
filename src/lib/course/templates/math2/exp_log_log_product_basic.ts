@@ -26,7 +26,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `次を計算せよ。$\\log_{${params.a}}(${params.a}^{${params.m}}\\times${params.a}^{${params.n}})$`;
+      const statement = `指数法則を用いて次を計算せよ。$\\log_{${params.a}}(${params.a}^{${params.m}}\\times${params.a}^{${params.n}})$`;
       return {
         templateId: id,
         statement,

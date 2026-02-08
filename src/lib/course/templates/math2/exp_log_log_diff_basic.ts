@@ -37,7 +37,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `$\\log_{${params.a}}${params.x}-\\log_{${params.a}}${params.y}$ を計算せよ。`;
+      const statement = `比の対数として $\\log_{${params.a}}${params.x}-\\log_{${params.a}}${params.y}$ を計算せよ。`;
       return {
         templateId: id,
         statement,
