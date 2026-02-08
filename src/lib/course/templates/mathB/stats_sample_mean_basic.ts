@@ -46,7 +46,9 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `次のデータの平均を求めよ。\\n${params.d1}, ${params.d2}, ${params.d3}, ${params.d4}`;
+      const statement =
+        `ある日の来客数データとする。平均を求めよ。\\n` +
+        `${params.d1}, ${params.d2}, ${params.d3}, ${params.d4}`;
       return {
         templateId: id,
         statement,
