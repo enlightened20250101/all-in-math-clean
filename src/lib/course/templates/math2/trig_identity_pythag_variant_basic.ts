@@ -12,16 +12,16 @@ type Case = {
 const CASES: Case[] = [
   {
     id: "trig_pythag_1",
-    statement: "次を計算せよ。$1+\\tan^2\\theta$",
-    choices: ["1", "\\cos^2\\theta", "\\frac{1}{\\cos^2\\theta}", "\\sin^2\\theta"],
-    answer: "\\frac{1}{\\cos^2\\theta}",
+    statement: "次を計算せよ。$1+\\cot^2\\theta$",
+    choices: ["1", "\\cos^2\\theta", "\\frac{1}{\\sin^2\\theta}", "\\sin^2\\theta"],
+    answer: "\\frac{1}{\\sin^2\\theta}",
     difficulty: 1,
   },
   {
     id: "trig_pythag_2",
-    statement: "次を計算せよ。$1-\\sin^2\\theta$",
-    choices: ["\\cos^2\\theta", "1", "\\sin^2\\theta", "\\tan^2\\theta"],
-    answer: "\\cos^2\\theta",
+    statement: "次を計算せよ。$\\frac{1}{\\cos^2\\theta}-1$",
+    choices: ["\\tan^2\\theta", "1", "\\sin^2\\theta", "\\cos^2\\theta"],
+    answer: "\\tan^2\\theta",
     difficulty: 1,
   },
   {
