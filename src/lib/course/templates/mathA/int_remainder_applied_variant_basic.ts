@@ -37,10 +37,30 @@ function buildTemplate(c: Case): QuestionTemplate {
 }
 
 const CASES: Case[] = [
-  { id: "int_rem_app_1", title: "剰余の応用 1", statement: `$(10^2+10^3)$ を 7 で割った余りを求めよ。`, answer: 1 },
-  { id: "int_rem_app_2", title: "剰余の応用 2", statement: `$(3^4+3^2)$ を 5 で割った余りを求めよ。`, answer: 0 },
-  { id: "int_rem_app_3", title: "剰余の応用 3", statement: `$(2^6-2^3)$ を 7 で割った余りを求めよ。`, answer: 0 },
-  { id: "int_rem_app_4", title: "剰余の応用 4", statement: `$(5^3+5)$ を 6 で割った余りを求めよ。`, answer: 4 },
+  {
+    id: "int_rem_app_1",
+    title: "剰余の応用 1",
+    statement: `7日周期の予定を考える。$10^2+10^3$ を 7 で割った余りを求めよ。`,
+    answer: 1,
+  },
+  {
+    id: "int_rem_app_2",
+    title: "剰余の応用 2",
+    statement: `5で割った余りだけを考えるとき、$3^4+3^2$ を 5 で割った余りを求めよ。`,
+    answer: 0,
+  },
+  {
+    id: "int_rem_app_3",
+    title: "剰余の応用 3",
+    statement: `連続した周期を考える。$2^6-2^3$ を 7 で割った余りを求めよ。`,
+    answer: 0,
+  },
+  {
+    id: "int_rem_app_4",
+    title: "剰余の応用 4",
+    statement: `6で割った余りに注目する。$5^3+5$ を 6 で割った余りを求めよ。`,
+    answer: 4,
+  },
 ];
 
 export const intRemainderAppliedVariantTemplates: QuestionTemplate[] = CASES.map(buildTemplate);

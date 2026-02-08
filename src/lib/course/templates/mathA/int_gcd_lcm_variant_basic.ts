@@ -5,6 +5,7 @@ import { gradeNumeric } from "../_shared/utils";
 type Case = {
   id: string;
   title: string;
+  context?: string;
   a: number;
   b: number;
   kind: "gcd" | "lcm";
@@ -37,9 +38,10 @@ function buildTemplate(c: Case): QuestionTemplate {
       tags: ["integer", c.kind],
     },
     generate() {
+      const lead = c.context ? `${c.context}\n` : "";
       return {
         templateId: c.id,
-        statement: `${c.a} と ${c.b} の${label}を求めよ。`,
+        statement: `${lead}${c.a} と ${c.b} の${label}を求めよ。`,
         answerKind: "numeric",
         params: { value },
       };
@@ -55,10 +57,38 @@ function buildTemplate(c: Case): QuestionTemplate {
 }
 
 const CASES: Case[] = [
-  { id: "gcd_v1", title: "最大公約数 1", a: 84, b: 60, kind: "gcd" },
-  { id: "gcd_v2", title: "最大公約数 2", a: 72, b: 48, kind: "gcd" },
-  { id: "lcm_v1", title: "最小公倍数 1", a: 12, b: 18, kind: "lcm" },
-  { id: "lcm_v2", title: "最小公倍数 2", a: 14, b: 35, kind: "lcm" },
+  {
+    id: "gcd_v1",
+    title: "最大公約数 1",
+    context: "長さ84cmと60cmのリボンを同じ長さに切るときの最大の長さを考える。",
+    a: 84,
+    b: 60,
+    kind: "gcd",
+  },
+  {
+    id: "gcd_v2",
+    title: "最大公約数 2",
+    context: "72枚と48枚のカードを同じ枚数に分けるときの最大枚数を求める。",
+    a: 72,
+    b: 48,
+    kind: "gcd",
+  },
+  {
+    id: "lcm_v1",
+    title: "最小公倍数 1",
+    context: "12分ごとと18分ごとのイベントが同時に起こる最短時間を考える。",
+    a: 12,
+    b: 18,
+    kind: "lcm",
+  },
+  {
+    id: "lcm_v2",
+    title: "最小公倍数 2",
+    context: "14日周期と35日周期の予定が重なる最短日数を求める。",
+    a: 14,
+    b: 35,
+    kind: "lcm",
+  },
 ];
 
 export const intGcdLcmVariantTemplates: QuestionTemplate[] = CASES.map(buildTemplate);
