@@ -470,7 +470,7 @@ export default function WriteupClient({ topicTitle, topicId }: WriteupClientProp
               {rubric.map((item) => (
                 <li key={item} className="flex items-center gap-2">
                   <span className="h-2 w-2 rounded-full bg-slate-300" />
-                  {item}
+                  <MathMarkdown content={item} className="text-sm" />
                 </li>
               ))}
             </ul>
