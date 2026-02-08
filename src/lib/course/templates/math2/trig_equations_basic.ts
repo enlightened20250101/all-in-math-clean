@@ -80,7 +80,8 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const idx = Math.floor(Math.random() * CASES.length);
       const c = CASES[idx];
       const eqText = c.eq.includes("=") ? c.eq : texEq(c.eq, "0");
-      const statement = `次を解け。（$0^\\circ \\le x < 360^\\circ$）\\n\\n$$${eqText}$$`;
+      const statement =
+        `回転角度を求める。（$0^\\circ \\le x < 360^\\circ$）\\n\\n$$${eqText}$$`;
       return {
         templateId: id,
         statement,

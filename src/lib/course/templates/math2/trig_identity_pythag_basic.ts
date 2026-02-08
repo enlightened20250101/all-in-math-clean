@@ -13,7 +13,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       tags: [],
     },
     generate() {
-      const statement = `次を計算せよ。$\\sin^2\\theta+\\cos^2\\theta=?$`;
+      const statement = `単位円の関係を用いて計算せよ。$\\sin^2\\theta+\\cos^2\\theta=?$`;
       return {
         templateId: id,
         statement,

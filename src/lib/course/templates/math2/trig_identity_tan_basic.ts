@@ -13,7 +13,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       tags: [],
     },
     generate() {
-      const statement = `次を計算せよ。$\\tan 30^\\circ$`;
+      const statement = `角度の値として次を計算せよ。$\\tan 30^\\circ$`;
       return {
         templateId: id,
         statement,

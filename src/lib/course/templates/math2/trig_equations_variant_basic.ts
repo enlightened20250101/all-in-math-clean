@@ -22,7 +22,7 @@ function buildTemplate(c: EqCase): QuestionTemplate {
     generate() {
       return {
         templateId: c.id,
-        statement: `次の方程式を満たす $0^\\circ \\le x < 360^\\circ$ の解をすべて答えよ。\\n\\n$$\\${c.func} x=${c.value}$$`,
+        statement: `回転角度として $0^\\circ \\le x < 360^\\circ$ の解をすべて答えよ。\\n\\n$$\\${c.func} x=${c.value}$$`,
         answerKind: "choice",
         choices: c.choices,
         params: {},
