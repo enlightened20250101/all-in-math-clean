@@ -87,7 +87,7 @@ export async function GET(_req: NextRequest) {
         .select("id, skill_id, body_md, kind")
         .order("created_at", { ascending: true })
         .limit(3);
-      return NextResponse.json({ ok: true, items: (anyProbs || []).map(p => ({
+      return NextResponse.json({ ok: true, items: (anyProbs || []).map((p: any) => ({
         problem_id: p.id, skill_id: p.skill_id, body_md: p.body_md, kind: p.kind, reason: "fallback", score: 1
       })) });
     }
