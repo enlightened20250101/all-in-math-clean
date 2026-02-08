@@ -31,7 +31,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `放物線 $y^2=4${params.p}x$ の準弦（latus rectum）の長さを求めよ。`;
+      const statement = `測定で得た放物線 $y^2=4${params.p}x$ の準弦（latus rectum）の長さを求めよ。`;
       return {
         templateId: id,
         statement,

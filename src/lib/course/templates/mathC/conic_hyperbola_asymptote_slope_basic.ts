@@ -31,7 +31,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `反射鏡の断面を表す双曲線 $\\frac{x^2}{${params.a ** 2}}-\\frac{y^2}{${params.b ** 2}}=1$ の設計上の漸近線の傾き（正の方）を求めよ。`;
+      const statement = `測定で得た反射鏡の断面を表す双曲線 $\\frac{x^2}{${params.a ** 2}}-\\frac{y^2}{${params.b ** 2}}=1$ の測定された設計上の漸近線の傾き（正の方）を求めよ。`;
       return {
         templateId: id,
         statement,
@@ -46,7 +46,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const p = params as Params;
       return `
 ### この問題の解説
-設計上の漸近線は $y=\pm \\frac{b}{a}x$。
+測定された設計上の漸近線は $y=\pm \\frac{b}{a}x$。
 よって傾きは **${p.m}** です。
 `;
     },
@@ -54,11 +54,11 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
 }
 
 export const conicHyperbolaAsymptoteSlopeTemplates: QuestionTemplate[] = Array.from({ length: 6 }, (_, i) =>
-  buildTemplate(`conic_hyperbola_asymptote_slope_basic_${i + 1}`, `設計上の漸近線 ${i + 1}`)
+  buildTemplate(`conic_hyperbola_asymptote_slope_basic_${i + 1}`, `測定された設計上の漸近線 ${i + 1}`)
 );
 
 const extraHyperbolaAsymptoteSlopeTemplates: QuestionTemplate[] = Array.from({ length: 32 }, (_, i) =>
-  buildTemplate(`conic_hyperbola_asymptote_slope_basic_${i + 7}`, `設計上の漸近線 追加${i + 1}`)
+  buildTemplate(`conic_hyperbola_asymptote_slope_basic_${i + 7}`, `測定された設計上の漸近線 追加${i + 1}`)
 );
 
 conicHyperbolaAsymptoteSlopeTemplates.push(...extraHyperbolaAsymptoteSlopeTemplates);

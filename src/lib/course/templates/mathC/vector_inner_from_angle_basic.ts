@@ -39,7 +39,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `進行方向を表すベクトルで $|\\vec{a}|=${params.a}, |\\vec{b}|=${params.b}, \\cos\\theta=${cosLabel(params.cos)}$ のとき、$\\vec{a}\\cdot\\vec{b}$ を求めよ。`;
+      const statement = `移動方向を表すベクトルで $|\\vec{a}|=${params.a}, |\\vec{b}|=${params.b}, \\cos\\theta=${cosLabel(params.cos)}$ のとき、$\\vec{a}\\cdot\\vec{b}$ を求めよ。`;
       return {
         templateId: id,
         statement,

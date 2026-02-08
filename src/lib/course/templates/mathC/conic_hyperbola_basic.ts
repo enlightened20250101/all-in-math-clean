@@ -14,7 +14,7 @@ function buildParams(): HyperParams {
 function explain(params: HyperParams) {
   return `
 ### この問題の解説
-反射鏡の断面を表す双曲線
+測定で得た反射鏡の断面を表す双曲線
 $$
 \\frac{x^2}{a^2}-\\frac{y^2}{b^2}=1
 $$
@@ -33,7 +33,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `反射鏡の断面を表す双曲線 $\\frac{x^2}{${params.a * params.a}}-\\frac{y^2}{${params.b * params.b}}=1$ について、$c^2$ を求めよ。`;
+      const statement = `測定で得た反射鏡の断面を表す双曲線 $\\frac{x^2}{${params.a * params.a}}-\\frac{y^2}{${params.b * params.b}}=1$ について、$c^2$ を求めよ。`;
       return {
         templateId: id,
         statement,
@@ -52,12 +52,12 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
 
 export const conicHyperbolaTemplates: QuestionTemplate[] = Array.from(
   { length: 20 },
-  (_, i) => buildTemplate(`conic_hyperbola_basic_${i + 1}`, `反射鏡の断面を表す双曲線 ${i + 1}`)
+  (_, i) => buildTemplate(`conic_hyperbola_basic_${i + 1}`, `測定で得た反射鏡の断面を表す双曲線 ${i + 1}`)
 );
 
 const extraConicHyperbolaTemplates: QuestionTemplate[] = Array.from(
   { length: 30 },
-  (_, i) => buildTemplate(`conic_hyperbola_basic_${i + 21}`, `反射鏡の断面を表す双曲線 追加${i + 1}`)
+  (_, i) => buildTemplate(`conic_hyperbola_basic_${i + 21}`, `測定で得た反射鏡の断面を表す双曲線 追加${i + 1}`)
 );
 
 conicHyperbolaTemplates.push(...extraConicHyperbolaTemplates);

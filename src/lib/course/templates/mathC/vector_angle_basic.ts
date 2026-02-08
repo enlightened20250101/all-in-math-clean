@@ -24,7 +24,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const idx = Math.floor(Math.random() * CASES.length);
       const c = CASES[idx];
-      const statement = `ベクトル $\\vec{a}=(${c.ax},${c.ay})$, $\\vec{b}=(${c.bx},${c.by})$ のなす角を $\\theta$ とする。$\\cos\\theta$ を求めよ。`;
+      const statement = `移動方向を表すベクトル $\\vec{a}=(${c.ax},${c.ay})$, $\\vec{b}=(${c.bx},${c.by})$ のなす角を $\\theta$ とする。$\\cos\\theta$ を求めよ。`;
       return {
         templateId: id,
         statement,

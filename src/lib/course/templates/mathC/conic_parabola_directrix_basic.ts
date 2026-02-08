@@ -47,7 +47,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const caseId = Math.floor(Math.random() * CASES.length);
       const c = CASES[caseId];
       const equation = c.axis === "x" ? `y^2=${4 * c.p}x` : `x^2=${4 * c.p}y`;
-      const statement = `放物線 $${equation}$ の準線を求めよ。`;
+      const statement = `測定で得た放物線 $${equation}$ の準線を求めよ。`;
       return {
         templateId: id,
         statement,

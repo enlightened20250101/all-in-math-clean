@@ -41,7 +41,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const params = buildParams();
       const xTerm = texParenShift("x", -params.h, 1);
       const yTerm = texParenShift("y", -params.k, 1);
-      const statement = `反射鏡の断面を表す双曲線 $\\frac{${xTerm}}{${params.a ** 2}}-\\frac{${yTerm}}{${params.b ** 2}}=1$ の中心の${
+      const statement = `測定で得た反射鏡の断面を表す双曲線 $\\frac{${xTerm}}{${params.a ** 2}}-\\frac{${yTerm}}{${params.b ** 2}}=1$ の中心の${
         params.ask === 1 ? "x" : "y"
       }座標を求めよ。`;
       return {

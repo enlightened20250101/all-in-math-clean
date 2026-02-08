@@ -31,7 +31,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `反射鏡の断面を表す双曲線 $\\frac{x^2}{${params.a ** 2}}-\\frac{y^2}{${params.b ** 2}}=1$ 上で $x=${params.x}$ のときの $y$ の値を求めよ（正の値）。`;
+      const statement = `測定で得た反射鏡の断面を表す双曲線 $\\frac{x^2}{${params.a ** 2}}-\\frac{y^2}{${params.b ** 2}}=1$ 上で $x=${params.x}$ のときの $y$ の値を求めよ（正の値）。`;
       return {
         templateId: id,
         statement,
@@ -54,5 +54,5 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
 }
 
 export const conicHyperbolaValueExtraTemplates: QuestionTemplate[] = Array.from({ length: 6 }, (_, i) =>
-  buildTemplate(`conic_hyperbola_value_basic2_${i + 1}`, `反射鏡の断面を表す双曲線の値 ${i + 1}`)
+  buildTemplate(`conic_hyperbola_value_basic2_${i + 1}`, `測定で得た反射鏡の断面を表す双曲線の値 ${i + 1}`)
 );
