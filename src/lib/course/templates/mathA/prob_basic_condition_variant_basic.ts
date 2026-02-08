@@ -71,6 +71,22 @@ const CASES: ProbCase[] = [
     choices: [texFrac(1, 2), texFrac(1, 4), texFrac(3, 4), texFrac(2, 3)],
     explain: `偶数1回は (偶,奇) と (奇,偶) の2通りなので $\\frac{2}{4}=\\frac{1}{2}$。`,
   },
+  {
+    id: "prob_basic_ball_atleast_1",
+    title: "玉：少なくとも1個赤",
+    statement: `赤2個・青3個の玉から2個取り出す（戻さない）。次の確率を求めよ。\\n\\n$$\\n${texProb("\\text{赤が少なくとも1個}")}\\n$$`,
+    correct: texFrac(7, 10),
+    choices: [texFrac(7, 10), texFrac(3, 10), texFrac(1, 2), texFrac(2, 5)],
+    explain: `補集合は「2個とも青」。$1-\\frac{3}{5}\\cdot\\frac{2}{4}=1-\\frac{3}{10}=\\frac{7}{10}$。`,
+  },
+  {
+    id: "prob_basic_card_atleast_even",
+    title: "カード：偶数が少なくとも1枚",
+    statement: `1〜10のカードから2枚同時に引く。次の確率を求めよ。\\n\\n$$\\n${texProb("\\text{偶数が少なくとも1枚}")}\\n$$`,
+    correct: texFrac(7, 9),
+    choices: [texFrac(7, 9), texFrac(2, 9), texFrac(1, 2), texFrac(5, 9)],
+    explain: `補集合は「2枚とも奇数」。$1-\\frac{5}{10}\\cdot\\frac{4}{9}=1-\\frac{2}{9}=\\frac{7}{9}$。`,
+  },
 ];
 
 export const probBasicConditionVariantTemplates: QuestionTemplate[] = CASES.map((c) => {

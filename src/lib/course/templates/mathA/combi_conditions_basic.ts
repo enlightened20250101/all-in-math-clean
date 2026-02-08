@@ -155,6 +155,34 @@ $$
 `,
   },
   {
+    id: "combi_cond_books_1",
+    title: "本：数学を含む",
+    statement: `数学2冊・国語3冊の合計5冊から2冊選ぶ。数学を少なくとも1冊含む選び方は何通りか。`,
+    answer: comb(5, 2) - comb(3, 2),
+    explain: `
+### この問題の解説
+全体から数学を含まない場合を引きます。
+
+$$
+${texComb(5, 2)} - ${texComb(3, 2)} = ${comb(5, 2) - comb(3, 2)}
+$$
+`,
+  },
+  {
+    id: "combi_cond_team_1",
+    title: "チーム：女子2人以上",
+    statement: `男子6人・女子4人から5人を選ぶ。女子を2人以上含む選び方は何通りか。`,
+    answer: comb(4, 2) * comb(6, 3) + comb(4, 3) * comb(6, 2) + comb(4, 4) * comb(6, 1),
+    explain: `
+### この問題の解説
+女子2人・3人・4人の場合に分けます。
+
+$$
+${texComb(4, 2)}${texComb(6, 3)} + ${texComb(4, 3)}${texComb(6, 2)} + ${texComb(4, 4)}${texComb(6, 1)}
+$$
+`,
+  },
+  {
     id: "combi_cond_not_1",
     title: "含まない（補集合）",
     statement: `10人から5人を選ぶ。Aさんを含まない選び方は何通りか。`,

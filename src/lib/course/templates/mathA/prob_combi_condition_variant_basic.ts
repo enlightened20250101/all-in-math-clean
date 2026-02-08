@@ -69,6 +69,27 @@ const CASES: Case[] = [
     correct: texFrac(comb(8, 2), comb(10, 4)),
     explain: `1と2を固定し、残り8枚から2枚選ぶ。`,
   },
+  {
+    id: "prob_cond_v4",
+    title: "玉：少なくとも2個赤",
+    statement: `赤4個・青2個の玉から3個取り出す。次の確率を求めよ。\\n\\n$$\\n${texProb("\\text{赤が少なくとも2個}")}\\n$$`,
+    correct: texFrac(comb(4, 2) * comb(2, 1) + comb(4, 3) * comb(2, 0), comb(6, 3)),
+    explain: `赤2個・青1個と赤3個・青0個の和。`,
+  },
+  {
+    id: "prob_cond_v5",
+    title: "カード：1を含む",
+    statement: `1〜8のカードから3枚選ぶ。1を含む確率を求めよ。\\n\\n$$\\n${texProb("\\text{1を含む}")}\\n$$`,
+    correct: texFrac(comb(7, 2), comb(8, 3)),
+    explain: `1を固定し、残り7枚から2枚選ぶ。`,
+  },
+  {
+    id: "prob_cond_v6",
+    title: "男女：女子が1人以上",
+    statement: `男子5人・女子4人から3人を選ぶ。女子が1人以上となる確率を求めよ。\\n\\n$$\\n${texProb("\\text{女子が1人以上}")}\\n$$`,
+    correct: texFrac(comb(9, 3) - comb(5, 3), comb(9, 3)),
+    explain: `補集合は「女子0人」。全体から引く。`,
+  },
 ];
 
 export const probCombiConditionVariantTemplates: QuestionTemplate[] = CASES.map(buildTemplate);
