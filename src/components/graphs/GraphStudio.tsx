@@ -1592,16 +1592,19 @@ export default function GraphStudio() {
   // ========= JSX =========
   return (
     <div className="space-y-6">
-      <header className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+      <header className="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-gradient-to-br from-white via-slate-50 to-slate-100 p-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <h1 className="text-xl font-bold tracking-tight md:text-2xl">
+          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-[10px] text-slate-500">
+            Graph Studio
+          </div>
+          <h1 className="mt-2 text-2xl font-bold tracking-tight text-slate-900 md:text-3xl">
             グラフスタジオ
           </h1>
-          <p className="mt-1 text-xs text-gray-500 md:text-sm">
-            数式を入力してグラフを描画・保存できます。スマホでは下のボタンから式を編集できます。
+          <p className="mt-1 text-xs text-slate-500 md:text-sm">
+            数式やデータを入力して、洗練されたグラフを描画・保存できます。
           </p>
         </div>
-        
+
         <div className="flex flex-wrap items-center gap-2 justify-end">
           <ExportSvgButton
             targetRef={activeChartRef}
@@ -1614,13 +1617,13 @@ export default function GraphStudio() {
             onError={(message) => setToast({ message, type: 'error' })}
           />
           <button
-            className="px-3 py-1 text-xs md:text-sm border rounded"
+            className="rounded-full border border-slate-200 bg-white px-4 py-2 text-[11px] font-medium text-slate-700 shadow-sm transition hover:bg-slate-50 md:text-sm"
             onClick={clearDraft}
           >
             下書き削除
           </button>
           <button
-            className="px-3 py-1 text-xs md:text-sm border rounded bg-black text-white"
+            className="rounded-full bg-slate-900 px-4 py-2 text-[11px] font-semibold text-white shadow-sm transition hover:bg-black md:text-sm"
             onClick={handleSave}
           >
             保存{!userId ? '（ログインが必要）' : ''}
@@ -1642,22 +1645,22 @@ export default function GraphStudio() {
       ) : null}
 
       {/* タブ */}
-      <div className="flex gap-2 border-b pb-2">
+      <div className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-slate-100 p-1">
         <button
-          className={`px-3 py-1 rounded-t border-b-2 text-xs md:text-sm ${
+          className={`px-4 py-2 rounded-full text-xs md:text-sm transition ${
             tab === 'equation'
-              ? 'border-black text-black font-semibold'
-              : 'border-transparent text-gray-500'
+              ? 'bg-white text-slate-900 font-semibold shadow-sm'
+              : 'text-slate-500 hover:text-slate-700'
           }`}
           onClick={() => setTab('equation')}
         >
           式から描く
         </button>
         <button
-          className={`px-3 py-1 rounded-t border-b-2 text-xs md:text-sm ${
+          className={`px-4 py-2 rounded-full text-xs md:text-sm transition ${
             tab === 'series'
-              ? 'border-black text-black font-semibold'
-              : 'border-transparent text-gray-500'
+              ? 'bg-white text-slate-900 font-semibold shadow-sm'
+              : 'text-slate-500 hover:text-slate-700'
           }`}
           onClick={() => setTab('series')}
         >
@@ -1668,26 +1671,29 @@ export default function GraphStudio() {
       {/* ── 式タブ ── */}
       {tab === 'equation' && (
         <div className="space-y-4">
-          {/* PC版：上に入力パネル */}
-          <div className="hidden md:block space-y-4">
-            {equationInputPanel}
+          <div className="grid gap-4 lg:grid-cols-[360px,1fr]">
+            <div className="hidden lg:block">
+              <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                {equationInputPanel}
+              </div>
+            </div>
+            <div className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
+              {equationChartView}
+            </div>
           </div>
-          
-          {/* グラフ本体：PC/SP 共通でここ「だけ」 */}
-          {equationChartView}
-          
+
           {/* SP版：下に「式を編集」ボタン */}
-          <div className="md:hidden space-y-3">
+          <div className="lg:hidden space-y-3">
             <button
-              className="w-full mt-2 px-4 py-3 rounded-xl border bg-black text-white text-sm font-medium shadow-sm active:scale-[0.98]"
+              className="w-full mt-2 px-4 py-3 rounded-xl border border-slate-200 bg-slate-900 text-white text-sm font-medium shadow-sm active:scale-[0.98]"
               onClick={() => setIsPanelOpen(true)}
             >
               式を編集する（入力パネルを開く）
             </button>
           </div>
-          
+
           {drawVersion > 0 && previewEmpty && (
-            <div className="text-sm text-red-600">
+            <div className="text-sm text-rose-600">
               描画できませんでした。式や範囲・解像度を見直してください。
             </div>
           )}
@@ -1698,21 +1704,24 @@ export default function GraphStudio() {
       {/* ── データタブ ── */}
       {tab === 'series' && (
         <div className="space-y-4">
-          <div className="space-y-2">
-            <label className="block text-sm">
-              CSVから読み込み（name,x,y）
-            </label>
-            <textarea
-              className="border rounded w-full text-xs p-1 h-24"
-              placeholder={'A,0,1\nA,1,0.5\nB,0,0\nB,1,0.3 など'}
-              onBlur={(e) => {
-                if (e.target.value.trim()) parseCsv(e.target.value);
-              }}
-            />
-          </div>
+          <div className="grid gap-4 lg:grid-cols-[360px,1fr]">
+            <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+              <label className="block text-sm font-semibold text-slate-700">
+                CSVから読み込み（name,x,y）
+              </label>
+              <p className="mt-1 text-[11px] text-slate-500">
+                例：A,0,1 / A,1,0.5 / B,0,0 / B,1,0.3
+              </p>
+              <textarea
+                className="mt-2 h-32 w-full rounded-xl border border-slate-200 bg-slate-50 p-3 text-xs text-slate-700 outline-none transition focus:border-slate-400"
+                placeholder={'A,0,1\nA,1,0.5\nB,0,0\nB,1,0.3'}
+                onBlur={(e) => {
+                  if (e.target.value.trim()) parseCsv(e.target.value);
+                }}
+              />
+            </div>
 
-          <div className="w-full flex justify-center">
-            <div className="border rounded bg-white p-2">
+            <div className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
               <div
                 ref={seriesChartRef}
                 className="
