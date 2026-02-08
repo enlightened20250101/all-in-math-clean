@@ -3322,7 +3322,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
   },
   {
     id: "writeup_calc_increasing_param_1",
-    topicId: "calculus_increasing_basic",
+    topicId: "calc_increasing_basic",
     title: "増減とパラメータ",
     statement:
       "関数 $f(x)=x^3-3x^2+(m-2)x+1$ が区間 $[0,2]$ で単調増加となるような $m$ の範囲を求めよ。",
