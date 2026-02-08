@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import ReportButton from "@/components/ReportButton";
 
 type Props = {
-  targetType: string;
+  targetType: "comment" | "article_comment" | "post" | "thread" | "thread_post" | "group_message" | "dm_message";
   targetId: string | number;
   buttonClassName?: string;
   menuClassName?: string;
