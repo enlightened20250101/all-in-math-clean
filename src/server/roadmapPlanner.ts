@@ -58,7 +58,7 @@ export async function planRoadmap(p: PlanParams): Promise<{ nodes: PlannedNode[]
     if (reqIds.length) {
       const { data: rows } = await sb.from("user_skill_mastery")
         .select("skill_id, mastery_level").eq("user_id", userId).in("skill_id", reqIds);
-      (rows||[]).forEach(r => mastery.set(r.skill_id, r.mastery_level ?? 0));
+      (rows||[]).forEach((r: any) => mastery.set(r.skill_id, r.mastery_level ?? 0));
     }
   
     // 4) スコアリング＆取捨
