@@ -26,7 +26,7 @@ function buildTemplate(c: RegCase): QuestionTemplate {
     generate() {
       return {
         templateId: c.id,
-        statement: `回帰直線 $y=${line}$ について、$x=${c.x}$ の推定値を求めよ。`,
+        statement: `広告費 $x$ と売上 $y$ の回帰直線が $y=${line}$ で表されるとする。$x=${c.x}$ の推定値を求めよ。`,
         answerKind: "numeric",
         params: {},
       };

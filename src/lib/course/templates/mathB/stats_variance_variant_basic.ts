@@ -28,7 +28,7 @@ function buildTemplate(c: VarCase): QuestionTemplate {
     generate() {
       return {
         templateId: c.id,
-        statement: `次のデータの分散を求めよ。\\n\\nデータ: ${c.data.join(", ")}`,
+        statement: `ある小テストの得点データとする。分散を求めよ。\\n\\nデータ: ${c.data.join(", ")}`,
         answerKind: "numeric",
         params: { value },
       };

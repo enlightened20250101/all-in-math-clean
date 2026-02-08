@@ -24,7 +24,7 @@ function buildTemplate(c: CorrCase): QuestionTemplate {
     generate() {
       return {
         templateId: c.id,
-        statement: `共分散が ${c.cov}、標準偏差が $\\sigma_x=${c.sx}$, $\\sigma_y=${c.sy}$ のとき、相関係数 $r$ を求めよ。`,
+        statement: `身長と体重のデータについて、共分散が ${c.cov}、標準偏差が $\\sigma_x=${c.sx}$, $\\sigma_y=${c.sy}$ のとき、相関係数 $r$ を求めよ。`,
         answerKind: "numeric",
         params: {},
       };

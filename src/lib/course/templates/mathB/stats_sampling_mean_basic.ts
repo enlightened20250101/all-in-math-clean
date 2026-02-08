@@ -43,7 +43,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `母平均が ${params.mu} の母集団から大きさ ${params.n} の標本を取る。標本平均の平均を求めよ。`;
+      const statement = `製品の重さの母平均が ${params.mu} とする。大きさ ${params.n} の標本を取ったとき、標本平均の平均を求めよ。`;
       return {
         templateId: id,
         statement,
