@@ -34,7 +34,7 @@ function buildAxisTemplate(id: string, title: string): QuestionTemplate {
       const axis = (r1 + r2) / 2;
       return {
         templateId: id,
-        statement: `二次関数 $y=${poly}$ の軸の方程式 $x=p$ の $p$ を求めよ。`,
+        statement: `放物線の左右対称性を利用する。二次関数 $y=${poly}$ の軸の方程式 $x=p$ の $p$ を求めよ。`,
         answerKind: "numeric",
         params: { axis },
       };
@@ -67,7 +67,7 @@ function buildInterceptTemplate(id: string, title: string): QuestionTemplate {
       const poly = texPoly2(A, B, C);
       return {
         templateId: id,
-        statement: `二次関数 $y=${poly}$ の $y$ 切片を求めよ。`,
+        statement: `グラフの $y$ 切片を求める。二次関数 $y=${poly}$ の $y$ 切片を求めよ。`,
         answerKind: "numeric",
         params: { C },
       };

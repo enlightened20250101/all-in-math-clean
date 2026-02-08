@@ -29,7 +29,7 @@ function buildTemplate(c: Case): QuestionTemplate {
     generate() {
       return {
         templateId: c.id,
-        statement: `二次関数 $y=${form}$ が点 $(${c.x},${c.y})$ を通る。$a$ を求めよ。`,
+        statement: `頂点形式の係数を決める。二次関数 $y=${form}$ が点 $(${c.x},${c.y})$ を通る。$a$ を求めよ。`,
         answerKind: "numeric",
         params: { a },
       };

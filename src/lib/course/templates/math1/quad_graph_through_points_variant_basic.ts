@@ -26,7 +26,7 @@ function buildTemplate(c: Case): QuestionTemplate {
     generate() {
       return {
         templateId: c.id,
-        statement: `二次関数 $y=${poly}+c$ が点 $(${c.x},${y})$ を通るとき、$c$ を求めよ。`,
+        statement: `通過点の条件を使って係数を決める。二次関数 $y=${poly}+c$ が点 $(${c.x},${y})$ を通るとき、$c$ を求めよ。`,
         answerKind: "numeric",
         params: { c: c.c },
       };
