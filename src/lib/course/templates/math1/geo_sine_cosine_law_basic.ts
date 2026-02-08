@@ -107,7 +107,7 @@ const cosineCases: NumericCase[] = [
   {
     id: "geo_cos_1",
     title: "余弦定理（90°）1",
-    statement: `三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
+    statement: `測量で得た測量で得た三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
       texAngle("C", 90),
       texSegmentLen("A", "C", 3),
       texSegmentLen("B", "C", 4),
@@ -124,7 +124,7 @@ $$
   {
     id: "geo_cos_2",
     title: "余弦定理（90°）2",
-    statement: `三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
+    statement: `測量で得た測量で得た三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
       texAngle("C", 90),
       texSegmentLen("A", "C", 5),
       texSegmentLen("B", "C", 12),
@@ -141,7 +141,7 @@ $$
   {
     id: "geo_cos_3",
     title: "余弦定理（90°）3",
-    statement: `三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
+    statement: `測量で得た測量で得た三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
       texAngle("C", 90),
       texSegmentLen("A", "C", 6),
       texSegmentLen("B", "C", 8),
@@ -158,7 +158,7 @@ $$
   {
     id: "geo_cos_4",
     title: "余弦定理（90°）4",
-    statement: `三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
+    statement: `測量で得た測量で得た三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
       texAngle("C", 90),
       texSegmentLen("A", "C", 7),
       texSegmentLen("B", "C", 24),
@@ -175,7 +175,7 @@ $$
   {
     id: "geo_cos_5",
     title: "余弦定理（90°）5",
-    statement: `三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
+    statement: `測量で得た測量で得た三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
       texAngle("C", 90),
       texSegmentLen("A", "C", 8),
       texSegmentLen("B", "C", 15),
@@ -192,7 +192,7 @@ $$
   {
     id: "geo_cos_6",
     title: "余弦定理（90°）6",
-    statement: `三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
+    statement: `測量で得た測量で得た三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
       texAngle("C", 90),
       texSegmentLen("A", "C", 9),
       texSegmentLen("B", "C", 12),
@@ -209,7 +209,7 @@ $$
   {
     id: "geo_cos_7",
     title: "余弦定理（60°）1",
-    statement: `三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
+    statement: `測量で得た三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
       texAngle("C", 60),
       texSegmentLen("A", "C", 7),
       texSegmentLen("B", "C", 7),
@@ -226,7 +226,7 @@ $$
   {
     id: "geo_cos_8",
     title: "余弦定理（60°）2",
-    statement: `三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
+    statement: `測量で得た三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
       texAngle("C", 60),
       texSegmentLen("A", "C", 5),
       texSegmentLen("B", "C", 5),
@@ -243,7 +243,7 @@ $$
   {
     id: "geo_cos_9",
     title: "余弦定理（60°）3",
-    statement: `三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
+    statement: `測量で得た三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
       texAngle("C", 60),
       texSegmentLen("A", "C", 6),
       texSegmentLen("B", "C", 6),
@@ -260,7 +260,7 @@ $$
   {
     id: "geo_cos_10",
     title: "余弦定理（60°）4",
-    statement: `三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
+    statement: `測量で得た三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
       texAngle("C", 60),
       texSegmentLen("A", "C", 8),
       texSegmentLen("B", "C", 8),
@@ -277,7 +277,7 @@ $$
   {
     id: "geo_cos_11",
     title: "余弦定理（60°）5",
-    statement: `三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
+    statement: `測量で得た三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
       texAngle("C", 60),
       texSegmentLen("A", "C", 9),
       texSegmentLen("B", "C", 9),
@@ -294,7 +294,7 @@ $$
   {
     id: "geo_cos_12",
     title: "余弦定理（60°）6",
-    statement: `三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
+    statement: `測量で得た三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
       texAngle("C", 60),
       texSegmentLen("A", "C", 4),
       texSegmentLen("B", "C", 4),
@@ -311,7 +311,7 @@ $$
   {
     id: "geo_cos_13",
     title: "余弦定理（90°）5",
-    statement: `三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
+    statement: `測量で得た三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
       texAngle("C", 90),
       texSegmentLen("A", "C", 8),
       texSegmentLen("B", "C", 15),
@@ -328,7 +328,7 @@ $$
   {
     id: "geo_cos_14",
     title: "余弦定理（90°）6",
-    statement: `三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
+    statement: `測量で得た三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
       texAngle("C", 90),
       texSegmentLen("A", "C", 9),
       texSegmentLen("B", "C", 12),
@@ -345,7 +345,7 @@ $$
   {
     id: "geo_cos_15",
     title: "余弦定理（60°）7",
-    statement: `三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
+    statement: `測量で得た三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
       texAngle("C", 60),
       texSegmentLen("A", "C", 7),
       texSegmentLen("B", "C", 7),
@@ -362,7 +362,7 @@ $$
   {
     id: "geo_cos_16",
     title: "余弦定理（60°）8",
-    statement: `三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
+    statement: `測量で得た三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
       texAngle("C", 60),
       texSegmentLen("A", "C", 10),
       texSegmentLen("B", "C", 10),
@@ -379,7 +379,7 @@ $$
   {
     id: "geo_cos_17",
     title: "余弦定理（90°）7",
-    statement: `三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
+    statement: `測量で得た三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
       texAngle("C", 90),
       texSegmentLen("A", "C", 5),
       texSegmentLen("B", "C", 12),
@@ -396,7 +396,7 @@ $$
   {
     id: "geo_cos_18",
     title: "余弦定理（90°）8",
-    statement: `三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
+    statement: `測量で得た三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
       texAngle("C", 90),
       texSegmentLen("A", "C", 12),
       texSegmentLen("B", "C", 16),
@@ -413,7 +413,7 @@ $$
   {
     id: "geo_cos_19",
     title: "余弦定理（60°）9",
-    statement: `三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
+    statement: `測量で得た三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
       texAngle("C", 60),
       texSegmentLen("A", "C", 6),
       texSegmentLen("B", "C", 6),
@@ -430,7 +430,7 @@ $$
   {
     id: "geo_cos_20",
     title: "余弦定理（60°）10",
-    statement: `三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
+    statement: `測量で得た三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
       texAngle("C", 60),
       texSegmentLen("A", "C", 8),
       texSegmentLen("B", "C", 8),
@@ -447,7 +447,7 @@ $$
   {
     id: "geo_cos_21",
     title: "余弦定理（90°）9",
-    statement: `三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
+    statement: `測量で得た三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
       texAngle("C", 90),
       texSegmentLen("A", "C", 7),
       texSegmentLen("B", "C", 24),
@@ -464,7 +464,7 @@ $$
   {
     id: "geo_cos_22",
     title: "余弦定理（90°）10",
-    statement: `三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
+    statement: `測量で得た三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
       texAngle("C", 90),
       texSegmentLen("A", "C", 9),
       texSegmentLen("B", "C", 40),
@@ -481,7 +481,7 @@ $$
   {
     id: "geo_cos_23",
     title: "余弦定理（60°）11",
-    statement: `三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
+    statement: `測量で得た三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
       texAngle("C", 60),
       texSegmentLen("A", "C", 9),
       texSegmentLen("B", "C", 9),
@@ -498,7 +498,7 @@ $$
   {
     id: "geo_cos_24",
     title: "余弦定理（60°）12",
-    statement: `三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
+    statement: `測量で得た三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
       texAngle("C", 60),
       texSegmentLen("A", "C", 11),
       texSegmentLen("B", "C", 11),
@@ -515,7 +515,7 @@ $$
   {
     id: "geo_cos_25",
     title: "余弦定理（90°）11",
-    statement: `三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
+    statement: `測量で得た三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
       texAngle("C", 90),
       texSegmentLen("A", "C", 15),
       texSegmentLen("B", "C", 20),
@@ -532,7 +532,7 @@ $$
   {
     id: "geo_cos_26",
     title: "余弦定理（90°）12",
-    statement: `三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
+    statement: `測量で得た三角形ABCで次を満たす。$\\overline{AB}$ の長さを求めよ。\n\n${triangleConditions([
       texAngle("C", 90),
       texSegmentLen("A", "C", 20),
       texSegmentLen("B", "C", 21),
@@ -586,7 +586,7 @@ const sineChoiceCases: ChoiceCase[] = [
   {
     id: "geo_sine_1",
     title: "正弦定理（30°→60°）",
-    statement: `三角形ABCで次を満たす。$\\overline{AC}$ の長さを求めよ。\n\n${triangleConditions([
+    statement: `測量で得た三角形ABCで次を満たす。$\\overline{AC}$ の長さを求めよ。\n\n${triangleConditions([
       texAngle("A", 30),
       texAngle("B", 60),
       texSegmentLen("B", "C", 5),
@@ -606,7 +606,7 @@ $$
   {
     id: "geo_sine_2",
     title: "正弦定理（30°→90°）",
-    statement: `三角形ABCで次を満たす。$\\overline{AC}$ の長さを求めよ。\n\n${triangleConditions([
+    statement: `測量で得た三角形ABCで次を満たす。$\\overline{AC}$ の長さを求めよ。\n\n${triangleConditions([
       texAngle("A", 30),
       texAngle("B", 90),
       texSegmentLen("B", "C", 6),
