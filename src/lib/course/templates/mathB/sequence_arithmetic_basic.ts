@@ -39,7 +39,9 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `等差数列 $\\{a_n\\}$ において $a_1=${params.a1}$, $d=${params.d}$ のとき、$a_${params.n}$ を求めよ。`;
+      const statement =
+        `一定の差で増減する記録を等差数列とみなす。` +
+        `$a_1=${params.a1}$, $d=${params.d}$ のとき、$a_${params.n}$ を求めよ。`;
       return {
         templateId: id,
         statement,

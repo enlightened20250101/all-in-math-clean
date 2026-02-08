@@ -62,8 +62,8 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const shift = texConst(params.d ?? 0);
       const statement =
         params.kind === 0
-          ? `数列 $\\{a_n\\}$ が漸化式 $a_{n+1}=a_n${shift ? ` ${shift}` : ""}$, $a_1=${params.a1}$ を満たすとき、$a_${params.n}$ を求めよ。`
-          : `数列 $\\{a_n\\}$ が漸化式 $a_{n+1}=${params.r}a_n$, $a_1=${params.a1}$ を満たすとき、$a_${params.n}$ を求めよ。`;
+          ? `毎回一定量ずつ変化する量を考える。漸化式 $a_{n+1}=a_n${shift ? ` ${shift}` : ""}$, $a_1=${params.a1}$ のとき、$a_${params.n}$ を求めよ。`
+          : `毎回一定倍率で変化する量を考える。漸化式 $a_{n+1}=${params.r}a_n$, $a_1=${params.a1}$ のとき、$a_${params.n}$ を求めよ。`;
       return {
         templateId: id,
         statement,

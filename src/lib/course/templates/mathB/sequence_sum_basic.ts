@@ -69,8 +69,8 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const params = Math.random() < 0.5 ? buildArithmetic() : buildGeometric();
       const statement =
         params.kind === 0
-          ? `等差数列 $\\{a_n\\}$ において $a_1=${params.a1}$, $d=${params.d}$ のとき、$S_${params.n}$ を求めよ。`
-          : `等比数列 $\\{a_n\\}$ において $a_1=${params.a1}$, $r=${params.r}$ のとき、$S_${params.n}$ を求めよ。`;
+          ? `毎回一定の差で増える合計を考える。$a_1=${params.a1}$, $d=${params.d}$ のとき、$S_${params.n}$ を求めよ。`
+          : `毎回一定の比で増減する合計を考える。$a_1=${params.a1}$, $r=${params.r}$ のとき、$S_${params.n}$ を求めよ。`;
       return {
         templateId: id,
         statement,

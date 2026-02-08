@@ -39,7 +39,9 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `等比数列 $\\{a_n\\}$ において $a_1=${params.a1}$, $r=${params.r}$ のとき、$a_${params.n}$ を求めよ。`;
+      const statement =
+        `比が一定で変化する量を等比数列とみなす。` +
+        `$a_1=${params.a1}$, $r=${params.r}$ のとき、$a_${params.n}$ を求めよ。`;
       return {
         templateId: id,
         statement,
