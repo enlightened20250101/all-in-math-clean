@@ -93,7 +93,7 @@ export async function GET() {
       const pool = g0.items
         .filter((it: any) => it.status !== "done")
         .slice()
-        .sort((a, b) => {
+        .sort((a: any, b: any) => {
           const order = (s: EnrichedItem["status"]) =>
             s === "overdue" ? 0 : s === "learning" ? 1 : s === "not_started" ? 2 : 3;
           if (order(a.status) !== order(b.status)) return order(a.status) - order(b.status);
