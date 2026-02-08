@@ -21,7 +21,7 @@ export default async function UnansweredPage() {
         <Link href="/posts" className="text-[11px] sm:text-sm text-blue-700 hover:underline px-2 py-1 rounded bg-slate-50 border border-slate-100 w-fit">一覧へ戻る</Link>
       </div>
       <ul className="grid gap-3 sm:gap-4">
-        {(rows ?? []).map(p => (
+        {(rows ?? []).map((p: any) => (
           <li key={p.id} className="border rounded-xl p-4 bg-white hover:bg-gray-50 transition">
             <Link href={`/posts/${p.id}`} className="font-medium text-[15px] sm:text-base hover:underline">
               <InlineMathText text={p.title} />
