@@ -95,7 +95,7 @@ const extraParametricTemplates: QuestionTemplate[] = Array.from({ length: 30 }, 
         const ytex = `${texTerm(b, "t^2", true)}${texTerm(c, "t")}`;
         return {
           templateId,
-          statement: `媒介変数表示 $x=${xtex},\\ y=${ytex}$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
+          statement: `移動体の軌道を媒介変数表示 $x=${xtex},\\ y=${ytex}$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
           answerKind: "numeric",
           params,
         };
@@ -107,7 +107,7 @@ const extraParametricTemplates: QuestionTemplate[] = Array.from({ length: 30 }, 
         const ytex = texTerm(b, "t^3", true);
         return {
           templateId,
-          statement: `媒介変数表示 $x=${xtex},\\ y=${ytex}$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
+          statement: `移動体の軌道を媒介変数表示 $x=${xtex},\\ y=${ytex}$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
           answerKind: "numeric",
           params,
         };
@@ -119,7 +119,7 @@ const extraParametricTemplates: QuestionTemplate[] = Array.from({ length: 30 }, 
       const target = ask === "x" ? "x" : "y";
       return {
         templateId,
-        statement: `媒介変数表示 $x=${xtex},\\ y=${ytex}$ で表された曲線について、$t=${t0}$ における ${target} 座標を求めよ。`,
+        statement: `移動体の軌道を媒介変数表示 $x=${xtex},\\ y=${ytex}$ で表された曲線について、$t=${t0}$ における ${target} 座標を求めよ。`,
         answerKind: "numeric",
         params,
       };
@@ -191,7 +191,7 @@ const extraParametricTemplates2: QuestionTemplate[] = Array.from({ length: 30 },
         const ytex = texTerm(b, "t^2", true);
         return {
           templateId,
-          statement: `媒介変数表示 $x=${xtex},\\ y=${ytex}$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dt}$ を求めよ。`,
+          statement: `移動体の軌道を媒介変数表示 $x=${xtex},\\ y=${ytex}$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dt}$ を求めよ。`,
           answerKind: "numeric",
           params: { t0, a, b, c: 0, value },
         };
@@ -206,7 +206,7 @@ const extraParametricTemplates2: QuestionTemplate[] = Array.from({ length: 30 },
         const ytex = texTerm(b, "t^2", true);
         return {
           templateId,
-          statement: `媒介変数表示 $x=${xtex},\\ y=${ytex}$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
+          statement: `移動体の軌道を媒介変数表示 $x=${xtex},\\ y=${ytex}$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
           answerKind: "numeric",
           params: { t0, a, b, c: 0, value },
         };
@@ -223,7 +223,7 @@ const extraParametricTemplates2: QuestionTemplate[] = Array.from({ length: 30 },
       if (cTerm) ytex = `${ytex} ${cTerm}`;
       return {
         templateId,
-        statement: `媒介変数表示 $x=t,\\ y=${ytex}$ で表された曲線について、$t=${t0}$ における $y$ 座標を求めよ。`,
+        statement: `移動体の軌道を媒介変数表示 $x=t,\\ y=${ytex}$ で表された曲線について、$t=${t0}$ における $y$ 座標を求めよ。`,
         answerKind: "numeric",
         params: { t0, a, b, c, value },
       };
@@ -242,7 +242,7 @@ $t=${p.t0}$ を代入して $y$ を計算します。
       }
       return `
 ### この問題の解説
-媒介変数表示の微分は
+移動体の軌道を媒介変数表示の微分は
 $$
 \\frac{dy}{dx} = \\frac{dy/dt}{dx/dt}
 $$
@@ -266,7 +266,7 @@ export const calcParametricBasicTemplates: QuestionTemplate[] = [
       const { t0 } = params;
       return {
         templateId: "calc_parametric_basic_1",
-        statement: `媒介変数表示 $x=t,\ y=t^2$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
+        statement: `移動体の軌道を媒介変数表示 $x=t,\ y=t^2$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
         answerKind: "numeric",
         params,
       };
@@ -302,7 +302,7 @@ $t=${t0}$ のとき **${value}** です。
       const { t0 } = params;
       return {
         templateId: "calc_parametric_basic_2",
-        statement: `媒介変数表示 $x=2t,\ y=t^2$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
+        statement: `移動体の軌道を媒介変数表示 $x=2t,\ y=t^2$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
         answerKind: "numeric",
         params,
       };
@@ -338,7 +338,7 @@ $t=${t0}$ のとき **${value}** です。
       const value = (3 * t0) / 2;
       return {
         templateId: "calc_parametric_basic_3",
-        statement: `媒介変数表示 $x=t^2,\\ y=t^3$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
+        statement: `移動体の軌道を媒介変数表示 $x=t^2,\\ y=t^3$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
         answerKind: "numeric",
         params: { t0, value },
       };
@@ -374,7 +374,7 @@ $t=${t0}$ のとき **${value}** です。
       const value = 2 * t0;
       return {
         templateId: "calc_parametric_basic_4",
-        statement: `媒介変数表示 $x=3t,\\ y=3t^2$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
+        statement: `移動体の軌道を媒介変数表示 $x=3t,\\ y=3t^2$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
         answerKind: "numeric",
         params: { t0, value },
       };
@@ -410,7 +410,7 @@ $t=${t0}$ のとき **${value}** です。
       const value = 6 * t0;
       return {
         templateId: "calc_parametric_basic_5",
-        statement: `媒介変数表示 $x=t,\\ y=3t^2$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
+        statement: `移動体の軌道を媒介変数表示 $x=t,\\ y=3t^2$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
         answerKind: "numeric",
         params: { t0, value },
       };
@@ -446,7 +446,7 @@ $t=${t0}$ のとき **${value}** です。
       const value = 4 * t0;
       return {
         templateId: "calc_parametric_basic_6",
-        statement: `媒介変数表示 $x=2t,\\ y=4t^2$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
+        statement: `移動体の軌道を媒介変数表示 $x=2t,\\ y=4t^2$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
         answerKind: "numeric",
         params: { t0, value },
       };
@@ -482,7 +482,7 @@ $t=${t0}$ のとき **${value}** です。
       const value = 1;
       return {
         templateId: "calc_parametric_basic_7",
-        statement: `媒介変数表示 $x=t^2,\\ y=t^2$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
+        statement: `移動体の軌道を媒介変数表示 $x=t^2,\\ y=t^2$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
         answerKind: "numeric",
         params: { t0, value },
       };
@@ -518,7 +518,7 @@ $t=${t0}$ のとき **1** です。
       const value = t0 / 2;
       return {
         templateId: "calc_parametric_basic_8",
-        statement: `媒介変数表示 $x=4t,\\ y=t^2$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
+        statement: `移動体の軌道を媒介変数表示 $x=4t,\\ y=t^2$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
         answerKind: "numeric",
         params: { t0, value },
       };
@@ -554,7 +554,7 @@ $t=${t0}$ のとき **${value}** です。
       const value = 2;
       return {
         templateId: "calc_parametric_basic_9",
-        statement: `媒介変数表示 $x=t^2,\\ y=2t^2$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
+        statement: `移動体の軌道を媒介変数表示 $x=t^2,\\ y=2t^2$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
         answerKind: "numeric",
         params: { t0, value },
       };
@@ -590,7 +590,7 @@ $t=${t0}$ のとき **2** です。
       const value = 3 * t0 * t0;
       return {
         templateId: "calc_parametric_basic_10",
-        statement: `媒介変数表示 $x=t,\\ y=t^3$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
+        statement: `移動体の軌道を媒介変数表示 $x=t,\\ y=t^3$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
         answerKind: "numeric",
         params: { t0, value },
       };
@@ -626,7 +626,7 @@ $t=${t0}$ のとき **${value}** です。
       const value = 10 * t0;
       return {
         templateId: "calc_parametric_basic_11",
-        statement: `媒介変数表示 $x=t,\\ y=5t^2$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
+        statement: `移動体の軌道を媒介変数表示 $x=t,\\ y=5t^2$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
         answerKind: "numeric",
         params: { t0, value },
       };
@@ -662,7 +662,7 @@ $t=${t0}$ のとき **${value}** です。
       const value = (2 * t0) / 3;
       return {
         templateId: "calc_parametric_basic_12",
-        statement: `媒介変数表示 $x=3t,\\ y=t^2$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
+        statement: `移動体の軌道を媒介変数表示 $x=3t,\\ y=t^2$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
         answerKind: "numeric",
         params: { t0, value },
       };
@@ -698,7 +698,7 @@ $t=${t0}$ のとき **${value}** です。
       const value = 3;
       return {
         templateId: "calc_parametric_basic_13",
-        statement: `媒介変数表示 $x=t^2,\\ y=3t^2$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
+        statement: `移動体の軌道を媒介変数表示 $x=t^2,\\ y=3t^2$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
         answerKind: "numeric",
         params: { t0, value },
       };
@@ -734,7 +734,7 @@ $t=${t0}$ のとき **3** です。
       const value = (3 * t0 * t0) / 2;
       return {
         templateId: "calc_parametric_basic_14",
-        statement: `媒介変数表示 $x=2t,\\ y=t^3$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
+        statement: `移動体の軌道を媒介変数表示 $x=2t,\\ y=t^3$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
         answerKind: "numeric",
         params: { t0, value },
       };
@@ -770,7 +770,7 @@ $t=${t0}$ のとき **${value}** です。
       const value = 2 * t0;
       return {
         templateId: "calc_parametric_basic_15",
-        statement: `媒介変数表示 $x=5t,\\ y=5t^2$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
+        statement: `移動体の軌道を媒介変数表示 $x=5t,\\ y=5t^2$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
         answerKind: "numeric",
         params: { t0, value },
       };
@@ -806,7 +806,7 @@ $t=${t0}$ のとき **${value}** です。
       const value = 8 * t0;
       return {
         templateId: "calc_parametric_basic_16",
-        statement: `媒介変数表示 $x=t,\\ y=4t^2$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
+        statement: `移動体の軌道を媒介変数表示 $x=t,\\ y=4t^2$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
         answerKind: "numeric",
         params: { t0, value },
       };
@@ -842,7 +842,7 @@ $t=${t0}$ のとき **${value}** です。
       const value = 2 * t0;
       return {
         templateId: "calc_parametric_basic_17",
-        statement: `媒介変数表示 $x=4t,\\ y=4t^2$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
+        statement: `移動体の軌道を媒介変数表示 $x=4t,\\ y=4t^2$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
         answerKind: "numeric",
         params: { t0, value },
       };
@@ -878,7 +878,7 @@ $t=${t0}$ のとき **${value}** です。
       const value = 4 * t0;
       return {
         templateId: "calc_parametric_basic_18",
-        statement: `媒介変数表示 $x=3t,\\ y=6t^2$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
+        statement: `移動体の軌道を媒介変数表示 $x=3t,\\ y=6t^2$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
         answerKind: "numeric",
         params: { t0, value },
       };
@@ -914,7 +914,7 @@ $t=${t0}$ のとき **${value}** です。
       const value = t0;
       return {
         templateId: "calc_parametric_basic_19",
-        statement: `媒介変数表示 $x=6t,\\ y=3t^2$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
+        statement: `移動体の軌道を媒介変数表示 $x=6t,\\ y=3t^2$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
         answerKind: "numeric",
         params: { t0, value },
       };
@@ -950,7 +950,7 @@ $t=${t0}$ のとき **${value}** です。
       const value = 4;
       return {
         templateId: "calc_parametric_basic_20",
-        statement: `媒介変数表示 $x=t^2,\\ y=4t^2$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
+        statement: `移動体の軌道を媒介変数表示 $x=t^2,\\ y=4t^2$ で表された曲線について、$t=${t0}$ における $\\dfrac{dy}{dx}$ を求めよ。`,
         answerKind: "numeric",
         params: { t0, value },
       };
