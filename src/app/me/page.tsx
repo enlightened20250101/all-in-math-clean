@@ -43,7 +43,7 @@ export default async function MyPage() {
   const { data: threads } = threadIds.length
     ? await sb.from("threads").select("id,title,slug").in("id", threadIds)
     : { data: [] as any[] };
-  const threadMap = new Map((threads ?? []).map((t: any) => [t.id, t]));
+  const threadMap: Map<string, any> = new Map((threads ?? []).map((t: any) => [String(t.id), t]));
 
   const name = profile?.display_name || "ユーザー";
   const avatar = profile?.avatar_url || "https://placehold.co/96x96?text=%E4%BA%BA";
