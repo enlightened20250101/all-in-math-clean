@@ -31,7 +31,9 @@ function buildTemplate(c: CenterCase): QuestionTemplate {
     generate() {
       return {
         templateId: c.id,
-        statement: `円 $${xShift}+${yShift}=${c.r}^2$ の中心を求めよ。`,
+        statement:
+          `円形の噴水の位置を求める場面を想定する。` +
+          `円 $${xShift}+${yShift}=${c.r}^2$ の中心を求めよ。`,
         answerKind: "choice",
         choices,
         params: { a: c.a, b: c.b, r: c.r },

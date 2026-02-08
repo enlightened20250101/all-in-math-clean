@@ -38,7 +38,9 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const params = buildParams();
       const exprX = shiftExpr("x", params.h);
       const exprY = shiftExpr("y", params.k);
-      const statement = `円 $(${exprX})^2+(${exprY})^2=${params.r ** 2}$ の中心の${params.ask === 1 ? "x" : "y"}座標を求めよ。`;
+      const statement =
+        `噴水の中心を原点からの座標で表すとする。` +
+        `円 $(${exprX})^2+(${exprY})^2=${params.r ** 2}$ の中心の${params.ask === 1 ? "x" : "y"}座標を求めよ。`;
       return {
         templateId: id,
         statement,

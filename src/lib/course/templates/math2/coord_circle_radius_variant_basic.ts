@@ -25,7 +25,9 @@ function buildTemplate(c: RadiusCase): QuestionTemplate {
     generate() {
       return {
         templateId: c.id,
-        statement: `円 ${xShift}^2+${yShift}^2=${c.r}^2 の半径を求めよ。`,
+        statement:
+          `円形の池を想定し、形を式で表す。` +
+          `円 ${xShift}^2+${yShift}^2=${c.r}^2 の半径を求めよ。`,
         answerKind: "numeric",
         params: { a: c.a, b: c.b, r: c.r },
       };

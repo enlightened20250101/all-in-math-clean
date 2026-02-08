@@ -41,7 +41,9 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `中心 $C(${params.h},${params.k})$ をもち、点 $P(${params.x1},${params.y1})$ を通る円の半径を求めよ。`;
+      const statement =
+        `水面に広がる波を円とみなし、中心 $C(${params.h},${params.k})$ をもつ。` +
+        `点 $P(${params.x1},${params.y1})$ を通る円の半径を求めよ。`;
       return {
         templateId: id,
         statement,

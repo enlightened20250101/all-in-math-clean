@@ -25,7 +25,9 @@ function buildTemplate(c: Case): QuestionTemplate {
     generate() {
       return {
         templateId: c.id,
-        statement: `円 $x^2+y^2${D >= 0 ? `+${D}` : D}x${E >= 0 ? `+${E}` : E}y${F >= 0 ? `+${F}` : F}=0$ の半径を求めよ。`,
+        statement:
+          `測量で得た一般形から円の大きさを求める場面を想定する。` +
+          `円 $x^2+y^2${D >= 0 ? `+${D}` : D}x${E >= 0 ? `+${E}` : E}y${F >= 0 ? `+${F}` : F}=0$ の半径を求めよ。`,
         answerKind: "numeric",
         params: { r: c.r },
       };

@@ -33,7 +33,9 @@ function buildTemplate(c: Case): QuestionTemplate {
     generate() {
       return {
         templateId: c.id,
-        statement: `円 $x^2+y^2${D >= 0 ? `+${D}` : D}x${E >= 0 ? `+${E}` : E}y${F >= 0 ? `+${F}` : F}=0$ の中心を選べ。`,
+        statement:
+          `円形の設備の位置を一般形から読み取る場面を想定する。` +
+          `円 $x^2+y^2${D >= 0 ? `+${D}` : D}x${E >= 0 ? `+${E}` : E}y${F >= 0 ? `+${F}` : F}=0$ の中心を選べ。`,
         answerKind: "choice",
         choices,
         params: {},
