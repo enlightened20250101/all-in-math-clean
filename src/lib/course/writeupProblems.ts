@@ -3193,6 +3193,216 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "区間の中点などで値を比較し、上にある関数から下にある関数を引く。",
     level: 1,
   },
+  {
+    id: "writeup_quad_param_range_1",
+    topicId: "quad_inequality_basic",
+    title: "パラメータと判別式",
+    statement:
+      "実数 $a$ について、不等式 $x^2-2ax+a+3\\ge 0$ が全ての実数 $x$ で成り立つような $a$ の範囲を求めよ。",
+    rubric: [
+      "二次式が常に非負になる条件（判別式 $\\le 0$）を使う方針が書けている",
+      "判別式を $a$ について整理している",
+      "範囲を結論として示している",
+    ],
+    solution:
+      "判別式 $D=( -2a)^2-4(a+3)=4a^2-4a-12\\le 0$ より $a^2-a-3\\le 0$。したがって $\\frac{1-\\sqrt{13}}{2}\\le a\\le \\frac{1+\\sqrt{13}}{2}$。",
+    level: 3,
+  },
+  {
+    id: "writeup_quad_points_min_1",
+    topicId: "quad_maxmin_basic",
+    title: "2点通過と最小値",
+    statement:
+      "二次関数 $y=ax^2+bx+c$ が点 $(1,2),(3,0)$ を通るとき、$y$ の最小値を求めよ。",
+    rubric: [
+      "2点を代入して $a,b,c$ の関係式を立てている",
+      "平方完成または軸で最小値を求める方針を示している",
+      "最小値を結論として示している",
+    ],
+    solution:
+      "条件より $a+b+c=2$, $9a+3b+c=0$。差を取って $8a+2b=-2$ なので $4a+b=-1$、よって $b=-1-4a$。すると $c=2-a-b=3+3a$。よって $y=a(x^2-4x+3)-x+3+3a=a(x-2)^2+(-x+3-a)$. 頂点は $x=2$ で $y= a(0)+(-2+3-a)=1-a$。また $a>0$ のとき最小値は $1-a$。$a<0$ なら最大値なので不適、よって $a>0$ を満たすとき最小値は $1-a$。",
+    level: 3,
+  },
+  {
+    id: "writeup_combi_restriction_1",
+    topicId: "combi_conditions_basic",
+    title: "条件付き組合せ",
+    statement:
+      "6人の中から3人を選ぶ。A,Bは同時に選ばれず、Cは必ず選ばれるときの選び方を求めよ。",
+    rubric: [
+      "Cを固定する方針を書いている",
+      "A,Bの条件を場合分けして数えている",
+      "合計の選び方を結論として示している",
+    ],
+    solution:
+      "Cを固定し残り2人を選ぶ。Aを含む場合はBを除いて残り3人から1人選ぶので $3$ 通り。Aを含まない場合はBを含む/含まないで、A,Bを除いた3人から2人選ぶので $\\binom{3}{2}=3$ 通り。合計 $6$ 通り。",
+    level: 3,
+  },
+  {
+    id: "writeup_prob_condition_1",
+    topicId: "prob_combi_basic",
+    title: "条件付き確率",
+    statement:
+      "赤球3個・白球2個の袋から2個同時に取り出す。少なくとも1個が赤であるとき、2個とも赤である確率を求めよ。",
+    rubric: [
+      "条件付き確率 $P(A\\mid B)=\\frac{P(A\\cap B)}{P(B)}$ を用いている",
+      "全事象と条件事象を組合せで数えている",
+      "計算結果を結論として示している",
+    ],
+    solution:
+      "全体は $\\binom{5}{2}=10$。2個とも赤は $\\binom{3}{2}=3$。少なくとも1個赤は $10-\\binom{2}{2}=9$。よって $\\frac{3}{9}=\\frac{1}{3}$。",
+    level: 3,
+  },
+  {
+    id: "writeup_int_diophantine_1",
+    topicId: "int_diophantine_basic",
+    title: "一次不定方程式の解",
+    statement:
+      "一次不定方程式 $3x+5y=1$ の整数解を求め、一般解を示せ。",
+    rubric: [
+      "1組の解を見つける方針が書けている",
+      "一般解を $x=x_0+5t, y=y_0-3t$ の形で示している",
+      "整数解であることを明記している",
+    ],
+    solution:
+      "$3(2)+5(-1)=1$ より $(x_0,y_0)=(2,-1)$。一般解は $x=2+5t, y=-1-3t$（$t\\in\\mathbb{Z}$）。",
+    level: 3,
+  },
+  {
+    id: "writeup_exp_log_param_1",
+    topicId: "exp_log_equations_basic",
+    title: "対数方程式（パラメータ）",
+    statement:
+      "実数 $a>1$ とする。方程式 $\\log_a(x-1)+\\log_a(x-3)=1$ の解を求めよ。",
+    rubric: [
+      "定義域 $x>3$ を確認している",
+      "対数の和を積にまとめて解いている",
+      "解が定義域を満たすか確認している",
+    ],
+    solution:
+      "定義域は $x>3$。左辺は $\\log_a((x-1)(x-3))=1$ より $(x-1)(x-3)=a$。$x^2-4x+3-a=0$ を解いて $x=2\\pm\\sqrt{1+a}$。定義域より $x=2+\\sqrt{1+a}$。",
+    level: 3,
+  },
+  {
+    id: "writeup_trig_equation_1",
+    topicId: "trig_equations_basic",
+    title: "三角方程式の解",
+    statement:
+      "$0\\le \\theta<2\\pi$ で $\\sin\\theta+\\cos\\theta=\\frac{1}{2}$ を満たす $\\theta$ を求めよ。",
+    rubric: [
+      "合成または変形で $\\sin(\\theta+\\alpha)$ にまとめている",
+      "解の範囲を考えて列挙している",
+      "結論を範囲内の角で示している",
+    ],
+    solution:
+      "$\\sin\\theta+\\cos\\theta=\\sqrt{2}\\sin(\\theta+\\frac{\\pi}{4})=\\frac{1}{2}$ より $\\sin(\\theta+\\frac{\\pi}{4})=\\frac{1}{2\\sqrt{2}}$。$0\\le\\theta<2\\pi$ を満たす解を列挙する。",
+    level: 3,
+  },
+  {
+    id: "writeup_calc_increasing_param_1",
+    topicId: "calculus_increasing_basic",
+    title: "増減とパラメータ",
+    statement:
+      "関数 $f(x)=x^3-3x^2+(m-2)x+1$ が区間 $[0,2]$ で単調増加となるような $m$ の範囲を求めよ。",
+    rubric: [
+      "導関数 $f'(x)$ を求めている",
+      "区間で $f'(x)\\ge 0$ の条件を立てている",
+      "範囲を結論として示している",
+    ],
+    solution:
+      "$f'(x)=3x^2-6x+(m-2)$。$[0,2]$ で最小は $x=1$ なので $f'(1)=m-5\\ge 0$ より $m\\ge 5$。",
+    level: 3,
+  },
+  {
+    id: "writeup_seq_recurrence_1",
+    topicId: "sequence_recurrence_basic",
+    title: "漸化式と一般項",
+    statement:
+      "数列 $a_{n+1}=2a_n+3$、$a_1=1$ の一般項を求めよ。",
+    rubric: [
+      "一次線形漸化式の解法（特解＋一般解）を示している",
+      "初期条件で定数を決めている",
+      "一般項を結論として示している",
+    ],
+    solution:
+      "定数解 $a= -3$。$b_n=a_n+3$ とおくと $b_{n+1}=2b_n$、$b_1=4$。よって $b_n=4\\cdot2^{n-1}$、$a_n=4\\cdot2^{n-1}-3$。",
+    level: 3,
+  },
+  {
+    id: "writeup_stats_regression_1",
+    topicId: "stats_regression_basic",
+    title: "回帰直線の利用",
+    statement:
+      "回帰直線 $y=0.8x+5$ が得られたとする。$x=30$ のときの予測値 $y$ を求め、解釈を述べよ。",
+    rubric: [
+      "回帰直線に代入して予測値を計算している",
+      "予測値がデータの推定であることを述べている",
+      "結論が簡潔に書けている",
+    ],
+    solution:
+      "$y=0.8\\cdot30+5=29$。$x=30$ のときの推定値は $29$ となる。",
+    level: 3,
+  },
+  {
+    id: "writeup_calc_area_abs_1",
+    topicId: "calc_integral_advanced_basic",
+    title: "絶対値を含む面積",
+    statement:
+      "曲線 $y=x^3-3x$ と $x$ 軸で囲まれる部分の面積を求めよ。",
+    rubric: [
+      "交点を求めて区間を分けている",
+      "符号に応じて積分を分割している",
+      "面積として正の値で結論を示している",
+    ],
+    solution:
+      "$x^3-3x=0$ より $x=-\\sqrt{3},0,\\sqrt{3}$。符号が変わるので区間を分割し、面積は $2\\int_0^{\\sqrt{3}}(3x-x^3)dx$。",
+    level: 3,
+  },
+  {
+    id: "writeup_calc_tangent_param_1",
+    topicId: "calc_derivative_advanced_basic",
+    title: "接線条件（パラメータ）",
+    statement:
+      "関数 $f(x)=x^3+ax^2+bx$ の $x=1$ と $x=2$ における接線が平行であるとき、$a,b$ を求めよ。",
+    rubric: [
+      "導関数から接線の傾きを求めている",
+      "平行条件 $f'(1)=f'(2)$ を立てている",
+      "連立を解いて $a,b$ を結論として示している",
+    ],
+    solution:
+      "$f'(x)=3x^2+2ax+b$。$f'(1)=3+2a+b$, $f'(2)=12+4a+b$ より $3+2a+b=12+4a+b$、$a=-\\frac{9}{2}$。",
+    level: 3,
+  },
+  {
+    id: "writeup_complex_locus_1",
+    topicId: "complex_locus_circle_radius_basic",
+    title: "等距離の軌跡",
+    statement:
+      "$|z-(1+i)|=|z-(3-i)|$ を満たす複素数 $z$ の軌跡を求めよ。",
+    rubric: [
+      "距離の等式を実数・虚数で整理している",
+      "2点の垂直二等分線になることを示している",
+      "結論を直線の式で示している",
+    ],
+    solution:
+      "$z=x+iy$ とすると $(x-1)^2+(y-1)^2=(x-3)^2+(y+1)^2$。整理して $x-y=2$。",
+    level: 3,
+  },
+  {
+    id: "writeup_vector_plane_dist_1",
+    topicId: "vector_plane_basic",
+    title: "空間内の距離",
+    statement:
+      "点 $P(1,2,3)$ と平面 $x+2y-2z=4$ の距離を求めよ。",
+    rubric: [
+      "法線ベクトルを用いる方針を書いている",
+      "距離公式 $\\frac{|ax_0+by_0+cz_0-d|}{\\sqrt{a^2+b^2+c^2}}$ を使っている",
+      "数値を代入して結論を示している",
+    ],
+    solution:
+      "距離は $\\frac{|1+4-6-4|}{\\sqrt{1^2+2^2+(-2)^2}}=\\frac{5}{3}$。",
+    level: 3,
+  },
 ];
 
 export function getWriteupProblemsByTopic(topicId?: TopicId) {
