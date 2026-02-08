@@ -8,6 +8,7 @@ type ChoiceCase = {
   base: number;
   exp: number;
   choices: string[];
+  context?: string;
 };
 
 type CongCase = {
@@ -17,6 +18,7 @@ type CongCase = {
   rem: number;
   limit: number;
   kind: "min_ge" | "max_le";
+  context?: string;
 };
 
 function lastDigit(base: number, exp: number): number {
@@ -42,9 +44,10 @@ function buildChoice(c: ChoiceCase): QuestionTemplate {
       tags: ["integer", "mod", "last-digit"],
     },
     generate() {
+      const lead = c.context ? `${c.context}\n\n` : "";
       return {
         templateId: c.id,
-        statement: `$${c.base}^${c.exp}$ の下1桁を選べ。`,
+        statement: `${lead}$${c.base}^${c.exp}$ の下1桁を選べ。`,
         answerKind: "choice",
         choices: c.choices,
         params: {},
@@ -86,9 +89,10 @@ function buildCong(c: CongCase): QuestionTemplate {
       const cond = `$x \\equiv ${c.rem} \\pmod{${c.mod}}$`;
       const bound = c.kind === "min_ge" ? `$x \\ge ${c.limit}$` : `$x \\le ${c.limit}$`;
       const tail = c.kind === "min_ge" ? "最小の $x$" : "最大の $x$";
+      const lead = c.context ? `${c.context}\n\n` : "";
       return {
         templateId: c.id,
-        statement: `${cond} かつ ${bound} を満たす${tail}を求めよ。`,
+        statement: `${lead}${cond} かつ ${bound} を満たす${tail}を求めよ。`,
         answerKind: "numeric",
         params: {},
       };
@@ -106,10 +110,38 @@ function buildCong(c: CongCase): QuestionTemplate {
 }
 
 const CHOICE_CASES: ChoiceCase[] = [
-  { id: "int_mod_1", title: "下1桁 2^5", base: 2, exp: 5, choices: ["2", "4", "6", "8"] },
-  { id: "int_mod_2", title: "下1桁 2^7", base: 2, exp: 7, choices: ["2", "4", "6", "8"] },
-  { id: "int_mod_3", title: "下1桁 3^4", base: 3, exp: 4, choices: ["1", "3", "7", "9"] },
-  { id: "int_mod_4", title: "下1桁 3^5", base: 3, exp: 5, choices: ["1", "3", "7", "9"] },
+  {
+    id: "int_mod_1",
+    title: "下1桁 2^5",
+    context: "2の累乗は下1桁が周期的に繰り返される。",
+    base: 2,
+    exp: 5,
+    choices: ["2", "4", "6", "8"],
+  },
+  {
+    id: "int_mod_2",
+    title: "下1桁 2^7",
+    context: "2の累乗の周期（2,4,8,6）を利用する。",
+    base: 2,
+    exp: 7,
+    choices: ["2", "4", "6", "8"],
+  },
+  {
+    id: "int_mod_3",
+    title: "下1桁 3^4",
+    context: "3の累乗の下1桁が4周期で回ることに注目する。",
+    base: 3,
+    exp: 4,
+    choices: ["1", "3", "7", "9"],
+  },
+  {
+    id: "int_mod_4",
+    title: "下1桁 3^5",
+    context: "3の累乗の周期を使って指数を割り算する。",
+    base: 3,
+    exp: 5,
+    choices: ["1", "3", "7", "9"],
+  },
   { id: "int_mod_5", title: "下1桁 4^3", base: 4, exp: 3, choices: ["4", "6", "8", "2"] },
   { id: "int_mod_6", title: "下1桁 5^7", base: 5, exp: 7, choices: ["0", "5", "2", "8"] },
   { id: "int_mod_7", title: "下1桁 6^8", base: 6, exp: 8, choices: ["6", "4", "8", "2"] },
@@ -121,10 +153,42 @@ const CHOICE_CASES: ChoiceCase[] = [
 ];
 
 const CONG_CASES: CongCase[] = [
-  { id: "int_cong_1", title: "合同 最小 20以上", mod: 5, rem: 2, limit: 20, kind: "min_ge" },
-  { id: "int_cong_2", title: "合同 最小 30以上", mod: 6, rem: 1, limit: 30, kind: "min_ge" },
-  { id: "int_cong_3", title: "合同 最小 40以上", mod: 7, rem: 3, limit: 40, kind: "min_ge" },
-  { id: "int_cong_4", title: "合同 最小 50以上", mod: 8, rem: 5, limit: 50, kind: "min_ge" },
+  {
+    id: "int_cong_1",
+    title: "合同 最小 20以上",
+    context: "5で割ると2余る数を、20以上で最小から探す。",
+    mod: 5,
+    rem: 2,
+    limit: 20,
+    kind: "min_ge",
+  },
+  {
+    id: "int_cong_2",
+    title: "合同 最小 30以上",
+    context: "6で割ると1余る数を30以上で最小から求める。",
+    mod: 6,
+    rem: 1,
+    limit: 30,
+    kind: "min_ge",
+  },
+  {
+    id: "int_cong_3",
+    title: "合同 最小 40以上",
+    context: "7で割ると3余る数を40以上で最小にする。",
+    mod: 7,
+    rem: 3,
+    limit: 40,
+    kind: "min_ge",
+  },
+  {
+    id: "int_cong_4",
+    title: "合同 最小 50以上",
+    context: "8で割ると5余る数を50以上で探す。",
+    mod: 8,
+    rem: 5,
+    limit: 50,
+    kind: "min_ge",
+  },
   { id: "int_cong_5", title: "合同 最大 60以下", mod: 5, rem: 2, limit: 60, kind: "max_le" },
   { id: "int_cong_6", title: "合同 最大 70以下", mod: 6, rem: 1, limit: 70, kind: "max_le" },
   { id: "int_cong_7", title: "合同 最大 80以下", mod: 7, rem: 3, limit: 80, kind: "max_le" },
