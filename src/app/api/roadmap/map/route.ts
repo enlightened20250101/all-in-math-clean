@@ -33,7 +33,7 @@ export async function GET() {
 
     if (rErr) return NextResponse.json({ ok:false, error:rErr.message }, { status:500 });
 
-    const roadmaps = (roads || []).map(r => ({
+    const roadmaps = (roads || []).map((r: any) => ({
       roadmap_id: r.id,
       goal_id: r.goal_id || "(no-title)",
       nodes: (Array.isArray(r.nodes_json) ? r.nodes_json : []) as RMNode[]
