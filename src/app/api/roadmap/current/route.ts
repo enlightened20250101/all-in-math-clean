@@ -91,7 +91,7 @@ export async function GET() {
     if (g0) {
       // overdue → learning → not_started の順で、priority降順、最後にtitle
       const pool = g0.items
-        .filter(it => it.status !== "done")
+        .filter((it: any) => it.status !== "done")
         .slice()
         .sort((a, b) => {
           const order = (s: EnrichedItem["status"]) =>
