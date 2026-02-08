@@ -8,11 +8,26 @@ export async function supabaseServerReadOnly() {
   const supabaseUrl =
     process.env.NEXT_PUBLIC_SUPABASE_URL ||
     process.env.SUPABASE_URL ||
-    "https://invalid.local";
+    "";
   const supabaseKey =
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
     process.env.SUPABASE_ANON_KEY ||
-    "invalid";
+    "";
+
+  if (!supabaseUrl || !supabaseKey) {
+    return {
+      auth: {
+        getUser: async () => ({ data: { user: null }, error: { message: "supabase_disabled" } }),
+      },
+      from: () => ({
+        select: () => ({ data: null, error: { message: "supabase_disabled" } }),
+        insert: () => ({ data: null, error: { message: "supabase_disabled" } }),
+        update: () => ({ data: null, error: { message: "supabase_disabled" } }),
+        upsert: () => ({ data: null, error: { message: "supabase_disabled" } }),
+      }),
+      rpc: async () => ({ data: null, error: { message: "supabase_disabled" } }),
+    } as any;
+  }
 
   // 1) sb-access-token（httpOnly）を最優先
   let access = cookieStore.get("sb-access-token")?.value || null;
@@ -21,34 +36,32 @@ export async function supabaseServerReadOnly() {
   if (!access) {
     const raw = cookieStore.get("supabase-auth-token")?.value;
     if (raw) {
-      try { access = JSON.parse(raw)?.access_token || null; } catch {}
+      try {
+        access = JSON.parse(raw)?.access_token || null;
+      } catch {}
     }
   }
 
-  return createServerClient(
-    supabaseUrl,
-    supabaseKey,
-    {
-      // cookies.get は refresh 系を SSR に見せない（勝手なリフレッシュ防止）
-      cookies: {
-        getAll: () =>
-          cookieStore
-            .getAll()
-            .filter((c) => {
-              const k = c.name.toLowerCase();
-              return k !== "sb-refresh-token" && k !== "sb:token";
-            })
-            .map((c) => ({ name: c.name, value: c.value })),
-        setAll: async () => {},
-      },
-      // ★ 決定打：Supabase クライアントの「送信ヘッダ」に常時 Authorization を差す
-      global: {
-        headers: access ? { Authorization: `Bearer ${access}` } : {},
-      },
-      // （任意）受信側のヘッダ参照はそのまま維持
-      // headers は SSR client options には存在しないため渡さない
-    }
-  );
+  return createServerClient(supabaseUrl, supabaseKey, {
+    // cookies.get は refresh 系を SSR に見せない（勝手なリフレッシュ防止）
+    cookies: {
+      getAll: () =>
+        cookieStore
+          .getAll()
+          .filter((c) => {
+            const k = c.name.toLowerCase();
+            return k !== "sb-refresh-token" && k !== "sb:token";
+          })
+          .map((c) => ({ name: c.name, value: c.value })),
+      setAll: async () => {},
+    },
+    // ★ 決定打：Supabase クライアントの「送信ヘッダ」に常時 Authorization を差す
+    global: {
+      headers: access ? { Authorization: `Bearer ${access}` } : {},
+    },
+    // （任意）受信側のヘッダ参照はそのまま維持
+    // headers は SSR client options には存在しないため渡さない
+  });
 }
 
 /** Route Handler / Action 向け（書き込み可）も同様に */
@@ -57,43 +70,56 @@ export async function supabaseServerAction() {
   const supabaseUrl =
     process.env.NEXT_PUBLIC_SUPABASE_URL ||
     process.env.SUPABASE_URL ||
-    "https://invalid.local";
+    "";
   const supabaseKey =
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
     process.env.SUPABASE_ANON_KEY ||
-    "invalid";
+    "";
+
+  if (!supabaseUrl || !supabaseKey) {
+    return {
+      auth: {
+        getUser: async () => ({ data: { user: null }, error: { message: "supabase_disabled" } }),
+      },
+      from: () => ({
+        select: () => ({ data: null, error: { message: "supabase_disabled" } }),
+        insert: () => ({ data: null, error: { message: "supabase_disabled" } }),
+        update: () => ({ data: null, error: { message: "supabase_disabled" } }),
+        upsert: () => ({ data: null, error: { message: "supabase_disabled" } }),
+      }),
+      rpc: async () => ({ data: null, error: { message: "supabase_disabled" } }),
+    } as any;
+  }
 
   let access = cookieStore.get("sb-access-token")?.value || null;
   if (!access) {
     const raw = cookieStore.get("supabase-auth-token")?.value;
     if (raw) {
-      try { access = JSON.parse(raw)?.access_token || null; } catch {}
+      try {
+        access = JSON.parse(raw)?.access_token || null;
+      } catch {}
     }
   }
 
-  return createServerClient(
-    supabaseUrl,
-    supabaseKey,
-    {
-      cookies: {
-        getAll: () =>
-          cookieStore
-            .getAll()
-            .filter((c) => {
-              const k = c.name.toLowerCase();
-              return k !== "sb-refresh-token" && k !== "sb:token";
-            })
-            .map((c) => ({ name: c.name, value: c.value })),
-        setAll: (cookiesToSet) => {
-          cookiesToSet.forEach(({ name, value, options }) => {
-            cookieStore.set({ name, value, ...options });
-          });
-        },
+  return createServerClient(supabaseUrl, supabaseKey, {
+    cookies: {
+      getAll: () =>
+        cookieStore
+          .getAll()
+          .filter((c) => {
+            const k = c.name.toLowerCase();
+            return k !== "sb-refresh-token" && k !== "sb:token";
+          })
+          .map((c) => ({ name: c.name, value: c.value })),
+      setAll: (cookiesToSet) => {
+        cookiesToSet.forEach(({ name, value, options }) => {
+          cookieStore.set({ name, value, ...options });
+        });
       },
-      global: {
-        headers: access ? { Authorization: `Bearer ${access}` } : {},
-      },
-      // headers は SSR client options には存在しないため渡さない
-    }
-  );
+    },
+    global: {
+      headers: access ? { Authorization: `Bearer ${access}` } : {},
+    },
+    // headers は SSR client options には存在しないため渡さない
+  });
 }
