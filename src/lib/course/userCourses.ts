@@ -15,6 +15,8 @@ export type UserCourse = {
   masteredTopicIds?: string[] | null;
   isActive: boolean;
   isArchived: boolean;
+  isCompleted?: boolean;
+  completedAt?: string | null;
   createdAt?: string | null;
   updatedAt?: string | null;
 };

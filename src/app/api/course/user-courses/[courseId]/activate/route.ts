@@ -22,6 +22,20 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: "Auth required" }, { status: 401 });
   }
 
+  const { data: targetCourse, error: selErr } = await supabase
+    .from("course_user_courses")
+    .select("id, is_completed")
+    .eq("id", courseId)
+    .eq("user_id", user.id)
+    .single();
+
+  if (selErr || !targetCourse) {
+    return NextResponse.json({ ok: false, error: "Course not found" }, { status: 404 });
+  }
+  if (targetCourse.is_completed) {
+    return NextResponse.json({ ok: false, error: "course_completed" }, { status: 400 });
+  }
+
   const { error: clearErr } = await supabase
     .from("course_user_courses")
     .update({ is_active: false, updated_at: new Date().toISOString() })

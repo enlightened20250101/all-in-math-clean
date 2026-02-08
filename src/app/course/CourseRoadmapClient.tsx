@@ -225,9 +225,17 @@ export default function CourseRoadmapClient() {
       /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
     return userCourses.filter((course) => !!course.id && uuidRe.test(String(course.id)));
   }, [userCourses]);
+  const activeUserCourses = useMemo(
+    () => safeUserCourses.filter((course) => !course.isCompleted),
+    [safeUserCourses]
+  );
+  const completedUserCourses = useMemo(
+    () => safeUserCourses.filter((course) => course.isCompleted),
+    [safeUserCourses]
+  );
   const activeUserCourse = useMemo(
-    () => userCourses.find((course) => course.isActive) ?? null,
-    [userCourses]
+    () => activeUserCourses.find((course) => course.isActive) ?? null,
+    [activeUserCourses]
   );
   useEffect(() => {
     if (!activeUserCourse) return;
@@ -874,12 +882,12 @@ export default function CourseRoadmapClient() {
             {openMenuKey === "course" ? (
               <div className="absolute left-0 top-10 z-10 w-[min(14rem,calc(100vw-2rem))] max-w-[calc(100vw-2rem)] rounded-[18px] border border-slate-400/80 bg-white p-2 shadow-lg sm:w-56 max-h-[60vh] overflow-auto sm:left-full sm:top-0 sm:ml-2">
                 <div className="space-y-1 text-[10px] text-slate-600">
-                  {safeUserCourses.length === 0 && !userCoursesLoading ? (
+                  {activeUserCourses.length === 0 && !userCoursesLoading ? (
                     <div className="rounded-[12px] border border-dashed bg-slate-50 px-3 py-2 text-[10px] text-slate-500">
                       まだ学習中のコースがありません
                     </div>
                   ) : null}
-                  {safeUserCourses.map((course) => {
+                  {activeUserCourses.map((course) => {
                     const isActive = course.isActive;
                     const baseLabel = courseMap.get(course.baseCourseId)?.title ?? course.baseCourseId;
                     return (
@@ -961,6 +969,28 @@ export default function CourseRoadmapClient() {
                       </button>
                     );
                   })}
+                  {completedUserCourses.length ? (
+                    <div className="mt-2 rounded-[12px] border border-slate-200 bg-slate-50 px-3 py-2 text-[9px] text-slate-500">
+                      修了済みコース
+                    </div>
+                  ) : null}
+                  {completedUserCourses.map((course) => {
+                    const baseLabel = courseMap.get(course.baseCourseId)?.title ?? course.baseCourseId;
+                    return (
+                      <div
+                        key={course.id}
+                        className="flex w-full items-center justify-between rounded-[14px] border border-slate-200 bg-white px-3 py-2 text-left text-[9px] text-slate-500"
+                      >
+                        <span className="flex flex-col gap-0.5">
+                          <span className="text-[10px] font-semibold">{course.name}</span>
+                          <span className="text-[9px] text-slate-400">{baseLabel}</span>
+                        </span>
+                        <span className="rounded-full border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[8px] text-emerald-700">
+                          修了
+                        </span>
+                      </div>
+                    );
+                  })}
                 </div>
                 <div className="mt-2 border-t border-slate-200 pt-2">
                   <Link
@@ -976,6 +1006,14 @@ export default function CourseRoadmapClient() {
           <span className={`rounded-full border px-3 py-1 ${theme.chip}`}>目標: {settings.goal}点</span>
           {extra.targetType ? (
             <span className={`rounded-full border px-3 py-1 ${theme.chip}`}>{extra.targetType}</span>
+          ) : null}
+          {activeUserCourse && !activeUserCourse.isCompleted ? (
+            <Link
+              href={`/course/final?courseId=${encodeURIComponent(activeUserCourse.id)}`}
+              className="inline-flex items-center gap-2 rounded-full border border-slate-400/80 bg-white px-3 py-1.5 text-[10px] text-slate-700 shadow-sm hover:bg-slate-50 transition"
+            >
+              修了テストへ
+            </Link>
           ) : null}
         </div>
       </div>
@@ -998,7 +1036,7 @@ export default function CourseRoadmapClient() {
         ) : null}
       </div>
 
-      {!userCoursesLoading && userCourses.length === 0 ? (
+      {!userCoursesLoading && activeUserCourses.length === 0 ? (
         <div className="rounded-[24px] border border-dashed border-slate-300 bg-white/90 px-4 py-6 text-center text-[10px] sm:text-sm text-slate-500">
           <div className="font-semibold text-slate-700">まだ学習中のコースがありません</div>
           <div className="mt-2">コースを作成するとロードマップが表示されます。</div>

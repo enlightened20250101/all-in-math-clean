@@ -31,7 +31,7 @@ export async function GET() {
   const { data, error: selErr } = await supabase
     .from("course_user_courses")
     .select(
-      "id, name, base_course_id, goal, start_topic_id, target_topic_id, target_type, target_name, target_date, weekly_hours, note, electives, level, mastered_topic_ids, is_active, is_archived, created_at, updated_at"
+      "id, name, base_course_id, goal, start_topic_id, target_topic_id, target_type, target_name, target_date, weekly_hours, note, electives, level, mastered_topic_ids, is_active, is_archived, is_completed, completed_at, created_at, updated_at"
     )
     .eq("user_id", user.id)
     .eq("is_archived", false)
@@ -59,6 +59,8 @@ export async function GET() {
     masteredTopicIds: row.mastered_topic_ids ?? [],
     isActive: row.is_active,
     isArchived: row.is_archived,
+    isCompleted: row.is_completed ?? false,
+    completedAt: row.completed_at ?? null,
     createdAt: row.created_at,
     updatedAt: row.updated_at,
   }));

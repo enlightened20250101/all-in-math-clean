@@ -29,22 +29,27 @@ type GradeResult = {
   partResults?: Record<string, { isCorrect: boolean; correctAnswer: string }>;
 };
 
-type Mode = 'practice' | 'review';
+type Mode = 'practice' | 'review' | 'final';
 
 export default function PracticeSessionClient({
   topicId,
   mode = 'practice',
   maxQuestions,
   topicPool,
+  onFinalComplete,
+  finalPassRate = 0.7,
 }: {
   topicId: string;
   mode?: Mode;
   maxQuestions?: number;
   topicPool?: string[];
+  onFinalComplete?: (result: { correct: number; total: number; passed: boolean }) => void;
+  finalPassRate?: number;
 }) {
   const searchParams = useSearchParams();
   const courseParam = searchParams.get("course");
   const isReview = mode === 'review';
+  const isFinal = mode === 'final';
   const isPooled = !!topicPool?.length;
   const poolKey = useMemo(() => (topicPool?.length ? topicPool.join("|") : topicId), [topicPool, topicId]);
   const storageKey = useMemo(
@@ -57,6 +62,8 @@ export default function PracticeSessionClient({
   const REVIEW_MAX_QUESTIONS =
     Number.isFinite(maxQuestions) && (maxQuestions as number) > 0 ? (maxQuestions as number) : 10; // 念のため上限
   const isQuickMode = Number.isFinite(maxQuestions) && (maxQuestions as number) > 0;
+  const FINAL_TOTAL =
+    Number.isFinite(maxQuestions) && (maxQuestions as number) > 0 ? (maxQuestions as number) : 10;
 
   const [loading, setLoading] = useState(false);
   const [question, setQuestion] = useState<Question | null>(null);
@@ -76,6 +83,8 @@ export default function PracticeSessionClient({
   const [answeredCount, setAnsweredCount] = useState(0);
   const [correctStreak, setCorrectStreak] = useState(0);
   const [reviewDone, setReviewDone] = useState(false);
+  const [finalDone, setFinalDone] = useState(false);
+  const [finalCorrect, setFinalCorrect] = useState(0);
   const [finalizeLoading, setFinalizeLoading] = useState(false);
   const [mood, setMood] = useState<"focus" | "review" | "light">("focus");
   const [focusMode, setFocusMode] = useState(false);
@@ -91,16 +100,17 @@ export default function PracticeSessionClient({
   }, [toast]);
 
   // 「次の問題へ」押下可否（採点前に次へ行けないように）
+  const sessionDone = isReview ? reviewDone : isFinal ? finalDone : false;
   const canGoNext = useMemo(() => {
     if (!question) return false;
     if (loading) return false;
-    if (isReview) return !!grade && !reviewDone; // review中は採点後のみ次へ
+    if (isReview || isFinal) return !!grade && !sessionDone; // review/final中は採点後のみ次へ
     return true; // practiceは今まで通り
-  }, [question, loading, isReview, grade, reviewDone]);
+  }, [question, loading, isReview, isFinal, grade, sessionDone]);
 
   const showQuickComplete = isQuickMode && reviewDone;
   const fetchQuestion = async () => {
-    if (reviewDone) return;
+    if (sessionDone) return;
 
     setLoading(true);
     setGrade(null);
@@ -179,6 +189,8 @@ export default function PracticeSessionClient({
     setAnsweredCount(0);
     setCorrectStreak(0);
     setReviewDone(false);
+    setFinalDone(false);
+    setFinalCorrect(0);
     if (typeof window !== "undefined") {
       try {
         const raw = window.localStorage.getItem(storageKey);
@@ -408,6 +420,10 @@ export default function PracticeSessionClient({
       else nextStreak = 0;
 
       setCorrectStreak(nextStreak);
+      const nextFinalCorrect = finalCorrect + (data.isCorrect ? 1 : 0);
+      if (isFinal) {
+        setFinalCorrect(nextFinalCorrect);
+      }
 
       // ===== attempts保存（採点成功後） =====
       // ★ 重要：SRS更新は「復習セッション完了の最後の1回」だけにしたい
@@ -436,6 +452,16 @@ export default function PracticeSessionClient({
         if (nextAnswered >= REVIEW_MAX_QUESTIONS) {
           // 上限に達したら一旦終了扱い（ユーザーを詰ませない）
           setReviewDone(true);
+          return;
+        }
+      }
+      if (isFinal) {
+        if (nextAnswered >= FINAL_TOTAL) {
+          setFinalDone(true);
+          if (onFinalComplete) {
+            const passed = nextFinalCorrect / FINAL_TOTAL >= finalPassRate;
+            onFinalComplete({ correct: nextFinalCorrect, total: FINAL_TOTAL, passed });
+          }
           return;
         }
       }
@@ -471,6 +497,37 @@ export default function PracticeSessionClient({
       setHintLoading(false);
     }
   };
+
+  // ===== 完了画面（final mode） =====
+  if (isFinal && finalDone) {
+    const passed = finalCorrect / FINAL_TOTAL >= finalPassRate;
+    return (
+      <div className="max-w-2xl mx-auto space-y-3 sm:space-y-4 p-3 sm:p-4">
+        <div className="flex items-center justify-between">
+          <Link href="/course" className="text-[11px] sm:text-sm text-blue-700 hover:underline">
+            ← コースTOPへ
+          </Link>
+          <Link href="/course/topics" className="text-[11px] sm:text-sm text-blue-700 hover:underline">
+            トピック一覧へ →
+          </Link>
+        </div>
+
+        <div className="border rounded-2xl p-4 sm:p-6 bg-white shadow-sm space-y-3">
+          <h2 className="text-lg sm:text-xl font-semibold">
+            修了テスト結果：{passed ? "合格" : "未達成"}
+          </h2>
+          <p className="text-gray-700 text-[11px] sm:text-sm">
+            正答 {finalCorrect} / {FINAL_TOTAL}（合格基準: {Math.round(finalPassRate * 100)}%）
+          </p>
+          <div className={`text-[11px] sm:text-sm font-semibold ${passed ? "text-emerald-600" : "text-rose-600"}`}>
+            {passed
+              ? "おめでとう！このコースを修了しました。"
+              : "もう少しで合格です。復習して再挑戦しましょう。"}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   // ===== 完了画面（review mode） =====
   if (isReview && reviewDone) {
