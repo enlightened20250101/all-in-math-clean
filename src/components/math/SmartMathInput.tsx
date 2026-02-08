@@ -369,17 +369,17 @@ export default function SmartMathInput({
 
       {/* モバイル専用ミニキーボード */}
       {showMobileKeyboard && (
-        <div className="mt-2 border rounded-lg bg-white px-1.5 py-1.5 space-y-1">
+        <div className="mt-2 rounded-2xl border border-slate-200 bg-slate-50 p-2 shadow-sm space-y-1.5">
           {MOBILE_KEY_ROWS.map((row, idx) => (
-            <div key={idx} className="flex justify-center flex-wrap gap-1">
+            <div key={idx} className="grid grid-cols-6 gap-1.5">
               {row.map((key) => (
                 <button
                   key={key.label + idx}
                   type="button"
                   className="
-                    flex-1 max-w-[60px]
-                    px-2 py-1 rounded-md border text-xs
-                    bg-gray-50 active:bg-gray-100
+                    rounded-xl border border-slate-200 bg-white px-2 py-2 text-xs
+                    text-slate-700 shadow-sm transition
+                    hover:bg-slate-50 active:bg-slate-100 active:scale-[0.98]
                   "
                   onClick={() => {
                     if (key.label === '⌫') {
@@ -395,13 +395,13 @@ export default function SmartMathInput({
             </div>
           ))}
 
-          {/* ★ バックスペースボタン（右寄せ） */}
+          {/* バックスペース（右寄せ） */}
           <div className="flex justify-end">
             <button
               type="button"
               className="
-                px-3 py-1 rounded-md border text-xs
-                bg-gray-50 hover:bg-gray-100 active:bg-gray-200
+                rounded-full border border-slate-200 bg-white px-3 py-1.5 text-[11px]
+                text-slate-700 shadow-sm transition hover:bg-slate-50 active:bg-slate-100
               "
               onClick={deleteAtCursor}
             >
@@ -409,7 +409,7 @@ export default function SmartMathInput({
             </button>
           </div>
 
-          <p className="mt-1 text-[10px] text-gray-500">
+          <p className="mt-1 text-[10px] text-slate-500">
             ボタンはカーソル位置に挿入されます。長押しで選択 → 上書きもできます。
           </p>
         </div>
