@@ -58,26 +58,30 @@ export async function supabaseServerReadOnly() {
     }
   }
 
-  return createServerClient(supabaseUrl, supabaseKey, {
-    // cookies.get は refresh 系を SSR に見せない（勝手なリフレッシュ防止）
-    cookies: {
-      getAll: () =>
-        cookieStore
-          .getAll()
-          .filter((c) => {
-            const k = c.name.toLowerCase();
-            return k !== "sb-refresh-token" && k !== "sb:token";
-          })
-          .map((c) => ({ name: c.name, value: c.value })),
-      setAll: async () => {},
-    },
-    // ★ 決定打：Supabase クライアントの「送信ヘッダ」に常時 Authorization を差す
-    global: {
-      headers: access ? { Authorization: `Bearer ${access}` } : {},
-    },
-    // （任意）受信側のヘッダ参照はそのまま維持
-    // headers は SSR client options には存在しないため渡さない
-  });
+  try {
+    return createServerClient(supabaseUrl, supabaseKey, {
+      // cookies.get は refresh 系を SSR に見せない（勝手なリフレッシュ防止）
+      cookies: {
+        getAll: () =>
+          cookieStore
+            .getAll()
+            .filter((c) => {
+              const k = c.name.toLowerCase();
+              return k !== "sb-refresh-token" && k !== "sb:token";
+            })
+            .map((c) => ({ name: c.name, value: c.value })),
+        setAll: async () => {},
+      },
+      // ★ 決定打：Supabase クライアントの「送信ヘッダ」に常時 Authorization を差す
+      global: {
+        headers: access ? { Authorization: `Bearer ${access}` } : {},
+      },
+      // （任意）受信側のヘッダ参照はそのまま維持
+      // headers は SSR client options には存在しないため渡さない
+    });
+  } catch {
+    return supabaseStub;
+  }
 }
 
 /** Route Handler / Action 向け（書き込み可）も同様に */
@@ -99,25 +103,29 @@ export async function supabaseServerAction() {
     }
   }
 
-  return createServerClient(supabaseUrl, supabaseKey, {
-    cookies: {
-      getAll: () =>
-        cookieStore
-          .getAll()
-          .filter((c) => {
-            const k = c.name.toLowerCase();
-            return k !== "sb-refresh-token" && k !== "sb:token";
-          })
-          .map((c) => ({ name: c.name, value: c.value })),
-      setAll: (cookiesToSet) => {
-        cookiesToSet.forEach(({ name, value, options }) => {
-          cookieStore.set({ name, value, ...options });
-        });
+  try {
+    return createServerClient(supabaseUrl, supabaseKey, {
+      cookies: {
+        getAll: () =>
+          cookieStore
+            .getAll()
+            .filter((c) => {
+              const k = c.name.toLowerCase();
+              return k !== "sb-refresh-token" && k !== "sb:token";
+            })
+            .map((c) => ({ name: c.name, value: c.value })),
+        setAll: (cookiesToSet) => {
+          cookiesToSet.forEach(({ name, value, options }) => {
+            cookieStore.set({ name, value, ...options });
+          });
+        },
       },
-    },
-    global: {
-      headers: access ? { Authorization: `Bearer ${access}` } : {},
-    },
-    // headers は SSR client options には存在しないため渡さない
-  });
+      global: {
+        headers: access ? { Authorization: `Bearer ${access}` } : {},
+      },
+      // headers は SSR client options には存在しないため渡さない
+    });
+  } catch {
+    return supabaseStub;
+  }
 }
