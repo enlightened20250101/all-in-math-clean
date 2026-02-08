@@ -25,7 +25,7 @@ function buildTemplate(c: RegionCase): QuestionTemplate {
     generate() {
       return {
         templateId: c.id,
-        statement: `次の不等式で表される領域に、点 $(${c.point[0]},${c.point[1]})$ は含まれるか。\\n\\n条件: ${cond}`,
+        statement: `避難区域を次の不等式で表す。点 $(${c.point[0]},${c.point[1]})$ は区域に含まれるか。\\n\\n条件: ${cond}`,
         answerKind: "choice",
         choices,
         params: {},
