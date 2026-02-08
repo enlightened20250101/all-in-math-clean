@@ -8,6 +8,8 @@ import * as hints from "@/server/learning/hints";
 import { gradeAnswer as gradeCourseAnswer } from "@/lib/course/questions.service";
 import type { QuestionParams } from "@/lib/course/types";
 
+export const dynamic = "force-dynamic";
+
 // -------------------- 既存 learn 用 --------------------
 const AttemptLearnReq = z.object({
   mode: z.literal("learn").optional(), // ★ 既存互換：modeなしはlearnとして扱う
