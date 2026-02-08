@@ -25,7 +25,7 @@ export async function GET(_req: NextRequest) {
 
     const now = new Date();
     const dueSkills = (dueMastery || [])
-      .filter(m => {
+      .filter((m: any) => {
         if (!m.last_seen_at) return false;
         const next = new Date(m.last_seen_at);
         next.setDate(next.getDate() + (m.interval_days ?? 0));
