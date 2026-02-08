@@ -1117,24 +1117,31 @@ export default function GraphStudio() {
     <>
       {/* 入力パネル（タイトル + ボタン） */}
       <div className="space-y-3">
-        <label className="block text-sm">タイトル</label>
-        <input
-          className="border rounded px-2 py-1 w-full"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-  
-        <div className="flex items-center justify-between mt-2">
-          <span className="text-sm font-medium">式（1行=1式）</span>
-          <div className="flex items-center gap-2">
+        <div className="space-y-1">
+          <label className="block text-xs font-semibold text-slate-600">タイトル</label>
+          <input
+            className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 shadow-sm outline-none transition focus:border-slate-400"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <div className="text-sm font-semibold text-slate-700">式（1行=1式）</div>
+            <div className="text-[11px] text-slate-500">
+              例：y = x**2 / r = 1 + 2*cos(x) / param: x = cos(t); y = sin(t)
+            </div>
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
             <button
-              className="px-2 py-1 border rounded"
+              className="rounded-full border border-slate-200 bg-white px-3 py-2 text-xs font-medium text-slate-700 shadow-sm transition hover:bg-slate-50"
               onClick={addEquation}
             >
               ＋ 式を追加
             </button>
             <button
-              className="px-3 py-1 border rounded bg-black text-white disabled:opacity-60"
+              className="rounded-full bg-slate-900 px-3 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-black disabled:opacity-60"
               onClick={() => setDrawVersion((v) => v + 1)}
               disabled={isDrawing}
             >
@@ -1143,12 +1150,6 @@ export default function GraphStudio() {
           </div>
         </div>
       </div>
-  
-      <p className="text-xs text-gray-500">
-        例：<code>y = x**2</code>、<code>r = 1 + 2*cos(x)</code>、
-        <code>param: x = cos(t); y = sin(t)</code>、
-        <code>x**2 + y**2 = 1</code>
-      </p>
   
       {/* 複数式の行 */}
       <div className="space-y-4">
@@ -1159,7 +1160,7 @@ export default function GraphStudio() {
           return (
             <div
               key={i}
-              className="border rounded-md p-2 bg-gray-50 space-y-3"
+              className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm space-y-3"
             >
               {/* 上段：PC と SP で表示を分岐 */}
               {!isMobile ? (
@@ -1178,17 +1179,17 @@ export default function GraphStudio() {
                     />
                   </div>
                   <div className="col-span-2 flex flex-col items-center gap-1">
-                    <span className="text-xs text-gray-500">色</span>
+                    <span className="text-xs text-slate-500">色</span>
                     <input
                       type="color"
                       value={colors[i] ?? PALETTE[i % PALETTE.length]}
                       onChange={(e) => updateColor(i, e.target.value)}
-                      className="w-8 h-8 p-0 border rounded"
+                      className="h-9 w-9 rounded-lg border border-slate-200 bg-white"
                     />
                   </div>
                   <div className="col-span-2 flex items-start justify-end">
                     <button
-                      className="px-2 py-1 border rounded text-xs"
+                      className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs text-slate-600 shadow-sm transition hover:bg-slate-50"
                       onClick={() => removeEquation(i)}
                     >
                       削除
@@ -1204,11 +1205,11 @@ export default function GraphStudio() {
                       type="button"
                       className="
                         flex-1 min-w-0 text-left
-                        rounded-md px-2 py-1
-                        border border-gray-200 bg-white
+                        rounded-xl px-3 py-2
+                        border border-slate-200 bg-white
                         shadow-sm
-                        hover:border-sky-400 hover:bg-sky-50
-                        focus:ring-2 focus:ring-sky-500/40
+                        hover:border-slate-300 hover:bg-slate-50
+                        focus:ring-2 focus:ring-slate-300/60
                         cursor-pointer
                         transition
                       "
@@ -1219,44 +1220,44 @@ export default function GraphStudio() {
                     >
                       <div className="flex items-center justify-between gap-2">
                         <div className="min-w-0">
-                          <div className="text-xs text-gray-500 mb-0.5">
+                          <div className="text-xs text-slate-500 mb-0.5">
                             式 {i + 1}
                           </div>
-                          <div className="text-sm text-gray-800 truncate">
+                          <div className="text-sm text-slate-800 truncate">
                             <InlineKatex tex={toDisplayTex(eq)} />
                           </div>
                         </div>
 
                         {/* ペンアイコン風の丸いボタン（実際には装飾） */}
-                        <div className="shrink-0 rounded-full border border-gray-300 px-2 py-0.5 text-[10px] text-gray-600 bg-gray-50">
+                        <div className="shrink-0 rounded-full border border-slate-200 px-2 py-0.5 text-[10px] text-slate-600 bg-slate-50">
                           編集
                         </div>
                       </div>
 
                       {equationErrors[i] && (
-                        <div className="mt-0.5 text-[11px] text-red-600">
+                        <div className="mt-0.5 text-[11px] text-rose-600">
                           {equationErrors[i]}
                         </div>
                       )}
 
-                      <div className="mt-0.5 text-[10px] text-gray-400">
+                      <div className="mt-0.5 text-[10px] text-slate-400">
                         タップして数式を編集
                       </div>
                     </button>
 
                     <div className="flex flex-col items-end gap-1">
                       <div className="flex items-center gap-1">
-                        <span className="text-[11px] text-gray-500">色</span>
+                        <span className="text-[11px] text-slate-500">色</span>
                         <input
                           type="color"
                           value={colors[i] ?? PALETTE[i % PALETTE.length]}
                           onChange={(e) => updateColor(i, e.target.value)}
-                          className="w-7 h-7 p-0 border rounded"
+                          className="h-7 w-7 rounded-lg border border-slate-200 bg-white"
                         />
                       </div>
                       <div className="flex">
                         <button
-                          className="px-2 py-1 border rounded text-[11px]"
+                          className="rounded-full border border-slate-200 bg-white px-2.5 py-1 text-[11px] text-slate-600 shadow-sm"
                           onClick={() => removeEquation(i)}
                         >
                           削除
@@ -1268,7 +1269,7 @@ export default function GraphStudio() {
               )}
 
               {/* ── 以下は PC / SP 共通：定義域・パラメータ ── */}
-              <div className="text-xs text-gray-600 space-y-1">
+              <div className="text-xs text-slate-600 space-y-1">
                 <div>
                   <span className="font-semibold">
                     定義域（関数なら x、極座標 / param なら t）
@@ -1279,10 +1280,10 @@ export default function GraphStudio() {
                 </div>
                 <div className="flex flex-wrap gap-2 items-end">
                   <div>
-                    <label className="block text-[11px]">最小</label>
+                    <label className="block text-[11px] text-slate-500">最小</label>
                     <input
                       type="number"
-                      className="border rounded px-2 py-1 w-24"
+                      className="w-24 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs"
                       value={d.xMin}
                       onChange={(e) =>
                         updateDomain(i, { xMin: Number(e.target.value) })
@@ -1290,10 +1291,10 @@ export default function GraphStudio() {
                     />
                   </div>
                   <div>
-                    <label className="block text-[11px]">最大</label>
+                    <label className="block text-[11px] text-slate-500">最大</label>
                     <input
                       type="number"
-                      className="border rounded px-2 py-1 w-24"
+                      className="w-24 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs"
                       value={d.xMax}
                       onChange={(e) =>
                         updateDomain(i, { xMax: Number(e.target.value) })
@@ -1301,11 +1302,11 @@ export default function GraphStudio() {
                     />
                   </div>
                   <div>
-                    <label className="block text-[11px]">step</label>
+                    <label className="block text-[11px] text-slate-500">step</label>
                     <input
                       type="number"
                       step="0.01"
-                      className="border rounded px-2 py-1 w-24"
+                      className="w-24 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs"
                       value={d.step}
                       onChange={(e) =>
                         updateDomain(i, { step: Number(e.target.value) })
@@ -1314,14 +1315,14 @@ export default function GraphStudio() {
                   </div>
                 </div>
 
-                <div className="text-xs text-gray-600 space-y-1 mt-2">
-                  <span className="font-semibold">パラメータ a, b, c</span>
+                <div className="text-xs text-slate-600 space-y-1 mt-2">
+                  <span className="font-semibold text-slate-700">パラメータ a, b, c</span>
                   <div className="flex flex-wrap gap-2 items-end">
                     <div>
-                      <label className="block text-[11px]">a</label>
+                      <label className="block text-[11px] text-slate-500">a</label>
                       <input
                         type="number"
-                        className="border rounded px-2 py-1 w-24"
+                        className="w-24 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs"
                         value={param.a}
                         onChange={(e) => {
                           const v = Number(e.target.value);
@@ -1334,10 +1335,10 @@ export default function GraphStudio() {
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px]">b</label>
+                      <label className="block text-[11px] text-slate-500">b</label>
                       <input
                         type="number"
-                        className="border rounded px-2 py-1 w-24"
+                        className="w-24 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs"
                         value={param.b}
                         onChange={(e) => {
                           const v = Number(e.target.value);
@@ -1350,10 +1351,10 @@ export default function GraphStudio() {
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px]">c</label>
+                      <label className="block text-[11px] text-slate-500">c</label>
                       <input
                         type="number"
-                        className="border rounded px-2 py-1 w-24"
+                        className="w-24 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs"
                         value={param.c}
                         onChange={(e) => {
                           const v = Number(e.target.value);
@@ -1377,52 +1378,52 @@ export default function GraphStudio() {
       {/* 軸ラベル */}
       <div className="grid md:grid-cols-2 gap-2">
         <div>
-          <label className="block text-xs">X軸ラベル</label>
+          <label className="block text-xs text-slate-500">X軸ラベル</label>
           <input
-            className="border rounded px-2 py-1 w-full"
+            className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 shadow-sm outline-none transition focus:border-slate-400"
             value={xLabel}
             onChange={(e) => setXLabel(e.target.value)}
           />
         </div>
         <div>
-          <label className="block text-xs">Y軸ラベル</label>
+          <label className="block text-xs text-slate-500">Y軸ラベル</label>
           <input
-            className="border rounded px-2 py-1 w-full"
+            className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 shadow-sm outline-none transition focus:border-slate-400"
             value={yLabel}
             onChange={(e) => setYLabel(e.target.value)}
           />
         </div>
       </div>
-  
+
       {/* 陰関数グリッド範囲（詳細設定） */}
-      <details className="border rounded p-2 bg-gray-50">
-        <summary className="text-xs font-semibold cursor-pointer">
+      <details className="rounded-2xl border border-slate-200 bg-slate-50 p-3">
+        <summary className="text-xs font-semibold text-slate-700 cursor-pointer">
           陰関数の詳細設定（グリッド範囲）
         </summary>
         <div className="mt-2 grid md:grid-cols-4 gap-2 text-xs">
           <div>
-            <label className="block text-xs">yMin</label>
+            <label className="block text-xs text-slate-500">yMin</label>
             <input
               type="number"
-              className="border rounded px-2 py-1 w-full"
+              className="w-full rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs"
               value={yMin}
               onChange={(e) => setYMin(Number(e.target.value))}
             />
           </div>
           <div>
-            <label className="block text-xs">yMax</label>
+            <label className="block text-xs text-slate-500">yMax</label>
             <input
               type="number"
-              className="border rounded px-2 py-1 w-full"
+              className="w-full rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs"
               value={yMax}
               onChange={(e) => setYMax(Number(e.target.value))}
             />
           </div>
           <div>
-            <label className="block text-xs">nx（x方向分割数）</label>
+            <label className="block text-xs text-slate-500">nx（x方向分割数）</label>
             <input
               type="number"
-              className="border rounded px-2 py-1 w-full"
+              className="w-full rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs"
               value={nx}
               onChange={(e) =>
                 setNx(Math.max(10, Number(e.target.value) || 10))
@@ -1430,10 +1431,10 @@ export default function GraphStudio() {
             />
           </div>
           <div>
-            <label className="block text-xs">ny（y方向分割数）</label>
+            <label className="block text-xs text-slate-500">ny（y方向分割数）</label>
             <input
               type="number"
-              className="border rounded px-2 py-1 w-full"
+              className="w-full rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs"
               value={ny}
               onChange={(e) =>
                 setNy(Math.max(10, Number(e.target.value) || 10))
@@ -1441,7 +1442,7 @@ export default function GraphStudio() {
             />
           </div>
         </div>
-        <p className="mt-1 text-[11px] text-gray-500">
+        <p className="mt-1 text-[11px] text-slate-500">
           これらは <code>x**2 + y**2 = 1</code> などの陰関数を描くときに使われる
           グリッド範囲です。通常の y=f(x)、r=f(θ)、param には影響しません。
         </p>
