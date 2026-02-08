@@ -1464,7 +1464,7 @@ export default function GraphStudio() {
     >
       <ResponsiveContainer width="100%" height="100%">
         <ComposedChart margin={chartMargin}>
-          <CartesianGrid strokeDasharray="3 3" />
+          <CartesianGrid stroke="#e2e8f0" strokeDasharray="4 4" />
           <XAxis
             type="number"
             dataKey="x"
@@ -1513,7 +1513,15 @@ export default function GraphStudio() {
             axisLine={{ stroke: '#9ca3af' }}
             tickLine={{ stroke: '#9ca3af' }}
           />
-          <Tooltip />
+          <Tooltip
+            contentStyle={{
+              background: '#ffffff',
+              border: '1px solid #e2e8f0',
+              borderRadius: 10,
+              fontSize: 12,
+              boxShadow: '0 8px 20px rgba(15, 23, 42, 0.08)',
+            }}
+          />
   
           {previewSeriesList.map((s, i) => {
             const kind = parsedList[i]?.kind;
@@ -1740,7 +1748,7 @@ export default function GraphStudio() {
                   height="100%"
                 >
                   <ComposedChart margin={chartMargin}>
-                    <CartesianGrid strokeDasharray="3 3" />
+                    <CartesianGrid stroke="#e2e8f0" strokeDasharray="4 4" />
                     <XAxis
                       type="number"
                       dataKey="x"
@@ -1769,7 +1777,15 @@ export default function GraphStudio() {
                       axisLine={{ stroke: '#9ca3af' }}
                       tickLine={{ stroke: '#9ca3af' }}
                     />
-                    <Tooltip />
+                    <Tooltip
+                      contentStyle={{
+                        background: '#ffffff',
+                        border: '1px solid #e2e8f0',
+                        borderRadius: 10,
+                        fontSize: 12,
+                        boxShadow: '0 8px 20px rgba(15, 23, 42, 0.08)',
+                      }}
+                    />
                     <Legend
                       verticalAlign="bottom"
                       align="center"
@@ -1965,11 +1981,11 @@ function CustomLegend({
   if (!labels || labels.length === 0) return null;
 
   return (
-    <div className="flex flex-wrap items-center gap-3 text-sm">
+    <div className="flex flex-wrap items-center gap-2 text-xs text-slate-600">
       {labels.map((label, i) => (
-        <div key={i} className="flex items-center gap-2">
+        <div key={i} className="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-2 py-1 shadow-sm">
           <span
-            className="inline-block w-3 h-3 rounded"
+            className="inline-block h-2.5 w-2.5 rounded-full"
             style={{
               backgroundColor: colors[i] ?? PALETTE[i % PALETTE.length],
             }}
