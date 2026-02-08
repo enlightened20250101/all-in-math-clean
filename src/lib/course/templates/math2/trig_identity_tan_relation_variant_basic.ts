@@ -57,7 +57,7 @@ export const trigIdentityTanRelationVariantTemplates: QuestionTemplate[] = Array
       return { isCorrect: userAnswer === c.answer, correctAnswer: c.answer };
     },
     explain() {
-      return `
+      return `測量で用いる関係として、
 ### この問題の解説
 三角関数の基本関係式を用います。答えは **${c.answer}** です。
 `;

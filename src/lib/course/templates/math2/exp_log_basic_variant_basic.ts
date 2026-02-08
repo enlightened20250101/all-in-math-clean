@@ -25,7 +25,7 @@ function buildParams(kindIndex: number): Params {
 
 function statement(p: Params) {
   if (p.kindIndex === 0) {
-    return `次を計算せよ。\\n\\n$$${texPow(String(p.a), p.m)} \\times ${texPow(String(p.a), p.n)}$$`;
+    return `成長モデルとして、次を計算せよ。\\n\\n$$${texPow(String(p.a), p.m)} \\times ${texPow(String(p.a), p.n)}$$`;
   }
   return `次を計算せよ。\\n\\n$$\\log_{${p.a}}\\left(${texPow(String(p.a), p.m + p.n)}\\right)$$`;
 }

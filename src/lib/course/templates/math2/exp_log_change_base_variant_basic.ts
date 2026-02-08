@@ -30,7 +30,7 @@ function statement(params: Params) {
   const kind = getKind(kindIndex);
   const c = Math.pow(a, m * k);
   if (kind === "log_base") {
-    return `次の値を求めよ。\\n\\n$$\\log_{${base}} ${c}$$`;
+    return `成長モデルとして、次の値を求めよ。\\n\\n$$\\log_{${base}} ${c}$$`;
   }
   return `次の値を求めよ。\\n\\n$$${texEq(
     `\\frac{\\log_{${a}} ${c}}{\\log_{${a}} ${base}}`,

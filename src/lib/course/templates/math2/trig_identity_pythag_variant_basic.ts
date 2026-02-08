@@ -57,7 +57,7 @@ export const trigIdentityPythagVariantTemplates: QuestionTemplate[] = Array.from
       return { isCorrect: userAnswer === c.answer, correctAnswer: c.answer };
     },
     explain() {
-      return `
+      return `測量で用いる関係として、
 ### この問題の解説
 基本恒等式 $\\sin^2\\theta+\\cos^2\\theta=1$ を使います。
 答えは **${c.answer}** です。

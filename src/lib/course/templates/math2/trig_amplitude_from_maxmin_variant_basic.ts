@@ -22,7 +22,7 @@ function buildTemplate(c: Case): QuestionTemplate {
     generate() {
       return {
         templateId: c.id,
-        statement: `三角関数のグラフの最大値が ${c.max}、最小値が ${c.min} のとき、振幅を求めよ。`,
+        statement: `振動モデルとして、三角関数のグラフの最大値が ${c.max}、最小値が ${c.min} のとき、振幅を求めよ。`,
         answerKind: "numeric",
         params: { amp },
       };

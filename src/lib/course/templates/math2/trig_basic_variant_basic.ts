@@ -57,7 +57,7 @@ export const trigBasicVariantTemplates: QuestionTemplate[] = Array.from({ length
       return { isCorrect: userAnswer === c.answer, correctAnswer: c.answer };
     },
     explain() {
-      return `
+      return `測量で用いる関係として、
 ### この問題の解説
 基本恒等式を用います。答えは **${c.answer}** です。
 `;

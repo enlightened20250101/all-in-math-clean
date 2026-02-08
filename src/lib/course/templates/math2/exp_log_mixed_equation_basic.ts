@@ -23,7 +23,7 @@ function buildParams(kindIndex: number): Params {
 
 function statement(p: Params) {
   if (p.kindIndex === 0) {
-    return `次を満たす $x$ を求めよ。\\n\\n$$\\log_{${p.a}}(${p.c})=x$$`;
+    return `成長モデルとして、次を満たす $x$ を求めよ。\\n\\n$$\\log_{${p.a}}(${p.c})=x$$`;
   }
   const right = texPow(String(p.a), p.c);
   return `次を満たす $x$ を求めよ。\\n\\n$$\\log_{${p.a}}(${right})=x+1$$`;
