@@ -5,6 +5,8 @@ import { critiqueLoop } from '@/server/learning/critic';
 import { ProblemSchema } from '@/lib/zod-schemas';
 import { db } from '@/server/db';
 
+export const dynamic = "force-dynamic";
+
 export async function POST(req: NextRequest) {
   try {
     const { userId, preferredSkillId } = await req.json();
