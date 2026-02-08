@@ -46,7 +46,7 @@ export async function GET() {
         .select("skill_id, mastery_level, retrievability, interval_days, last_seen_at")
         .eq("user_id", user.id)
         .in("skill_id", skillIds);
-      (mastery || []).forEach(m => masteryMap.set(m.skill_id, m));
+      (mastery || []).forEach((m: any) => masteryMap.set(m.skill_id, m));
     }
 
     const now = Date.now();
