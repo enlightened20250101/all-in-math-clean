@@ -42,7 +42,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `ベクトル $\\vec{a}=(${params.ax},${params.ay})$, $\\vec{b}=(${params.bx},${params.by})$ に対し、$\\vec{a}$ を $\\vec{b}$ に正射影したベクトルの長さの二乗を求めよ。`;
+      const statement = `進行方向ベクトル $\\vec{a}=(${params.ax},${params.ay})$, $\\vec{b}=(${params.bx},${params.by})$ に対し、$\\vec{a}$ を $\\vec{b}$ に正射影したベクトルの長さの二乗を求めよ。`;
       return {
         templateId: id,
         statement,

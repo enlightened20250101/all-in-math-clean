@@ -47,7 +47,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const params = buildParams();
       const a = `\\vec{a}=(${params.ax},${params.ay})`;
       const b = `\\vec{b}=(${params.bx},${params.by})`;
-      const statement = `ベクトル ${a}, ${b} の内積 $\\vec{a}\\cdot\\vec{b}$ を求めよ。`;
+      const statement = `移動を表すベクトル ${a}, ${b} の内積 $\\vec{a}\\cdot\\vec{b}$ を求めよ。`;
       return {
         templateId: id,
         statement,

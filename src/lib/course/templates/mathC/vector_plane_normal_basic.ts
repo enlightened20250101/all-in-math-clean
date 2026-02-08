@@ -35,7 +35,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const b = -1;
       const c = 3;
       const plane = texPlane(a, b, c, 5);
-      const statement = `平面 ${plane} の法線ベクトルの $z$ 成分を求めよ。`;
+      const statement = `壁面 ${plane} の法線ベクトルの $z$ 成分を求めよ。`;
       return {
         templateId: id,
         statement,

@@ -24,7 +24,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `ベクトル $\\vec{a}=(${params.ax},${params.ay})$ の $x$ 成分を求めよ。`;
+      const statement = `移動ベクトル $\\vec{a}=(${params.ax},${params.ay})$ の $x$ 成分を求めよ。`;
       return {
         templateId: id,
         statement,

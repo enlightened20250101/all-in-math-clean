@@ -36,7 +36,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `ベクトル $\\vec{a}=(${params.x},${params.y})$ の長さの二乗 $|\\vec{a}|^2$ を求めよ。`;
+      const statement = `移動量を表すベクトル $\\vec{a}=(${params.x},${params.y})$ の長さの二乗 $|\\vec{a}|^2$ を求めよ。`;
       return {
         templateId: id,
         statement,

@@ -32,7 +32,7 @@ function buildTemplate(c: VecCase): QuestionTemplate {
     generate() {
       return {
         templateId: c.id,
-        statement: `次のベクトル方程式 $a\\vec{u}+b\\vec{v}=\\vec{w}$ を満たす $a+b$ を求めよ。\\n\\n$\\vec{u}=(${c.u[0]},${c.u[1]})$, $\\vec{v}=(${c.v[0]},${c.v[1]})$, $\\vec{w}=(${c.w[0]},${c.w[1]})$`,
+        statement: `合成移動として $a\\vec{u}+b\\vec{v}=\\vec{w}$ が成り立つとき、$a+b$ を求めよ。\\n\\n$\\vec{u}=(${c.u[0]},${c.u[1]})$, $\\vec{v}=(${c.v[0]},${c.v[1]})$, $\\vec{w}=(${c.w[0]},${c.w[1]})$`,
         answerKind: "numeric",
         params: {},
       };

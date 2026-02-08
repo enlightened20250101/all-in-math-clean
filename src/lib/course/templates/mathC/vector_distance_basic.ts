@@ -49,7 +49,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `空間ベクトルとして、点 $A(${params.x1},${params.y1},${params.z1})$, $B(${params.x2},${params.y2},${params.z2})$ の距離の二乗 $|AB|^2$ を求めよ。`;
+      const statement = `ドローンの位置を表す点 $A(${params.x1},${params.y1},${params.z1})$, $B(${params.x2},${params.y2},${params.z2})$ の距離の二乗 $|AB|^2$ を求めよ。`;
       return {
         templateId: id,
         statement,

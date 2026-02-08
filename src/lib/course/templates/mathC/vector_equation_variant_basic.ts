@@ -45,7 +45,7 @@ export const vectorEquationVariantTemplates: QuestionTemplate[] = Array.from({ l
     },
     generate() {
       const params = buildParams();
-      const statement = `次のベクトル方程式 $a\\vec{u}+b\\vec{v}=\\vec{w}$ を満たす $a+b$ を求めよ。\\n\\n$\\vec{u}=(${params.u1},${params.u2})$, $\\vec{v}=(${params.v1},${params.v2})$, $\\vec{w}=(${params.w1},${params.w2})$`;
+      const statement = `合成移動として $a\\vec{u}+b\\vec{v}=\\vec{w}$ を満たす $a+b$ を求めよ。\\n\\n$\\vec{u}=(${params.u1},${params.u2})$, $\\vec{v}=(${params.v1},${params.v2})$, $\\vec{w}=(${params.w1},${params.w2})$`;
       return {
         templateId,
         statement,

@@ -38,8 +38,8 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const a = `\\vec{a}=(${params.ax},${params.ay},${params.az})`;
       const statement =
         params.op === 0
-          ? `空間ベクトル $${a}$ の $2\\vec{a}$ の x 成分を求めよ。`
-          : `空間ベクトル $${a}$ の $-\\vec{a}$ の x 成分を求めよ。`;
+          ? `空間内の移動 $${a}$ を2倍したときの x 成分を求めよ。`
+          : `空間内の移動 $${a}$ を逆向きにしたときの x 成分を求めよ。`;
       return {
         templateId: id,
         statement,

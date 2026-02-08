@@ -37,7 +37,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `法線ベクトル $(a,b,c)=(${params.a},${params.b},${params.c})$ で点 $P(${params.x0},${params.y0},${params.z0})$ を通る平面の方程式 $ax+by+cz=d$ における $d$ を求めよ。`;
+      const statement = `壁面を表す平面が法線ベクトル $(a,b,c)=(${params.a},${params.b},${params.c})$ をもち点 $P(${params.x0},${params.y0},${params.z0})$ を通るとき、方程式 $ax+by+cz=d$ における $d$ を求めよ。`;
       return {
         templateId: id,
         statement,

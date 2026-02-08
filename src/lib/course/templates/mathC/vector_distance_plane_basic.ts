@@ -48,7 +48,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const params = buildParams();
       const plane = texPlane(params.a, params.b, params.c, params.d);
-      const statement = `ベクトルで扱う空間内で、平面 ${plane} と点 $P(${params.x0},${params.y0},${params.z0})$ の距離を求めよ。`;
+      const statement = `壁面を表す平面 ${plane} と点 $P(${params.x0},${params.y0},${params.z0})$ の距離を求めよ。`;
       return {
         templateId: id,
         statement,

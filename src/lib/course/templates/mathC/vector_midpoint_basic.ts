@@ -32,7 +32,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `ベクトルの中点として、点 $A(${params.x1},${params.y1})$, $B(${params.x2},${params.y2})$ の中点の $x$ 座標を求めよ。`;
+      const statement = `地点 $A(${params.x1},${params.y1})$, $B(${params.x2},${params.y2})$ の中継点の $x$ 座標を求めよ。`;
       return {
         templateId: id,
         statement,

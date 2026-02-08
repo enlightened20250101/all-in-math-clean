@@ -29,7 +29,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const caseId = Math.floor(Math.random() * CASES.length);
       const c = CASES[caseId];
-      const statement = `ベクトル $\\vec{a}=(${c.ax},${c.ay})$ の単位ベクトルを求めよ。`;
+      const statement = `進行方向を表すベクトル $\\vec{a}=(${c.ax},${c.ay})$ を長さ1に正規化した単位ベクトルを求めよ。`;
       return {
         templateId: id,
         statement,

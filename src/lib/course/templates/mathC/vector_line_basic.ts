@@ -34,7 +34,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `点 $P(${params.x0},${params.y0})$ を通り方向ベクトル $\\vec{v}=(${params.vx},${params.vy})$ の直線を $P+t\\vec{v}$ と表す。$t=${params.t}$ のときの $x$ 座標を求めよ。`;
+      const statement = `道の進行方向を表す直線が点 $P(${params.x0},${params.y0})$ を通り方向ベクトル $\\vec{v}=(${params.vx},${params.vy})$ をもつとする。$t=${params.t}$ のときの $x$ 座標を求めよ。`;
       return {
         templateId: id,
         statement,
