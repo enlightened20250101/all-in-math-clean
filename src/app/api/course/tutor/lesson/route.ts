@@ -4,11 +4,18 @@ import OpenAI from 'openai';
 import { TOPIC_CONTENT } from '@/lib/course/topicContent';
 import { getTopicById } from '@/lib/course/topics';
 
+export const dynamic = "force-dynamic";
+
 const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY!,
 });
 
 export async function POST(req: Request) {
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) {
+    return NextResponse.json({ error: "openai_disabled" }, { status: 503 });
+  }
+  const client = new OpenAI({ apiKey });
   const body = await req.json().catch(() => null);
 
   const topicId = body?.topicId as string | undefined;
