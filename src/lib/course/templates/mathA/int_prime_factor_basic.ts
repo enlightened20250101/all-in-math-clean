@@ -5,6 +5,7 @@ import { gradeNumeric } from "../_shared/utils";
 type FactorCase = {
   id: string;
   title: string;
+  context?: string;
   n: number;
   correct: string;
   choices: string[];
@@ -13,6 +14,7 @@ type FactorCase = {
 type PrimeCase = {
   id: string;
   title: string;
+  context?: string;
   n: number;
   correct: "素数" | "合成数";
 };
@@ -20,6 +22,7 @@ type PrimeCase = {
 type DivisorCountCase = {
   id: string;
   title: string;
+  context?: string;
   n: number;
   count: number;
 };
@@ -34,9 +37,10 @@ function buildFactorTemplate(c: FactorCase): QuestionTemplate {
       tags: ["integer", "prime-factor"],
     },
     generate() {
+      const lead = c.context ? `${c.context}\n` : "";
       return {
         templateId: c.id,
-        statement: `$${c.n}$ を素因数分解した結果として正しいものを選べ。`,
+        statement: `${lead}$${c.n}$ を素因数分解した結果として正しいものを選べ。`,
         answerKind: "choice",
         choices: c.choices,
         params: { n: c.n },
@@ -64,9 +68,10 @@ function buildPrimeTemplate(c: PrimeCase): QuestionTemplate {
       tags: ["integer", "prime-check"],
     },
     generate() {
+      const lead = c.context ? `${c.context}\n` : "";
       return {
         templateId: c.id,
-        statement: `$${c.n}$ は素数か合成数か。`,
+        statement: `${lead}$${c.n}$ は素数か合成数か。`,
         answerKind: "choice",
         choices: ["素数", "合成数"],
         params: { n: c.n },
@@ -94,9 +99,10 @@ function buildDivisorCountTemplate(c: DivisorCountCase): QuestionTemplate {
       tags: ["integer", "divisor-count"],
     },
     generate() {
+      const lead = c.context ? `${c.context}\n` : "";
       return {
         templateId: c.id,
-        statement: `$${c.n}$ の正の約数の個数を求めよ。`,
+        statement: `${lead}$${c.n}$ の正の約数の個数を求めよ。`,
         answerKind: "numeric",
         params: { n: c.n },
       };
@@ -114,10 +120,38 @@ $${c.n}$ の正の約数の個数は $${c.count}$ 個です。
 }
 
 const FACTOR_CASES: FactorCase[] = [
-  { id: "int_pf_1", title: "素因数分解 12", n: 12, correct: "2^2 \\cdot 3", choices: ["2^2 \\cdot 3", "2 \\cdot 3^2", "3 \\cdot 4", "2^3"] },
-  { id: "int_pf_2", title: "素因数分解 18", n: 18, correct: "2 \\cdot 3^2", choices: ["2 \\cdot 3^2", "2^2 \\cdot 3", "3 \\cdot 6", "2 \\cdot 9"] },
-  { id: "int_pf_3", title: "素因数分解 20", n: 20, correct: "2^2 \\cdot 5", choices: ["2^2 \\cdot 5", "2 \\cdot 3^2", "4 \\cdot 5", "2^4"] },
-  { id: "int_pf_4", title: "素因数分解 45", n: 45, correct: "3^2 \\cdot 5", choices: ["3^2 \\cdot 5", "3 \\cdot 5^2", "5 \\cdot 9", "3 \\cdot 15"] },
+  {
+    id: "int_pf_1",
+    title: "素因数分解 12",
+    context: "12個のクッキーを同じ数の袋に分けるため、素因数分解で分解する。",
+    n: 12,
+    correct: "2^2 \\cdot 3",
+    choices: ["2^2 \\cdot 3", "2 \\cdot 3^2", "3 \\cdot 4", "2^3"],
+  },
+  {
+    id: "int_pf_2",
+    title: "素因数分解 18",
+    context: "18人を等しく分けるために素因数分解する。",
+    n: 18,
+    correct: "2 \\cdot 3^2",
+    choices: ["2 \\cdot 3^2", "2^2 \\cdot 3", "3 \\cdot 6", "2 \\cdot 9"],
+  },
+  {
+    id: "int_pf_3",
+    title: "素因数分解 20",
+    context: "20枚のカードの分け方を考えるために素因数分解する。",
+    n: 20,
+    correct: "2^2 \\cdot 5",
+    choices: ["2^2 \\cdot 5", "2 \\cdot 3^2", "4 \\cdot 5", "2^4"],
+  },
+  {
+    id: "int_pf_4",
+    title: "素因数分解 45",
+    context: "45個を同じ数のグループに分ける準備として素因数分解する。",
+    n: 45,
+    correct: "3^2 \\cdot 5",
+    choices: ["3^2 \\cdot 5", "3 \\cdot 5^2", "5 \\cdot 9", "3 \\cdot 15"],
+  },
   { id: "int_pf_5", title: "素因数分解 60", n: 60, correct: "2^2 \\cdot 3 \\cdot 5", choices: ["2^2 \\cdot 3 \\cdot 5", "2^2 \\cdot 5^2", "3 \\cdot 4 \\cdot 5", "2 \\cdot 30"] },
   { id: "int_pf_6", title: "素因数分解 72", n: 72, correct: "2^3 \\cdot 3^2", choices: ["2^3 \\cdot 3^2", "2^2 \\cdot 3 \\cdot 6", "3^2 \\cdot 8", "2 \\cdot 36"] },
   { id: "int_pf_7", title: "素因数分解 84", n: 84, correct: "2^2 \\cdot 3 \\cdot 7", choices: ["2^2 \\cdot 3 \\cdot 7", "2 \\cdot 3 \\cdot 14", "4 \\cdot 21", "3 \\cdot 7^2"] },
@@ -137,10 +171,10 @@ const FACTOR_CASES: FactorCase[] = [
 ];
 
 const PRIME_CASES: PrimeCase[] = [
-  { id: "int_prime_1", title: "素数判定 17", n: 17, correct: "素数" },
-  { id: "int_prime_2", title: "素数判定 19", n: 19, correct: "素数" },
-  { id: "int_prime_3", title: "素数判定 21", n: 21, correct: "合成数" },
-  { id: "int_prime_4", title: "素数判定 29", n: 29, correct: "素数" },
+  { id: "int_prime_1", title: "素数判定 17", context: "17が素数か合成数かを判定する。", n: 17, correct: "素数" },
+  { id: "int_prime_2", title: "素数判定 19", context: "19の約数を考えて素数かどうか判定する。", n: 19, correct: "素数" },
+  { id: "int_prime_3", title: "素数判定 21", context: "21が素数か合成数かを判定する。", n: 21, correct: "合成数" },
+  { id: "int_prime_4", title: "素数判定 29", context: "29の約数を調べて判定する。", n: 29, correct: "素数" },
   { id: "int_prime_5", title: "素数判定 33", n: 33, correct: "合成数" },
   { id: "int_prime_6", title: "素数判定 37", n: 37, correct: "素数" },
   { id: "int_prime_7", title: "素数判定 49", n: 49, correct: "合成数" },
@@ -156,10 +190,10 @@ const PRIME_CASES: PrimeCase[] = [
 ];
 
 const DIV_COUNT_CASES: DivisorCountCase[] = [
-  { id: "int_divcount_1", title: "約数の個数 12", n: 12, count: 6 },
-  { id: "int_divcount_2", title: "約数の個数 18", n: 18, count: 6 },
-  { id: "int_divcount_3", title: "約数の個数 20", n: 20, count: 6 },
-  { id: "int_divcount_4", title: "約数の個数 24", n: 24, count: 8 },
+  { id: "int_divcount_1", title: "約数の個数 12", context: "12個を割り切れる数の個数を数える。", n: 12, count: 6 },
+  { id: "int_divcount_2", title: "約数の個数 18", context: "18の正の約数の個数を求める。", n: 18, count: 6 },
+  { id: "int_divcount_3", title: "約数の個数 20", context: "20の正の約数の個数を求める。", n: 20, count: 6 },
+  { id: "int_divcount_4", title: "約数の個数 24", context: "24を割り切る正の整数の個数を数える。", n: 24, count: 8 },
   { id: "int_divcount_5", title: "約数の個数 30", n: 30, count: 8 },
   { id: "int_divcount_6", title: "約数の個数 36", n: 36, count: 9 },
   { id: "int_divcount_7", title: "約数の個数 48", n: 48, count: 10 },
