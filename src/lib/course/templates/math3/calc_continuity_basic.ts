@@ -117,7 +117,7 @@ const extraContinuityTemplates: QuestionTemplate[] = Array.from({ length: 30 }, 
       const { k } = params;
       return {
         templateId,
-        statement: `次の関数が $x=${k}$ で連続となるように $c$ を求めよ。\\n\\n$$\\n f(x)=\\begin{cases}\n ${leftTex} & (x<${k})\\\\\\\\\n c & (x=${k})\\\\\\\\\n ${rightTex} & (x>${k})\n \\end{cases}\n$$`,
+        statement: `水温の変化を分けて表した関数とする。$x=${k}$ で連続となるように $c$ を求めよ。\\n\\n$$\\n f(x)=\\begin{cases}\n ${leftTex} & (x<${k})\\\\\\\\\n c & (x=${k})\\\\\\\\\n ${rightTex} & (x>${k})\n \\end{cases}\n$$`,
         answerKind: "numeric",
         params,
       };
@@ -166,7 +166,7 @@ const extraContinuityTemplates2: QuestionTemplate[] = Array.from({ length: 30 },
       const { k } = params;
       return {
         templateId,
-        statement: `次の関数が $x=${k}$ で連続となるように $c$ を求めよ。\\n\\n$$\\n f(x)=\\begin{cases}\n ${rightTex} & (x<${k})\\\\\\\\\n c & (x=${k})\\\\\\\\\n ${leftTex} & (x>${k})\n \\end{cases}\n$$`,
+        statement: `水温の変化を分けて表した関数とする。$x=${k}$ で連続となるように $c$ を求めよ。\\n\\n$$\\n f(x)=\\begin{cases}\n ${rightTex} & (x<${k})\\\\\\\\\n c & (x=${k})\\\\\\\\\n ${leftTex} & (x>${k})\n \\end{cases}\n$$`,
         answerKind: "numeric",
         params,
       };
@@ -208,7 +208,7 @@ export const calcContinuityBasicTemplates: QuestionTemplate[] = [
       const right = texLinear(d, e);
       return {
         templateId: "calc_continuity_basic_1",
-        statement: `次の関数が $x=${k}$ で連続となるように $c$ を求めよ。\n\n$$\n f(x)=\begin{cases}
+        statement: `水温の変化を分けて表した関数とする。$x=${k}$ で連続となるように $c$ を求めよ。\n\n$$\n f(x)=\begin{cases}
  ${left} & (x<${k})\\\\
  c & (x=${k})\\\\
  ${right} & (x>${k})
@@ -254,7 +254,7 @@ $$
       const right = texLinear(d, e);
       return {
         templateId: "calc_continuity_basic_2",
-        statement: `次の関数が $x=${k}$ で連続となるように $c$ を求めよ。\n\n$$\n f(x)=\begin{cases}
+        statement: `水温の変化を分けて表した関数とする。$x=${k}$ で連続となるように $c$ を求めよ。\n\n$$\n f(x)=\begin{cases}
  ${left} & (x<${k})\\\\
  c & (x=${k})\\\\
  ${right} & (x>${k})
@@ -289,7 +289,7 @@ $x=${k}$ の左右極限が一致する値が $c$ です。答えは **${c}** �
       const left = texLinear(a, b);
       return {
         templateId: "calc_continuity_basic_3",
-        statement: `次の関数が $x=${k}$ で連続となるように $c$ を求めよ。\\n\\n$$\\n f(x)=\\begin{cases}\n ${left} & (x<${k})\\\\\\\\\n c & (x\\ge ${k})\n \\end{cases}\n$$`,
+        statement: `水温の変化を分けて表した関数とする。$x=${k}$ で連続となるように $c$ を求めよ。\\n\\n$$\\n f(x)=\\begin{cases}\n ${left} & (x<${k})\\\\\\\\\n c & (x\\ge ${k})\n \\end{cases}\n$$`,
         answerKind: "numeric",
         params,
       };
@@ -325,7 +325,7 @@ $$
       const right = texLinear(d, e);
       return {
         templateId: "calc_continuity_basic_4",
-        statement: `次の関数が $x=${k}$ で連続となるように $c$ を求めよ。\\n\\n$$\\n f(x)=\\begin{cases}\n ${left} & (x<${k})\\\\\\\\\n c & (x=${k})\\\\\\\\\n ${right} & (x>${k})\n \\end{cases}\n$$`,
+        statement: `水温の変化を分けて表した関数とする。$x=${k}$ で連続となるように $c$ を求めよ。\\n\\n$$\\n f(x)=\\begin{cases}\n ${left} & (x<${k})\\\\\\\\\n c & (x=${k})\\\\\\\\\n ${right} & (x>${k})\n \\end{cases}\n$$`,
         answerKind: "numeric",
         params,
       };
@@ -356,7 +356,7 @@ $x=${k}$ で左右極限が一致する値が $c$ です。答えは **${c}** �
       const right = texLinear(d, e);
       return {
         templateId: "calc_continuity_basic_5",
-        statement: `次の関数が $x=${k}$ で連続となるように $c$ を求めよ。\\n\\n$$\\n f(x)=\\begin{cases}\n ${right} & (x<${k})\\\\\\\\\n c & (x=${k})\\\\\\\\\n ${left} & (x>${k})\n \\end{cases}\n$$`,
+        statement: `水温の変化を分けて表した関数とする。$x=${k}$ で連続となるように $c$ を求めよ。\\n\\n$$\\n f(x)=\\begin{cases}\n ${right} & (x<${k})\\\\\\\\\n c & (x=${k})\\\\\\\\\n ${left} & (x>${k})\n \\end{cases}\n$$`,
         answerKind: "numeric",
         params,
       };
@@ -386,7 +386,7 @@ $x=${k}$ で左右極限が一致する値が $c$ です。答えは **${c}** �
       const left = texLinear(a, b);
       return {
         templateId: "calc_continuity_basic_6",
-        statement: `次の関数が $x=${k}$ で連続となるように $c$ を求めよ。\\n\\n$$\\n f(x)=\\begin{cases}\n c & (x<${k})\\\\\\\\\n ${left} & (x\\ge ${k})\n \\end{cases}\n$$`,
+        statement: `水温の変化を分けて表した関数とする。$x=${k}$ で連続となるように $c$ を求めよ。\\n\\n$$\\n f(x)=\\begin{cases}\n c & (x<${k})\\\\\\\\\n ${left} & (x\\ge ${k})\n \\end{cases}\n$$`,
         answerKind: "numeric",
         params,
       };
@@ -421,7 +421,7 @@ $$
       const left = texLinear(a, b);
       return {
         templateId: "calc_continuity_basic_7",
-        statement: `次の関数が $x=${k}$ で連続となるように $c$ を求めよ。\\n\\n$$\\n f(x)=\\begin{cases}\n ${left} & (x\\le ${k})\\\\\\\\\n c & (x>${k})\n \\end{cases}\n$$`,
+        statement: `水温の変化を分けて表した関数とする。$x=${k}$ で連続となるように $c$ を求めよ。\\n\\n$$\\n f(x)=\\begin{cases}\n ${left} & (x\\le ${k})\\\\\\\\\n c & (x>${k})\n \\end{cases}\n$$`,
         answerKind: "numeric",
         params,
       };
@@ -456,7 +456,7 @@ $$
       const left = texLinear(a, b);
       return {
         templateId: "calc_continuity_basic_8",
-        statement: `次の関数が $x=${k}$ で連続となるように $c$ を求めよ。\\n\\n$$\\n f(x)=\\begin{cases}\n c & (x<${k})\\\\\\\\\n ${left} & (x\\ge ${k})\n \\end{cases}\n$$`,
+        statement: `水温の変化を分けて表した関数とする。$x=${k}$ で連続となるように $c$ を求めよ。\\n\\n$$\\n f(x)=\\begin{cases}\n c & (x<${k})\\\\\\\\\n ${left} & (x\\ge ${k})\n \\end{cases}\n$$`,
         answerKind: "numeric",
         params,
       };
@@ -492,7 +492,7 @@ $$
       const right = texLinear(d, e);
       return {
         templateId: "calc_continuity_basic_9",
-        statement: `次の関数が $x=${k}$ で連続となるように $c$ を求めよ。\\n\\n$$\\n f(x)=\\begin{cases}\n ${left} & (x<${k})\\\\\\\\\n ${right} & (x>${k})\\\\\\\\\n c & (x=${k})\n \\end{cases}\n$$`,
+        statement: `水温の変化を分けて表した関数とする。$x=${k}$ で連続となるように $c$ を求めよ。\\n\\n$$\\n f(x)=\\begin{cases}\n ${left} & (x<${k})\\\\\\\\\n ${right} & (x>${k})\\\\\\\\\n c & (x=${k})\n \\end{cases}\n$$`,
         answerKind: "numeric",
         params,
       };
@@ -522,7 +522,7 @@ $x=${k}$ で左右極限が一致する値が $c$ です。答えは **${c}** �
       const right = texLinear(d, e);
       return {
         templateId: "calc_continuity_basic_10",
-        statement: `次の関数が $x=${k}$ で連続となるように $c$ を求めよ。\\n\\n$$\\n f(x)=\\begin{cases}\n c & (x\\le ${k})\\\\\\\\\n ${right} & (x>${k})\n \\end{cases}\n$$`,
+        statement: `水温の変化を分けて表した関数とする。$x=${k}$ で連続となるように $c$ を求めよ。\\n\\n$$\\n f(x)=\\begin{cases}\n c & (x\\le ${k})\\\\\\\\\n ${right} & (x>${k})\n \\end{cases}\n$$`,
         answerKind: "numeric",
         params,
       };
@@ -557,7 +557,7 @@ $$
       const left = texLinear(a, b);
       return {
         templateId: "calc_continuity_basic_11",
-        statement: `次の関数が $x=${k}$ で連続となるように $c$ を求めよ。\n\n$$\n f(x)=\\begin{cases}\n ${left} & (x\\le ${k})\\\\\\\\\n c & (x>${k})\n \\end{cases}\n$$`,
+        statement: `水温の変化を分けて表した関数とする。$x=${k}$ で連続となるように $c$ を求めよ。\n\n$$\n f(x)=\\begin{cases}\n ${left} & (x\\le ${k})\\\\\\\\\n c & (x>${k})\n \\end{cases}\n$$`,
         answerKind: "numeric",
         params,
       };
@@ -592,7 +592,7 @@ $$
       const right = texLinear(d, e);
       return {
         templateId: "calc_continuity_basic_12",
-        statement: `次の関数が $x=${k}$ で連続となるように $c$ を求めよ。\n\n$$\n f(x)=\\begin{cases}\n c & (x<${k})\\\\\\\\\n ${right} & (x\\ge ${k})\n \\end{cases}\n$$`,
+        statement: `水温の変化を分けて表した関数とする。$x=${k}$ で連続となるように $c$ を求めよ。\n\n$$\n f(x)=\\begin{cases}\n c & (x<${k})\\\\\\\\\n ${right} & (x\\ge ${k})\n \\end{cases}\n$$`,
         answerKind: "numeric",
         params,
       };
@@ -627,7 +627,7 @@ $$
       const right = texLinear(d, e);
       return {
         templateId: "calc_continuity_basic_13",
-        statement: `次の関数が $x=${k}$ で連続となるように $c$ を求めよ。\n\n$$\n f(x)=\\begin{cases}\n ${right} & (x\\le ${k})\\\\\\\\\n c & (x>${k})\n \\end{cases}\n$$`,
+        statement: `水温の変化を分けて表した関数とする。$x=${k}$ で連続となるように $c$ を求めよ。\n\n$$\n f(x)=\\begin{cases}\n ${right} & (x\\le ${k})\\\\\\\\\n c & (x>${k})\n \\end{cases}\n$$`,
         answerKind: "numeric",
         params,
       };
@@ -662,7 +662,7 @@ $$
       const left = texLinear(a, b);
       return {
         templateId: "calc_continuity_basic_14",
-        statement: `次の関数が $x=${k}$ で連続となるように $c$ を求めよ。\n\n$$\n f(x)=\\begin{cases}\n c & (x\\le ${k})\\\\\\\\\n ${left} & (x>${k})\n \\end{cases}\n$$`,
+        statement: `水温の変化を分けて表した関数とする。$x=${k}$ で連続となるように $c$ を求めよ。\n\n$$\n f(x)=\\begin{cases}\n c & (x\\le ${k})\\\\\\\\\n ${left} & (x>${k})\n \\end{cases}\n$$`,
         answerKind: "numeric",
         params,
       };
@@ -698,7 +698,7 @@ $$
       const right = texLinear(d, e);
       return {
         templateId: "calc_continuity_basic_15",
-        statement: `次の関数が $x=${k}$ で連続となるように $c$ を求めよ。\\n\\n$$\\n f(x)=\\begin{cases}\n ${left} & (x<${k})\\\\\\\\\n ${right} & (x>${k})\\\\\\\\\n c & (x=${k})\n \\end{cases}\n$$`,
+        statement: `水温の変化を分けて表した関数とする。$x=${k}$ で連続となるように $c$ を求めよ。\\n\\n$$\\n f(x)=\\begin{cases}\n ${left} & (x<${k})\\\\\\\\\n ${right} & (x>${k})\\\\\\\\\n c & (x=${k})\n \\end{cases}\n$$`,
         answerKind: "numeric",
         params,
       };
@@ -729,7 +729,7 @@ $x=${k}$ で左右極限が一致する値が $c$ です。答えは **${c}** �
       const right = texLinear(d, e);
       return {
         templateId: "calc_continuity_basic_16",
-        statement: `次の関数が $x=${k}$ で連続となるように $c$ を求めよ。\\n\\n$$\\n f(x)=\\begin{cases}\n ${right} & (x<${k})\\\\\\\\\n ${left} & (x>${k})\\\\\\\\\n c & (x=${k})\n \\end{cases}\n$$`,
+        statement: `水温の変化を分けて表した関数とする。$x=${k}$ で連続となるように $c$ を求めよ。\\n\\n$$\\n f(x)=\\begin{cases}\n ${right} & (x<${k})\\\\\\\\\n ${left} & (x>${k})\\\\\\\\\n c & (x=${k})\n \\end{cases}\n$$`,
         answerKind: "numeric",
         params,
       };
@@ -759,7 +759,7 @@ $x=${k}$ で左右極限が一致する値が $c$ です。答えは **${c}** �
       const left = texLinear(a, b);
       return {
         templateId: "calc_continuity_basic_17",
-        statement: `次の関数が $x=${k}$ で連続となるように $c$ を求めよ。\\n\\n$$\\n f(x)=\\begin{cases}\n ${left} & (x<${k})\\\\\\\\\n c & (x\\ge ${k})\n \\end{cases}\n$$`,
+        statement: `水温の変化を分けて表した関数とする。$x=${k}$ で連続となるように $c$ を求めよ。\\n\\n$$\\n f(x)=\\begin{cases}\n ${left} & (x<${k})\\\\\\\\\n c & (x\\ge ${k})\n \\end{cases}\n$$`,
         answerKind: "numeric",
         params,
       };
@@ -794,7 +794,7 @@ $$
       const right = texLinear(d, e);
       return {
         templateId: "calc_continuity_basic_18",
-        statement: `次の関数が $x=${k}$ で連続となるように $c$ を求めよ。\\n\\n$$\\n f(x)=\\begin{cases}\n c & (x\\le ${k})\\\\\\\\\n ${right} & (x>${k})\n \\end{cases}\n$$`,
+        statement: `水温の変化を分けて表した関数とする。$x=${k}$ で連続となるように $c$ を求めよ。\\n\\n$$\\n f(x)=\\begin{cases}\n c & (x\\le ${k})\\\\\\\\\n ${right} & (x>${k})\n \\end{cases}\n$$`,
         answerKind: "numeric",
         params,
       };
@@ -829,7 +829,7 @@ $$
       const right = texLinear(d, e);
       return {
         templateId: "calc_continuity_basic_19",
-        statement: `次の関数が $x=${k}$ で連続となるように $c$ を求めよ。\\n\\n$$\\n f(x)=\\begin{cases}\n ${right} & (x<${k})\\\\\\\\\n c & (x\\ge ${k})\n \\end{cases}\n$$`,
+        statement: `水温の変化を分けて表した関数とする。$x=${k}$ で連続となるように $c$ を求めよ。\\n\\n$$\\n f(x)=\\begin{cases}\n ${right} & (x<${k})\\\\\\\\\n c & (x\\ge ${k})\n \\end{cases}\n$$`,
         answerKind: "numeric",
         params,
       };
@@ -864,7 +864,7 @@ $$
       const left = texLinear(a, b);
       return {
         templateId: "calc_continuity_basic_20",
-        statement: `次の関数が $x=${k}$ で連続となるように $c$ を求めよ。\\n\\n$$\\n f(x)=\\begin{cases}\n c & (x<${k})\\\\\\\\\n ${left} & (x\\ge ${k})\n \\end{cases}\n$$`,
+        statement: `水温の変化を分けて表した関数とする。$x=${k}$ で連続となるように $c$ を求めよ。\\n\\n$$\\n f(x)=\\begin{cases}\n c & (x<${k})\\\\\\\\\n ${left} & (x\\ge ${k})\n \\end{cases}\n$$`,
         answerKind: "numeric",
         params,
       };
