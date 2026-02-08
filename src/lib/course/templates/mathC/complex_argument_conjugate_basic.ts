@@ -33,7 +33,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `複素数 $z$ の点の偏角が $${params.theta}^\\circ$ のとき、共役 $\\overline{z}$ の点の偏角を求めよ。（$0^\\circ\\le\\theta<360^\\circ$）`;
+      const statement = `観測点を表す複素数 $z$ の点の偏角が $${params.theta}^\\circ$ のとき、共役 $\\overline{z}$ の点の偏角を求めよ。（$0^\\circ\\le\\theta<360^\\circ$）`;
       return {
         templateId: id,
         statement,

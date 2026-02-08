@@ -34,7 +34,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `複素数 $z_1=${params.a}+${params.b}i$, $z_2=${params.c}+${params.d}i$ のとき、$|z_1|+|z_2|$ を求めよ。`;
+      const statement = `地図上の点を表す複素数 $z_1=${params.a}+${params.b}i$, $z_2=${params.c}+${params.d}i$ のとき、$|z_1|+|z_2|$ を求めよ。`;
       return {
         templateId: id,
         statement,

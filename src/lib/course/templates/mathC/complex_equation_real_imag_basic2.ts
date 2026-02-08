@@ -37,7 +37,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const params = buildParams();
       const label = params.ask === 0 ? "実部" : "虚部";
-      const statement = `複素数 $z=${texComplex(params.a, params.b)}$ の${label}を答えよ。`;
+      const statement = `地図上の点を表す複素数 $z=${texComplex(params.a, params.b)}$ の${label}を答えよ。`;
       return {
         templateId: id,
         statement,
@@ -53,7 +53,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const label = p.ask === 0 ? "実部" : "虚部";
       return `
 ### この問題の解説
-複素数 $a+bi$ の実部は $a$、虚部は $b$。
+地図上の点を表す複素数 $a+bi$ の実部は $a$、虚部は $b$。
 ${label}は **${p.ans}**。
 `;
     },

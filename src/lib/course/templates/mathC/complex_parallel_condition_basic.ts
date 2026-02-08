@@ -41,7 +41,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `地図上の点を表す地図上の点を表す複素数 $z_1=${texComplex(params.a, params.b)}$, $z_2=${texComplex(
+      const statement = `地図上の点を表す複素数 $z_1=${texComplex(params.a, params.b)}$, $z_2=${texComplex(
         params.c,
         params.d
       )}$ に対して、$\\frac{z_1}{z_2}$ が実数なら 0、実数でなければ 1 を答えよ。`;

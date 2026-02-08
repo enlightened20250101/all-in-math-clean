@@ -37,7 +37,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `地図上の点を表す地図上の点を表す複素数 $z_1=${texComplex(params.a, params.b)}$ と $z_2=${texComplex(
+      const statement = `地図上の点を表す複素数 $z_1=${texComplex(params.a, params.b)}$ と $z_2=${texComplex(
         params.c,
         params.d
       )}$ が直交（直角）するかを調べ、直交なら 0、そうでなければ 1 を答えよ。`;

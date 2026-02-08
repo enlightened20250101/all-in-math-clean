@@ -37,7 +37,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `複素数 $z_1=${formatComplex(params.a, params.b)}$, $z_2=${formatComplex(params.c, params.d)}$ のとき、$|z_1-z_2|^2$ を求めよ。`;
+      const statement = `地図上の点を表す複素数 $z_1=${formatComplex(params.a, params.b)}$, $z_2=${formatComplex(params.c, params.d)}$ のとき、$|z_1-z_2|^2$ を求めよ。`;
       return {
         templateId: id,
         statement,

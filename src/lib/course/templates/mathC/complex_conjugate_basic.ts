@@ -66,12 +66,12 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
 
 export const complexConjugateTemplates: QuestionTemplate[] = Array.from(
   { length: 20 },
-  (_, i) => buildTemplate(`complex_conjugate_basic_${i + 1}`, `共役座標平面上の点を表す複素数 ${i + 1}`)
+  (_, i) => buildTemplate(`complex_conjugate_basic_${i + 1}`, `共役（座標平面上の点を表す複素数） ${i + 1}`)
 );
 
 const extraComplexConjugateTemplates: QuestionTemplate[] = Array.from(
   { length: 30 },
-  (_, i) => buildTemplate(`complex_conjugate_basic_${i + 21}`, `共役座標平面上の点を表す複素数 追加${i + 1}`)
+  (_, i) => buildTemplate(`complex_conjugate_basic_${i + 21}`, `共役（座標平面上の点を表す複素数） 追加${i + 1}`)
 );
 
 complexConjugateTemplates.push(...extraComplexConjugateTemplates);

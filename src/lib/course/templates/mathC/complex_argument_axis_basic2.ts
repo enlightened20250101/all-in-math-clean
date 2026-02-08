@@ -35,7 +35,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `複素数 $z=${texComplex(params.x, params.y)}$ の点の偏角を $0^\\circ\\le\\theta<360^\\circ$ で求めよ。`;
+      const statement = `観測点を表す複素数 $z=${texComplex(params.x, params.y)}$ の点の偏角を $0^\\circ\\le\\theta<360^\\circ$ で求めよ。`;
       return {
         templateId: id,
         statement,

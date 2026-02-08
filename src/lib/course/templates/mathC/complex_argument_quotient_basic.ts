@@ -34,7 +34,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `複素数 $z_1, z_2$ の点の偏角がそれぞれ $${params.a}^\\circ$, $${params.b}^\\circ$ のとき、$z_1/z_2$ の点の偏角を求めよ。`;
+      const statement = `観測点を表す複素数 $z_1, z_2$ の点の偏角がそれぞれ $${params.a}^\\circ$, $${params.b}^\\circ$ のとき、$z_1/z_2$ の点の偏角を求めよ。`;
       return {
         templateId: id,
         statement,

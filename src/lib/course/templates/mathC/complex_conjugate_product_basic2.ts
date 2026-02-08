@@ -35,7 +35,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `複素数 $z=${texComplex(params.a, params.b)}$ に対して、$z\\overline{z}$ の値を求めよ。`;
+      const statement = `地図上の点を表す複素数 $z=${texComplex(params.a, params.b)}$ に対して、$z\\overline{z}$ の値を求めよ。`;
       return {
         templateId: id,
         statement,

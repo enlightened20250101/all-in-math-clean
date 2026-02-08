@@ -37,7 +37,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const params = buildParams();
       const z0 = texComplex(params.a, params.b);
-      const statement = `複素数 $z$ が $|z-(${z0})|=${params.r}$ を満たすとき、$|z-(${z0})|$ の値を答えよ。`;
+      const statement = `地図上の点を表す複素数 $z$ が $|z-(${z0})|=${params.r}$ を満たすとき、$|z-(${z0})|$ の値を答えよ。`;
       return {
         templateId: id,
         statement,

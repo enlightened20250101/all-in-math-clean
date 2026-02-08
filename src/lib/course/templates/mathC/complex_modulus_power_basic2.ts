@@ -30,7 +30,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `複素数 $z$ が $|z|=${params.r}$ を満たすとき、$|z|^{${params.n}}$ を求めよ。`;
+      const statement = `地図上の点を表す複素数 $z$ が $|z|=${params.r}$ を満たすとき、$|z|^{${params.n}}$ を求めよ。`;
       return {
         templateId: id,
         statement,

@@ -39,7 +39,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const params = buildParams();
       const askLabel = params.ask === 0 ? "x" : "y";
-      const statement = `複素数 $z_1=${formatComplex(params.a, params.b)}$ と $z_2=${formatComplex(params.c, params.d)}$ の中点の ${askLabel} 座標を求めよ。`;
+      const statement = `地図上の点を表す複素数 $z_1=${formatComplex(params.a, params.b)}$ と $z_2=${formatComplex(params.c, params.d)}$ の中点の ${askLabel} 座標を求めよ。`;
       return {
         templateId: id,
         statement,

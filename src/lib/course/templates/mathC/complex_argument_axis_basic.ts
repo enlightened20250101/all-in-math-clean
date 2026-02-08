@@ -33,7 +33,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const caseId = Math.floor(Math.random() * CASES.length);
       const c = CASES[caseId];
-      const statement = `複素数 $z=${texComplex(c.a, c.b)}$ の点の偏角を求めよ。`;
+      const statement = `観測点を表す複素数 $z=${texComplex(c.a, c.b)}$ の点の偏角を求めよ。`;
       return {
         templateId: id,
         statement,
