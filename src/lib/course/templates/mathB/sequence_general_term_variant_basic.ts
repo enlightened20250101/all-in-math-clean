@@ -23,7 +23,9 @@ function buildTemplate(c: Case): QuestionTemplate {
     generate() {
       return {
         templateId: c.id,
-        statement: `等差数列 $\\{a_n\\}$ で $a_1=${c.a1}$, 公差 $d=${c.d}$ のとき、$a_${c.n}$ を求めよ。`,
+        statement:
+          `一定の差で増減する記録を等差数列とみなす。` +
+          `$a_1=${c.a1}$, 公差 $d=${c.d}$ のとき、$a_${c.n}$ を求めよ。`,
         answerKind: "numeric",
         params: { an },
       };
