@@ -587,6 +587,7 @@ import { sequenceArithmeticSumTemplates } from "./templates/mathB/sequence_arith
 import { sequenceArithmeticSumVariantTemplates } from "./templates/mathB/sequence_arithmetic_sum_variant_basic";
 import { sequenceArithmeticSumConditionTemplates } from "./templates/mathB/sequence_arithmetic_sum_condition_basic";
 import { binomialProbabilityTemplates } from "./templates/mathC/prob_binomial_probability_basic";
+import { highDifficultyTemplates } from "./templates/high_difficulty_pack";
 
 const RAW_TEMPLATES: QuestionTemplate[] = [
   ...quadSolveTemplates,
@@ -1176,6 +1177,7 @@ const RAW_TEMPLATES: QuestionTemplate[] = [
   ...vectorAreaTemplates,
   ...vectorEquationTemplates,
   ...vectorEquationVariantTemplates,
+  ...highDifficultyTemplates,
 ];
 
 const totalByTopic = RAW_TEMPLATES.reduce((acc, t) => {
