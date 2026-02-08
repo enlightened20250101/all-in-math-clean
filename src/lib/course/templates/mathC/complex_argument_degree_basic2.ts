@@ -29,7 +29,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `偏角が ${params.deg}^\\circ$ のとき、$0^\\circ\\le\\theta<360^\\circ$ で表した偏角を答えよ。`;
+      const statement = `点の偏角が ${params.deg}^\\circ$ のとき、$0^\\circ\\le\\theta<360^\\circ$ で表した点の偏角を答えよ。`;
       return {
         templateId: id,
         statement,
@@ -52,5 +52,5 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
 }
 
 export const complexArgumentDegreeExtraTemplates: QuestionTemplate[] = Array.from({ length: 6 }, (_, i) =>
-  buildTemplate(`complex_argument_degree_basic2_${i + 1}`, `偏角（度数） ${i + 1}`)
+  buildTemplate(`complex_argument_degree_basic2_${i + 1}`, `点の偏角（度数） ${i + 1}`)
 );

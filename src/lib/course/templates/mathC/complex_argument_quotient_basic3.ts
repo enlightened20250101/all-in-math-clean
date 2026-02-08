@@ -35,7 +35,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `複素数 $z_1,z_2$ の偏角がそれぞれ ${params.a}^\\circ, ${params.b}^\\circ$ のとき、$\\frac{z_1}{z_2}$ の偏角を $0^\\circ\\le\\theta<360^\\circ$ で答えよ。`;
+      const statement = `複素数 $z_1,z_2$ の点の偏角がそれぞれ ${params.a}^\\circ, ${params.b}^\\circ$ のとき、$\\frac{z_1}{z_2}$ の点の偏角を $0^\\circ\\le\\theta<360^\\circ$ で答えよ。`;
       return {
         templateId: id,
         statement,
@@ -58,5 +58,5 @@ $\\arg\\left(\\frac{z_1}{z_2}\\right)=\\arg z_1-\\arg z_2$。
 }
 
 export const complexArgumentQuotientExtraTemplates2: QuestionTemplate[] = Array.from({ length: 6 }, (_, i) =>
-  buildTemplate(`complex_argument_quotient_basic3_${i + 1}`, `偏角の差 ${i + 1}`)
+  buildTemplate(`complex_argument_quotient_basic3_${i + 1}`, `点の偏角の差 ${i + 1}`)
 );

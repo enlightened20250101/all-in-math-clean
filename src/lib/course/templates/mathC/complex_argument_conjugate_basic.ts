@@ -33,7 +33,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `複素数 $z$ の偏角が $${params.theta}^\\circ$ のとき、共役 $\\overline{z}$ の偏角を求めよ。（$0^\\circ\\le\\theta<360^\\circ$）`;
+      const statement = `複素数 $z$ の点の偏角が $${params.theta}^\\circ$ のとき、共役 $\\overline{z}$ の点の偏角を求めよ。（$0^\\circ\\le\\theta<360^\\circ$）`;
       return {
         templateId: id,
         statement,
@@ -48,7 +48,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const p = params as Params;
       return `
 ### この問題の解説
-共役は偏角の符号が反転し、$[0,360)$ に戻します。
+共役は点の偏角の符号が反転し、$[0,360)$ に戻します。
 よって **${p.ans}^\\circ**。
 `;
     },
@@ -56,11 +56,11 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
 }
 
 export const complexArgumentConjugateTemplates: QuestionTemplate[] = Array.from({ length: 6 }, (_, i) =>
-  buildTemplate(`complex_argument_conjugate_basic_${i + 1}`, `共役の偏角 ${i + 1}`)
+  buildTemplate(`complex_argument_conjugate_basic_${i + 1}`, `共役の点の偏角 ${i + 1}`)
 );
 
 const extraArgumentConjugateTemplates: QuestionTemplate[] = Array.from({ length: 44 }, (_, i) =>
-  buildTemplate(`complex_argument_conjugate_basic_${i + 7}`, `共役の偏角 追加${i + 1}`)
+  buildTemplate(`complex_argument_conjugate_basic_${i + 7}`, `共役の点の偏角 追加${i + 1}`)
 );
 
 complexArgumentConjugateTemplates.push(...extraArgumentConjugateTemplates);

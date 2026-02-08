@@ -34,7 +34,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `複素数 $z_1, z_2$ の偏角がそれぞれ $${params.a}^\\circ$, $${params.b}^\\circ$ のとき、$z_1/z_2$ の偏角を求めよ。`;
+      const statement = `複素数 $z_1, z_2$ の点の偏角がそれぞれ $${params.a}^\\circ$, $${params.b}^\\circ$ のとき、$z_1/z_2$ の点の偏角を求めよ。`;
       return {
         templateId: id,
         statement,
@@ -49,7 +49,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const p = params as Params;
       return `
 ### この問題の解説
-偏角は商で差になります。
+点の偏角は商で差になります。
 よって ${p.a}-${p.b}=${p.ans}^\\circ。
 `;
     },
@@ -57,11 +57,11 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
 }
 
 export const complexArgumentQuotientTemplates: QuestionTemplate[] = Array.from({ length: 6 }, (_, i) =>
-  buildTemplate(`complex_argument_quotient_basic_${i + 1}`, `偏角の差 ${i + 1}`)
+  buildTemplate(`complex_argument_quotient_basic_${i + 1}`, `点の偏角の差 ${i + 1}`)
 );
 
 const extraArgumentQuotientTemplates: QuestionTemplate[] = Array.from({ length: 32 }, (_, i) =>
-  buildTemplate(`complex_argument_quotient_basic_${i + 7}`, `偏角の差 追加${i + 1}`)
+  buildTemplate(`complex_argument_quotient_basic_${i + 7}`, `点の偏角の差 追加${i + 1}`)
 );
 
 complexArgumentQuotientTemplates.push(...extraArgumentQuotientTemplates);

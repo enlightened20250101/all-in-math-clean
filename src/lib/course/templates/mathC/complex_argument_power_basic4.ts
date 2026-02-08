@@ -35,7 +35,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `複素数 $z$ の偏角が $${params.theta}^\\circ$ のとき、$z^{${params.n}}$ の偏角を $0^\\circ\\le\\theta<360^\\circ$ で答えよ。`;
+      const statement = `複素数 $z$ の点の偏角が $${params.theta}^\\circ$ のとき、$z^{${params.n}}$ の点の偏角を $0^\\circ\\le\\theta<360^\\circ$ で答えよ。`;
       return {
         templateId: id,
         statement,
@@ -58,5 +58,5 @@ $\\arg(z^n)=n\\arg(z)$。
 }
 
 export const complexArgumentPowerExtraTemplates3: QuestionTemplate[] = Array.from({ length: 6 }, (_, i) =>
-  buildTemplate(`complex_argument_power_basic4_${i + 1}`, `偏角のn倍 ${i + 1}`)
+  buildTemplate(`complex_argument_power_basic4_${i + 1}`, `点の偏角のn倍 ${i + 1}`)
 );

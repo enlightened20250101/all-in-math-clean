@@ -33,7 +33,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `複素数 $z$ の偏角が $${params.theta}^\\circ$ のとき、$1/z$ の偏角を求めよ。（$0^\\circ\\le\\theta<360^\\circ$）`;
+      const statement = `複素数 $z$ の点の偏角が $${params.theta}^\\circ$ のとき、$1/z$ の点の偏角を求めよ。（$0^\\circ\\le\\theta<360^\\circ$）`;
       return {
         templateId: id,
         statement,
@@ -56,11 +56,11 @@ $\arg(1/z)=-\arg(z)$。
 }
 
 export const complexArgumentInverseTemplates: QuestionTemplate[] = Array.from({ length: 6 }, (_, i) =>
-  buildTemplate(`complex_argument_inverse_basic_${i + 1}`, `偏角の逆数 ${i + 1}`)
+  buildTemplate(`complex_argument_inverse_basic_${i + 1}`, `点の偏角の逆数 ${i + 1}`)
 );
 
 const extraArgumentInverseTemplates: QuestionTemplate[] = Array.from({ length: 44 }, (_, i) =>
-  buildTemplate(`complex_argument_inverse_basic_${i + 7}`, `偏角の逆数 追加${i + 1}`)
+  buildTemplate(`complex_argument_inverse_basic_${i + 7}`, `点の偏角の逆数 追加${i + 1}`)
 );
 
 complexArgumentInverseTemplates.push(...extraArgumentInverseTemplates);

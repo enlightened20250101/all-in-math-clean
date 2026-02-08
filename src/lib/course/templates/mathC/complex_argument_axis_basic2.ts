@@ -35,7 +35,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `複素数 $z=${texComplex(params.x, params.y)}$ の偏角を $0^\\circ\\le\\theta<360^\\circ$ で求めよ。`;
+      const statement = `複素数 $z=${texComplex(params.x, params.y)}$ の点の偏角を $0^\\circ\\le\\theta<360^\\circ$ で求めよ。`;
       return {
         templateId: id,
         statement,
@@ -50,7 +50,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const p = params as Params;
       return `
 ### この問題の解説
-軸上の点なので偏角は $0^\\circ,90^\\circ,180^\\circ,270^\\circ$ のいずれか。
+軸上の点なので点の偏角は $0^\\circ,90^\\circ,180^\\circ,270^\\circ$ のいずれか。
 ここでは **${p.ans}^\\circ**。
 `;
     },
@@ -58,5 +58,5 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
 }
 
 export const complexArgumentAxisExtraTemplates: QuestionTemplate[] = Array.from({ length: 6 }, (_, i) =>
-  buildTemplate(`complex_argument_axis_basic2_${i + 1}`, `偏角（軸） ${i + 1}`)
+  buildTemplate(`complex_argument_axis_basic2_${i + 1}`, `点の偏角（軸） ${i + 1}`)
 );

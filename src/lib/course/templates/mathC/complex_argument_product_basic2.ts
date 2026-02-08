@@ -35,7 +35,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `複素数 $z_1,z_2$ の偏角がそれぞれ $${params.a}^\\circ, ${params.b}^\\circ$ のとき、$z_1z_2$ の偏角を $0^\\circ\\le\\theta<360^\\circ$ で答えよ。`;
+      const statement = `複素数 $z_1,z_2$ の点の偏角がそれぞれ $${params.a}^\\circ, ${params.b}^\\circ$ のとき、$z_1z_2$ の点の偏角を $0^\\circ\\le\\theta<360^\\circ$ で答えよ。`;
       return {
         templateId: id,
         statement,
@@ -58,5 +58,5 @@ $\\arg(z_1z_2)=\\arg z_1+\\arg z_2$。
 }
 
 export const complexArgumentProductExtraTemplates: QuestionTemplate[] = Array.from({ length: 6 }, (_, i) =>
-  buildTemplate(`complex_argument_product_basic2_${i + 1}`, `偏角の和 ${i + 1}`)
+  buildTemplate(`complex_argument_product_basic2_${i + 1}`, `点の偏角の和 ${i + 1}`)
 );

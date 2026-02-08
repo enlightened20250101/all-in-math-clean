@@ -29,7 +29,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `偏角が ${params.theta}^\\circ$ の複素数は第何象限にあるか。第◯象限の番号を答えよ。`;
+      const statement = `点の偏角が ${params.theta}^\\circ$ の複素数は第何象限にあるか。第◯象限の番号を答えよ。`;
       return {
         templateId: id,
         statement,
@@ -44,7 +44,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const p = params as Params;
       return `
 ### この問題の解説
-偏角の範囲で象限を判定します。
+点の偏角の範囲で象限を判定します。
 答えは **第${p.ans}象限**。
 `;
     },

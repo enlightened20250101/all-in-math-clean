@@ -33,7 +33,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const caseId = Math.floor(Math.random() * CASES.length);
       const c = CASES[caseId];
-      const statement = `複素数 $z=${texComplex(c.a, c.b)}$ の偏角を求めよ。`;
+      const statement = `複素数 $z=${texComplex(c.a, c.b)}$ の点の偏角を求めよ。`;
       return {
         templateId: id,
         statement,
@@ -50,18 +50,18 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const c = CASES[params.caseId] ?? CASES[0];
       return `
 ### この問題の解説
-軸上の点なので偏角は **${c.answer}** です。
+軸上の点なので点の偏角は **${c.answer}** です。
 `;
     },
   };
 }
 
 export const complexArgumentAxisTemplates: QuestionTemplate[] = Array.from({ length: 6 }, (_, i) =>
-  buildTemplate(`complex_argument_axis_basic_${i + 1}`, `偏角（軸上） ${i + 1}`)
+  buildTemplate(`complex_argument_axis_basic_${i + 1}`, `点の偏角（軸上） ${i + 1}`)
 );
 
 const extraArgumentAxisTemplates: QuestionTemplate[] = Array.from({ length: 38 }, (_, i) =>
-  buildTemplate(`complex_argument_axis_basic_${i + 7}`, `偏角（軸上） 追加${i + 1}`)
+  buildTemplate(`complex_argument_axis_basic_${i + 7}`, `点の偏角（軸上） 追加${i + 1}`)
 );
 
 complexArgumentAxisTemplates.push(...extraArgumentAxisTemplates);

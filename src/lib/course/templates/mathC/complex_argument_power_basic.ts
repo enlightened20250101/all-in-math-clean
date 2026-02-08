@@ -34,7 +34,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `複素数 $z$ の偏角が $${params.theta}^\\circ$ のとき、$z^${params.n}$ の偏角を求めよ。（$0^\\circ\\le\\theta<360^\\circ$）`;
+      const statement = `複素数 $z$ の点の偏角が $${params.theta}^\\circ$ のとき、$z^${params.n}$ の点の偏角を求めよ。（$0^\\circ\\le\\theta<360^\\circ$）`;
       return {
         templateId: id,
         statement,
@@ -49,7 +49,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const p = params as Params;
       return `
 ### この問題の解説
-偏角はべきで $n\\theta$。
+点の偏角はべきで $n\\theta$。
 よって ${p.n}\times ${p.theta}=${p.ans}^\\circ。
 `;
     },
@@ -57,11 +57,11 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
 }
 
 export const complexArgumentPowerTemplates: QuestionTemplate[] = Array.from({ length: 6 }, (_, i) =>
-  buildTemplate(`complex_argument_power_basic_${i + 1}`, `偏角のべき ${i + 1}`)
+  buildTemplate(`complex_argument_power_basic_${i + 1}`, `点の偏角のべき ${i + 1}`)
 );
 
 const extraArgumentPowerTemplates: QuestionTemplate[] = Array.from({ length: 32 }, (_, i) =>
-  buildTemplate(`complex_argument_power_basic_${i + 7}`, `偏角のべき 追加${i + 1}`)
+  buildTemplate(`complex_argument_power_basic_${i + 7}`, `点の偏角のべき 追加${i + 1}`)
 );
 
 complexArgumentPowerTemplates.push(...extraArgumentPowerTemplates);

@@ -41,7 +41,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `複素数 $z=${texComplex(params.x, params.y)}$ の偏角（主値, 度数法）を求めよ。`;
+      const statement = `複素数 $z=${texComplex(params.x, params.y)}$ の点の偏角（主値, 度数法）を求めよ。`;
       return {
         templateId: id,
         statement,
@@ -56,19 +56,19 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const p = params as Params;
       return `
 ### この問題の解説
-点 $(${p.x},${p.y})$ の偏角は **${p.arg}^\\circ** です。
+点 $(${p.x},${p.y})$ の点の偏角は **${p.arg}^\\circ** です。
 `;
     },
   };
 }
 
 const extraComplexArgumentDegreeTemplates: QuestionTemplate[] = Array.from({ length: 30 }, (_, i) =>
-  buildTemplate(`complex_argument_degree_basic_${i + 21}`, `偏角（度） 追加${i + 1}`)
+  buildTemplate(`complex_argument_degree_basic_${i + 21}`, `点の偏角（度） 追加${i + 1}`)
 );
 
 export const complexArgumentDegreeTemplates: QuestionTemplate[] = [
   ...Array.from({ length: 20 }, (_, i) =>
-    buildTemplate(`complex_argument_degree_basic_${i + 1}`, `偏角（度） ${i + 1}`)
+    buildTemplate(`complex_argument_degree_basic_${i + 1}`, `点の偏角（度） ${i + 1}`)
   ),
   ...extraComplexArgumentDegreeTemplates,
 ];

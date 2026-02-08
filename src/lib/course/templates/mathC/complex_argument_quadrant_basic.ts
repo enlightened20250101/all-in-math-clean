@@ -28,7 +28,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const caseId = Math.floor(Math.random() * CASES.length);
       const c = CASES[caseId];
-      const statement = `複素数 $z=${c.a}${c.b >= 0 ? "+" : ""}${c.b}i$ の偏角を求めよ。`;
+      const statement = `複素数 $z=${c.a}${c.b >= 0 ? "+" : ""}${c.b}i$ の点の偏角を求めよ。`;
       return {
         templateId: id,
         statement,
@@ -45,18 +45,18 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const c = CASES[params.caseId] ?? CASES[0];
       return `
 ### この問題の解説
-第${c.answer === "45^\\circ" ? "1" : c.answer === "135^\\circ" ? "2" : c.answer === "225^\\circ" ? "3" : "4"}象限なので偏角は **${c.answer}** です。
+第${c.answer === "45^\\circ" ? "1" : c.answer === "135^\\circ" ? "2" : c.answer === "225^\\circ" ? "3" : "4"}象限なので点の偏角は **${c.answer}** です。
 `;
     },
   };
 }
 
 export const complexArgumentQuadrantTemplates: QuestionTemplate[] = Array.from({ length: 6 }, (_, i) =>
-  buildTemplate(`complex_argument_quadrant_basic_${i + 1}`, `偏角（象限） ${i + 1}`)
+  buildTemplate(`complex_argument_quadrant_basic_${i + 1}`, `点の偏角（象限） ${i + 1}`)
 );
 
 const extraArgumentQuadrantTemplates: QuestionTemplate[] = Array.from({ length: 38 }, (_, i) =>
-  buildTemplate(`complex_argument_quadrant_basic_${i + 7}`, `偏角（象限） 追加${i + 1}`)
+  buildTemplate(`complex_argument_quadrant_basic_${i + 7}`, `点の偏角（象限） 追加${i + 1}`)
 );
 
 complexArgumentQuadrantTemplates.push(...extraArgumentQuadrantTemplates);
