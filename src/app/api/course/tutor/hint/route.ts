@@ -9,6 +9,11 @@ const client = new OpenAI({
 });
 
 export async function POST(req: Request) {
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) {
+    return NextResponse.json({ error: "openai_disabled" }, { status: 503 });
+  }
+  const client = new OpenAI({ apiKey });
   const body = await req.json().catch(() => null);
 
   const question = body?.question as string | undefined;
