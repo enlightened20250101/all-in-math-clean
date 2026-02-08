@@ -6,6 +6,7 @@ type CovCase = {
   id: string;
   title: string;
   points: Array<[number, number]>;
+  context?: string;
   difficulty: 1 | 2 | 3;
 };
 
@@ -37,9 +38,10 @@ function buildTemplate(c: CovCase): QuestionTemplate {
       tags: ["data", "covariance"],
     },
     generate() {
+      const lead = c.context ? `${c.context}\n\n` : "";
       return {
         templateId: c.id,
-        statement: `次のデータの共分散を求めよ。\\n\\nデータ: ${pointsText(c.points)}`,
+        statement: `${lead}次のデータの共分散を求めよ。\\n\\nデータ: ${pointsText(c.points)}`,
         answerKind: "numeric",
         params: {},
       };
@@ -54,9 +56,9 @@ function buildTemplate(c: CovCase): QuestionTemplate {
 }
 
 const CASES: CovCase[] = [
-  { id: "data_cov_1", title: "共分散 1", points: [[1, 1], [-1, -1]], difficulty: 1 },
-  { id: "data_cov_2", title: "共分散 2", points: [[1, 2], [3, 4]], difficulty: 1 },
-  { id: "data_cov_3", title: "共分散 3", points: [[-2, 2], [2, -2]], difficulty: 1 },
+  { id: "data_cov_1", title: "共分散 1", points: [[1, 1], [-1, -1]], context: "2人の生徒の勉強時間 $x$ と得点 $y$ を調べた。", difficulty: 1 },
+  { id: "data_cov_2", title: "共分散 2", points: [[1, 2], [3, 4]], context: "気温 $x$ とアイスの売上 $y$ の関係を調べた。", difficulty: 1 },
+  { id: "data_cov_3", title: "共分散 3", points: [[-2, 2], [2, -2]], context: "広告費 $x$ と利益 $y$ のデータが次である。", difficulty: 1 },
   { id: "data_cov_4", title: "共分散 4", points: [[0, 0], [2, 2], [4, 4], [6, 6]], difficulty: 1 },
   { id: "data_cov_5", title: "共分散 5", points: [[-1, 1], [1, 1], [3, 1]], difficulty: 1 },
   { id: "data_cov_6", title: "共分散 6", points: [[0, 2], [2, 2], [4, 2]], difficulty: 1 },

@@ -8,6 +8,7 @@ type FreqCase = {
   values: number[];
   freqs: number[];
   kind: "mean" | "median";
+  context?: string;
 };
 
 function mean(values: number[], freqs: number[]): number {
@@ -40,9 +41,10 @@ function buildTemplate(c: FreqCase): QuestionTemplate {
       tags: ["data", c.kind, "frequency"],
     },
     generate() {
+      const lead = c.context ? `${c.context}\n\n` : "";
       return {
         templateId: c.id,
-        statement: `度数分布のデータから${c.kind === "mean" ? "平均" : "中央値"}を求めよ。\\n\\nデータ(値:度数) ${tableText(
+        statement: `${lead}度数分布のデータから${c.kind === "mean" ? "平均" : "中央値"}を求めよ。\\n\\nデータ(値:度数) ${tableText(
           c.values,
           c.freqs
         )}`,
@@ -60,12 +62,12 @@ function buildTemplate(c: FreqCase): QuestionTemplate {
 }
 
 const CASES: FreqCase[] = [
-  { id: "data_freq_mean_1", title: "度数分布の平均 1", values: [1, 2, 3], freqs: [2, 1, 2], kind: "mean" },
-  { id: "data_freq_mean_2", title: "度数分布の平均 2", values: [2, 4, 6], freqs: [1, 2, 1], kind: "mean" },
-  { id: "data_freq_mean_3", title: "度数分布の平均 3", values: [1, 3, 5], freqs: [1, 3, 1], kind: "mean" },
-  { id: "data_freq_median_1", title: "度数分布の中央値 1", values: [1, 3, 5], freqs: [1, 3, 1], kind: "median" },
-  { id: "data_freq_median_2", title: "度数分布の中央値 2", values: [2, 4, 6], freqs: [2, 1, 2], kind: "median" },
-  { id: "data_freq_median_3", title: "度数分布の中央値 3", values: [1, 2, 4], freqs: [1, 2, 2], kind: "median" },
+  { id: "data_freq_mean_1", title: "度数分布の平均 1", values: [1, 2, 3], freqs: [2, 1, 2], kind: "mean", context: "あるクラスの小テスト得点を区分して度数分布を作った。", },
+  { id: "data_freq_mean_2", title: "度数分布の平均 2", values: [2, 4, 6], freqs: [1, 2, 1], kind: "mean", context: "身長を区分して度数分布を作った。", },
+  { id: "data_freq_mean_3", title: "度数分布の平均 3", values: [1, 3, 5], freqs: [1, 3, 1], kind: "mean", context: "1日の勉強時間を区分して度数分布を作った。", },
+  { id: "data_freq_median_1", title: "度数分布の中央値 1", values: [1, 3, 5], freqs: [1, 3, 1], kind: "median", context: "ある商品の購入回数を区分して度数分布を作った。", },
+  { id: "data_freq_median_2", title: "度数分布の中央値 2", values: [2, 4, 6], freqs: [2, 1, 2], kind: "median", context: "通学時間を区分して度数分布を作った。", },
+  { id: "data_freq_median_3", title: "度数分布の中央値 3", values: [1, 2, 4], freqs: [1, 2, 2], kind: "median", context: "部活動の出席回数を区分して度数分布を作った。", },
 ];
 
 export const dataSummaryFrequencyVariantTemplates: QuestionTemplate[] = CASES.map(buildTemplate);
