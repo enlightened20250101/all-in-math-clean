@@ -31,7 +31,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const c = CASES[caseId];
       const func = Math.random() < 0.5 ? "sin" : "cos";
       const aText = c.a === 1 ? "" : `${c.a}`;
-      const statement = `関数 $y=${aText}\\${func} x$ の値域を求めよ。`;
+      const statement = `波のモデル $y=${aText}\\${func} x$ の値域を求めよ。`;
       return {
         templateId: id,
         statement,

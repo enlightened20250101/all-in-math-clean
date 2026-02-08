@@ -30,7 +30,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const func = Math.random() < 0.5 ? "sin" : "cos";
       const aTerm = texTerm(params.a, `\\${func} x`, true);
       const shift = texConst(params.c);
-      const statement = `関数 $y=${aTerm}${shift ? ` ${shift}` : ""}$ の最大値を求めよ。`;
+      const statement = `周期的な波形 $y=${aTerm}${shift ? ` ${shift}` : ""}$ の最大値を求めよ。`;
       return {
         templateId: id,
         statement,
