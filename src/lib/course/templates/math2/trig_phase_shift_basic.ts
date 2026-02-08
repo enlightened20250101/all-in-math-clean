@@ -29,7 +29,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const caseId = Math.floor(Math.random() * CASES.length);
       const c = CASES[caseId];
-      const statement = `関数 $y=\\sin(x-${c.shift})$ の位相のずれを求めよ。`;
+      const statement = `波形 $y=\\sin(x-${c.shift})$ の位相のずれを求めよ。`;
       return {
         templateId: id,
         statement,

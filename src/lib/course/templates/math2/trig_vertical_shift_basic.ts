@@ -26,7 +26,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const params = buildParams();
       const func = Math.random() < 0.5 ? "sin" : "cos";
       const shift = texConst(params.c);
-      const statement = `関数 $y=\\${func} x${shift ? ` ${shift}` : ""}$ の中心線（平均値）を求めよ。`;
+      const statement = `波形 $y=\\${func} x${shift ? ` ${shift}` : ""}$ の中心線（平均値）を求めよ。`;
       return {
         templateId: id,
         statement,

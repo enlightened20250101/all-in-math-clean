@@ -25,7 +25,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const params = buildParams();
       const func = Math.random() < 0.5 ? "sin" : "cos";
       const aText = params.a === -1 ? "-" : params.a === 1 ? "" : `${params.a}`;
-      const statement = `関数 $y=${aText}\\${func} x$ の振幅を求めよ。`;
+      const statement = `波形 $y=${aText}\\${func} x$ の振幅を求めよ。`;
       return {
         templateId: id,
         statement,

@@ -23,7 +23,7 @@ function buildTemplate(c: Case): QuestionTemplate {
       const inside = texLinear(c.b, -c.b * c.shift);
       return {
         templateId: c.id,
-        statement: `関数 $y=\\sin(${inside})$ の位相のずれを求めよ。`,
+        statement: `波形 $y=\\sin(${inside})$ の位相のずれを求めよ。`,
         answerKind: "numeric",
         params: { shift: c.shift },
       };

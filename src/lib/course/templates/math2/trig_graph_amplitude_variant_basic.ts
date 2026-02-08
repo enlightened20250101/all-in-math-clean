@@ -21,7 +21,7 @@ function buildTemplate(c: Case): QuestionTemplate {
     generate() {
       return {
         templateId: c.id,
-        statement: `関数 $y=${c.a}\\sin x$ の振幅を求めよ。`,
+        statement: `波形 $y=${c.a}\\sin x$ の振幅を求めよ。`,
         answerKind: "numeric",
         params: { amp },
       };
