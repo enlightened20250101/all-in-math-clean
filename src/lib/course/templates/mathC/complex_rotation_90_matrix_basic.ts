@@ -34,7 +34,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `点 $(x,y)=(${params.x},${params.y})$ を原点中心に $90^\\circ$ 反時計回りに回転した点の $x$ 座標を求めよ。`;
+      const statement = `点 $(x,y)=(${params.x},${params.y})$ を原点中心に $90^\\circ$ 反時計回りに回転した地図上の点の $x$ 座標を求めよ。`;
       return {
         templateId: id,
         statement,

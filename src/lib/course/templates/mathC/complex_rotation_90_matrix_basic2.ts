@@ -32,7 +32,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const params = buildParams();
       const label = params.ask === 0 ? "x" : "y";
-      const statement = `点 $(x,y)=(${params.x},${params.y})$ を $90^\\circ$ 回転した点の ${label} 座標を求めよ。`;
+      const statement = `点 $(x,y)=(${params.x},${params.y})$ を $90^\\circ$ 回転した地図上の点の ${label} 座標を求めよ。`;
       return {
         templateId: id,
         statement,

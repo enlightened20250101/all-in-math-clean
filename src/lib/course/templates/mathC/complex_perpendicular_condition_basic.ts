@@ -41,7 +41,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `複素数 $z_1=${texComplex(params.a, params.b)}$, $z_2=${texComplex(
+      const statement = `地図上の点を表す地図上の点を表す複素数 $z_1=${texComplex(params.a, params.b)}$, $z_2=${texComplex(
         params.c,
         params.d
       )}$ に対して、$\\frac{z_1}{z_2}$ が純虚数なら 0、純虚数でなければ 1 を答えよ。`;
@@ -59,7 +59,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const p = params as Params;
       return `
 ### この問題の解説
-$\\frac{z_1}{z_2}$ が純虚数 ⇔ $z_1$ と $z_2$ が直交。
+$\\frac{z_1}{z_2}$ が純虚数 ⇔ $z_1$ と $z_2$ が直交（直角）。
 答えは **${p.ans}**。
 `;
     },
