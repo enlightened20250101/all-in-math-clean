@@ -35,7 +35,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `ベクトル $\\vec{a}=(${params.ax},${params.ay})$, $\\vec{b}=(${params.bx},${params.by})$ が張る平行四辺形の面積を求めよ。`;
+      const statement = `畑の区画を表すベクトル $\\vec{a}=(${params.ax},${params.ay})$, $\\vec{b}=(${params.bx},${params.by})$ が張る平行四辺形の面積を求めよ。`;
       return {
         templateId: id,
         statement,

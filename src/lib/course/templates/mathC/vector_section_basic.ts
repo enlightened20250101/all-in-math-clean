@@ -49,7 +49,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `ベクトルとして、点 $A(${params.x1},${params.y1})$, $B(${params.x2},${params.y2})$ を $m:n=${params.m}:${params.n}$ に内分する点 $P$ の x 座標を求めよ。`;
+      const statement = `地図上の地点として、点 $A(${params.x1},${params.y1})$, $B(${params.x2},${params.y2})$ を $m:n=${params.m}:${params.n}$ に内分する点 $P$ の x 座標を求めよ。`;
       return {
         templateId: id,
         statement,

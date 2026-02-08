@@ -38,7 +38,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const params = buildParams();
       const label = params.ask === 0 ? "実部" : "虚部";
-      const statement = `複素数 $z=${texComplex(params.a, params.b)}$ を実数 ${params.r} 倍したときの ${label} を答えよ。`;
+      const statement = `地図上の点を表す複素数 $z=${texComplex(params.a, params.b)}$ を実数 ${params.r} 倍したときの ${label} を答えよ。`;
       return {
         templateId: id,
         statement,

@@ -40,7 +40,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `複素数 $z=${texComplex(params.a, params.b)}$ を $${params.theta}^\\circ$ 回転した複素数 $z'$ の虚部を求めよ。`;
+      const statement = `地図上の点を表す複素数 $z=${texComplex(params.a, params.b)}$ を $${params.theta}^\\circ$ 回転した複素数 $z'$ の虚部を求めよ。`;
       return {
         templateId: id,
         statement,

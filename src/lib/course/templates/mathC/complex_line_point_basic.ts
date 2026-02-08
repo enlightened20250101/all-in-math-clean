@@ -40,7 +40,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const params = buildParams();
       const label = params.ask === 0 ? "x" : "y";
-      const statement = `地図上の地図上の地図上の点 $A(${params.x1},${params.y1})$, $B(${params.x2},${params.y2})$ を結ぶ線分を $${params.m}:${params.n}$ に内分する地図上の地図上の点 $P$ の ${label} 座標を求めよ。`;
+      const statement = `地図上の点 $A(${params.x1},${params.y1})$, $B(${params.x2},${params.y2})$ を結ぶ線分を $${params.m}:${params.n}$ に内分する地図上の点 $P$ の ${label} 座標を求めよ。`;
       return {
         templateId: id,
         statement,
@@ -64,11 +64,11 @@ ${label} 座標は **${p.ans}**。
 }
 
 export const complexLinePointTemplates: QuestionTemplate[] = Array.from({ length: 6 }, (_, i) =>
-  buildTemplate(`complex_line_point_basic_${i + 1}`, `線分内の地図上の地図上の点 ${i + 1}`)
+  buildTemplate(`complex_line_point_basic_${i + 1}`, `線分内の地図上の点 ${i + 1}`)
 );
 
 const extraLinePointTemplates: QuestionTemplate[] = Array.from({ length: 38 }, (_, i) =>
-  buildTemplate(`complex_line_point_basic_${i + 7}`, `線分内の地図上の地図上の点 追加${i + 1}`)
+  buildTemplate(`complex_line_point_basic_${i + 7}`, `線分内の地図上の点 追加${i + 1}`)
 );
 
 complexLinePointTemplates.push(...extraLinePointTemplates);

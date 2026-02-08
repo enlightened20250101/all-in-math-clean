@@ -32,7 +32,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `ベクトル $\\vec{a}=(${params.ax},${params.ay})$ と $\\vec{b}=(${params.bx},${params.by})$ が平行であるとき、$\\vec{b}=k\\vec{a}$ の $k$ を求めよ。`;
+      const statement = `地図上の移動を表すベクトル $\\vec{a}=(${params.ax},${params.ay})$ と $\\vec{b}=(${params.bx},${params.by})$ が同一直線上にあるとき、$\\vec{b}=k\\vec{a}$ の $k$ を求めよ。`;
       return {
         templateId: id,
         statement,

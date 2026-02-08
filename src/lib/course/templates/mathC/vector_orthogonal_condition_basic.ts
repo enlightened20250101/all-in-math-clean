@@ -31,7 +31,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `ベクトル $\\vec{a}=(${params.a1},${params.a2})$ と $\\vec{b}=(x,${params.b2})$ が直交するとき、$x$ を求めよ。`;
+      const statement = `進行方向を表すベクトル $\\vec{a}=(${params.a1},${params.a2})$ と $\\vec{b}=(x,${params.b2})$ が直交するとき、$x$ を求めよ。`;
       return {
         templateId: id,
         statement,
