@@ -28,7 +28,7 @@ export const identityEvalVariantTemplates: QuestionTemplate[] = Array.from({ len
     generate() {
       const params = buildParams();
       const yText = params.y < 0 ? `(${params.y})` : `${params.y}`;
-      const statement = `次を計算せよ。\\n\\n$(${params.x}+${yText})^2+(${params.x}-${yText})^2$`;
+      const statement = `面積の式として、次を計算せよ。\\n\\n$(${params.x}+${yText})^2+(${params.x}-${yText})^2$`;
       return {
         templateId,
         statement,

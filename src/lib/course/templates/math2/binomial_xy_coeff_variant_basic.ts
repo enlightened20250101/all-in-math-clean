@@ -45,7 +45,7 @@ export const binomialXyCoeffVariantTemplates: QuestionTemplate[] = Array.from({ 
       const xTerm = texTerm(params.a, "x", true);
       const yTerm = texTerm(params.b, "y", false);
       const base = `${xTerm}${yTerm ? ` ${yTerm}` : ""}`;
-      const statement = `$(${base})^{${params.n}}$ の $x^{${params.k}}y^{${params.n - params.k}}$ の係数を求めよ。`;
+      const statement = `組合せの個数として、$(${base})^{${params.n}}$ の $x^{${params.k}}y^{${params.n - params.k}}$ の係数を求めよ。`;
       return {
         templateId,
         statement,

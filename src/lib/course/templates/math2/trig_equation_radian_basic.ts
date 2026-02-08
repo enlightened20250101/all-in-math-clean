@@ -33,7 +33,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const caseId = Math.floor(Math.random() * CASES.length);
       const c = CASES[caseId];
-      const statement = `方程式 $\\${c.func} x=${c.rhs}$ の解のうち $0\\le x < \\pi$ を求めよ。`;
+      const statement = `振動モデルとして、方程式 $\\${c.func} x=${c.rhs}$ の解のうち $0\\le x < \\pi$ を求めよ。`;
       return {
         templateId: id,
         statement,

@@ -37,7 +37,7 @@ export const binomialMiddleCoeffVariantTemplates: QuestionTemplate[] = Array.fro
     },
     generate() {
       const params = buildParams();
-      const statement = `$(1+x)^{${params.n}}$ の中央二項係数を求めよ。`;
+      const statement = `組合せの個数として、$(1+x)^{${params.n}}$ の中央二項係数を求めよ。`;
       return {
         templateId,
         statement,

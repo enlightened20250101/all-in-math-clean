@@ -27,7 +27,7 @@ export const binomialValueVariantTemplates: QuestionTemplate[] = Array.from({ le
     },
     generate() {
       const params = buildParams();
-      const statement = `$(x+1)^{${params.n}}$ に $x=${params.a}$ を代入した値を求めよ。`;
+      const statement = `組合せの個数として、$(x+1)^{${params.n}}$ に $x=${params.a}$ を代入した値を求めよ。`;
       return {
         templateId,
         statement,

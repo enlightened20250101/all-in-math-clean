@@ -31,7 +31,7 @@ export const identityCoefficientVariantTemplates: QuestionTemplate[] = Array.fro
     generate() {
       const params = buildParams();
       const poly = texPoly2(params.p, params.q, params.r);
-      const statement = `恒等式 $(${poly})(x-1)\\equiv ax^3+bx^2+\\cdots$ が成り立つとき、$b$ を求めよ。`;
+      const statement = `面積の式として、恒等式 $(${poly})(x-1)\\equiv ax^3+bx^2+\\cdots$ が成り立つとき、$b$ を求めよ。`;
       return {
         templateId,
         statement,

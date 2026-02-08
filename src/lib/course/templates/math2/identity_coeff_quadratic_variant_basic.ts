@@ -34,7 +34,7 @@ export const identityCoeffQuadraticVariantTemplates: QuestionTemplate[] = Array.
       const bTerm = texTerm(params.b, "x", false);
       const quad = `${aTerm}${bTerm ? ` ${bTerm}` : ""} + c`;
       const rhs = `${texTerm(params.a, "x^3", true)} + \\cdots ${texTerm(params.k, "x", false)}`;
-      const statement = `(x+1)(${quad})\\equiv ${rhs}+\\cdots が成り立つとき、$c$ を求めよ。`;
+      const statement = `面積の式として、(x+1)(${quad})\\equiv ${rhs}+\\cdots が成り立つとき、$c$ を求めよ。`;
       return {
         templateId,
         statement,

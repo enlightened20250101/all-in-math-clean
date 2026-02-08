@@ -28,7 +28,7 @@ export const trigIdentityTanVariantTemplates: QuestionTemplate[] = Array.from({ 
       tags: [],
     },
     generate() {
-      const statement = `次を計算せよ。$\\tan ${c.angle}^\\circ$`;
+      const statement = `測量で用いる関係として、次を計算せよ。$\\tan ${c.angle}^\\circ$`;
       return {
         templateId,
         statement,
