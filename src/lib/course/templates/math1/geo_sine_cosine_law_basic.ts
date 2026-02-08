@@ -73,6 +73,32 @@ function buildChoice(c: ChoiceCase): QuestionTemplate {
   };
 }
 
+function buildNumericSine(c: NumericCase): QuestionTemplate {
+  return {
+    meta: {
+      id: c.id,
+      topicId: "geo_sine_cosine_law_basic",
+      title: c.title,
+      difficulty: 1,
+      tags: ["geometry", "sine-law"],
+    },
+    generate() {
+      return {
+        templateId: c.id,
+        statement: c.statement,
+        answerKind: "numeric",
+        params: {},
+      };
+    },
+    grade(_params, userAnswer) {
+      return gradeNumeric(userAnswer, c.answer);
+    },
+    explain() {
+      return c.explain;
+    },
+  };
+}
+
 function triangleConditions(parts: string[]): string {
   return `$$\n${parts.join(",\\, ")}\n$$`;
 }
@@ -522,6 +548,40 @@ $$
   },
 ];
 
+const sineNumericCases: NumericCase[] = [
+  {
+    id: "geo_sine_num_1",
+    title: "正弦定理（辺の長さ）",
+    statement: `三角形ABCで $${texAngle("A", 30)},\\ ${texAngle("B", 90)},\\ ${texSegmentLen("B", "C", 6)}$ とする。辺 $AC$ の長さを求めよ。`,
+    answer: 12,
+    explain: `
+### この問題の解説
+正弦定理より
+$$
+\\frac{BC}{\\sin A}=\\frac{AC}{\\sin B}
+$$
+なので
+$$
+AC = BC\\frac{\\sin B}{\\sin A} = 6\\times\\frac{1}{1/2}=12
+$$
+`,
+  },
+  {
+    id: "geo_cos_num_1",
+    title: "余弦定理（辺の長さ）",
+    statement: `三角形ABCで $${texAngle("C", 60)},\\ ${texSegmentLen("A", "C", 5)},\\ ${texSegmentLen("B", "C", 5)}$ とする。辺 $AB$ の長さを求めよ。`,
+    answer: 5,
+    explain: `
+### この問題の解説
+余弦定理より
+$$
+AB^2 = 5^2+5^2-2\\cdot5\\cdot5\\cos60^\\circ = 25
+$$
+よって $AB=5$。
+`,
+  },
+];
+
 const sineChoiceCases: ChoiceCase[] = [
   {
     id: "geo_sine_1",
@@ -918,4 +978,5 @@ $$
 export const geoSineCosineLawTemplates: QuestionTemplate[] = [
   ...cosineCases.map(buildNumeric),
   ...sineChoiceCases.map(buildChoice),
+  ...sineNumericCases.map(buildNumericSine),
 ];

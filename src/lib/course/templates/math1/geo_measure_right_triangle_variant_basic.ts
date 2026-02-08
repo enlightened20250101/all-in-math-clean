@@ -98,6 +98,32 @@ const CASES: NumericCase[] = [
 \\tan 45^\\circ = \\frac{BC}{AC} = 1 なので、$AC=BC=6$ です。
 `,
   },
+  {
+    id: "geo_rt_word_height_1",
+    title: "距離と仰角から高さ",
+    statement: `地面と垂直な塔がある。塔の足元から水平に ${texSegmentLen("A", "C", 8)} だけ離れた点から塔の頂点を見上げたとき、仰角が $${texAngle("A", 45)}$ であった。塔の高さを求めよ。`,
+    answer: 8,
+    explain: `
+### この問題の解説
+$$
+\\tan 45^\\circ = \\frac{\\text{高さ}}{8} = 1
+$$
+より高さは $8$。
+`,
+  },
+  {
+    id: "geo_rt_word_hyp_1",
+    title: "高さと角から斜辺",
+    statement: `直角三角形で、斜面の長さを $x$、高さを $6$ とする。斜面と地面のなす角が $${texAngle("A", 30)}$ のとき、斜面の長さ $x$ を求めよ。`,
+    answer: 12,
+    explain: `
+### この問題の解説
+$$
+\\sin 30^\\circ = \\frac{6}{x} = \\frac{1}{2}
+$$
+より $x=12$。
+`,
+  },
 ];
 
 export const geoMeasureRightTriangleVariantTemplates: QuestionTemplate[] = CASES.map(buildNumeric);
