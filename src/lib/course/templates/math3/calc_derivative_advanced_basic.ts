@@ -73,7 +73,7 @@ const extraDerivativeTemplates: QuestionTemplate[] = Array.from({ length: 30 }, 
         const fx = `(${texLinear(params.a, params.b)})^2`;
         return {
           templateId,
-          statement: `次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
+          statement: `速度のモデルとして次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
           answerKind: "numeric",
           params,
         };
@@ -83,7 +83,7 @@ const extraDerivativeTemplates: QuestionTemplate[] = Array.from({ length: 30 }, 
         const fx = `(${texLinear(params.a, params.b)})^3`;
         return {
           templateId,
-          statement: `次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
+          statement: `速度のモデルとして次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
           answerKind: "numeric",
           params,
         };
@@ -92,7 +92,7 @@ const extraDerivativeTemplates: QuestionTemplate[] = Array.from({ length: 30 }, 
       const fx = texPoly2(params.a, params.b, params.c);
       return {
         templateId,
-        statement: `次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
+        statement: `速度のモデルとして次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
         answerKind: "numeric",
         params,
       };
@@ -152,7 +152,7 @@ export const calcDerivativeAdvancedBasicTemplates: QuestionTemplate[] = [
       const fx = `(${texLinear(params.a, params.b)})^2`;
       return {
         templateId: "calc_derivative_advanced_basic_1",
-        statement: `次の関数について $f'(${params.x0})$ を求めよ。\n\n$$f(x) = ${fx}$$`,
+        statement: `速度のモデルとして次の関数について $f'(${params.x0})$ を求めよ。\n\n$$f(x) = ${fx}$$`,
         answerKind: "numeric",
         params,
       };
@@ -192,7 +192,7 @@ $$
       const fx = `(${texLinear(params.a, params.b)})^3`;
       return {
         templateId: "calc_derivative_advanced_basic_2",
-        statement: `次の関数について $f'(${params.x0})$ を求めよ。\n\n$$f(x) = ${fx}$$`,
+        statement: `速度のモデルとして次の関数について $f'(${params.x0})$ を求めよ。\n\n$$f(x) = ${fx}$$`,
         answerKind: "numeric",
         params,
       };
@@ -233,7 +233,7 @@ $$
       const fx = addExpr(`(${linear})^2`, linear);
       return {
         templateId: "calc_derivative_advanced_basic_3",
-        statement: `次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
+        statement: `速度のモデルとして次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
         answerKind: "numeric",
         params,
       };
@@ -282,7 +282,7 @@ $$
       const fx = subExpr(`(${linear})^3`, linear);
       return {
         templateId: "calc_derivative_advanced_basic_4",
-        statement: `次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
+        statement: `速度のモデルとして次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
         answerKind: "numeric",
         params,
       };
@@ -330,7 +330,7 @@ $$
       const fx = `(${texLinear(params.a, params.b)})^2-2`;
       return {
         templateId: "calc_derivative_advanced_basic_5",
-        statement: `次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
+        statement: `速度のモデルとして次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
         answerKind: "numeric",
         params,
       };
@@ -375,7 +375,7 @@ $$
       const fx = `2(${texLinear(params.a, params.b)})^3`;
       return {
         templateId: "calc_derivative_advanced_basic_6",
-        statement: `次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
+        statement: `速度のモデルとして次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
         answerKind: "numeric",
         params,
       };
@@ -420,7 +420,7 @@ $$
       const fx = `3(${texLinear(params.a, params.b)})^2`;
       return {
         templateId: "calc_derivative_advanced_basic_7",
-        statement: `次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
+        statement: `速度のモデルとして次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
         answerKind: "numeric",
         params,
       };
@@ -465,7 +465,7 @@ $$
       const fx = `(${texLinear(params.a, params.b)})^2+5`;
       return {
         templateId: "calc_derivative_advanced_basic_8",
-        statement: `次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
+        statement: `速度のモデルとして次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
         answerKind: "numeric",
         params,
       };
@@ -507,7 +507,7 @@ $$
       const fx = `(${texLinear(params.a, params.b)})^3+4`;
       return {
         templateId: "calc_derivative_advanced_basic_9",
-        statement: `次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
+        statement: `速度のモデルとして次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
         answerKind: "numeric",
         params,
       };
@@ -550,7 +550,7 @@ $$
       const fx = subExpr(`(${linear})^2`, linear);
       return {
         templateId: "calc_derivative_advanced_basic_10",
-        statement: `次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
+        statement: `速度のモデルとして次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
         answerKind: "numeric",
         params,
       };
@@ -594,7 +594,7 @@ $$
       const fx = `-(${texLinear(params.a, params.b)})^2`;
       return {
         templateId: "calc_derivative_advanced_basic_11",
-        statement: `次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
+        statement: `速度のモデルとして次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
         answerKind: "numeric",
         params,
       };
@@ -639,7 +639,7 @@ $$
       const fx = `-(${texLinear(params.a, params.b)})^3`;
       return {
         templateId: "calc_derivative_advanced_basic_12",
-        statement: `次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
+        statement: `速度のモデルとして次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
         answerKind: "numeric",
         params,
       };
@@ -684,7 +684,7 @@ $$
       const fx = `(${texLinear(params.a, params.b)})^2+2(${texLinear(params.a, params.b)})`;
       return {
         templateId: "calc_derivative_advanced_basic_13",
-        statement: `次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
+        statement: `速度のモデルとして次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
         answerKind: "numeric",
         params,
       };
@@ -725,7 +725,7 @@ $$
       const fx = `(${texLinear(params.a, params.b)})^3+2(${texLinear(params.a, params.b)})`;
       return {
         templateId: "calc_derivative_advanced_basic_14",
-        statement: `次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
+        statement: `速度のモデルとして次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
         answerKind: "numeric",
         params,
       };
@@ -766,7 +766,7 @@ $$
       const fx = `4(${texLinear(params.a, params.b)})^2`;
       return {
         templateId: "calc_derivative_advanced_basic_15",
-        statement: `次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
+        statement: `速度のモデルとして次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
         answerKind: "numeric",
         params,
       };
@@ -807,7 +807,7 @@ $$
       const fx = `-2(${texLinear(params.a, params.b)})^3`;
       return {
         templateId: "calc_derivative_advanced_basic_16",
-        statement: `次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
+        statement: `速度のモデルとして次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
         answerKind: "numeric",
         params,
       };
@@ -848,7 +848,7 @@ $$
       const fx = `(${texLinear(params.a, params.b)})^2-5(${texLinear(params.a, params.b)})`;
       return {
         templateId: "calc_derivative_advanced_basic_17",
-        statement: `次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
+        statement: `速度のモデルとして次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
         answerKind: "numeric",
         params,
       };
@@ -889,7 +889,7 @@ $$
       const fx = `(${texLinear(params.a, params.b)})^3-2(${texLinear(params.a, params.b)})`;
       return {
         templateId: "calc_derivative_advanced_basic_18",
-        statement: `次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
+        statement: `速度のモデルとして次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
         answerKind: "numeric",
         params,
       };
@@ -930,7 +930,7 @@ $$
       const fx = `5(${texLinear(params.a, params.b)})^2+1`;
       return {
         templateId: "calc_derivative_advanced_basic_19",
-        statement: `次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
+        statement: `速度のモデルとして次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
         answerKind: "numeric",
         params,
       };
@@ -972,7 +972,7 @@ $$
       const fx = `-3(${texLinear(params.a, params.b)})^2+4`;
       return {
         templateId: "calc_derivative_advanced_basic_20",
-        statement: `次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
+        statement: `速度のモデルとして次の関数について $f'(${params.x0})$ を求めよ。\\n\\n$$f(x) = ${fx}$$`,
         answerKind: "numeric",
         params,
       };
