@@ -47,7 +47,7 @@ const extraCurveAreaTemplates: QuestionTemplate[] = Array.from({ length: 30 }, (
         const quad = texPoly2(b, 0, 0);
         return {
           templateId,
-          statement: `次の2曲線 $y=${line}$ と $y=${quad}$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
+          statement: `花壇の断面を表す次の2曲線 $y=${line}$ と $y=${quad}$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
           answerKind: "numeric",
           params,
         };
@@ -61,7 +61,7 @@ const extraCurveAreaTemplates: QuestionTemplate[] = Array.from({ length: 30 }, (
       const value = Math.abs(4 * m - 3 * n);
       return {
         templateId,
-        statement: `次の2曲線 $y=${quad}$ と $y=${cubic}$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
+        statement: `花壇の断面を表す次の2曲線 $y=${quad}$ と $y=${cubic}$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
         answerKind: "numeric",
         params: { a, b, value },
       };
@@ -96,7 +96,7 @@ export const calcCurveAreaBasicTemplates: QuestionTemplate[] = [
       const quad = texPoly2(coef, 0, 0);
       return {
         templateId: "calc_curve_area_basic_1",
-        statement: `次の2曲線 $y=${line}$ と $y=${quad}$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
+        statement: `花壇の断面を表す次の2曲線 $y=${line}$ と $y=${quad}$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
         answerKind: "numeric",
         params,
       };
@@ -134,7 +134,7 @@ $$
       const coef = 6 * params.m;
       return {
         templateId: "calc_curve_area_basic_2",
-        statement: `次の2曲線 $y=${coef}x^2$ と $y=${coef}x$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
+        statement: `花壇の断面を表す次の2曲線 $y=${coef}x^2$ と $y=${coef}x$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
         answerKind: "numeric",
         params,
       };
@@ -172,7 +172,7 @@ $$
       const coef = 4 * params.m;
       return {
         templateId: "calc_curve_area_basic_3",
-        statement: `次の2曲線 $y=${coef}x$ と $y=${coef}x^3$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
+        statement: `花壇の断面を表す次の2曲線 $y=${coef}x$ と $y=${coef}x^3$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
         answerKind: "numeric",
         params,
       };
@@ -211,7 +211,7 @@ $$
       const coef = 3 * m;
       return {
         templateId: "calc_curve_area_basic_4",
-        statement: `次の2曲線 $y=${coef}x$ と $y=${coef}x^2$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
+        statement: `花壇の断面を表す次の2曲線 $y=${coef}x$ と $y=${coef}x^2$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
         answerKind: "numeric",
         params,
       };
@@ -244,7 +244,7 @@ $$
       const coef = 8 * params.m;
       return {
         templateId: "calc_curve_area_basic_5",
-        statement: `次の2曲線 $y=${coef}x^2$ と $y=${coef}x^3$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
+        statement: `花壇の断面を表す次の2曲線 $y=${coef}x^2$ と $y=${coef}x^3$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
         answerKind: "numeric",
         params,
       };
@@ -281,7 +281,7 @@ $$
       const coef = 12 * params.m;
       return {
         templateId: "calc_curve_area_basic_6",
-        statement: `次の2曲線 $y=${coef}x$ と $y=${coef}x^2$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
+        statement: `花壇の断面を表す次の2曲線 $y=${coef}x$ と $y=${coef}x^2$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
         answerKind: "numeric",
         params,
       };
@@ -316,7 +316,7 @@ $$
       const coef = 2 * m;
       return {
         templateId: "calc_curve_area_basic_7",
-        statement: `次の2曲線 $y=${coef}x$ と $y=${coef}x^3$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
+        statement: `花壇の断面を表す次の2曲線 $y=${coef}x$ と $y=${coef}x^3$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
         answerKind: "numeric",
         params,
       };
@@ -350,7 +350,7 @@ $$
       const params = { m, value: 3 * m };
       return {
         templateId: "calc_curve_area_basic_8",
-        statement: `次の2曲線 $y=${coef}x$ と $y=${coef}x^2$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
+        statement: `花壇の断面を表す次の2曲線 $y=${coef}x$ と $y=${coef}x^2$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
         answerKind: "numeric",
         params,
       };
@@ -384,7 +384,7 @@ $$
       const params = { m, value: 2 * m };
       return {
         templateId: "calc_curve_area_basic_9",
-        statement: `次の2曲線 $y=${coef}x^2$ と $y=${coef}x^4$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
+        statement: `花壇の断面を表す次の2曲線 $y=${coef}x^2$ と $y=${coef}x^4$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
         answerKind: "numeric",
         params,
       };
@@ -418,7 +418,7 @@ $$
       const params = { m, value: 5 * m };
       return {
         templateId: "calc_curve_area_basic_10",
-        statement: `次の2曲線 $y=${coef}x$ と $y=${coef}x^2$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
+        statement: `花壇の断面を表す次の2曲線 $y=${coef}x$ と $y=${coef}x^2$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
         answerKind: "numeric",
         params,
       };
@@ -452,7 +452,7 @@ $$
       const params = { m, value: 3 * m };
       return {
         templateId: "calc_curve_area_basic_11",
-        statement: `次の2曲線 $y=${coef}x$ と $y=${coef}x^4$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
+        statement: `花壇の断面を表す次の2曲線 $y=${coef}x$ と $y=${coef}x^4$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
         answerKind: "numeric",
         params,
       };
@@ -486,7 +486,7 @@ $$
       const params = { m, value: m };
       return {
         templateId: "calc_curve_area_basic_12",
-        statement: `次の2曲線 $y=${coef}x$ と $y=${coef}x^5$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
+        statement: `花壇の断面を表す次の2曲線 $y=${coef}x$ と $y=${coef}x^5$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
         answerKind: "numeric",
         params,
       };
@@ -520,7 +520,7 @@ $$
       const params = { m, value: m };
       return {
         templateId: "calc_curve_area_basic_13",
-        statement: `次の2曲線 $y=${coef}x^2$ と $y=${coef}x^3$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
+        statement: `花壇の断面を表す次の2曲線 $y=${coef}x^2$ と $y=${coef}x^3$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
         answerKind: "numeric",
         params,
       };
@@ -554,7 +554,7 @@ $$
       const params = { m, value: m };
       return {
         templateId: "calc_curve_area_basic_14",
-        statement: `次の2曲線 $y=${coef}x^2$ と $y=${coef}x^5$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
+        statement: `花壇の断面を表す次の2曲線 $y=${coef}x^2$ と $y=${coef}x^5$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
         answerKind: "numeric",
         params,
       };
@@ -588,7 +588,7 @@ $$
       const params = { m, value: m };
       return {
         templateId: "calc_curve_area_basic_15",
-        statement: `次の2曲線 $y=${coef}x^3$ と $y=${coef}x^4$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
+        statement: `花壇の断面を表す次の2曲線 $y=${coef}x^3$ と $y=${coef}x^4$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
         answerKind: "numeric",
         params,
       };
@@ -622,7 +622,7 @@ $$
       const params = { m, value: 3 * m };
       return {
         templateId: "calc_curve_area_basic_16",
-        statement: `次の2曲線 $y=${coef}x$ と $y=${coef}x^3$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
+        statement: `花壇の断面を表す次の2曲線 $y=${coef}x$ と $y=${coef}x^3$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
         answerKind: "numeric",
         params,
       };
@@ -656,7 +656,7 @@ $$
       const params = { m, value: 4 * m };
       return {
         templateId: "calc_curve_area_basic_17",
-        statement: `次の2曲線 $y=${coef}x^2$ と $y=${coef}x^4$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
+        statement: `花壇の断面を表す次の2曲線 $y=${coef}x^2$ と $y=${coef}x^4$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
         answerKind: "numeric",
         params,
       };
@@ -690,7 +690,7 @@ $$
       const params = { m, value: 3 * m };
       return {
         templateId: "calc_curve_area_basic_18",
-        statement: `次の2曲線 $y=${coef}x$ と $y=${coef}x^2$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
+        statement: `花壇の断面を表す次の2曲線 $y=${coef}x$ と $y=${coef}x^2$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
         answerKind: "numeric",
         params,
       };
@@ -724,7 +724,7 @@ $$
       const params = { m, value: 4 * m };
       return {
         templateId: "calc_curve_area_basic_19",
-        statement: `次の2曲線 $y=${coef}x^2$ と $y=${coef}x^6$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
+        statement: `花壇の断面を表す次の2曲線 $y=${coef}x^2$ と $y=${coef}x^6$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
         answerKind: "numeric",
         params,
       };
@@ -758,7 +758,7 @@ $$
       const params = { m, value: 2 * m };
       return {
         templateId: "calc_curve_area_basic_20",
-        statement: `次の2曲線 $y=${coef}x$ と $y=${coef}x^5$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
+        statement: `花壇の断面を表す次の2曲線 $y=${coef}x$ と $y=${coef}x^5$ によって $0\\le x\\le 1$ で囲まれる面積を求めよ。`,
         answerKind: "numeric",
         params,
       };
