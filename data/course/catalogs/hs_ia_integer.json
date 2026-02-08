@@ -21,12 +21,6 @@
       "viewCode": "centertest-int-prime-factor-basic"
     },
     {
-      "id": "int_divisibility_tests_basic",
-      "title": "整除性の判定",
-      "description": "2,3,4,5,8,9,11 の判定法を使う",
-      "viewCode": "centertest-int-divisibility-basic"
-    },
-    {
       "id": "int_gcd_lcm_applications_basic",
       "title": "最大公約数・最小公倍数の応用",
       "description": "周期や分け方の問題で gcd/lcm を使う",
@@ -46,6 +40,13 @@
     }
   ],
   "units": [
-    "mathA"
+    {
+      "0": "m",
+      "1": "a",
+      "2": "t",
+      "3": "h",
+      "4": "A",
+      "topics": []
+    }
   ]
 }

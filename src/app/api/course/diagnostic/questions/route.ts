@@ -27,9 +27,7 @@ const AREA_TOPICS_HS_IA: Record<string, string[]> = {
   integer: [
     "int_divisor_multiple_basic",
     "int_remainder_basic",
-    "int_prime_factor_basic",
-    "int_divisibility_tests_basic",
-    "int_gcd_lcm_applications_basic",
+    "int_prime_factor_basic",    "int_gcd_lcm_applications_basic",
     "int_mod_arithmetic_intro",
   ],
 };

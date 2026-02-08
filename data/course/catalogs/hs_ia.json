@@ -62,7 +62,6 @@
       "description": "因数分解と符号の変化から解の範囲を判断する",
       "viewCode": "centertest-quad-inequality-basic"
     },
-
     {
       "id": "quad_graph_basic",
       "title": "二次関数のグラフと頂点",
@@ -135,7 +134,6 @@
       "description": "回帰直線を使って近似値を求める",
       "viewCode": "centertest-data-regression-basic"
     },
-
     {
       "id": "combi_basic",
       "title": "場合の数（基本）",
@@ -189,12 +187,6 @@
       "title": "素因数分解と素数判定",
       "description": "素因数分解・素数/合成数・約数の個数を学ぶ",
       "viewCode": "centertest-int-prime-factor-basic"
-    },
-    {
-      "id": "int_divisibility_tests_basic",
-      "title": "整除性の判定",
-      "description": "2,3,4,5,8,9,11 の判定法を使う",
-      "viewCode": "centertest-int-divisibility-basic"
     },
     {
       "id": "int_gcd_lcm_applications_basic",

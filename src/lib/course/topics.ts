@@ -27,7 +27,6 @@ export type TopicId =
   | "int_divisor_multiple_basic"
   | "int_remainder_basic"
   | "int_prime_factor_basic"
-  | "int_divisibility_tests_basic"
   | "int_gcd_lcm_applications_basic"
   | "int_diophantine_basic"
   | "int_mod_arithmetic_intro"
@@ -470,13 +469,6 @@ export const TOPICS: Topic[] = [
     section: "integer",
     title: "素因数分解と素数判定（基本）",
     description: "素因数分解・素数/合成数の判定・約数の個数を学ぶ",
-  },
-  {
-    id: "int_divisibility_tests_basic",
-    unit: "mathA",
-    section: "integer",
-    title: "整除性の判定（基本）",
-    description: "2,3,4,5,8,9,11 の判定法を使う",
   },
   {
     id: "int_gcd_lcm_applications_basic",

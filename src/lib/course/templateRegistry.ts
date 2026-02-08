@@ -74,7 +74,6 @@ import { intRemainderTemplates } from "./templates/mathA/int_remainder_basic";
 import { intRemainderVariantTemplates } from "./templates/mathA/int_remainder_variant_basic";
 import { intRemainderAppliedVariantTemplates } from "./templates/mathA/int_remainder_applied_variant_basic";
 import { intPrimeFactorTemplates } from "./templates/mathA/int_prime_factor_basic";
-import { intDivisibilityTestsTemplates } from "./templates/mathA/int_divisibility_tests_basic";
 import { intGcdLcmApplicationsTemplates } from "./templates/mathA/int_gcd_lcm_applications_basic";
 import { intGcdLcmVariantTemplates } from "./templates/mathA/int_gcd_lcm_variant_basic";
 import { intDiophantineTemplates } from "./templates/mathA/int_diophantine_basic";
@@ -650,7 +649,6 @@ const RAW_TEMPLATES: QuestionTemplate[] = [
   ...intRemainderVariantTemplates,
   ...intRemainderAppliedVariantTemplates,
   ...intPrimeFactorTemplates,
-  ...intDivisibilityTestsTemplates,
   ...intGcdLcmApplicationsTemplates,
   ...intGcdLcmVariantTemplates,
   ...intDiophantineTemplates,
