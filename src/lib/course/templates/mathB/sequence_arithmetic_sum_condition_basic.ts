@@ -29,7 +29,9 @@ export const sequenceArithmeticSumConditionTemplates: QuestionTemplate[] = Array
     },
     generate() {
       const params = buildParams();
-      const statement = `等差数列で $a_1=${params.a1}$, 公差 $d=${params.d}$ のとき、$S_${params.n}$ を求めよ。`;
+      const statement =
+        `一定の差で増える量の合計を考える。` +
+        `$a_1=${params.a1}$, 公差 $d=${params.d}$ のとき、$S_${params.n}$ を求めよ。`;
       return {
         templateId,
         statement,

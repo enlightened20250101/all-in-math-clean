@@ -27,7 +27,9 @@ export const sequenceTermFromSumConditionTemplates: QuestionTemplate[] = Array.f
     },
     generate() {
       const params = buildParams();
-      const statement = `数列で $S_{n-1}=${params.sPrev}$, $S_n=${params.sNow}$ のとき、$a_n$ を求めよ。`;
+      const statement =
+        `累積値の差から当日の量を求める場面を想定する。` +
+        `$S_{n-1}=${params.sPrev}$, $S_n=${params.sNow}$ のとき、$a_n$ を求めよ。`;
       return {
         templateId,
         statement,

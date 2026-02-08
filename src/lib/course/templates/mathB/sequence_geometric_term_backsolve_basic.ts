@@ -29,7 +29,9 @@ export const sequenceGeometricTermBacksolveTemplates: QuestionTemplate[] = Array
     },
     generate() {
       const params = buildParams();
-      const statement = `等比数列で $a_1=${params.a1}$, 公比 $r=${params.r}$ のとき、$a_n=${params.an}$ を満たす $n$ を求めよ。`;
+      const statement =
+        `一定倍率で変化する量を考える。` +
+        `$a_1=${params.a1}$, 公比 $r=${params.r}$ のとき、$a_n=${params.an}$ を満たす $n$ を求めよ。`;
       return {
         templateId,
         statement,

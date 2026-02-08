@@ -29,7 +29,9 @@ export const sequenceArithmeticTermBacksolveTemplates: QuestionTemplate[] = Arra
     },
     generate() {
       const params = buildParams();
-      const statement = `等差数列で $a_1=${params.a1}$, 公差 $d=${params.d}$ のとき、$a_n=${params.an}$ を満たす $n$ を求めよ。`;
+      const statement =
+        `一定の差で増減する量を考える。` +
+        `$a_1=${params.a1}$, 公差 $d=${params.d}$ のとき、$a_n=${params.an}$ を満たす $n$ を求めよ。`;
       return {
         templateId,
         statement,
