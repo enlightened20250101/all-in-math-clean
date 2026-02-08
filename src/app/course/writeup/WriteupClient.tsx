@@ -89,9 +89,19 @@ export default function WriteupClient({ topicTitle, topicId }: WriteupClientProp
 
   const rubricChecks = useMemo(() => {
     const normalizedAnswer = normalizeText(combinedAnswer);
-    return rubric.map((item) => {
-      const tokens = extractTokens(item);
-      const mathTokens = extractMathTokens(item);
+    const keywordOverrides = activeProblem?.rubricKeywords ?? [];
+    const solutionTextForTokens = activeProblem?.solution ?? "";
+    return rubric.map((item, index) => {
+      const overrideTokens = keywordOverrides[index] ?? [];
+      const tokens = uniqueTokens([
+        ...extractTokens(item),
+        ...overrideTokens.map((token) => normalizeText(token)),
+      ]);
+      const mathTokens = uniqueTokens([
+        ...extractMathTokens(item),
+        ...extractMathTokens(overrideTokens.join(" ")),
+        ...extractMathTokens(solutionTextForTokens),
+      ]);
       const hitByText = tokens.some((token) => normalizedAnswer.includes(token));
       const hitByMath = mathTokens.some((token) => normalizedAnswer.includes(token));
       return {
@@ -99,7 +109,7 @@ export default function WriteupClient({ topicTitle, topicId }: WriteupClientProp
         hit: combinedAnswer.trim().length > 0 && (hitByText || hitByMath),
       };
     });
-  }, [rubric, combinedAnswer]);
+  }, [rubric, combinedAnswer, activeProblem]);
 
   const rubricScore = useMemo(() => {
     if (rubricChecks.length === 0) return 0;
@@ -664,7 +674,8 @@ function extractTokens(value: string): string[] {
   const matches = value.match(/[一-龥ぁ-んァ-ンa-zA-Z0-9]+/g) ?? [];
   return matches
     .map((token) => normalizeText(token))
-    .filter((token) => token.length >= 2);
+    .filter((token) => token.length >= 2)
+    .filter((token) => !STOP_WORDS.has(token));
 }
 
 function extractMathTokens(value: string): string[] {
@@ -678,3 +689,31 @@ function extractMathTokens(value: string): string[] {
   }
   return tokens.filter(Boolean);
 }
+
+function uniqueTokens(tokens: string[]): string[] {
+  return Array.from(new Set(tokens.filter(Boolean)));
+}
+
+const STOP_WORDS = new Set([
+  "説明",
+  "述べる",
+  "示す",
+  "求める",
+  "書く",
+  "簡潔",
+  "結論",
+  "途中",
+  "方針",
+  "理由",
+  "計算",
+  "確認",
+  "導く",
+  "条件",
+  "場合",
+  "結論として",
+  "触れる",
+  "成り立つ",
+  "同値",
+  "式",
+  "導出",
+]);

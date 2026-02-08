@@ -7,6 +7,7 @@ export type WriteupProblem = {
   title: string;
   statement: string;
   rubric: string[];
+  rubricKeywords?: string[][];
   solution: string;
   level?: 1 | 2 | 3;
 };
