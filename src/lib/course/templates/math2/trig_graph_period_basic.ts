@@ -50,7 +50,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const c = CASES[caseId];
       const k = buildK(c);
       const kx = k === "1" ? "x" : `${k}x`;
-      const statement = `周期運動のモデル $y=\\sin(${kx})$ の周期を求めよ。`;
+      const statement = `振動の周期運動のモデル $y=\\sin(${kx})$ の振動モデルの周期を求めよ。`;
       return {
         templateId: id,
         statement,

@@ -22,7 +22,7 @@ function buildTemplate(c: Case): QuestionTemplate {
       const kx = c.b < 0 ? `(${c.b}x)` : `${c.b}x`;
       return {
         templateId: c.id,
-        statement: `関数 $y=\\sin(${kx})$ の周期を求めよ。`,
+        statement: `関数 $y=\\sin(${kx})$ の振動モデルの振動の周期を求めよ。`,
         answerKind: "numeric",
         params: { period },
       };

@@ -40,7 +40,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const params = buildParams();
       const base = texLinear(1, params.a);
-      const statement = `$(${base})^{${params.n}}$ の $x^{${params.k}}$ の係数を求めよ。`;
+      const statement = `個数の数え上げとして $(${base})^{${params.n}}$ の $x^{${params.k}}$ の係数を求めよ。`;
       return {
         templateId: id,
         statement,

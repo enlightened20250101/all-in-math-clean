@@ -24,7 +24,7 @@ function buildTemplate(c: Case): QuestionTemplate {
       const inside = texLinear(c.b, -c.b * c.shift);
       return {
         templateId: c.id,
-        statement: `関数 $y=\\sin(${inside})$ の周期を求めよ。`,
+        statement: `関数 $y=\\sin(${inside})$ の振動モデルの振動の周期を求めよ。`,
         answerKind: "numeric",
         params: { period },
       };

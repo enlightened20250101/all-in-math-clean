@@ -29,7 +29,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `放物線 $x^2=4${params.a}y$ の準線の $y$ 座標を求めよ。`;
+      const statement = `測定で得た放物線 $x^2=4${params.a}y$ の準線の $y$ 座標を求めよ。`;
       return {
         templateId: id,
         statement,
@@ -44,7 +44,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const p = params as Params;
       return `
 ### この問題の解説
-放物線 $x^2=4ay$ の準線は $y=-a$。
+測定で得た放物線 $x^2=4ay$ の準線は $y=-a$。
 よって **${p.ans}**。
 `;
     },

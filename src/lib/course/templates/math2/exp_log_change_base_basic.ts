@@ -32,7 +32,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const base = texPow(String(params.a), params.m);
       const value = texPow(String(params.a), params.n);
       const statement =
-        `底の変換を用いて次を計算せよ。\\n\\n$$${texEq(`\\log_{${base}}(${value})`, "?")}$$`;
+        `成長率の計算として、底の変換を用いて次を計算せよ。\\n\\n$$${texEq(`\\log_{${base}}(${value})`, "?")}$$`;
       return {
         templateId: id,
         statement,

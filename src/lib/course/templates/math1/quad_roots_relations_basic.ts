@@ -47,7 +47,7 @@ function buildSumTemplate(id: string, title: string, paramsFactory: () => RelPar
       const poly = texPoly2(params.a, params.b, params.c);
       return {
         templateId: id,
-        statement: `次の二次方程式の2解の和を求めよ。\n\n$$\n${poly} = 0\n$$`,
+        statement: `面積条件から得た次の二次方程式の2解の和を求めよ。\n\n$$\n${poly} = 0\n$$`,
         answerKind: "numeric",
         params: params as unknown as Record<string, number>,
       };
@@ -95,7 +95,7 @@ function buildProductTemplate(id: string, title: string, paramsFactory: () => Re
       const poly = texPoly2(params.a, params.b, params.c);
       return {
         templateId: id,
-        statement: `次の二次方程式の2解の積を求めよ。\n\n$$\n${poly} = 0\n$$`,
+        statement: `面積条件から得た次の二次方程式の2解の積を求めよ。\n\n$$\n${poly} = 0\n$$`,
         answerKind: "numeric",
         params: params as unknown as Record<string, number>,
       };
@@ -143,7 +143,7 @@ function buildSmallerRootTemplate(id: string, title: string, paramsFactory: () =
       const poly = texPoly2(params.a, params.b, params.c);
       return {
         templateId: id,
-        statement: `次の二次方程式の小さい方の解を答えよ。\n\n$$\n${poly} = 0\n$$`,
+        statement: `面積条件から得た次の二次方程式の小さい方の解を答えよ。\n\n$$\n${poly} = 0\n$$`,
         answerKind: "numeric",
         params: params as unknown as Record<string, number>,
       };

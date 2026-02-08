@@ -40,7 +40,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `ベクトル $\\vec{a}=(${params.ax},${params.ay})$, $\\vec{b}=(x,${params.by})$ が直交するとき、$x$ を求めよ。`;
+      const statement = `移動方向を表すベクトル $\\vec{a}=(${params.ax},${params.ay})$, $\\vec{b}=(x,${params.by})$ が直交するとき、$x$ を求めよ。`;
       return {
         templateId: id,
         statement,
