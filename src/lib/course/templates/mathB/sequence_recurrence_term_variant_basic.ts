@@ -20,8 +20,8 @@ function buildTemplate(c: Case): QuestionTemplate {
   const recurrence = texJoin("a_{n+1}=a_n", shift);
   const statement =
     c.kind === "arithmetic"
-      ? `数列 $\\{a_n\\}$ が $a_1=${c.a1}$, $${recurrence}$ を満たすとき、$a_${c.n}$ を求めよ。`
-      : `数列 $\\{a_n\\}$ が $a_1=${c.a1}$, $a_{n+1}=${c.r}a_n$ を満たすとき、$a_${c.n}$ を求めよ。`;
+      ? `毎回一定量ずつ変化する量を考える。$a_1=${c.a1}$, $${recurrence}$ を満たすとき、$a_${c.n}$ を求めよ。`
+      : `毎回一定倍率で変化する量を考える。$a_1=${c.a1}$, $a_{n+1}=${c.r}a_n$ を満たすとき、$a_${c.n}$ を求めよ。`;
   return {
     meta: {
       id: c.id,

@@ -30,7 +30,9 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `数列で $S_{n-1}=${params.s1}$, $S_n=${params.s2}$ のとき、$a_n$ を求めよ。`;
+      const statement =
+        `累積記録から当日の値を求める場面を想定する。` +
+        `$S_{n-1}=${params.s1}$, $S_n=${params.s2}$ のとき、$a_n$ を求めよ。`;
       return {
         templateId: id,
         statement,

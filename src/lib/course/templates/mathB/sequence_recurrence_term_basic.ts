@@ -37,10 +37,14 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       if (c.kind === "arithmetic") {
         const shift = texConst(c.d);
         const recurrence = texJoin("a_{n+1}=a_n", shift);
-        statement = `数列 $\\{a_n\\}$ が $a_1=${c.a1}$, $${recurrence}$ を満たすとき、$a_${c.n}$ を求めよ。`;
+        statement =
+          `毎回同じ増減がある記録を漸化式で表す。` +
+          `$a_1=${c.a1}$, $${recurrence}$ を満たすとき、$a_${c.n}$ を求めよ。`;
         answer = c.a1 + (c.n - 1) * c.d;
       } else {
-        statement = `数列 $\\{a_n\\}$ が $a_1=${c.a1}$, $a_{n+1}=${c.r}a_n$ を満たすとき、$a_${c.n}$ を求めよ。`;
+        statement =
+          `一定倍率で増減する量を漸化式で表す。` +
+          `$a_1=${c.a1}$, $a_{n+1}=${c.r}a_n$ を満たすとき、$a_${c.n}$ を求めよ。`;
         answer = c.a1 * Math.pow(c.r, c.n - 1);
       }
       return {

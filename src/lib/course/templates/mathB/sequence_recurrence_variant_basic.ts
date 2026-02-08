@@ -26,7 +26,9 @@ function buildTemplate(c: Case): QuestionTemplate {
       const recurrence = texJoin("a_{n+1}=a_n", shift);
       return {
         templateId: c.id,
-        statement: `数列 $\\{a_n\\}$ が $${recurrence}$、$a_1=${c.a1}$ を満たすとき、$a_${c.n}$ を求めよ。`,
+        statement:
+          `毎回同じ増減がある記録を漸化式で表す。` +
+          `$${recurrence}$、$a_1=${c.a1}$ を満たすとき、$a_${c.n}$ を求めよ。`,
         answerKind: "numeric",
         params: { an },
       };
