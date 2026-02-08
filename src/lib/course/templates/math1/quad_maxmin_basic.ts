@@ -37,7 +37,7 @@ export const quadMaxMinTemplates: QuestionTemplate[] = [
       return {
         templateId: "quad_interval_max_endpoint",
         statement:
-          `二次関数 $y=${form}$ について、区間 $[${l},${r}]$ における最大値を求めよ。`,
+          `放物線の区間での最大値を調べる。二次関数 $y=${form}$ について、区間 $[${l},${r}]$ における最大値を求めよ。`,
         answerKind: "numeric",
         params: { a, p, q, l, r, maxVal },
       };
@@ -69,7 +69,7 @@ $$
       const poly = texPoly2(a, b, c);
       return {
         templateId: "quad_min_value_unbounded",
-        statement: `二次関数 $y = ${poly}$ の最小値を求めなさい。`,
+        statement: `放物線の頂点を利用して最小値を求める。二次関数 $y = ${poly}$ の最小値を求めなさい。`,
         answerKind: "numeric",
         params: { a, b, c },
       };
@@ -100,7 +100,7 @@ $a>0$ なので上に開き、頂点で最小値を取ります。
       const poly = texPoly2(a, b, c);
       return {
         templateId: "quad_min_x_unbounded",
-        statement: `二次関数 $y = ${poly}$ が最小値をとるときの $x$ の値を求めなさい。`,
+        statement: `軸の位置を使って最小となる $x$ を求める。二次関数 $y = ${poly}$ が最小値をとるときの $x$ の値を求めなさい。`,
         answerKind: "numeric",
         params: { a, b, c },
       };
@@ -133,7 +133,7 @@ $a>0$ なので上に開き、頂点で最小値を取ります。
       const poly = texPoly2(a, b, c);
       return {
         templateId: "quad_value_at_x",
-        statement: `二次関数 $y = ${poly}$ について、$x=${x}$ のときの $y$ の値を求めなさい。`,
+        statement: `関数の値を具体的に計算する。二次関数 $y = ${poly}$ について、$x=${x}$ のときの $y$ の値を求めなさい。`,
         answerKind: "numeric",
         params: { a, b, c, x },
       };

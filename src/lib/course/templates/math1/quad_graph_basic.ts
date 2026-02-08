@@ -54,7 +54,7 @@ const extraGraphTemplates: QuestionTemplate[] = Array.from({ length: 30 }, (_, i
       const poly = texPoly2(a, b, c);
       return {
         templateId,
-        statement: `二次関数 $y=${poly}$ において、$x=${x}$ のときの $y$ の値を求めなさい。`,
+        statement: `座標上の高さを求める。二次関数 $y=${poly}$ において、$x=${x}$ のときの $y$ の値を求めなさい。`,
         answerKind: "numeric",
         params: { a, b, c, x, value },
       };
@@ -99,7 +99,7 @@ export const quadGraphTemplates: QuestionTemplate[] = [
       return {
         templateId: "quad_axis_from_symmetric_points",
         statement:
-          `二次関数 $y=${poly}$ について、$x=${x1}$ と $x=${x2}$ のときの $y$ の値が等しい。` +
+          `左右対称の性質を利用する。二次関数 $y=${poly}$ について、$x=${x1}$ と $x=${x2}$ のときの $y$ の値が等しい。` +
           `このとき、軸の方程式 $x=p$ の $p$ を求めよ。`,
         answerKind: "numeric",
         params: { a, b, c, p },
