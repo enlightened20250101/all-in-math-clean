@@ -2,6 +2,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { generateTutorial } from '@/server/learning/generate';
 
+export const dynamic = "force-dynamic";
+
 export async function POST(req: NextRequest) {
   try {
     const { skillId, objectives } = await req.json();
