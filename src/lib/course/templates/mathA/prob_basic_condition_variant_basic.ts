@@ -87,6 +87,22 @@ const CASES: ProbCase[] = [
     choices: [texFrac(7, 9), texFrac(2, 9), texFrac(1, 2), texFrac(5, 9)],
     explain: `補集合は「2枚とも奇数」。$1-\\frac{5}{10}\\cdot\\frac{4}{9}=1-\\frac{2}{9}=\\frac{7}{9}$。`,
   },
+  {
+    id: "prob_basic_ball_exact_1",
+    title: "玉：ちょうど1個赤",
+    statement: `赤3個・青2個の玉から2個取り出す（戻さない）。次の確率を求めよ。\\n\\n$$\\n${texProb("\\text{赤がちょうど1個}")}\\n$$`,
+    correct: texFrac(3, 5),
+    choices: [texFrac(3, 5), texFrac(2, 5), texFrac(1, 2), texFrac(1, 5)],
+    explain: `赤1個・青1個の組合せは $3\\cdot2=6$ 通り、全体は $\\binom{5}{2}=10$ 通りなので $\\frac{6}{10}=\\frac{3}{5}$。`,
+  },
+  {
+    id: "prob_basic_die_exact_1",
+    title: "サイコロ3回：1がちょうど2回",
+    statement: `サイコロを3回投げる。次の確率を求めよ。\\n\\n$$\\n${texProb("\\text{1がちょうど2回}")}\\n$$`,
+    correct: texFrac(5, 72),
+    choices: [texFrac(5, 72), texFrac(1, 12), texFrac(5, 36), texFrac(1, 8)],
+    explain: `1が出る確率を $\\frac{1}{6}$ とすると、$\\binom{3}{2}(\\frac{1}{6})^2(\\frac{5}{6})=\\frac{5}{72}$。`,
+  },
 ];
 
 export const probBasicConditionVariantTemplates: QuestionTemplate[] = CASES.map((c) => {

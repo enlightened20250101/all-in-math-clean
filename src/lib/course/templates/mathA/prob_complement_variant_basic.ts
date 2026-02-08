@@ -71,6 +71,22 @@ const CASES: ProbCase[] = [
     choices: [texFrac(3, 4), texFrac(1, 4), texFrac(1, 2), texFrac(5, 6)],
     explain: `補集合は「2回とも奇数」。$(\\frac{1}{2})^2=\\frac{1}{4}$、よって $\\frac{3}{4}$。`,
   },
+  {
+    id: "prob_comp_coin_5",
+    title: "コイン5回：少なくとも1回表",
+    statement: `コインを5回投げる。次の確率を求めよ。\\n\\n$$\\n${texProb("\\text{少なくとも1回表}")}\\n$$`,
+    correct: texFrac(31, 32),
+    choices: [texFrac(31, 32), texFrac(1, 32), texFrac(15, 16), texFrac(7, 8)],
+    explain: `補集合は「表が0回」。$1-\\frac{1}{32}=\\frac{31}{32}$。`,
+  },
+  {
+    id: "prob_comp_die_7",
+    title: "サイコロ4回：6が少なくとも1回",
+    statement: `サイコロを4回投げる。次の確率を求めよ。\\n\\n$$\\n${texProb("\\text{少なくとも1回6}")}\\n$$`,
+    correct: texFrac(671, 1296),
+    choices: [texFrac(671, 1296), texFrac(625, 1296), texFrac(1, 6), texFrac(11, 36)],
+    explain: `補集合は「4回とも6以外」。$1-(\\frac{5}{6})^4=1-\\frac{625}{1296}=\\frac{671}{1296}$。`,
+  },
 ];
 
 export const probComplementVariantTemplates: QuestionTemplate[] = CASES.map(buildTemplate);
