@@ -31,7 +31,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `双曲線 $\\frac{x^2}{${params.a2}}-\\frac{y^2}{1}=1$ の頂点の $x$ 座標を求めよ。`;
+      const statement = `反射鏡の断面を表す双曲線 $\\frac{x^2}{${params.a2}}-\\frac{y^2}{1}=1$ の頂点の $x$ 座標を求めよ。`;
       return {
         templateId: id,
         statement,
@@ -54,11 +54,11 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
 }
 
 export const conicHyperbolaVertexTemplates: QuestionTemplate[] = Array.from({ length: 6 }, (_, i) =>
-  buildTemplate(`conic_hyperbola_vertex_basic_${i + 1}`, `双曲線の頂点 ${i + 1}`)
+  buildTemplate(`conic_hyperbola_vertex_basic_${i + 1}`, `反射鏡の断面を表す双曲線の頂点 ${i + 1}`)
 );
 
 const extraHyperbolaVertexTemplates: QuestionTemplate[] = Array.from({ length: 38 }, (_, i) =>
-  buildTemplate(`conic_hyperbola_vertex_basic_${i + 7}`, `双曲線の頂点 追加${i + 1}`)
+  buildTemplate(`conic_hyperbola_vertex_basic_${i + 7}`, `反射鏡の断面を表す双曲線の頂点 追加${i + 1}`)
 );
 
 conicHyperbolaVertexTemplates.push(...extraHyperbolaVertexTemplates);

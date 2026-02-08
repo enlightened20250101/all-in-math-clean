@@ -39,7 +39,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const params = buildParams();
       const poly = texPoly2(params.a, params.b, params.c);
       const divisor = texLinear(1, -params.p);
-      const statement = `モデル式 $f(x)=${poly}$ を $${divisor}$ で割ったときの余りを求めよ。`;
+      const statement = `調査で得たモデル式 $f(x)=${poly}$ を $${divisor}$ で割ったときの余りを求めよ。`;
       return {
         templateId: id,
         statement,

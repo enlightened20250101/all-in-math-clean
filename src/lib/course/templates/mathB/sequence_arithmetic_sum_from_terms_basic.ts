@@ -30,7 +30,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const params = buildParams();
       const statement =
-        `一定の差で増える量の合計を考える。` +
+        `調査で得た売上が一定の差で増えるとする。` +
         `$a_1=${params.a1}$, $a_${params.n}=${params.an}$ のとき、$S_${params.n}$ を求めよ。`;
       return {
         templateId: id,

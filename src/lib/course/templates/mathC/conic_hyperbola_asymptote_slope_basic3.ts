@@ -30,7 +30,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `双曲線 $\\frac{x^2}{${params.a ** 2}}-\\frac{y^2}{${params.b ** 2}}=1$ の漸近線の傾きを求めよ。`;
+      const statement = `反射鏡の断面を表す双曲線 $\\frac{x^2}{${params.a ** 2}}-\\frac{y^2}{${params.b ** 2}}=1$ の設計上の漸近線の傾きを求めよ。`;
       return {
         templateId: id,
         statement,
@@ -45,7 +45,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const p = params as Params;
       return `
 ### この問題の解説
-漸近線の傾きは $\\frac{b}{a}$。
+設計上の漸近線の傾きは $\\frac{b}{a}$。
 ここでは **${p.slope}**。
 `;
     },
@@ -53,5 +53,5 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
 }
 
 export const conicHyperbolaAsymptoteSlopeExtraTemplates2: QuestionTemplate[] = Array.from({ length: 6 }, (_, i) =>
-  buildTemplate(`conic_hyperbola_asymptote_slope_basic3_${i + 1}`, `漸近線の傾き ${i + 1}`)
+  buildTemplate(`conic_hyperbola_asymptote_slope_basic3_${i + 1}`, `設計上の漸近線の傾き ${i + 1}`)
 );

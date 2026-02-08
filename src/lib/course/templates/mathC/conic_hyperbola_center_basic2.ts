@@ -35,7 +35,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const label = params.ask === 0 ? "x" : "y";
       const xTerm = texParenShift("x", -params.h, 1);
       const yTerm = texParenShift("y", -params.k, 1);
-      const statement = `双曲線 $\\frac{${xTerm}}{9}-\\frac{${yTerm}}{4}=1$ の中心の ${label} 座標を求めよ。`;
+      const statement = `反射鏡の断面を表す双曲線 $\\frac{${xTerm}}{9}-\\frac{${yTerm}}{4}=1$ の中心の ${label} 座標を求めよ。`;
       return {
         templateId: id,
         statement,

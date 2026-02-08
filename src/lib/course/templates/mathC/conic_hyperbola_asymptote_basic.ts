@@ -40,7 +40,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const caseId = Math.floor(Math.random() * CASES.length);
       const c = CASES[caseId];
-      const statement = `双曲線 $\\frac{x^2}{${c.a2}}-\\frac{y^2}{${c.b2}}=1$ の漸近線 $y=mx$ のうち、$m>0$ を求めよ。`;
+      const statement = `反射鏡の断面を表す双曲線 $\\frac{x^2}{${c.a2}}-\\frac{y^2}{${c.b2}}=1$ の設計上の漸近線 $y=mx$ のうち、$m>0$ を求めよ。`;
       return {
         templateId: id,
         statement,
@@ -57,7 +57,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const c = CASES[params.caseId] ?? CASES[0];
       return `
 ### この問題の解説
-漸近線は $y=\\pm\\frac{b}{a}x$ なので ${c.explain} です。
+設計上の漸近線は $y=\\pm\\frac{b}{a}x$ なので ${c.explain} です。
 答えは **${c.answer}** です。
 `;
     },
@@ -65,11 +65,11 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
 }
 
 export const conicHyperbolaAsymptoteTemplates: QuestionTemplate[] = Array.from({ length: 6 }, (_, i) =>
-  buildTemplate(`conic_hyperbola_asymptote_basic_${i + 1}`, `双曲線の漸近線 ${i + 1}`)
+  buildTemplate(`conic_hyperbola_asymptote_basic_${i + 1}`, `反射鏡の断面を表す双曲線の設計上の漸近線 ${i + 1}`)
 );
 
 const extraHyperbolaAsymptoteTemplates: QuestionTemplate[] = Array.from({ length: 44 }, (_, i) =>
-  buildTemplate(`conic_hyperbola_asymptote_basic_${i + 7}`, `双曲線の漸近線 追加${i + 1}`)
+  buildTemplate(`conic_hyperbola_asymptote_basic_${i + 7}`, `反射鏡の断面を表す双曲線の設計上の漸近線 追加${i + 1}`)
 );
 
 conicHyperbolaAsymptoteTemplates.push(...extraHyperbolaAsymptoteTemplates);

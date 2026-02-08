@@ -38,7 +38,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const params = buildParams();
       const poly = `${texPoly2(params.a, params.b, 0)}+k`;
       const factor = texLinear(1, -params.p);
-      const statement = `設計条件を満たすように $${factor}$ が $f(x)=${poly}$ の因数となる $k$ を求めよ。`;
+      const statement = `費用モデル $f(x)=${poly}$ に対し、設計条件を満たすように $${factor}$ が因数となる $k$ を求めよ。`;
       return {
         templateId: id,
         statement,

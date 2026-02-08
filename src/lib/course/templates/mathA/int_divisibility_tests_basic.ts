@@ -30,7 +30,7 @@ function buildChoice(c: ChoiceCase): QuestionTemplate {
     generate() {
       return {
         templateId: c.id,
-        statement: `検査番号の候補として、${c.statement}`,
+        statement: `調査で使う検査番号の候補として、${c.statement}`,
         answerKind: "choice",
         choices: c.choices,
         params: {},
