@@ -38,7 +38,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
         texConst(-params.b),
         "|"
       );
-      const statement = `複素数 $z$ が $${eq}$ を満たすとき、軌跡の $x$ 座標を答えよ。`;
+      const statement = `地図上の点を表す複素数 $z$ が $${eq}$ を満たすとき、軌跡の $x$ 座標を答えよ。`;
       return {
         templateId: id,
         statement,

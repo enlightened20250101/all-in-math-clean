@@ -38,7 +38,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const params = buildParams();
       const center = texComplex(params.a, params.b);
-      const statement = `複素数 $z$ が $|z-(${center})|=${params.r}$ を満たすとき、この図形の半径を求めよ。`;
+      const statement = `地図上の点を表す複素数 $z$ が $|z-(${center})|=${params.r}$ を満たすとき、この図形の半径を求めよ。`;
       return {
         templateId: id,
         statement,

@@ -43,7 +43,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const params = buildParams();
       const center = texComplex(params.a, params.b);
-      const statement = `複素数 $z$ が $|z-(${center})|=${params.r}$ を満たすとき、この円の中心の${
+      const statement = `地図上の点を表す複素数 $z$ が $|z-(${center})|=${params.r}$ を満たすとき、この円の中心の${
         params.ask === 1 ? "x" : "y"
       }座標を求めよ。`;
       return {

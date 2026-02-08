@@ -37,7 +37,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const params = buildParams();
       const z1 = texComplex(params.a, params.b);
       const z2 = texComplex(params.a, -params.b);
-      const statement = `複素数 $z$ が $|z-(${z1})|=|z-(${z2})|$ を満たすとき、軌跡の $y$ 座標を答えよ。`;
+      const statement = `地図上の点を表す複素数 $z$ が $|z-(${z1})|=|z-(${z2})|$ を満たすとき、軌跡の $y$ 座標を答えよ。`;
       return {
         templateId: id,
         statement,
