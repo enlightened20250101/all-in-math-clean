@@ -33,7 +33,7 @@ export const calcIncreasingVariantTemplates: QuestionTemplate[] = Array.from({ l
     generate() {
       const params = buildParams();
       const statement =
-        `一次関数の変化を考える。関数 $f(x)=${texLinear(params.a, params.b)}$ は $x=${params.x0}$ のとき増加か減少か。`;
+        `速度の変化を考える。関数 $f(x)=${texLinear(params.a, params.b)}$ は $x=${params.x0}$ のとき増加か減少か。`;
       return {
         templateId,
         statement,

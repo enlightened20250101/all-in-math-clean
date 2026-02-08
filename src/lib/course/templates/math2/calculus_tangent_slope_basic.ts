@@ -41,7 +41,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const params = buildParams();
       const statement =
-        `変化率を求める。関数 $f(x)=${texPoly2(params.a, params.b, params.c)}$ の $x=${params.x0}$ における接線の傾きを求めよ。`;
+        `位置の変化率（速度）を求める。関数 $f(x)=${texPoly2(params.a, params.b, params.c)}$ の $x=${params.x0}$ における接線の傾きを求めよ。`;
       return {
         templateId: id,
         statement,

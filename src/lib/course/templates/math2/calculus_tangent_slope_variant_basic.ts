@@ -26,7 +26,7 @@ export const tangentSlopeVariantTemplates: QuestionTemplate[] = Array.from({ len
     generate() {
       const params = buildParams();
       const statement =
-        `一次関数の変化率を考える。関数 $f(x)=${texLinear(params.a, params.b)}$ の $x=${params.x0}$ における接線の傾きを求めよ。`;
+        `速度の変化率を考える。関数 $f(x)=${texLinear(params.a, params.b)}$ の $x=${params.x0}$ における接線の傾きを求めよ。`;
       return {
         templateId,
         statement,

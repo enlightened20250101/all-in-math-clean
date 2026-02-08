@@ -22,7 +22,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const params = buildParams();
       const base = texLinear(1, params.a);
-      const statement = `係数確認のため、展開前の式 $(${base})^{${params.n}}$ の値を求めよ。`;
+      const statement = `個数の確認のため、展開前の式 $(${base})^{${params.n}}$ の値を求めよ。`;
       return {
         templateId: id,
         statement,
