@@ -30,7 +30,9 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `等比数列で $a_1=${params.a1}$, $a_3=${params.a3}$ のとき、公比 $r$ を求めよ。`;
+      const statement =
+        `毎回同じ倍率で変化する量を等比数列とみなす。` +
+        `$a_1=${params.a1}$, $a_3=${params.a3}$ のとき、公比 $r$ を求めよ。`;
       return {
         templateId: id,
         statement,

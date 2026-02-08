@@ -34,7 +34,9 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `等差数列で $a_1=${params.a1}$, $a_4=${params.a4}$ のとき、公差 $d$ を求めよ。`;
+      const statement =
+        `一定の差で増える記録を考える。` +
+        `$a_1=${params.a1}$, $a_4=${params.a4}$ のとき、公差 $d$ を求めよ。`;
       return {
         templateId: id,
         statement,

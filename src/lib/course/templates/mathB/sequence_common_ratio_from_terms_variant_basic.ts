@@ -27,7 +27,9 @@ export const sequenceCommonRatioFromTermsVariantTemplates: QuestionTemplate[] = 
     },
     generate() {
       const params = buildParams();
-      const statement = `等比数列で $a_2=${params.a2}$, $a_5=${params.a5}$ のとき、公比 $r$ を求めよ。`;
+      const statement =
+        `同じ倍率で変化する量を考える。` +
+        `$a_2=${params.a2}$, $a_5=${params.a5}$ のとき、公比 $r$ を求めよ。`;
       return {
         templateId,
         statement,

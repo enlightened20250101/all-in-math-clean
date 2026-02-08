@@ -31,7 +31,9 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `等比数列で $a_1=${params.a1}$, $r=${params.r}$ のとき、$S_${params.n}$ を求めよ。`;
+      const statement =
+        `一定の倍率で増減する量の合計を考える。` +
+        `$a_1=${params.a1}$, $r=${params.r}$ のとき、$S_${params.n}$ を求めよ。`;
       return {
         templateId: id,
         statement,

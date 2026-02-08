@@ -22,7 +22,9 @@ function buildTemplate(c: Case): QuestionTemplate {
     generate() {
       return {
         templateId: c.id,
-        statement: `等差数列で $a_1=${c.a1}$, $a_5=${c.a5}$ のとき、公差 $d$ を求めよ。`,
+        statement:
+          `一定の差で増減する量を考える。` +
+          `$a_1=${c.a1}$, $a_5=${c.a5}$ のとき、公差 $d$ を求めよ。`,
         answerKind: "numeric",
         params: { d },
       };
