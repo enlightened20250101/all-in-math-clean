@@ -31,7 +31,7 @@ export async function GET(_req: NextRequest) {
         next.setDate(next.getDate() + (m.interval_days ?? 0));
         return next <= now;
       })
-      .map(m => ({
+      .map((m: any) => ({
         skill_id: m.skill_id,
         reason: "review",
         due_at: new Date(new Date(m.last_seen_at!).getTime() + (m.interval_days ?? 0) * 86400000).toISOString(),
