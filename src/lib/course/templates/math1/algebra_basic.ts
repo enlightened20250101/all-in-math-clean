@@ -1953,11 +1953,9 @@ $(x-${a})(x-${b})=0$ より解は $x=${a},${b}$。
       const c = pick([1, 2, 3, 4, 5]);
       // ax + b >= c の最小整数解
       const minX = Math.ceil((c - b) / a);
-      const left = texLinear(a, b);
-      const right = String(c);
       return {
         templateId: "alg_ineq_min_int_1",
-        statement: `次の不等式を満たす $x$ の最小の整数を求めよ。\n\n$$ ${texInequality(left, "\\\\ge", right)} $$`,
+        statement: `次の不等式を満たす $x$ の最小の整数を求めよ。\n\n$$ ${texInequality(a, b, 0, c, ">=")} $$`,
         answerKind: "numeric",
         params: { a, b, c, minX },
       };
