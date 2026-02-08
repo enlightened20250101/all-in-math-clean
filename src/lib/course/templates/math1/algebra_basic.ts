@@ -1861,6 +1861,122 @@ $$
 `;
     },
   },
+  // -----------------------------
+  // 文章題: 一次方程式（数量関係）
+  // -----------------------------
+  {
+    meta: {
+      id: "alg_linear_word_1",
+      topicId: "algebra_linear_eq_basic",
+      title: "数量関係の文章題",
+      difficulty: 1,
+      tags: ["linear_eq", "word"],
+    },
+    generate() {
+      const x = randInt(-2, 8);
+      const a = pick([2, 3, 4]);
+      const b = pick([3, 4, 5, 6]);
+      const c = a * (x + b);
+      return {
+        templateId: "alg_linear_word_1",
+        statement:
+          `ある数に ${b} を足して ${a} 倍すると ${c} になる。` +
+          `その数を求めよ。`,
+        answerKind: "numeric",
+        params: { x, a, b, c },
+      };
+    },
+    grade(params, userAnswer) {
+      return gradeNumeric(userAnswer, params.x);
+    },
+    explain(params) {
+      const { a, b, c, x } = params;
+      return `
+### この問題の解説
+「ある数」を $x$ とおくと
+$$
+${a}(x+${b})=${c}
+$$
+より $x=${x}$。
+`;
+    },
+  },
+  // -----------------------------
+  // 因数分解と解: (x-a)(x-b)=0 の解の選択
+  // -----------------------------
+  {
+    meta: {
+      id: "alg_factor_root_1",
+      topicId: "algebra_factor_basic",
+      title: "因数分解と解の選択",
+      difficulty: 1,
+      tags: ["factor", "root"],
+    },
+    generate() {
+      const a = pick([-4, -3, -2, -1, 1, 2, 3, 4]);
+      let b = pick([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5]);
+      if (b === a) b = a + 1;
+      const bigger = Math.max(a, b);
+      return {
+        templateId: "alg_factor_root_1",
+        statement: `次の方程式の解のうち、大きい方を答えよ。\n\n$$ (x-${a})(x-${b})=0 $$`,
+        answerKind: "numeric",
+        params: { a, b, bigger },
+      };
+    },
+    grade(params, userAnswer) {
+      return gradeNumeric(userAnswer, params.bigger);
+    },
+    explain(params) {
+      const { a, b, bigger } = params;
+      return `
+### この問題の解説
+$(x-${a})(x-${b})=0$ より解は $x=${a},${b}$。
+大きい方は $${bigger}$$。
+`;
+    },
+  },
+  // -----------------------------
+  // 不等式: 最小の整数
+  // -----------------------------
+  {
+    meta: {
+      id: "alg_ineq_min_int_1",
+      topicId: "algebra_ineq_basic",
+      title: "不等式の最小整数",
+      difficulty: 1,
+      tags: ["inequality", "min_int"],
+    },
+    generate() {
+      const a = pick([2, 3, 4, 5]);
+      const b = pick([-6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5]);
+      const c = pick([1, 2, 3, 4, 5]);
+      // ax + b >= c の最小整数解
+      const minX = Math.ceil((c - b) / a);
+      const left = texLinear(a, b);
+      const right = String(c);
+      return {
+        templateId: "alg_ineq_min_int_1",
+        statement: `次の不等式を満たす $x$ の最小の整数を求めよ。\n\n$$ ${texInequality(left, "\\\\ge", right)} $$`,
+        answerKind: "numeric",
+        params: { a, b, c, minX },
+      };
+    },
+    grade(params, userAnswer) {
+      return gradeNumeric(userAnswer, params.minX);
+    },
+    explain(params) {
+      const { a, b, c, minX } = params;
+      return `
+### この問題の解説
+$$
+${a}x+${b} \\ge ${c}
+\\Rightarrow x \\ge ${((c - b) / a).toFixed(2)}
+$$
+よって最小の整数は $${minX}$$。
+`;
+    },
+  },
 ];
 
 const extraLinearEqTemplates: QuestionTemplate[] = Array.from({ length: 41 }, (_, idx) => {
