@@ -4,6 +4,8 @@ import OpenAI from 'openai';
 import { buildTutorPrompt } from '@/lib/course/tutor';
 import type { HintStep } from '@/lib/course/tutor';
 
+export const dynamic = "force-dynamic";
+
 const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY!,
 });
