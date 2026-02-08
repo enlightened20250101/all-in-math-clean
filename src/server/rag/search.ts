@@ -1,9 +1,21 @@
 // src/server/rag/search.ts
 import { createClient } from '@supabase/supabase-js';
 
-const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!);
+const getSupabase = () => {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+  if (!url || !key) return null;
+  try {
+    return createClient(url, key);
+  } catch {
+    return null;
+  }
+};
 
 export async function fetchRagChunks({ skillId, objective }: { skillId: string; objective?: string }) {
+  const supabase = getSupabase();
+  if (!supabase) return [];
+
   // ベクトル検索 + キーワード絞り（skill_id単位で）
   const q = (objective ?? '').slice(0, 120);
   const { data, error } = await supabase.rpc('rag_search_by_skill', {
