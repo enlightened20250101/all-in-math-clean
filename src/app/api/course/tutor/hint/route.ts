@@ -6,10 +6,6 @@ import type { HintStep } from '@/lib/course/tutor';
 
 export const dynamic = "force-dynamic";
 
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY!,
-});
-
 export async function POST(req: Request) {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
