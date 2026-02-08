@@ -31,7 +31,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `次を計算せよ。\\n\\n$$\\log_{${params.a}}(${params.a}^{${params.n}})$$`;
+      const statement = `成長モデルとして、次を計算せよ。\\n\\n$$\\log_{${params.a}}(${params.a}^{${params.n}})$$`;
       return {
         templateId: id,
         statement,

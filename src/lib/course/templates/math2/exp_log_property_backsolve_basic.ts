@@ -34,7 +34,7 @@ export const expLogPropertyBacksolveTemplates: QuestionTemplate[] = Array.from({
     },
     generate() {
       const params = buildParams();
-      const statement = `$\\log_{${params.base}} b = ${params.m}$,\\ $\\log_{${params.base}} c = ${params.n}$ のとき、次を満たす $x$ を求めよ。\\n\\n$$\\log_{${params.base}}\\left(${texPow(
+      const statement = `成長モデルとして、$\\log_{${params.base}} b = ${params.m}$,\\ $\\log_{${params.base}} c = ${params.n}$ のとき、次を満たす $x$ を求めよ。\\n\\n$$\\log_{${params.base}}\\left(${texPow(
         "b",
         params.p
       )}${texPow("c", params.q)}\\right)=x$$`;

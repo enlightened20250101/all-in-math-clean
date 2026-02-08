@@ -34,7 +34,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `方程式 $${params.a}^{2x}=${params.a}^{${params.k}}$ を解け。`;
+      const statement = `成長モデルとして、方程式 $${params.a}^{2x}=${params.a}^{${params.k}}$ を解け。`;
       return {
         templateId: id,
         statement,
