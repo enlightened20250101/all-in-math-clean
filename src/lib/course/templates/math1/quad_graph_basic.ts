@@ -84,6 +84,44 @@ $$
 export const quadGraphTemplates: QuestionTemplate[] = [
   {
     meta: {
+      id: "quad_axis_from_symmetric_points",
+      topicId: "quad_graph_basic",
+      title: "対称な2点から軸を求める",
+      difficulty: 2,
+      tags: ["axis", "symmetry"],
+    },
+    generate() {
+      const { a, b, c, p } = genVertexForm();
+      const d = pick([1, 2, 3]);
+      const x1 = p - d;
+      const x2 = p + d;
+      const poly = texPoly2(a, b, c);
+      return {
+        templateId: "quad_axis_from_symmetric_points",
+        statement:
+          `二次関数 $y=${poly}$ について、$x=${x1}$ と $x=${x2}$ のときの $y$ の値が等しい。` +
+          `このとき、軸の方程式 $x=p$ の $p$ を求めよ。`,
+        answerKind: "numeric",
+        params: { a, b, c, p },
+      };
+    },
+    grade(params, userAnswer) {
+      return gradeNumeric(userAnswer, params.p);
+    },
+    explain(params) {
+      return `
+### この問題の解説
+二次関数は軸 $x=p$ に関して左右対称です。  
+等しい値をとる2点の $x$ 座標の平均が軸になります。
+$$
+p=\\frac{x_1+x_2}{2}
+$$
+よって答えは **${params.p}**。
+`;
+    },
+  },
+  {
+    meta: {
       id: "quad_vertex_x",
       topicId: "quad_graph_basic",
       title: "頂点のx座標",

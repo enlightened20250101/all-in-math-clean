@@ -20,6 +20,44 @@ function yAt(a: number, b: number, c: number, x: number) {
 export const quadMaxMinTemplates: QuestionTemplate[] = [
   {
     meta: {
+      id: "quad_interval_max_endpoint",
+      topicId: "quad_maxmin_basic",
+      title: "区間内の最大値（端点）",
+      difficulty: 2,
+      tags: ["max", "interval"],
+    },
+    generate() {
+      const { a, p, q } = genVertexQuadratic(1); // a>0
+      const l = p - 1;
+      const r = p + 2;
+      const yL = a * (l - p) * (l - p) + q;
+      const yR = a * (r - p) * (r - p) + q;
+      const maxVal = Math.max(yL, yR);
+      const form = texQuadraticVertex(a, p, q);
+      return {
+        templateId: "quad_interval_max_endpoint",
+        statement:
+          `二次関数 $y=${form}$ について、区間 $[${l},${r}]$ における最大値を求めよ。`,
+        answerKind: "numeric",
+        params: { a, p, q, l, r, maxVal },
+      };
+    },
+    grade(params, userAnswer) {
+      return gradeNumeric(userAnswer, (params as any).maxVal);
+    },
+    explain(params) {
+      const { l, r, maxVal } = params as any;
+      return `
+### この問題の解説
+$a>0$ なので下に凸。区間での最大値は端点で決まります。
+$$
+y(${l}),\\ y(${r}) を比較すると最大値は ${maxVal}
+$$
+`;
+    },
+  },
+  {
+    meta: {
       id: "quad_min_value_unbounded",
       topicId: "quad_maxmin_basic",
       title: "最小値（範囲なし）",
