@@ -12,21 +12,21 @@ type Case = {
 const CASES: Case[] = [
   {
     id: "trig_tan_rel_1",
-    statement: "次を計算せよ。$\\frac{\\sin\\theta}{\\cos\\theta}$",
+    statement: "恒等式の変形として次を計算せよ。$\\frac{\\sin\\theta}{\\cos\\theta}$",
     choices: ["\\tan\\theta", "\\cot\\theta", "\\sin\\theta", "\\cos\\theta"],
     answer: "\\tan\\theta",
     difficulty: 1,
   },
   {
     id: "trig_tan_rel_2",
-    statement: "次を計算せよ。$\\frac{1}{\\cos^2\\theta}-1$",
+    statement: "恒等式の変形として次を計算せよ。$\\frac{1}{\\cos^2\\theta}-1$",
     choices: ["\\tan^2\\theta", "\\sin^2\\theta", "\\cos^2\\theta", "1"],
     answer: "\\tan^2\\theta",
     difficulty: 2,
   },
   {
     id: "trig_tan_rel_3",
-    statement: "次を計算せよ。$1-\\frac{1}{\\cos^2\\theta}$",
+    statement: "恒等式の変形として次を計算せよ。$1-\\frac{1}{\\cos^2\\theta}$",
     choices: ["-\\tan^2\\theta", "\\tan^2\\theta", "-\\sin^2\\theta", "0"],
     answer: "-\\tan^2\\theta",
     difficulty: 2,

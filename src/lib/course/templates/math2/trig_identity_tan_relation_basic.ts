@@ -30,7 +30,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const caseId = Math.floor(Math.random() * CASES.length);
       const c = CASES[caseId];
-      const statement = `\\(\\cos\\theta=${c.cos}\\) のとき、$1+\\tan^2\\theta$ を求めよ。`;
+      const statement = `比の整理として、\\(\\cos\\theta=${c.cos}\\) のとき $1+\\tan^2\\theta$ を求めよ。`;
       return {
         templateId: id,
         statement,
