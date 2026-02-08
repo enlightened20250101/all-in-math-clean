@@ -5,6 +5,7 @@ import { texPoly2 } from "@/lib/format/tex";
 type InequalityCase = {
   id: string;
   title: string;
+  context?: string;
   a: number;
   r1: number;
   r2: number;
@@ -49,9 +50,10 @@ function buildTemplate(c: InequalityCase): QuestionTemplate {
       tags: ["quadratic", "inequality"],
     },
     generate() {
+      const lead = c.context ? `${c.context}\n` : "";
       return {
         templateId: c.id,
-        statement: `次の二次不等式を解け。\\n\\n$$${poly} ${signText} 0$$`,
+        statement: `${lead}次の二次不等式を解け。\\n\\n$$${poly} ${signText} 0$$`,
         answerKind: "choice",
         choices,
         params: {},
@@ -71,16 +73,16 @@ function buildTemplate(c: InequalityCase): QuestionTemplate {
 }
 
 const CASES: InequalityCase[] = [
-  { id: "quad_ineq_1", title: "二次不等式 1", a: 1, r1: -2, r2: 3, sign: "ge" },
-  { id: "quad_ineq_2", title: "二次不等式 2", a: 1, r1: -1, r2: 4, sign: "le" },
-  { id: "quad_ineq_3", title: "二次不等式 3", a: 2, r1: 0, r2: 3, sign: "ge" },
-  { id: "quad_ineq_4", title: "二次不等式 4", a: 2, r1: -3, r2: 1, sign: "le" },
-  { id: "quad_ineq_5", title: "二次不等式 5", a: -1, r1: -2, r2: 2, sign: "ge" },
-  { id: "quad_ineq_6", title: "二次不等式 6", a: -1, r1: -1, r2: 3, sign: "le" },
-  { id: "quad_ineq_7", title: "二次不等式 7", a: -2, r1: 1, r2: 4, sign: "ge" },
-  { id: "quad_ineq_8", title: "二次不等式 8", a: -2, r1: -4, r2: -1, sign: "le" },
-  { id: "quad_ineq_9", title: "二次不等式 9", a: 1, r1: -5, r2: -2, sign: "ge" },
-  { id: "quad_ineq_10", title: "二次不等式 10", a: 3, r1: 1, r2: 2, sign: "le" },
+  { id: "quad_ineq_1", title: "二次不等式 1", context: "放物線がx軸より上にある範囲を求める。", a: 1, r1: -2, r2: 3, sign: "ge" },
+  { id: "quad_ineq_2", title: "二次不等式 2", context: "グラフがx軸より下にある範囲を判定する。", a: 1, r1: -1, r2: 4, sign: "le" },
+  { id: "quad_ineq_3", title: "二次不等式 3", context: "条件を満たすxの範囲をグラフで考える。", a: 2, r1: 0, r2: 3, sign: "ge" },
+  { id: "quad_ineq_4", title: "二次不等式 4", context: "放物線がx軸より下になる範囲を求める。", a: 2, r1: -3, r2: 1, sign: "le" },
+  { id: "quad_ineq_5", title: "二次不等式 5", context: "下に開く放物線の範囲判定。", a: -1, r1: -2, r2: 2, sign: "ge" },
+  { id: "quad_ineq_6", title: "二次不等式 6", context: "下に開く放物線で、x軸より下の範囲を調べる。", a: -1, r1: -1, r2: 3, sign: "le" },
+  { id: "quad_ineq_7", title: "二次不等式 7", context: "条件を満たす区間を求める（外側か内側か）。", a: -2, r1: 1, r2: 4, sign: "ge" },
+  { id: "quad_ineq_8", title: "二次不等式 8", context: "x軸との位置関係から解の範囲を決める。", a: -2, r1: -4, r2: -1, sign: "le" },
+  { id: "quad_ineq_9", title: "二次不等式 9", context: "判別した解の区間を答える。", a: 1, r1: -5, r2: -2, sign: "ge" },
+  { id: "quad_ineq_10", title: "二次不等式 10", context: "二次関数の値が0以下となる範囲を求める。", a: 3, r1: 1, r2: 2, sign: "le" },
 ];
 
 export const quadInequalityTemplates: QuestionTemplate[] = CASES.map(buildTemplate);

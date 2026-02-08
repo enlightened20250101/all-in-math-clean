@@ -5,6 +5,7 @@ import { texPoly2 } from "@/lib/format/tex";
 type InequalityCase = {
   id: string;
   title: string;
+  context?: string;
   a: number;
   r1: number;
   r2: number;
@@ -46,9 +47,10 @@ function buildTemplate(c: InequalityCase): QuestionTemplate {
       tags: ["quadratic", "inequality"],
     },
     generate() {
+      const lead = c.context ? `${c.context}\n` : "";
       return {
         templateId: c.id,
-        statement: `次の二次不等式を解け。\\n\\n$$${poly} ${signText} 0$$`,
+        statement: `${lead}次の二次不等式を解け。\\n\\n$$${poly} ${signText} 0$$`,
         answerKind: "choice",
         choices,
         params: {},
@@ -68,12 +70,12 @@ function buildTemplate(c: InequalityCase): QuestionTemplate {
 }
 
 const CASES: InequalityCase[] = [
-  { id: "quad_ineq_v1", title: "二次不等式（別）1", a: 1, r1: -3, r2: 2, sign: "ge" },
-  { id: "quad_ineq_v2", title: "二次不等式（別）2", a: 1, r1: -4, r2: -1, sign: "le" },
-  { id: "quad_ineq_v3", title: "二次不等式（別）3", a: 2, r1: 1, r2: 3, sign: "le" },
-  { id: "quad_ineq_v4", title: "二次不等式（別）4", a: -1, r1: -2, r2: 4, sign: "ge" },
-  { id: "quad_ineq_v5", title: "二次不等式（別）5", a: -2, r1: -1, r2: 2, sign: "le" },
-  { id: "quad_ineq_v6", title: "二次不等式（別）6", a: 3, r1: 0, r2: 2, sign: "ge" },
+  { id: "quad_ineq_v1", title: "二次不等式（別）1", context: "放物線とx軸の位置関係から範囲を判定する。", a: 1, r1: -3, r2: 2, sign: "ge" },
+  { id: "quad_ineq_v2", title: "二次不等式（別）2", context: "x軸より下側にある範囲を求める。", a: 1, r1: -4, r2: -1, sign: "le" },
+  { id: "quad_ineq_v3", title: "二次不等式（別）3", context: "解の内側・外側を見分ける練習。", a: 2, r1: 1, r2: 3, sign: "le" },
+  { id: "quad_ineq_v4", title: "二次不等式（別）4", context: "下に開く放物線の範囲判定。", a: -1, r1: -2, r2: 4, sign: "ge" },
+  { id: "quad_ineq_v5", title: "二次不等式（別）5", context: "符号表を使って範囲を決める。", a: -2, r1: -1, r2: 2, sign: "le" },
+  { id: "quad_ineq_v6", title: "二次不等式（別）6", context: "実数解の位置と係数の符号から範囲を判断する。", a: 3, r1: 0, r2: 2, sign: "ge" },
 ];
 
 export const quadInequalityVariantTemplates: QuestionTemplate[] = CASES.map(buildTemplate);
