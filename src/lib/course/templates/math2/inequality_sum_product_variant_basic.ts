@@ -25,7 +25,7 @@ export const inequalitySumProductVariantTemplates: QuestionTemplate[] = Array.fr
     },
     generate() {
       const params = buildParams();
-      const statement = `利益の条件として、正の数 $x,y$ が $x+y=${params.s}$ を満たすとき、$xy$ の最大値を求めよ。`;
+      const statement = `販売販売利益の条件として、正の数 $x,y$ が $x+y=${params.s}$ を満たすとき、$xy$ の最大値を求めよ。`;
       return {
         templateId,
         statement,
