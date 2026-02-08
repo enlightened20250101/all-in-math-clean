@@ -44,7 +44,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `母標準偏差が ${params.sigma}、標本サイズが ${params.n} のとき、標本平均の標準偏差（標準誤差）を求めよ。`;
+      const statement = `アンケート結果の母標準偏差が ${params.sigma}、標本サイズが ${params.n} のとき、標本平均の標準偏差（標準誤差）を求めよ。`;
       return {
         templateId: id,
         statement,

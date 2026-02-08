@@ -23,7 +23,7 @@ function buildTemplate(c: InferCase): QuestionTemplate {
     generate() {
       return {
         templateId: c.id,
-        statement: `母平均の95%信頼区間が $[${c.low}, ${c.high}]$ のとき、点推定値（区間の中心）を求めよ。`,
+        statement: `調査結果の母平均の95%信頼区間が $[${c.low}, ${c.high}]$ のとき、点推定値（区間の中心）を求めよ。`,
         answerKind: "numeric",
         params: {},
       };
