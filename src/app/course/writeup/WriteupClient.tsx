@@ -4,6 +4,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import MathMarkdown from "@/components/MathMarkdown";
+import MarkdownEditor from "@/components/MarkdownEditor";
 import { getDefaultRubric, getWriteupProblemsByTopic } from "@/lib/course/writeupProblems";
 import type { TopicId } from "@/lib/course/topics";
 
@@ -371,45 +372,45 @@ export default function WriteupClient({ topicTitle, topicId }: WriteupClientProp
             {mode === "summary" ? (
               <div>
                 <label className="text-xs font-semibold text-slate-600">清書（要点まとめ）</label>
-                <textarea
-                  rows={8}
-                  className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-200"
-                  placeholder="紙で解いた内容を要点だけ整理して入力してください。"
-                  value={summary}
-                  onChange={(event) => setSummary(event.target.value)}
-                />
+                <div className="mt-2">
+                  <MarkdownEditor
+                    value={summary}
+                    onChange={setSummary}
+                    placeholder="紙で解いた内容を要点だけ整理して入力してください。TeX は $...$ で入力できます。"
+                  />
+                </div>
               </div>
             ) : (
               <div className="space-y-4">
                 <div>
                   <label className="text-xs font-semibold text-slate-600">方針</label>
-                  <textarea
-                    rows={3}
-                    className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-200"
-                    placeholder="何を使って解くか（平方完成・解の公式など）"
-                    value={plan}
-                    onChange={(event) => setPlan(event.target.value)}
-                  />
+                  <div className="mt-2">
+                    <MarkdownEditor
+                      value={plan}
+                      onChange={setPlan}
+                      placeholder="何を使って解くか（平方完成・解の公式など）。TeX は $...$ で入力できます。"
+                    />
+                  </div>
                 </div>
                 <div>
                   <label className="text-xs font-semibold text-slate-600">途中式</label>
-                  <textarea
-                    rows={5}
-                    className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-200"
-                    placeholder="重要な変形や立式だけを記述"
-                    value={work}
-                    onChange={(event) => setWork(event.target.value)}
-                  />
+                  <div className="mt-2">
+                    <MarkdownEditor
+                      value={work}
+                      onChange={setWork}
+                      placeholder="重要な変形や立式だけを記述。TeX は $...$ で入力できます。"
+                    />
+                  </div>
                 </div>
                 <div>
                   <label className="text-xs font-semibold text-slate-600">結論</label>
-                  <textarea
-                    rows={2}
-                    className="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-200"
-                    placeholder="最終的な答えを簡潔に"
-                    value={conclusion}
-                    onChange={(event) => setConclusion(event.target.value)}
-                  />
+                  <div className="mt-2">
+                    <MarkdownEditor
+                      value={conclusion}
+                      onChange={setConclusion}
+                      placeholder="最終的な答えを簡潔に。TeX は $...$ で入力できます。"
+                    />
+                  </div>
                 </div>
               </div>
             )}
