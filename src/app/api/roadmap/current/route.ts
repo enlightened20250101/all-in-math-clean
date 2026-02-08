@@ -50,7 +50,7 @@ export async function GET() {
     }
 
     const now = Date.now();
-    const goals = (roads || []).map(r => {
+    const goals = (roads || []).map((r: any) => {
       const nodes: NodeItem[] = Array.isArray(r.nodes_json) ? r.nodes_json : [];
       const items: (EnrichedItem)[] = nodes.map(n => {
         const m = masteryMap.get(n.skill_id);
