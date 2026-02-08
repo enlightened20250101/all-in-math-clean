@@ -53,7 +53,8 @@ function buildExpTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildExpParams();
-      const statement = `次を計算せよ。\\n\\n$$${texPow(String(params.a), params.n)}$$`;
+      const statement =
+        `ある倍率の計算として次を求めよ。\\n\\n$$${texPow(String(params.a), params.n)}$$`;
       return {
         templateId: id,
         statement,
@@ -81,7 +82,8 @@ function buildLogTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildLogParams();
-      const statement = `次を計算せよ。\\n\\n$$${texEq(`\\log_{${params.a}}(${params.value})`, "?")}$$`;
+      const statement =
+        `ログの指数を求めよ。\\n\\n$$${texEq(`\\log_{${params.a}}(${params.value})`, "?")}$$`;
       return {
         templateId: id,
         statement,

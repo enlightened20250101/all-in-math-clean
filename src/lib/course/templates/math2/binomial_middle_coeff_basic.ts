@@ -35,7 +35,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildParams();
-      const statement = `$(x+y)^{${params.n}}$ の中央項の係数を求めよ。`;
+      const statement = `展開式 $(x+y)^{${params.n}}$ の中央項の係数を求めよ。`;
       return {
         templateId: id,
         statement,

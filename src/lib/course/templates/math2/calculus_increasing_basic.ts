@@ -39,7 +39,8 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const params = buildParams();
       const poly = texPoly2(params.a, params.b, params.c);
-      const statement = `関数 $f(x)=${poly}$ は $x=${params.x0}$ のとき増加か減少か。`;
+      const statement =
+        `変化の様子を調べる。関数 $f(x)=${poly}$ は $x=${params.x0}$ のとき増加か減少か。`;
       return {
         templateId: id,
         statement,

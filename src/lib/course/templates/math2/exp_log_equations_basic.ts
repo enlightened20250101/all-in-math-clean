@@ -51,7 +51,8 @@ function buildExpEqTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildExpEqParams();
-      const statement = `方程式を解け。\\n\\n$$${texEq(texPow(String(params.a), "x"), String(params.value))}$$`;
+      const statement =
+        `指数モデルの条件を満たす $x$ を求めよ。\\n\\n$$${texEq(texPow(String(params.a), "x"), String(params.value))}$$`;
       return {
         templateId: id,
         statement,
@@ -79,7 +80,8 @@ function buildLogEqTemplate(id: string, title: string): QuestionTemplate {
     },
     generate() {
       const params = buildLogEqParams();
-      const statement = `方程式を解け。\\n\\n$$${texEq(`\\log_{${params.a}} x`, String(params.n))}$$`;
+      const statement =
+        `対数条件を満たす $x$ を求めよ。\\n\\n$$${texEq(`\\log_{${params.a}} x`, String(params.n))}$$`;
       return {
         templateId: id,
         statement,

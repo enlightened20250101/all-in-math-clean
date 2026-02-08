@@ -28,7 +28,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const caseId = Math.floor(Math.random() * CASES.length);
       const c = CASES[caseId];
       const inner = c.shift === 0 ? "x" : `x-${c.shift}`;
-      const statement = `関数 $y=\\log_2(${inner})$ の定義域を選べ。`;
+      const statement = `対数関数 $y=\\log_2(${inner})$ の定義域を選べ。`;
       return {
         templateId: id,
         statement,
