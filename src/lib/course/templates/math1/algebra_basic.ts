@@ -1417,9 +1417,10 @@ $$
       // 条件: k*x > d-b で、境界 t を作るため d-b = k*t
       const d = b + k * t;
 
+      const lead = "人数や枚数が条件を満たす最小値を求める場面を想定する。";
       return {
         templateId: "alg_ineq_min_int_1",
-        statement: `次の不等式を満たす **最小の整数** $x$ を答えよ。\n\n$$
+        statement: `${lead}\n次の不等式を満たす **最小の整数** $x$ を答えよ。\n\n$$
 ${texInequality(a, b, c, d, ">")}
 $$`,
         answerKind: "numeric",
@@ -1471,9 +1472,10 @@ $$
       const b = randInt(-10, 10);
       const d = b + k * t;
 
+      const lead = "条件を満たす最小の整数を求める場面を想定する。";
       return {
         templateId: "alg_ineq_min_int_2",
-        statement: `次の不等式を満たす **最小の整数** $x$ を答えよ。\n\n$$
+        statement: `${lead}\n次の不等式を満たす **最小の整数** $x$ を答えよ。\n\n$$
 ${texInequality(a, b, c, d, ">")}
 $$`,
         answerKind: "numeric",
@@ -1513,6 +1515,7 @@ $$
       tags: ["inequality", "integer"],
     },
     generate() {
+      const lead = "人数や個数が条件を満たす最小値を探す場面を想定する。";
       const k = pick([1, 2, 3, 4]);
       const t = pick([-3, -2, -1, 0, 1, 2, 3]);
       const minInt = t;
@@ -1524,7 +1527,7 @@ $$
 
       return {
         templateId: "alg_ineq_min_int_ge_1",
-        statement: `次の不等式を満たす **最小の整数** $x$ を答えよ。\n\n$$
+        statement: `${lead}\n次の不等式を満たす **最小の整数** $x$ を答えよ。\n\n$$
 ${texInequality(a, b, c, d, ">=")}
 $$`,
         answerKind: "numeric",
@@ -1564,6 +1567,7 @@ $$
       tags: ["inequality", "integer"],
     },
     generate() {
+      const lead = "条件を満たす最小値を整数として求める場面を想定する。";
       const k = pick([2, 3, 4, 5]);
       const t = pick([-4, -3, -2, -1, 0, 1, 2, 3, 4]);
       const minInt = t;
@@ -1575,7 +1579,7 @@ $$
 
       return {
         templateId: "alg_ineq_min_int_ge_2",
-        statement: `次の不等式を満たす **最小の整数** $x$ を答えよ。\n\n$$
+        statement: `${lead}\n次の不等式を満たす **最小の整数** $x$ を答えよ。\n\n$$
 ${texInequality(a, b, c, d, ">=")}
 $$`,
         answerKind: "numeric",
@@ -1615,6 +1619,7 @@ $$
       tags: ["inequality", "integer"],
     },
     generate() {
+      const lead = "予算や人数の上限を整数で判断する場面を想定する。";
       const k = pick([1, 2, 3, 4]);
       const t = pick([-3, -2, -1, 0, 1, 2, 3]);
       const maxInt = t - 1;
@@ -1626,7 +1631,7 @@ $$
 
       return {
         templateId: "alg_ineq_max_int_lt_1",
-        statement: `次の不等式を満たす **最大の整数** $x$ を答えよ。\n\n$$
+        statement: `${lead}\n次の不等式を満たす **最大の整数** $x$ を答えよ。\n\n$$
 ${texInequality(a, b, c, d, "<")}
 $$`,
         answerKind: "numeric",
@@ -1666,6 +1671,7 @@ $$
       tags: ["inequality", "integer"],
     },
     generate() {
+      const lead = "条件を満たす最大値を整数として求める場面を想定する。";
       const k = pick([2, 3, 4, 5]);
       const t = pick([-4, -3, -2, -1, 0, 1, 2, 3, 4]);
       const maxInt = t - 1;
@@ -1677,7 +1683,7 @@ $$
 
       return {
         templateId: "alg_ineq_max_int_lt_2",
-        statement: `次の不等式を満たす **最大の整数** $x$ を答えよ。\n\n$$
+        statement: `${lead}\n次の不等式を満たす **最大の整数** $x$ を答えよ。\n\n$$
 ${texInequality(a, b, c, d, "<")}
 $$`,
         answerKind: "numeric",
@@ -1717,6 +1723,7 @@ $$
       tags: ["inequality", "integer"],
     },
     generate() {
+      const lead = "上限値を整数で判断する場面を想定する。";
       const k = pick([1, 2, 3, 4]);
       const t = pick([-3, -2, -1, 0, 1, 2, 3]);
       const maxInt = t;
@@ -1728,7 +1735,7 @@ $$
 
       return {
         templateId: "alg_ineq_max_int_le_1",
-        statement: `次の不等式を満たす **最大の整数** $x$ を答えよ。\n\n$$
+        statement: `${lead}\n次の不等式を満たす **最大の整数** $x$ を答えよ。\n\n$$
 ${texInequality(a, b, c, d, "<=")}
 $$`,
         answerKind: "numeric",
@@ -1768,6 +1775,7 @@ $$
       tags: ["inequality", "integer"],
     },
     generate() {
+      const lead = "在庫や定員の条件を満たす最大値を整数で求める場面を想定する。";
       const k = pick([2, 3, 4, 5]);
       const t = pick([-4, -3, -2, -1, 0, 1, 2, 3, 4]);
       const maxInt = t;
@@ -1779,7 +1787,7 @@ $$
 
       return {
         templateId: "alg_ineq_max_int_le_2",
-        statement: `次の不等式を満たす **最大の整数** $x$ を答えよ。\n\n$$
+        statement: `${lead}\n次の不等式を満たす **最大の整数** $x$ を答えよ。\n\n$$
 ${texInequality(a, b, c, d, "<=")}
 $$`,
         answerKind: "numeric",
@@ -1819,6 +1827,7 @@ $$
       tags: ["inequality", "integer"],
     },
     generate() {
+      const lead = "条件を満たす最小値を整数として求める場面を想定する。";
       const k = pick([2, 3, 4, 5]);
       const t = pick([-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5]);
       const minInt = t + 1;
@@ -1830,7 +1839,7 @@ $$
 
       return {
         templateId: "alg_ineq_min_int_gt_3",
-        statement: `次の不等式を満たす **最小の整数** $x$ を答えよ。\n\n$$
+        statement: `${lead}\n次の不等式を満たす **最小の整数** $x$ を答えよ。\n\n$$
 ${texInequality(a, b, c, d, ">")}
 $$`,
         answerKind: "numeric",
