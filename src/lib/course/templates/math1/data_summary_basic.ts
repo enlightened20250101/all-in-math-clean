@@ -66,9 +66,15 @@ function buildTemplate(c: SummaryCase): QuestionTemplate {
       tags: ["data", c.kind],
     },
     generate() {
+      const statement =
+        c.title.includes("文章題") && c.kind === "mean"
+          ? `5日間の学習時間（時間）は ${formatData(c.data)} であった。平均の学習時間を求めよ。`
+          : c.title.includes("文章題") && c.kind === "median"
+          ? `5人の小テストの点数が ${formatData(c.data)} であった。中央値を求めよ。`
+          : `次のデータの${c.title}を求めよ。\n\nデータ: ${formatData(c.data)}`;
       return {
         templateId: c.id,
-        statement: `次のデータの${c.title}を求めよ。\n\nデータ: ${formatData(c.data)}`,
+        statement,
         answerKind: "numeric",
         params: {},
       };
@@ -145,6 +151,8 @@ const CASES: SummaryCase[] = [
   { id: "data_mode_8", title: "最頻値", kind: "mode", data: [1, 3, 3, 3, 5, 6] },
   { id: "data_mode_9", title: "最頻値", kind: "mode", data: [2, 2, 4, 6, 6, 6] },
   { id: "data_mode_10", title: "最頻値", kind: "mode", data: [7, 7, 8, 9, 10] },
+  { id: "data_mean_word_1", title: "平均（文章題）", kind: "mean", data: [2, 3, 4, 5, 6] },
+  { id: "data_median_word_1", title: "中央値（文章題）", kind: "median", data: [1, 4, 4, 6, 9] },
 
   { id: "data_range_1", title: "範囲", kind: "range", data: [1, 3, 4, 8, 9] },
   { id: "data_range_2", title: "範囲", kind: "range", data: [2, 2, 2, 2, 6] },

@@ -48,9 +48,15 @@ function buildTemplate(c: VarCase): QuestionTemplate {
     },
     generate() {
       const label = c.kind === "variance" ? "分散（母分散）" : "標準偏差";
+      const statement =
+        c.title.includes("文章題") && c.kind === "variance"
+          ? `ある4回の測定値が ${formatData(c.data)} であった。分散（母分散）を求めよ。`
+          : c.title.includes("文章題") && c.kind === "sd"
+          ? `ある4回の測定値が ${formatData(c.data)} であった。標準偏差を求めよ。`
+          : `次のデータの${label}を求めよ。\n\nデータ: ${formatData(c.data)}`;
       return {
         templateId: c.id,
-        statement: `次のデータの${label}を求めよ。\n\nデータ: ${formatData(c.data)}`,
+        statement,
         answerKind: "numeric",
         params: {},
       };
@@ -129,6 +135,7 @@ const CASES: VarCase[] = [
   { id: "data_var_33", title: "分散", kind: "variance", data: [2, 2, 12, 12] },
   { id: "data_var_34", title: "分散", kind: "variance", data: [4, 4, 14, 14] },
   { id: "data_var_35", title: "分散", kind: "variance", data: [7, 7, 15, 15] },
+  { id: "data_var_word_1", title: "分散（文章題）", kind: "variance", data: [2, 2, 6, 6] },
 
   { id: "data_sd_13", title: "標準偏差", kind: "sd", data: [4, 4, 10, 10] },
   { id: "data_sd_14", title: "標準偏差", kind: "sd", data: [5, 5, 11, 11] },
@@ -145,6 +152,7 @@ const CASES: VarCase[] = [
   { id: "data_sd_25", title: "標準偏差", kind: "sd", data: [0, 0, 6, 6] },
   { id: "data_sd_26", title: "標準偏差", kind: "sd", data: [9, 9, 15, 15] },
   { id: "data_sd_27", title: "標準偏差", kind: "sd", data: [10, 10, 16, 16] },
+  { id: "data_sd_word_1", title: "標準偏差（文章題）", kind: "sd", data: [1, 1, 5, 5] },
 ];
 
 export const dataVarianceSdTemplates: QuestionTemplate[] = CASES.map(buildTemplate);

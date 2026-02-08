@@ -6,6 +6,7 @@ type ScatterCase = {
   title: string;
   points: Array<[number, number]>;
   correct: string;
+  context?: string;
   difficulty: 1 | 2 | 3;
 };
 
@@ -24,9 +25,10 @@ function buildTemplate(c: ScatterCase): QuestionTemplate {
       tags: ["data", "scatter"],
     },
     generate() {
+      const lead = c.context ? `${c.context}\\n\\n` : "";
       return {
         templateId: c.id,
-        statement: `次のデータの散布図の傾向として正しいものを選べ。\\n\\nデータ: ${pointsText(c.points)}`,
+        statement: `${lead}次のデータの散布図の傾向として正しいものを選べ。\\n\\nデータ: ${pointsText(c.points)}`,
         answerKind: "choice",
         choices,
         params: {},
@@ -42,9 +44,9 @@ function buildTemplate(c: ScatterCase): QuestionTemplate {
 }
 
 const CASES: ScatterCase[] = [
-  { id: "data_scatter_1", title: "散布図 1", points: [[1, 1], [2, 2], [3, 3], [4, 4]], correct: "正の相関", difficulty: 1 },
-  { id: "data_scatter_2", title: "散布図 2", points: [[1, 5], [2, 4], [3, 3], [4, 2]], correct: "負の相関", difficulty: 1 },
-  { id: "data_scatter_3", title: "散布図 3", points: [[1, 2], [2, 1], [3, 2], [4, 1]], correct: "相関なし", difficulty: 1 },
+  { id: "data_scatter_1", title: "散布図 1", points: [[1, 1], [2, 2], [3, 3], [4, 4]], correct: "正の相関", context: "ある生徒の学習時間 $x$ (時間) とテスト得点 $y$ (点) のデータが次である。", difficulty: 1 },
+  { id: "data_scatter_2", title: "散布図 2", points: [[1, 5], [2, 4], [3, 3], [4, 2]], correct: "負の相関", context: "気温 $x$ (℃) と電気使用量 $y$ (kWh) の関係を調べた。", difficulty: 1 },
+  { id: "data_scatter_3", title: "散布図 3", points: [[1, 2], [2, 1], [3, 2], [4, 1]], correct: "相関なし", context: "身長 $x$ (cm) とテスト順位 $y$ のデータをまとめた。", difficulty: 1 },
   { id: "data_scatter_4", title: "散布図 4", points: [[0, 0], [1, 2], [2, 4], [3, 6]], correct: "正の相関", difficulty: 1 },
   { id: "data_scatter_5", title: "散布図 5", points: [[0, 6], [1, 5], [2, 4], [3, 3]], correct: "負の相関", difficulty: 1 },
   { id: "data_scatter_6", title: "散布図 6", points: [[1, 2], [2, 2], [3, 1], [4, 3]], correct: "相関なし", difficulty: 1 },

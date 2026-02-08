@@ -6,6 +6,7 @@ type CorrCase = {
   title: string;
   r: number;
   correct: string;
+  context?: string;
   difficulty: 1 | 2 | 3;
 };
 
@@ -20,9 +21,10 @@ function buildTemplate(c: CorrCase): QuestionTemplate {
       tags: ["data", "correlation"],
     },
     generate() {
+      const lead = c.context ? `${c.context}\\n\\n` : "";
       return {
         templateId: c.id,
-        statement: `相関係数 $r=${c.r}$ のとき、相関の強さとして正しいものを選べ。`,
+        statement: `${lead}相関係数 $r=${c.r}$ のとき、相関の強さとして正しいものを選べ。`,
         answerKind: "choice",
         choices,
         params: {},
@@ -38,9 +40,9 @@ function buildTemplate(c: CorrCase): QuestionTemplate {
 }
 
 const CASES: CorrCase[] = [
-  { id: "data_corr_1", title: "相関係数 1", r: 0.9, correct: "強い正の相関", difficulty: 1 },
-  { id: "data_corr_2", title: "相関係数 2", r: 0.6, correct: "正の相関", difficulty: 1 },
-  { id: "data_corr_3", title: "相関係数 3", r: -0.7, correct: "負の相関", difficulty: 1 },
+  { id: "data_corr_1", title: "相関係数 1", r: 0.9, correct: "強い正の相関", context: "学習時間 $x$ とテスト得点 $y$ の相関係数が次の値であった。", difficulty: 1 },
+  { id: "data_corr_2", title: "相関係数 2", r: 0.6, correct: "正の相関", context: "身長 $x$ と体重 $y$ の相関係数が次の値であった。", difficulty: 1 },
+  { id: "data_corr_3", title: "相関係数 3", r: -0.7, correct: "負の相関", context: "気温 $x$ と暖房使用量 $y$ の相関係数が次の値であった。", difficulty: 1 },
   { id: "data_corr_4", title: "相関係数 4", r: 0, correct: "相関なし", difficulty: 1 },
   { id: "data_corr_5", title: "相関係数 5", r: -0.3, correct: "負の相関", difficulty: 1 },
   { id: "data_corr_6", title: "相関係数 6", r: 0.2, correct: "正の相関", difficulty: 1 },
