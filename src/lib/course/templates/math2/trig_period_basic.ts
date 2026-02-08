@@ -38,7 +38,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const c = CASES[caseId];
       const k = buildK(c);
       const kx = k === "1" ? "x" : `${k}x`;
-      const statement = `関数 $y=\\${c.func}(${kx})$ の周期を求めよ。`;
+      const statement = `振動モデル $y=\\${c.func}(${kx})$ の周期を求めよ。`;
       return {
         templateId: id,
         statement,

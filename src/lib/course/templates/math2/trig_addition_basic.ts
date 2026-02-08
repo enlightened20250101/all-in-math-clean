@@ -52,7 +52,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const caseId = Math.floor(Math.random() * CASES.length);
       const c = CASES[caseId];
       const statement =
-        `角度の合成として次を計算せよ。\\n\\n$$${texEq(`\\${c.func}(${c.a}^\\circ+${c.b}^\\circ)`, "?")}$$`;
+        `方位角の合成として次を計算せよ。\\n\\n$$${texEq(`\\${c.func}(${c.a}^\\circ+${c.b}^\\circ)`, "?")}$$`;
       return {
         templateId: id,
         statement,

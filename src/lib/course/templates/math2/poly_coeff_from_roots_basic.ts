@@ -22,7 +22,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const params = buildParams();
       const t1 = texLinear(1, -params.a);
       const t2 = texLinear(1, -params.b);
-      const statement = `$(${t1})(${t2})$ を展開したときの $x$ の係数を求めよ。`;
+      const statement = `面積の式として $(${t1})(${t2})$ を展開したときの $x$ の係数を求めよ。`;
       return {
         templateId: id,
         statement,

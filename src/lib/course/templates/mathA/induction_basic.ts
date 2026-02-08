@@ -23,7 +23,7 @@ function buildTemplate(c: InductionCase): QuestionTemplate {
     generate() {
       return {
         templateId: c.id,
-        statement: `次の命題 $P(n)$ について、$n=1$ のとき成り立つか判定せよ。\\n\\n$${c.statement}$`,
+        statement: `ある図形の枚数や数の規則に関する命題 $P(n)$ について、$n=1$ のとき成り立つか判定せよ。\\n\\n$${c.statement}$`,
         answerKind: "choice",
         choices,
         params: {},

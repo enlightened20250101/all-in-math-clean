@@ -30,7 +30,7 @@ function buildChoice(c: ChoiceCase): QuestionTemplate {
     generate() {
       return {
         templateId: c.id,
-        statement: c.statement,
+        statement: `検査番号の候補として、${c.statement}`,
         answerKind: "choice",
         choices: c.choices,
         params: {},
@@ -61,7 +61,7 @@ function buildDigit(c: DigitCase): QuestionTemplate {
       const baseTeX = c.base.replace("_", "x");
       return {
         templateId: c.id,
-        statement: `$${baseTeX}$ の $x$ を 0〜9 の数字とする。$${baseTeX}$ が $${c.divisor}$ で割り切れるようにするための最小の $x$ を答えよ。`,
+        statement: `商品コード $${baseTeX}$ の $x$ を 0〜9 の数字とする。$${baseTeX}$ が $${c.divisor}$ で割り切れるようにするための最小の $x$ を答えよ。`,
         answerKind: "numeric",
         params: {},
       };

@@ -36,7 +36,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
     generate() {
       const params = buildParams();
       const poly = texPoly2(params.a, params.b, params.c);
-      const statement = `多項式 $f(x)=${poly}$ について $f(1)+f(-1)$ を求めよ。`;
+      const statement = `対称性の確認として、多項式 $f(x)=${poly}$ について $f(1)+f(-1)$ を求めよ。`;
       return {
         templateId: id,
         statement,

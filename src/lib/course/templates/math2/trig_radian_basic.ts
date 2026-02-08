@@ -49,7 +49,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const caseId = Math.floor(Math.random() * CASES.length);
       const c = CASES[caseId];
       const statement =
-        `弧度法での角度として次を計算せよ。\\n\\n$$${texEq(`\\${c.func}(${c.angle})`, "?")}$$`;
+        `回転角（弧度法）として次を計算せよ。\\n\\n$$${texEq(`\\${c.func}(${c.angle})`, "?")}$$`;
       return {
         templateId: id,
         statement,

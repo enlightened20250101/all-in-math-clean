@@ -45,7 +45,7 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
       const caseId = Math.floor(Math.random() * CASES.length);
       const c = CASES[caseId];
       const statement =
-        `倍角の計算として次を求めよ。\\n\\n$$${texEq(`\\${c.func}(2\\times${c.a}^\\circ)`, "?")}$$`;
+        `波の位相の倍角として次を求めよ。\\n\\n$$${texEq(`\\${c.func}(2\\times${c.a}^\\circ)`, "?")}$$`;
       return {
         templateId: id,
         statement,
