@@ -102,7 +102,7 @@ export async function GET() {
           return (a.title || a.skill_id).localeCompare(b.title || b.skill_id, "ja");
         });
 
-      const next = pool.slice(0, 3).map(it => ({ id: it.skill_id, title: it.title || it.skill_id }));
+      const next = pool.slice(0, 3).map((it: any) => ({ id: it.skill_id, title: it.title || it.skill_id }));
 
       // “今日の達成”は今は 0 としておく（将来 attempts から日次集計）
       summary = {
