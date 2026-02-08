@@ -524,6 +524,25 @@ const numericCases: NumericCase[] = [
     answer: 27,
     explain: `### この問題の解説\n$50-23=27$ です。`,
   },
+  {
+    id: "set_word_none_1",
+    title: "どちらにも属さない人数",
+    statement:
+      `クラスに40人いる。集合 $${A}$ をサッカー部、$${B}$ を野球部とする。` +
+      `サッカー部は18人、野球部は15人、両方に入っている人は6人いる。` +
+      `どちらにも入っていない人は何人か。`,
+    answer: 13,
+    explain: `### この問題の解説\n和集合は $18+15-6=27$ 人。よってどちらにも入っていない人は $40-27=13$ 人。`,
+  },
+  {
+    id: "set_word_comp_1",
+    title: "補集合の人数",
+    statement:
+      `全集合 $${U}$ の要素数が30、集合 $${A}$ の要素数が11のとき、` +
+      `補集合 $${texSetComp("A")}$ の要素数を求めよ。`,
+    answer: 19,
+    explain: `### この問題の解説\n$30-11=19$。`,
+  },
 ];
 
 export const setOperationsTemplates: QuestionTemplate[] = [

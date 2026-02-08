@@ -619,6 +619,30 @@ const choiceCases: ChoiceCase[] = [
     choices: [texText("必要条件"), texText("十分条件"), texText("必要十分条件"), texText("どれでもない")],
     explain: `### この問題の解説\n$9$ の倍数なら $3$ の倍数なので十分条件です。`,
   },
+  {
+    id: "prop_ext_31",
+    title: "真偽判定 25",
+    statement: `命題「$x$ が $6$ の倍数ならば $x$ は $${texDivides(3, "x")}$ である」は真か偽か。`,
+    correct: texText("真"),
+    choices: [texText("真"), texText("偽")],
+    explain: `### この問題の解説\n$6$ の倍数は必ず $3$ の倍数です。`,
+  },
+  {
+    id: "prop_ext_32",
+    title: "真偽判定 26",
+    statement: `命題「$x$ が $${texDivides(3, "x")}$ ならば $x$ は $6$ の倍数である」は真か偽か。`,
+    correct: texText("偽"),
+    choices: [texText("真"), texText("偽")],
+    explain: `### この問題の解説\n$3$ の倍数でも $3,9$ のように $6$ の倍数でない例があります。`,
+  },
+  {
+    id: "prop_ext_33",
+    title: "必要十分 11",
+    statement: `命題「$x$ が $6$ の倍数ならば $x$ は $${evenText}$ である」について、「$x$ が $${evenText}$ である」は何条件か。`,
+    correct: texText("必要条件"),
+    choices: [texText("必要条件"), texText("十分条件"), texText("必要十分条件"), texText("どれでもない")],
+    explain: `### この問題の解説\n$6$ の倍数なら偶数なので必要条件。ただし偶数でも $6$ の倍数とは限らないため十分ではありません。`,
+  },
 ];
 
 export const propPropositionTemplates: QuestionTemplate[] = choiceCases.map(buildChoice);
