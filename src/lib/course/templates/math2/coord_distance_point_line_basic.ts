@@ -46,7 +46,9 @@ function buildTemplate(id: string, title: string): QuestionTemplate {
         const sign = params.c > 0 ? "+" : "-";
         expr = normalizeSigns(`${expr} ${sign} ${Math.abs(params.c)}`);
       }
-      const statement = `直線 $${expr}=0$ と点 $(${params.x0},${params.y0})$ の距離を求めよ。`;
+      const statement =
+        `壁を直線 $${expr}=0$ とみなす。` +
+        `点 $(${params.x0},${params.y0})$ から壁までの距離を求めよ。`;
       return {
         templateId: id,
         statement,
