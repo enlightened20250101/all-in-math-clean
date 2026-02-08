@@ -91,7 +91,7 @@ const extraIntegralTemplates: QuestionTemplate[] = Array.from({ length: 30 }, (_
         const coef = 3 * params.m;
         return {
           templateId,
-          statement: `次の定積分を求めよ。\\n\\n$$\\\\int_0^1 ${coef}(2x+1)^2\\\\,dx$$`,
+          statement: `流量の合計として次の定積分を求めよ。\\n\\n$$\\\\int_0^1 ${coef}(2x+1)^2\\\\,dx$$`,
           answerKind: "numeric",
           params,
         };
@@ -102,7 +102,7 @@ const extraIntegralTemplates: QuestionTemplate[] = Array.from({ length: 30 }, (_
         const b = params.b;
         return {
           templateId,
-          statement: `次の定積分を求めよ。\\n\\n$$\\\\int_0^1 ${coef}x(x^2+${b})\\\\,dx$$`,
+          statement: `流量の合計として次の定積分を求めよ。\\n\\n$$\\\\int_0^1 ${coef}x(x^2+${b})\\\\,dx$$`,
           answerKind: "numeric",
           params,
         };
@@ -112,7 +112,7 @@ const extraIntegralTemplates: QuestionTemplate[] = Array.from({ length: 30 }, (_
       const coefText = coef === 1 ? "" : `${coef}`;
       return {
         templateId,
-        statement: `次の定積分を求めよ。\\n\\n$$\\\\int_0^1 ${coefText}(3x+1)^2\\\\,dx$$`,
+        statement: `流量の合計として次の定積分を求めよ。\\n\\n$$\\\\int_0^1 ${coefText}(3x+1)^2\\\\,dx$$`,
         answerKind: "numeric",
         params,
       };
@@ -149,7 +149,7 @@ const extraIntegralTemplates2: QuestionTemplate[] = Array.from({ length: 30 }, (
         const params = buildU6();
         return {
           templateId,
-          statement: `次の定積分を求めよ。\\n\\n$$\\\\int_0^1 ${10 * params.m}(2x+1)^4\\\\,dx$$`,
+          statement: `流量の合計として次の定積分を求めよ。\\n\\n$$\\\\int_0^1 ${10 * params.m}(2x+1)^4\\\\,dx$$`,
           answerKind: "numeric",
           params,
         };
@@ -158,7 +158,7 @@ const extraIntegralTemplates2: QuestionTemplate[] = Array.from({ length: 30 }, (
         const params = buildU7();
         return {
           templateId,
-          statement: `次の定積分を求めよ。\\n\\n$$\\\\int_0^1 ${12 * params.m}(3x+1)^3\\\\,dx$$`,
+          statement: `流量の合計として次の定積分を求めよ。\\n\\n$$\\\\int_0^1 ${12 * params.m}(3x+1)^3\\\\,dx$$`,
           answerKind: "numeric",
           params,
         };
@@ -166,7 +166,7 @@ const extraIntegralTemplates2: QuestionTemplate[] = Array.from({ length: 30 }, (
       const params = buildU8();
       return {
         templateId,
-        statement: `次の定積分を求めよ。\\n\\n$$\\\\int_0^1 ${6 * params.m}x(2x+1)^2\\\\,dx$$`,
+        statement: `流量の合計として次の定積分を求めよ。\\n\\n$$\\\\int_0^1 ${6 * params.m}x(2x+1)^2\\\\,dx$$`,
         answerKind: "numeric",
         params,
       };
@@ -199,7 +199,7 @@ export const calcIntegralAdvancedBasicTemplates: QuestionTemplate[] = [
       const coef = 6 * params.m;
       return {
         templateId: "calc_integral_advanced_basic_1",
-        statement: `次の定積分を求めよ。\n\n$$\\int_0^1 ${coef}x(x^2+1)\\,dx$$`,
+        statement: `流量の合計として次の定積分を求めよ。\n\n$$\\int_0^1 ${coef}x(x^2+1)\\,dx$$`,
         answerKind: "numeric",
         params,
       };
@@ -237,7 +237,7 @@ $$
       const coef = 4 * params.p;
       return {
         templateId: "calc_integral_advanced_basic_2",
-        statement: `次の定積分を求めよ。\n\n$$\\int_0^1 ${coef}(2x+1)^3\\,dx$$`,
+        statement: `流量の合計として次の定積分を求めよ。\n\n$$\\int_0^1 ${coef}(2x+1)^3\\,dx$$`,
         answerKind: "numeric",
         params,
       };
@@ -275,7 +275,7 @@ $$
       const value = 14 * p;
       return {
         templateId: "calc_integral_advanced_basic_3",
-        statement: `次の定積分を求めよ。\\n\\n$$\\\\int_0^1 ${2 * p}(3x+1)^2\\\\,dx$$`,
+        statement: `流量の合計として次の定積分を求めよ。\\n\\n$$\\\\int_0^1 ${2 * p}(3x+1)^2\\\\,dx$$`,
         answerKind: "numeric",
         params: { p, value },
       };
@@ -312,7 +312,7 @@ $$
       const value = 5 * m;
       return {
         templateId: "calc_integral_advanced_basic_4",
-        statement: `次の定積分を求めよ。\\n\\n$$\\\\int_0^1 ${4 * m}x(x^2+2)\\\\,dx$$`,
+        statement: `流量の合計として次の定積分を求めよ。\\n\\n$$\\\\int_0^1 ${4 * m}x(x^2+2)\\\\,dx$$`,
         answerKind: "numeric",
         params: { m, value },
       };
@@ -349,7 +349,7 @@ $$
       const value = 3 * m;
       return {
         templateId: "calc_integral_advanced_basic_5",
-        statement: `次の定積分を求めよ。\n\n$$\\int_0^1 ${4 * m}x(x^2+1)\\,dx$$`,
+        statement: `流量の合計として次の定積分を求めよ。\n\n$$\\int_0^1 ${4 * m}x(x^2+1)\\,dx$$`,
         answerKind: "numeric",
         params: { m, value },
       };
@@ -386,7 +386,7 @@ $$
       const value = 13 * p;
       return {
         templateId: "calc_integral_advanced_basic_6",
-        statement: `次の定積分を求めよ。\n\n$$\\int_0^1 ${3 * p}(2x+1)^2\\,dx$$`,
+        statement: `流量の合計として次の定積分を求めよ。\n\n$$\\int_0^1 ${3 * p}(2x+1)^2\\,dx$$`,
         answerKind: "numeric",
         params: { p, value },
       };
@@ -423,7 +423,7 @@ $$
       const value = 7 * m;
       return {
         templateId: "calc_integral_advanced_basic_7",
-        statement: `次の定積分を求めよ。\n\n$$\\int_0^1 ${m}(3x+1)^2\\,dx$$`,
+        statement: `流量の合計として次の定積分を求めよ。\n\n$$\\int_0^1 ${m}(3x+1)^2\\,dx$$`,
         answerKind: "numeric",
         params: { m, value },
       };
@@ -460,7 +460,7 @@ $$
       const value = 10 * p;
       return {
         templateId: "calc_integral_advanced_basic_8",
-        statement: `次の定積分を求めよ。\n\n$$\\int_0^1 ${p}(2x+1)^3\\,dx$$`,
+        statement: `流量の合計として次の定積分を求めよ。\n\n$$\\int_0^1 ${p}(2x+1)^3\\,dx$$`,
         answerKind: "numeric",
         params: { p, value },
       };
@@ -497,7 +497,7 @@ $$
       const value = 6 * m;
       return {
         templateId: "calc_integral_advanced_basic_9",
-        statement: `次の定積分を求めよ。\n\n$$\\int_0^1 ${8 * m}x(x^2+1)\\,dx$$`,
+        statement: `流量の合計として次の定積分を求めよ。\n\n$$\\int_0^1 ${8 * m}x(x^2+1)\\,dx$$`,
         answerKind: "numeric",
         params: { m, value },
       };
@@ -534,7 +534,7 @@ $$
       const value = 21 * p;
       return {
         templateId: "calc_integral_advanced_basic_10",
-        statement: `次の定積分を求めよ。\n\n$$\\int_0^1 ${3 * p}(3x+1)^2\\,dx$$`,
+        statement: `流量の合計として次の定積分を求めよ。\n\n$$\\int_0^1 ${3 * p}(3x+1)^2\\,dx$$`,
         answerKind: "numeric",
         params: { p, value },
       };
@@ -571,7 +571,7 @@ $$
       const value = 9 * m;
       return {
         templateId: "calc_integral_advanced_basic_11",
-        statement: `次の定積分を求めよ。\n\n$$\\int_0^1 ${12 * m}x(x^2+1)\\,dx$$`,
+        statement: `流量の合計として次の定積分を求めよ。\n\n$$\\int_0^1 ${12 * m}x(x^2+1)\\,dx$$`,
         answerKind: "numeric",
         params: { m, value },
       };
@@ -608,7 +608,7 @@ $$
       const value = 12 * m;
       return {
         templateId: "calc_integral_advanced_basic_12",
-        statement: `次の定積分を求めよ。\n\n$$\\int_0^1 ${16 * m}x(x^2+1)\\,dx$$`,
+        statement: `流量の合計として次の定積分を求めよ。\n\n$$\\int_0^1 ${16 * m}x(x^2+1)\\,dx$$`,
         answerKind: "numeric",
         params: { m, value },
       };
@@ -645,7 +645,7 @@ $$
       const value = 20 * p;
       return {
         templateId: "calc_integral_advanced_basic_13",
-        statement: `次の定積分を求めよ。\n\n$$\\int_0^1 ${2 * p}(2x+1)^3\\,dx$$`,
+        statement: `流量の合計として次の定積分を求めよ。\n\n$$\\int_0^1 ${2 * p}(2x+1)^3\\,dx$$`,
         answerKind: "numeric",
         params: { p, value },
       };
@@ -682,7 +682,7 @@ $$
       const value = 50 * p;
       return {
         templateId: "calc_integral_advanced_basic_14",
-        statement: `次の定積分を求めよ。\n\n$$\\int_0^1 ${5 * p}(2x+1)^3\\,dx$$`,
+        statement: `流量の合計として次の定積分を求めよ。\n\n$$\\int_0^1 ${5 * p}(2x+1)^3\\,dx$$`,
         answerKind: "numeric",
         params: { p, value },
       };
@@ -719,7 +719,7 @@ $$
       const value = 26 * p;
       return {
         templateId: "calc_integral_advanced_basic_15",
-        statement: `次の定積分を求めよ。\n\n$$\\int_0^1 ${6 * p}(2x+1)^2\\,dx$$`,
+        statement: `流量の合計として次の定積分を求めよ。\n\n$$\\int_0^1 ${6 * p}(2x+1)^2\\,dx$$`,
         answerKind: "numeric",
         params: { p, value },
       };
@@ -756,7 +756,7 @@ $$
       const value = 63 * p;
       return {
         templateId: "calc_integral_advanced_basic_16",
-        statement: `次の定積分を求めよ。\n\n$$\\int_0^1 ${9 * p}(3x+1)^2\\,dx$$`,
+        statement: `流量の合計として次の定積分を求めよ。\n\n$$\\int_0^1 ${9 * p}(3x+1)^2\\,dx$$`,
         answerKind: "numeric",
         params: { p, value },
       };
@@ -793,7 +793,7 @@ $$
       const value = 15 * m;
       return {
         templateId: "calc_integral_advanced_basic_17",
-        statement: `次の定積分を求めよ。\n\n$$\\int_0^1 ${12 * m}x(x^2+2)\\,dx$$`,
+        statement: `流量の合計として次の定積分を求めよ。\n\n$$\\int_0^1 ${12 * m}x(x^2+2)\\,dx$$`,
         answerKind: "numeric",
         params: { m, value },
       };
@@ -830,7 +830,7 @@ $$
       const value = 25 * m;
       return {
         templateId: "calc_integral_advanced_basic_18",
-        statement: `次の定積分を求めよ。\n\n$$\\int_0^1 ${20 * m}x(x^2+2)\\,dx$$`,
+        statement: `流量の合計として次の定積分を求めよ。\n\n$$\\int_0^1 ${20 * m}x(x^2+2)\\,dx$$`,
         answerKind: "numeric",
         params: { m, value },
       };
@@ -867,7 +867,7 @@ $$
       const value = 28 * p;
       return {
         templateId: "calc_integral_advanced_basic_19",
-        statement: `次の定積分を求めよ。\n\n$$\\int_0^1 ${4 * p}(3x+1)^2\\,dx$$`,
+        statement: `流量の合計として次の定積分を求めよ。\n\n$$\\int_0^1 ${4 * p}(3x+1)^2\\,dx$$`,
         answerKind: "numeric",
         params: { p, value },
       };
@@ -904,7 +904,7 @@ $$
       const value = 35 * p;
       return {
         templateId: "calc_integral_advanced_basic_20",
-        statement: `次の定積分を求めよ。\n\n$$\\int_0^1 ${5 * p}(3x+1)^2\\,dx$$`,
+        statement: `流量の合計として次の定積分を求めよ。\n\n$$\\int_0^1 ${5 * p}(3x+1)^2\\,dx$$`,
         answerKind: "numeric",
         params: { p, value },
       };
