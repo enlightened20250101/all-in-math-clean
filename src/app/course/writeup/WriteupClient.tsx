@@ -120,12 +120,19 @@ export default function WriteupClient({ topicTitle, topicId }: WriteupClientProp
             ? "数式一致"
             : "未検出"
         : "自動判定対象外";
-      const weight = getRubricWeight(item, weightOverride);
+      const weight =
+        typeof weightOverride === "number" && Number.isFinite(weightOverride)
+          ? clampWeight(weightOverride)
+          : inferRubricWeight(item);
       return {
         item,
         hit: combinedAnswer.trim().length > 0 && (hitByText || hitByMath),
         reason,
         weight,
+        weightSource:
+          typeof weightOverride === "number" && Number.isFinite(weightOverride)
+            ? "manual"
+            : "auto",
       };
     });
   }, [rubric, combinedAnswer, activeProblem]);
@@ -576,6 +583,7 @@ export default function WriteupClient({ topicTitle, topicId }: WriteupClientProp
                       </span>
                       <span className="inline-flex rounded-full bg-slate-100 px-2 py-[2px] text-slate-600">
                         重み {check.weight.toFixed(1)}
+                        {check.weightSource === "auto" ? "（自動）" : "（指定）"}
                       </span>
                     </div>
                   </div>
@@ -753,10 +761,11 @@ function normalizeMathToken(value: string): string {
     .replace(/\{([^}]*)\}/g, "$1");
 }
 
-function getRubricWeight(item: string, override?: number): number {
-  if (typeof override === "number" && Number.isFinite(override)) {
-    return Math.max(0.2, Math.min(2, override));
-  }
+function clampWeight(value: number): number {
+  return Math.max(0.2, Math.min(2, value));
+}
+
+function inferRubricWeight(item: string): number {
   const normalized = normalizeText(item);
   if (!normalized) return 1;
   if (normalized.includes("結論") || normalized.includes("答") || normalized.includes("最終")) {
