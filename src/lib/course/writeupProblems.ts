@@ -6293,6 +6293,96 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "$z=\sqrt2\,\mathrm{cis}(\pi/4)$。よって $z^5=(\sqrt2)^5\,\mathrm{cis}(5\pi/4)=4\sqrt2\,(\!-\tfrac{\sqrt2}{2}-\tfrac{\sqrt2}{2}i)=-4-4i$。",
     level: 3,
   },
+  {
+    id: "writeup_hd_complex_polar_2",
+    topicId: "complex_polar_basic",
+    title: "複素数の冪（難）",
+    statement:
+      "$z=\sqrt{3}-i$ の $6$ 乗を求めよ。",
+    rubric: [
+      "極形式に直している",
+      "ド・モアブルの定理を用いている",
+      "結果を正しく計算している",
+    ],
+    solution:
+      "$z=2\,\mathrm{cis}(-\pi/6)$。よって $z^6=2^6\,\mathrm{cis}(-\pi)=64(-1)=-64$。",
+    level: 3,
+  },
+  {
+    id: "writeup_hd_complex_locus_1",
+    topicId: "complex_locus_circle_radius_basic",
+    title: "軌跡（難）",
+    statement:
+      "$|z-1|=|z+1|$ を満たす複素数 $z$ の軌跡を求めよ。",
+    rubric: [
+      "距離の等式を用いている",
+      "実部・虚部に分けて整理している",
+      "軌跡を直線として答えている",
+    ],
+    solution:
+      "$z=x+iy$ とすると $(x-1)^2+y^2=(x+1)^2+y^2$ より $x=0$。よって虚軸。",
+    level: 3,
+  },
+  {
+    id: "writeup_hd_vector_triple_1",
+    topicId: "vector_space_basic",
+    title: "空間ベクトル（難）",
+    statement:
+      "3点 $A(1,0,0), B(0,1,0), C(0,0,1)$ を通る平面と、点 $P(1,1,1)$ の距離を求めよ。",
+    rubric: [
+      "平面の方程式を立てている",
+      "距離公式を用いている",
+      "計算が正しい",
+    ],
+    solution:
+      "平面は $x+y+z=1$。距離は $\frac{|1+1+1-1|}{\sqrt{1^2+1^2+1^2}}=\frac{2}{\sqrt3}$。",
+    level: 3,
+  },
+  {
+    id: "writeup_hd_vector_projection_1",
+    topicId: "vector_projection_basic",
+    title: "射影（難）",
+    statement:
+      "$\vec{a}=(2,1,2)$ を $\vec{b}=(1,2,2)$ に正射影したベクトルを求めよ。",
+    rubric: [
+      "射影公式を用いている",
+      "内積と長さを正しく計算している",
+      "ベクトルとして答えている",
+    ],
+    solution:
+      "$\mathrm{proj}_{\vec b}\vec a=\frac{\vec a\cdot \vec b}{\|\vec b\|^2}\vec b$。$\vec a\cdot\vec b=2+2+4=8$、$\|\vec b\|^2=1+4+4=9$。よって $\frac{8}{9}(1,2,2)=(8/9,16/9,16/9)$。",
+    level: 3,
+  },
+  {
+    id: "writeup_hd_conic_parabola_1",
+    topicId: "conic_parabola_basic",
+    title: "放物線（難）",
+    statement:
+      "$y^2=4px$ の焦点と準線を求めよ。",
+    rubric: [
+      "標準形を理解している",
+      "焦点と準線を正しく書いている",
+      "結論が簡潔である",
+    ],
+    solution:
+      "焦点は $(p,0)$、準線は $x=-p$。",
+    level: 3,
+  },
+  {
+    id: "writeup_hd_conic_hyperbola_1",
+    topicId: "conic_hyperbola_basic",
+    title: "双曲線（難）",
+    statement:
+      "$\frac{x^2}{9}-\frac{y^2}{4}=1$ の漸近線の方程式を求めよ。",
+    rubric: [
+      "$a,b$ を読み取っている",
+      "漸近線が $y=\pm \frac{b}{a}x$ と分かっている",
+      "結論が簡潔である",
+    ],
+    solution:
+      "$a=3,b=2$ より漸近線は $y=\pm \frac{2}{3}x$。",
+    level: 3,
+  },
 
 ];
 
