@@ -1,10 +1,12 @@
 import { supabaseServerReadOnly } from "@/lib/supabaseServer";
 import UserRankSelect from "./UserRankSelect";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminUsersPage({
   searchParams,
 }: {
-  searchParams?: { q?: string; rank?: string };
+  searchParams?: { q?: string; rank?: string; grade?: string };
 }) {
   const sb = await supabaseServerReadOnly();
   const { data: auth } = await sb.auth.getUser();
@@ -26,6 +28,7 @@ export default async function AdminUsersPage({
 
   const q = (searchParams?.q ?? "").trim();
   const rank = (searchParams?.rank ?? "all").trim();
+  const grade = (searchParams?.grade ?? "all").trim();
 
   let query = sb
     .from("profiles")
@@ -36,9 +39,17 @@ export default async function AdminUsersPage({
   if (rank && rank !== "all") {
     query = query.eq("user_rank", rank);
   }
+  if (grade && grade !== "all") {
+    query = query.eq("grade_level", grade);
+  }
   if (q) {
-    const qSafe = q.replace(/[%_]/g, "\\$&");
-    query = query.or(`display_name.ilike.%${qSafe}%,id.ilike.%${qSafe}%`);
+    const isUuid = /^[0-9a-f-]{36}$/i.test(q);
+    if (isUuid) {
+      query = query.eq("id", q);
+    } else {
+      const qSafe = q.replace(/[%_]/g, "\\$&");
+      query = query.or(`display_name.ilike.%${qSafe}%`);
+    }
   }
 
   const { data: users } = await query;
@@ -71,6 +82,16 @@ export default async function AdminUsersPage({
           <option value="all">全権限</option>
           <option value="user">user</option>
           <option value="admin">admin</option>
+        </select>
+        <select name="grade" defaultValue={grade} className="rounded border px-2 py-1">
+          <option value="all">全学年</option>
+          <option value="junior_1">中1</option>
+          <option value="junior_2">中2</option>
+          <option value="junior_3">中3</option>
+          <option value="high_1">高1</option>
+          <option value="high_2">高2</option>
+          <option value="high_3">高3</option>
+          <option value="other">その他</option>
         </select>
         <button type="submit" className="rounded-full border px-3 py-1 text-[10px] sm:text-xs">
           検索
