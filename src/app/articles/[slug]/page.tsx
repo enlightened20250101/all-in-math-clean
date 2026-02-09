@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { supabaseServerReadOnly } from "@/lib/supabaseServer";
@@ -165,4 +166,56 @@ export default async function ArticleDetailPage({
       </section>
     </div>
   );
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const sb = await supabaseServerReadOnly();
+  const { slug } = params;
+  const { data } = await sb
+    .from("articles")
+    .select("title, body_mdx, images, updated_at")
+    .eq("slug", slug)
+    .maybeSingle();
+
+  if (!data?.title) {
+    return { title: "記事が見つかりません" };
+  }
+
+  const description = buildDescription(data.body_mdx);
+  const ogImage = Array.isArray(data.images) ? data.images[0] : null;
+
+  return {
+    title: data.title,
+    description,
+    openGraph: {
+      title: data.title,
+      description,
+      type: "article",
+      images: ogImage ? [{ url: ogImage }] : undefined,
+    },
+    twitter: {
+      card: ogImage ? "summary_large_image" : "summary",
+      title: data.title,
+      description,
+      images: ogImage ? [ogImage] : undefined,
+    },
+  };
+}
+
+function buildDescription(body: string | null | undefined) {
+  if (!body) return "数学の学びを深める記事です。";
+  const stripped = body
+    .replace(/```[\s\S]*?```/g, " ")
+    .replace(/`[^`]*`/g, " ")
+    .replace(/<[^>]*>/g, " ")
+    .replace(/\!\[[^\]]*\]\([^)]+\)/g, " ")
+    .replace(/\[[^\]]*\]\([^)]+\)/g, " ")
+    .replace(/[#>*_~\-]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  return stripped.slice(0, 140) || "数学の学びを深める記事です。";
 }

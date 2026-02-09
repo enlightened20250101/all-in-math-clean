@@ -1,4 +1,5 @@
 // app/posts/[id]/page.tsx
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { supabaseServerReadOnly } from "@/lib/supabaseServer";
@@ -179,4 +180,60 @@ export default async function PostDetailPage({ params }: Props) {
       </section>
     </div>
   );
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  const numId = Number(params.id);
+  if (!Number.isFinite(numId)) {
+    return { title: "質問が見つかりません" };
+  }
+
+  const sb = await supabaseServerReadOnly();
+  const { data } = await sb
+    .from("posts")
+    .select("title, body_md, images, updated_at")
+    .eq("id", numId)
+    .maybeSingle();
+
+  if (!data?.title) {
+    return { title: "質問が見つかりません" };
+  }
+
+  const description = buildDescription(data.body_md);
+  const ogImage = Array.isArray(data.images) ? data.images[0] : null;
+
+  return {
+    title: data.title,
+    description,
+    openGraph: {
+      title: data.title,
+      description,
+      type: "article",
+      images: ogImage ? [{ url: ogImage }] : undefined,
+    },
+    twitter: {
+      card: ogImage ? "summary_large_image" : "summary",
+      title: data.title,
+      description,
+      images: ogImage ? [ogImage] : undefined,
+    },
+  };
+}
+
+function buildDescription(body: string | null | undefined) {
+  if (!body) return "数学の質問を共有するページです。";
+  const stripped = body
+    .replace(/```[\s\S]*?```/g, " ")
+    .replace(/`[^`]*`/g, " ")
+    .replace(/<[^>]*>/g, " ")
+    .replace(/\!\[[^\]]*\]\([^)]+\)/g, " ")
+    .replace(/\[[^\]]*\]\([^)]+\)/g, " ")
+    .replace(/[#>*_~\-]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  return stripped.slice(0, 140) || "数学の質問を共有するページです。";
 }

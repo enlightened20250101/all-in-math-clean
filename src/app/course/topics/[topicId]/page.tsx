@@ -1,4 +1,5 @@
 // src/app/course/topics/[topicId]/page.tsx
+import type { Metadata } from "next";
 import Link from 'next/link';
 import fs from 'fs';
 import path from 'path';
@@ -273,4 +274,35 @@ export default async function TopicDetailPage({ params, searchParams }: Props) {
       </div>
     </div>
   );
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { topicId: string };
+}): Promise<Metadata> {
+  const topic = getTopicById(params.topicId);
+  if (!topic) {
+    return { title: "トピックが見つかりません" };
+  }
+
+  const unitLabel = UNIT_LABELS[topic.unit] ?? topic.unit;
+  const description = topic.description
+    ? `${topic.description}（${unitLabel}）`
+    : `${unitLabel}のトピック学習ページ`;
+
+  return {
+    title: `${topic.title}`,
+    description,
+    openGraph: {
+      title: `${topic.title}`,
+      description,
+      type: "article",
+    },
+    twitter: {
+      card: "summary",
+      title: `${topic.title}`,
+      description,
+    },
+  };
 }
