@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 export default async function AdminUsersPage({
   searchParams,
 }: {
-  searchParams?: { q?: string; rank?: string; grade?: string };
+  searchParams?: Promise<{ q?: string; rank?: string; grade?: string }>;
 }) {
   const sb = await supabaseServerReadOnly();
   const { data: auth } = await sb.auth.getUser();
@@ -26,9 +26,10 @@ export default async function AdminUsersPage({
     );
   }
 
-  const q = (searchParams?.q ?? "").trim();
-  const rank = (searchParams?.rank ?? "all").trim();
-  const grade = (searchParams?.grade ?? "all").trim();
+  const resolved = (await searchParams) ?? {};
+  const q = (resolved.q ?? "").trim();
+  const rank = (resolved.rank ?? "all").trim();
+  const grade = (resolved.grade ?? "all").trim();
 
   let query = sb
     .from("profiles")
