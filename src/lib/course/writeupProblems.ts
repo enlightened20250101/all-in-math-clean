@@ -4709,6 +4709,262 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
     solution: "$\\frac{dy}{dx}=\\frac{3t^2}{2t}=\\frac{3t}{2}$。",
     level: 3,
   },
+  {
+    id: "writeup_seq_arithmetic_1",
+    topicId: "seq_arithmetic_basic",
+    title: "等差数列の一般項",
+    statement:
+      "初項 $a_1=5$、公差 $d=3$ の等差数列の一般項 $a_n$ を求め、$a_{10}$ を計算せよ。",
+    rubric: [
+      "$a_n=a_1+(n-1)d$ を用いている",
+      "$a_{10}$ を正しく代入している",
+      "結論が簡潔である",
+    ],
+    solution:
+      "$a_n=5+(n-1)\\cdot3=3n+2$。よって $a_{10}=3\\cdot10+2=32$。",
+    level: 1,
+  },
+  {
+    id: "writeup_seq_geometric_1",
+    topicId: "seq_geometric_basic",
+    title: "等比数列の一般項",
+    statement:
+      "初項 $a_1=2$、公比 $r=3$ の等比数列の一般項 $a_n$ を求め、$a_5$ を計算せよ。",
+    rubric: [
+      "$a_n=a_1 r^{n-1}$ を用いている",
+      "$a_5$ を正しく代入している",
+      "結論が簡潔である",
+    ],
+    solution:
+      "$a_n=2\\cdot3^{n-1}$。よって $a_5=2\\cdot3^4=162$。",
+    level: 1,
+  },
+  {
+    id: "writeup_seq_geom_mean_1",
+    topicId: "seq_geometric_mean_basic",
+    title: "等比中項",
+    statement:
+      "$a$ と $b$ の等比中項 $x$ は $x^2=ab$ を満たす。$a=4, b=9$ のときの $x$ を求めよ。",
+    rubric: [
+      "$x^2=ab$ を使っている",
+      "正の解を選んでいる",
+      "結論が簡潔である",
+    ],
+    solution:
+      "$x^2=36$ より $x=6$（正の中項）。",
+    level: 1,
+  },
+  {
+    id: "writeup_seq_term_from_sum_1",
+    topicId: "seq_term_from_sum_basic",
+    title: "部分和から一般項",
+    statement:
+      "数列の部分和が $S_n=n^2+n$ と与えられるとき、一般項 $a_n$ を求めよ。",
+    rubric: [
+      "$a_n=S_n-S_{n-1}$ を用いている",
+      "代入計算が正しい",
+      "結論が簡潔である",
+    ],
+    solution:
+      "$a_n=(n^2+n)-((n-1)^2+(n-1))=2n$。",
+    level: 1,
+  },
+  {
+    id: "writeup_seq_geom_sum_n_1",
+    topicId: "seq_geometric_sum_n_basic",
+    title: "等比数列の和",
+    statement:
+      "初項 $a_1=3$、公比 $r=2$ の等比数列の和 $S_n$ を求め、$S_4$ を計算せよ。",
+    rubric: [
+      "$S_n=a_1(1-r^n)/(1-r)$ を用いている",
+      "$S_4$ を正しく計算している",
+      "結論が簡潔である",
+    ],
+    solution:
+      "$S_n=3(1-2^n)/(1-2)=3(2^n-1)$。よって $S_4=3(16-1)=45$。",
+    level: 1,
+  },
+  {
+    id: "writeup_seq_ratio_from_terms_1",
+    topicId: "seq_common_ratio_from_terms_basic",
+    title: "公比の決定",
+    statement:
+      "等比数列で $a_2=6, a_5=48$ のとき、公比 $r$ と初項 $a_1$ を求めよ。",
+    rubric: [
+      "$a_5=a_2 r^3$ を用いている",
+      "$r$ と $a_1$ を正しく求めている",
+      "結論が簡潔である",
+    ],
+    solution:
+      "$48=6r^3$ より $r^3=8$、$r=2$。$a_1=a_2/r=3$。",
+    level: 1,
+  },
+  {
+    id: "writeup_seq_sum_1",
+    topicId: "seq_sum_basic",
+    title: "等差数列の和",
+    statement:
+      "初項 $a_1=4$、公差 $d=2$ の等差数列の和 $S_n$ を求め、$S_{10}$ を計算せよ。",
+    rubric: [
+      "$S_n=\\frac{n}{2}(2a_1+(n-1)d)$ を用いている",
+      "$S_{10}$ を正しく計算している",
+      "結論が簡潔である",
+    ],
+    solution:
+      "$S_n=\\frac{n}{2}(8+2(n-1))=n(n+3)$。よって $S_{10}=10\\cdot13=130$。",
+    level: 1,
+  },
+  {
+    id: "writeup_seq_common_diff_1",
+    topicId: "seq_common_difference_basic",
+    title: "公差の決定",
+    statement:
+      "等差数列で $a_3=7, a_6=16$ のとき、公差 $d$ と初項 $a_1$ を求めよ。",
+    rubric: [
+      "$a_6-a_3=3d$ を用いている",
+      "$d$ と $a_1$ を正しく求めている",
+      "結論が簡潔である",
+    ],
+    solution:
+      "$16-7=3d$ より $d=3$。$a_1=a_3-2d=1$。",
+    level: 1,
+  },
+  {
+    id: "writeup_seq_geom_sum_1",
+    topicId: "seq_geometric_sum_basic",
+    title: "等比数列の無限和",
+    statement:
+      "初項 $a_1=5$、公比 $r=\\frac12$ の等比数列の無限和 $S_\\infty$ を求めよ。",
+    rubric: [
+      "$|r|<1$ を確認している",
+      "$S_\\infty=\\frac{a_1}{1-r}$ を用いている",
+      "結論が簡潔である",
+    ],
+    solution:
+      "$S_\\infty=\\frac{5}{1-1/2}=10$。",
+    level: 1,
+  },
+  {
+    id: "writeup_seq_arith_sum_terms_1",
+    topicId: "seq_arithmetic_sum_from_terms_basic",
+    title: "末項から和",
+    statement:
+      "等差数列で $a_1=2$, $a_{10}=20$ のとき、公差 $d$ と $S_{10}$ を求めよ。",
+    rubric: [
+      "$a_{10}=a_1+9d$ を用いている",
+      "$S_{10}=\\frac{10}{2}(a_1+a_{10})$ を用いている",
+      "結論が簡潔である",
+    ],
+    solution:
+      "$20=2+9d$ より $d=2$。$S_{10}=5(2+20)=110$。",
+    level: 1,
+  },
+  {
+    id: "writeup_seq_arith_mean_1",
+    topicId: "seq_arithmetic_mean_basic",
+    title: "等差中項",
+    statement:
+      "$a$ と $b$ の等差中項 $x$ は $x=\\frac{a+b}{2}$ である。$a=6, b=14$ のときの $x$ を求めよ。",
+    rubric: [
+      "$x=\\frac{a+b}{2}$ を用いている",
+      "計算が正しい",
+      "結論が簡潔である",
+    ],
+    solution:
+      "$x=\\frac{6+14}{2}=10$。",
+    level: 1,
+  },
+  {
+    id: "writeup_seq_arith_diff_1",
+    topicId: "seq_arithmetic_diff_from_terms_basic",
+    title: "公差と一般項",
+    statement:
+      "等差数列で $a_1=3$, $a_4=12$ のとき、公差 $d$ と一般項 $a_n$ を求めよ。",
+    rubric: [
+      "$a_4=a_1+3d$ を用いている",
+      "$a_n$ を正しく表している",
+      "結論が簡潔である",
+    ],
+    solution:
+      "$12=3+3d$ より $d=3$。$a_n=3+(n-1)3=3n$。",
+    level: 1,
+  },
+  {
+    id: "writeup_seq_recurrence_term_1",
+    topicId: "seq_recurrence_term_basic",
+    title: "漸化式の一般項",
+    statement:
+      "数列 $a_{n+1}=a_n+3$, $a_1=2$ の一般項 $a_n$ と $a_{10}$ を求めよ。",
+    rubric: [
+      "等差数列として捉えている",
+      "$a_n$ を正しく表している",
+      "$a_{10}$ を正しく計算している",
+    ],
+    solution:
+      "$a_n=2+3(n-1)=3n-1$。$a_{10}=29$。",
+    level: 1,
+  },
+  {
+    id: "writeup_stats_sampling_mean_1",
+    topicId: "stats_sampling_mean_basic",
+    title: "標本平均の分布",
+    statement:
+      "母平均 $\\mu=50$、母標準偏差 $\\sigma=10$ の母集団から大きさ $n=25$ の標本をとる。標本平均 $\\bar{X}$ の平均と標準偏差を求めよ。",
+    rubric: [
+      "$E(\\bar{X})=\\mu$ を用いている",
+      "$\\mathrm{SD}(\\bar{X})=\\sigma/\\sqrt{n}$ を用いている",
+      "結論が簡潔である",
+    ],
+    solution:
+      "平均は $50$、標準偏差は $10/5=2$。",
+    level: 2,
+  },
+  {
+    id: "writeup_stats_scatter_1",
+    topicId: "stats_scatter_basic",
+    title: "散布図の傾向",
+    statement:
+      "データ $(1,2),(2,3),(3,4),(4,5)$ の散布図について、相関の符号（正・負・なし）を答えよ。",
+    rubric: [
+      "右上がりの傾向を読み取っている",
+      "相関が正と判断している",
+      "結論が簡潔である",
+    ],
+    solution:
+      "右上がりなので相関は正。",
+    level: 1,
+  },
+  {
+    id: "writeup_stats_covariance_1",
+    topicId: "stats_covariance_basic",
+    title: "共分散",
+    statement:
+      "データ $x:1,2,3$ と $y:2,4,6$ の共分散を求めよ。",
+    rubric: [
+      "平均を求めている",
+      "共分散の定義を用いている",
+      "計算が正しい",
+    ],
+    solution:
+      "平均は $\\bar{x}=2,\\bar{y}=4$。共分散は $\\frac{1}{3}[(1-2)(2-4)+(2-2)(4-4)+(3-2)(6-4)]=\\frac{4}{3}$。",
+    level: 2,
+  },
+  {
+    id: "writeup_stats_inference_1",
+    topicId: "stats_inference_basic",
+    title: "母平均の信頼区間",
+    statement:
+      "標本平均 $\\bar{x}=12$、母標準偏差 $\\sigma=3$、標本サイズ $n=36$ のとき、95%信頼区間を求めよ（$z=1.96$）。",
+    rubric: [
+      "標準誤差 $\\sigma/\\sqrt{n}$ を求めている",
+      "$\\bar{x}\\pm z\\cdot\\sigma/\\sqrt{n}$ を用いている",
+      "区間を正しく表している",
+    ],
+    solution:
+      "標準誤差は $3/6=0.5$。よって $12\\pm1.96\\times0.5=12\\pm0.98$、区間は $[11.02,12.98]$。",
+    level: 2,
+  },
+
 ];
 
 export function getWriteupProblemsByTopic(topicId?: TopicId) {
