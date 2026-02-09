@@ -185,9 +185,10 @@ export default async function PostDetailPage({ params }: Props) {
 export async function generateMetadata({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }): Promise<Metadata> {
-  const numId = Number(params.id);
+  const { id } = await params;
+  const numId = Number(id);
   if (!Number.isFinite(numId)) {
     return { title: "質問が見つかりません" };
   }
