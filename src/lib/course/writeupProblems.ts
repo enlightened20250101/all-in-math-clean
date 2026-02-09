@@ -8,6 +8,7 @@ export type WriteupProblem = {
   statement: string;
   rubric: string[];
   rubricKeywords?: string[][];
+  rubricWeights?: number[];
   solution: string;
   level?: 1 | 2 | 3;
 };

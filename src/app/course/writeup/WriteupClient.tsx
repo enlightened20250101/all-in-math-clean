@@ -99,6 +99,7 @@ export default function WriteupClient({ topicTitle, topicId }: WriteupClientProp
     const solutionTextForTokens = activeProblem?.solution ?? "";
     return rubric.map((item, index) => {
       const overrideTokens = keywordOverrides[index] ?? [];
+      const weightOverride = activeProblem?.rubricWeights?.[index];
       const tokens = uniqueTokens([
         ...extractTokens(item),
         ...overrideTokens.map((token) => normalizeText(token)),
@@ -119,7 +120,7 @@ export default function WriteupClient({ topicTitle, topicId }: WriteupClientProp
             ? "数式一致"
             : "未検出"
         : "自動判定対象外";
-      const weight = getRubricWeight(item);
+      const weight = getRubricWeight(item, weightOverride);
       return {
         item,
         hit: combinedAnswer.trim().length > 0 && (hitByText || hitByMath),
@@ -752,7 +753,10 @@ function normalizeMathToken(value: string): string {
     .replace(/\{([^}]*)\}/g, "$1");
 }
 
-function getRubricWeight(item: string): number {
+function getRubricWeight(item: string, override?: number): number {
+  if (typeof override === "number" && Number.isFinite(override)) {
+    return Math.max(0.2, Math.min(2, override));
+  }
   const normalized = normalizeText(item);
   if (!normalized) return 1;
   if (normalized.includes("結論") || normalized.includes("答") || normalized.includes("最終")) {
