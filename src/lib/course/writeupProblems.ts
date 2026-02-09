@@ -6113,6 +6113,96 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "$7^2=49\\equiv5$、$7^3\\equiv5\\cdot7=35\\equiv2$、$7^4\\equiv2\\cdot7=14\\equiv3$、$7^5\\equiv3\\cdot7=21\\equiv10$、$7^6\\equiv10\\cdot7=70\\equiv4$、$7^7\\equiv4\\cdot7=28\\equiv6$、$7^8\\equiv6\\cdot7=42\\equiv9$、$7^9\\equiv9\\cdot7=63\\equiv8$、$7^{10}\\equiv8\\cdot7=56\\equiv1$。よって最小は $n=10$。",
     level: 3,
   },
+  {
+    id: "writeup_hd_calc_tangent_1",
+    topicId: "calc_tangent_slope_basic",
+    title: "接線の傾き（難）",
+    statement:
+      "$y=x^3-3x+1$ の $x=a$ における接線が点 $(1,-1)$ を通る。$a$ を求めよ。",
+    rubric: [
+      "$f'(a)$ を用いて接線の式を立てている",
+      "点 $(1,-1)$ を代入して方程式を作っている",
+      "$a$ を正しく求めている",
+    ],
+    solution:
+      "$f(x)=x^3-3x+1$、$f'(x)=3x^2-3$。接線は $y=f'(a)(x-a)+f(a)$。点 $(1,-1)$ を代入して $-1=(3a^2-3)(1-a)+a^3-3a+1$。整理して $-1= -3a^3+6a^2-3 +a^3-3a+1$ より $-1=-2a^3+6a^2-3a-2$。$0=2a^3-6a^2+3a+1=(a-1)(2a^2-4a-1)$。$a=1$ または $a=1\pm\sqrt{\tfrac{3}{2}}$。",
+    level: 3,
+  },
+  {
+    id: "writeup_hd_calc_area_1",
+    topicId: "calc_curve_area_basic",
+    title: "面積（難）",
+    statement:
+      "$y=x^2$ と $y=2x$ で囲まれる部分の面積を求めよ。",
+    rubric: [
+      "交点を求めている",
+      "積分で面積を計算している",
+      "結論が簡潔である",
+    ],
+    solution:
+      "交点は $x^2=2x$ より $x=0,2$。面積は $\int_0^2 (2x-x^2)\,dx=\left[x^2-\tfrac{x^3}{3}\right]_0^2=4-\tfrac{8}{3}=\tfrac{4}{3}$。",
+    level: 3,
+  },
+  {
+    id: "writeup_hd_exp_log_param_1",
+    topicId: "exp_log_power_equation_basic",
+    title: "指数方程式（パラメータ）",
+    statement:
+      "$3^{2x}-3^x+(m-2)=0$ が実数解をもつための $m$ の範囲を求めよ。",
+    rubric: [
+      "$t=3^x$ とおいて二次方程式にしている",
+      "$t>0$ を考慮している",
+      "判別式と範囲を正しくまとめている",
+    ],
+    solution:
+      "$t=3^x(>0)$ とすると $t^2-t+(m-2)=0$。判別式 $D=1-4(m-2)=9-4m\ge0$ より $m\le\tfrac94$。さらに実数解 $t$ が正である必要がある。二次方程式の解は $\tfrac{1\pm\sqrt{9-4m}}{2}$。小さい方が正となるには $1-\sqrt{9-4m}>0\Rightarrow 9-4m<1\Rightarrow m>2$。よって $2<m\le\tfrac94$。$m=2$ のとき $t(t-1)=0$ で $t=1$ があり解をもつので結論は $2\le m\le\tfrac94$。",
+    level: 3,
+  },
+  {
+    id: "writeup_hd_trig_equation_2",
+    topicId: "trig_equations_basic",
+    title: "三角方程式（難）",
+    statement:
+      "$\sin x+\sqrt{3}\cos x=1$ を $0\le x<2\pi$ で解け。",
+    rubric: [
+      "合成して $R\sin(x+\alpha)$ にしている",
+      "方程式を解いている",
+      "区間内の解を列挙している",
+    ],
+    solution:
+      "$\sin x+\sqrt3\cos x=2\sin(x+\pi/3)$。よって $2\sin(x+\pi/3)=1$、$\sin(x+\pi/3)=1/2$。$x+\pi/3=\pi/6,5\pi/6$。したがって $x=-\pi/6, \; x=\pi/2$。区間内では $x=11\pi/6,\pi/2$。",
+    level: 3,
+  },
+  {
+    id: "writeup_hd_binomial_eq_1",
+    topicId: "binomial_xy_coeff_basic",
+    title: "二項係数（難）",
+    statement:
+      "$(x+2)^8$ の展開式で $x^3$ の係数を求めよ。",
+    rubric: [
+      "一般項を立てている",
+      "係数の指数条件を正しく適用している",
+      "計算が正しい",
+    ],
+    solution:
+      "一般項は $\binom{8}{k}x^{8-k}2^k$。$8-k=3$ より $k=5$。係数は $\binom{8}{5}2^5=56\times32=1792$。",
+    level: 3,
+  },
+  {
+    id: "writeup_hd_poly_param_1",
+    topicId: "poly_remainder_basic",
+    title: "剰余の定理（難）",
+    statement:
+      "多項式 $P(x)=x^3+ax^2+bx+1$ が $x=1$ で 2 を、$x=-1$ で 0 を与えるとき $a,b$ を求めよ。",
+    rubric: [
+      "$P(1),P(-1)$ を用いて連立方程式を作っている",
+      "$a,b$ を正しく解いている",
+      "結論が簡潔である",
+    ],
+    solution:
+      "$P(1)=1+a+b+1=2\Rightarrow a+b=0$。$P(-1)=-1+a-b+1=0\Rightarrow a-b=0$。よって $a=b=0$。",
+    level: 3,
+  },
 
 ];
 
