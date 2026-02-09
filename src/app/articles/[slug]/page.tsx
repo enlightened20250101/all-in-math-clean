@@ -12,10 +12,10 @@ import InlineMathText from "@/components/InlineMathText";
 export default async function ArticleDetailPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }) {
   const sb = await supabaseServerReadOnly();
-  const { slug } = await params;
+  const { slug } = params;
 
   let article: any = null;
   let articleErr: any = null;
