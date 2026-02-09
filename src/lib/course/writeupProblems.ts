@@ -6203,6 +6203,96 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "$P(1)=1+a+b+1=2\Rightarrow a+b=0$。$P(-1)=-1+a-b+1=0\Rightarrow a-b=0$。よって $a=b=0$。",
     level: 3,
   },
+  {
+    id: "writeup_hd_calc_limit_1",
+    topicId: "calc_limit_basic",
+    title: "極限（難）",
+    statement:
+      "$\lim_{x\to0} \frac{\sin x - x + \tfrac{x^3}{6}}{x^5}$ を求めよ。",
+    rubric: [
+      "テイラー展開または近似式を用いている",
+      "次数を比較して極限を求めている",
+      "結論が簡潔である",
+    ],
+    solution:
+      "$\sin x = x-\tfrac{x^3}{6}+\tfrac{x^5}{120}+\cdots$ より分子は $\tfrac{x^5}{120}+\cdots$。したがって極限は $1/120$。",
+    level: 3,
+  },
+  {
+    id: "writeup_hd_calc_extrema_2",
+    topicId: "calc_extrema_basic",
+    title: "極値条件（難）",
+    statement:
+      "$f(x)=x^4-4x^3+6x^2-4x+m$ が $x=1$ で極小をとるための $m$ を求めよ。",
+    rubric: [
+      "$f'(x)$ を求めている",
+      "$f'(1)=0$ を用いている",
+      "極小条件を確認している",
+    ],
+    solution:
+      "$f'(x)=4x^3-12x^2+12x-4=4(x-1)^3$。$f'(1)=0$ は常に成り立つので $m$ によらない。$f''(x)=12(x-1)^2$ で $x=1$ で $0$ だが $f'(x)$ の符号は $(x-1)^3$ によって変わり、$x=1$ は極小。従って $m$ は任意。",
+    level: 3,
+  },
+  {
+    id: "writeup_hd_calc_integral_1",
+    topicId: "calc_integral_advanced_basic",
+    title: "定積分（難）",
+    statement:
+      "$\int_0^1 x\ln(1+x)\,dx$ を求めよ。",
+    rubric: [
+      "部分積分を用いている",
+      "計算が正しい",
+      "結論が簡潔である",
+    ],
+    solution:
+      "$u=\ln(1+x),\,dv=x\,dx$ とすると $du=\tfrac{1}{1+x}dx,\,v=\tfrac{x^2}{2}$。よって $\int_0^1 x\ln(1+x)dx=\left[\tfrac{x^2}{2}\ln(1+x)\right]_0^1-\tfrac12\int_0^1 \tfrac{x^2}{1+x}dx$。後者は $\tfrac12\int_0^1 (x-1+\tfrac{1}{1+x})dx=\tfrac12\left[\tfrac{x^2}{2}-x+\ln(1+x)\right]_0^1=\tfrac12(\tfrac12-1+\ln2)$. したがって全体は $\tfrac12\ln2-\tfrac12(\tfrac12-1+\ln2)=\tfrac14$.",
+    level: 3,
+  },
+  {
+    id: "writeup_hd_conic_ellipse_1",
+    topicId: "conic_ellipse_basic",
+    title: "楕円（難）",
+    statement:
+      "$\frac{x^2}{9}+\frac{y^2}{4}=1$ の焦点と離心率を求めよ。",
+    rubric: [
+      "$a^2,b^2$ を読み取っている",
+      "$c^2=a^2-b^2$ を用いている",
+      "離心率 $e=c/a$ を求めている",
+    ],
+    solution:
+      "$a^2=9,b^2=4$ より $c^2=5$、$c=\sqrt5$。焦点は $(\pm\sqrt5,0)$、離心率 $e=\sqrt5/3$。",
+    level: 3,
+  },
+  {
+    id: "writeup_hd_vector_plane_1",
+    topicId: "vector_plane_basic",
+    title: "平面ベクトル（難）",
+    statement:
+      "点 $A(1,0,2), B(2,1,3), C(0,1,1)$ を通る平面の方程式を求めよ。",
+    rubric: [
+      "2つの方向ベクトルを作っている",
+      "法線ベクトルを求めている",
+      "平面方程式を立てている",
+    ],
+    solution:
+      "$\overrightarrow{AB}=(1,1,1),\overrightarrow{AC}=(-1,1,-1)$。外積より法線 $n=( -2,0,2)\sim( -1,0,1)$。点 $A$ を通るので $-(x-1)+ (z-2)=0$、すなわち $z-x-1=0$。",
+    level: 3,
+  },
+  {
+    id: "writeup_hd_complex_1",
+    topicId: "complex_polar_basic",
+    title: "複素数（難）",
+    statement:
+      "$z=1+i$ の $5$ 乗を求めよ。",
+    rubric: [
+      "極形式に直している",
+      "ド・モアブルの定理を用いている",
+      "結果を正しく計算している",
+    ],
+    solution:
+      "$z=\sqrt2\,\mathrm{cis}(\pi/4)$。よって $z^5=(\sqrt2)^5\,\mathrm{cis}(5\pi/4)=4\sqrt2\,(\!-\tfrac{\sqrt2}{2}-\tfrac{\sqrt2}{2}i)=-4-4i$。",
+    level: 3,
+  },
 
 ];
 
