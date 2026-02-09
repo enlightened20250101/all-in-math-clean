@@ -111,9 +111,18 @@ export default function WriteupClient({ topicTitle, topicId }: WriteupClientProp
       const normalizedMathTokens = uniqueTokens(mathTokens.map((token) => normalizeMathToken(token)));
       const hitByText = tokens.some((token) => normalizedAnswer.includes(token));
       const hitByMath = normalizedMathTokens.some((token) => normalizedAnswer.includes(token));
+      const hasSignals = tokens.length > 0 || normalizedMathTokens.length > 0;
+      const reason = hasSignals
+        ? hitByText
+          ? "テキスト一致"
+          : hitByMath
+            ? "数式一致"
+            : "未検出"
+        : "自動判定対象外";
       return {
         item,
         hit: combinedAnswer.trim().length > 0 && (hitByText || hitByMath),
+        reason,
       };
     });
   }, [rubric, combinedAnswer, activeProblem]);
@@ -540,13 +549,26 @@ export default function WriteupClient({ topicTitle, topicId }: WriteupClientProp
             </div>
             <ul className="mt-3 space-y-2 text-sm text-slate-700">
               {rubricChecks.map((check) => (
-                <li key={check.item} className="flex items-center gap-2">
+                <li key={check.item} className="flex items-start gap-2">
                   <span
-                    className={`h-2 w-2 rounded-full ${
+                    className={`mt-1 h-2 w-2 rounded-full ${
                       check.hit ? "bg-emerald-500" : "bg-slate-300"
                     }`}
                   />
-                  <MathMarkdown content={check.item} className="text-sm" />
+                  <div className="flex-1">
+                    <MathMarkdown content={check.item} className="text-sm" />
+                    <span
+                      className={`mt-1 inline-flex rounded-full px-2 py-[2px] text-[10px] ${
+                        check.hit
+                          ? "bg-emerald-50 text-emerald-700"
+                          : check.reason === "自動判定対象外"
+                            ? "bg-slate-100 text-slate-500"
+                            : "bg-amber-50 text-amber-700"
+                      }`}
+                    >
+                      {check.reason}
+                    </span>
+                  </div>
                 </li>
               ))}
             </ul>
