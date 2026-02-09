@@ -6035,6 +6035,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "区間端点と頂点位置の場合分けをしている",
       "範囲を不等式で正しくまとめている",
     ],
+    rubricWeights: [1.2, 1.0, 1.5],
     solution:
       "$f(x)=(x-a)^2-1$。区間内での最大値が $<0$ となる必要がある。頂点 $x=a$ が $[0,2]$ にあるとき最大は端点なので $\\max\\{(0-a)^2-1,(2-a)^2-1\\}<0$。これは $a^2<1$ かつ $(2-a)^2<1$ より $-1<a<1$ と $1<a<3$ を同時に満たせず不可。頂点が区間外なら端点で最大。$a\\le0$ のとき最大は $x=2$: $(2-a)^2-1<0\\Rightarrow 1<a<3$ は矛盾。$a\\ge2$ のとき最大は $x=0$: $a^2-1<0\\Rightarrow -1<a<1$ は矛盾。よって該当なし。",
     level: 3,
@@ -6050,6 +6051,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "解の和が係数から $4$ と置けている",
       "$p,q$ の関係式を導いている",
     ],
+    rubricWeights: [1.2, 1.0, 1.5],
     solution:
       "交点は $x^2+px+q=2x+1\\Rightarrow x^2+(p-2)x+(q-1)=0$。解の和は $-(p-2)=4$ より $p-2=-4$、$p=-2$。異なる2点条件は判別式 $D=(p-2)^2-4(q-1)>0$。$p=-2$ から $16-4(q-1)>0\\Rightarrow q<5$。関係は $p=-2$ かつ $q<5$。",
     level: 3,
@@ -6065,6 +6067,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "最大最小が $\\pm R$ と分かっている",
       "対応する $x$ を正しく求めている",
     ],
+    rubricWeights: [1.2, 1.0, 1.5],
     solution:
       "$f(x)=R\\sin(x+\\alpha)$ とおくと $R=\\sqrt{2^2+(\\sqrt3)^2}=\\sqrt7$。$\\cos\\alpha=2/\\sqrt7,\\sin\\alpha=\\sqrt3/\\sqrt7$。最大値 $\\sqrt7$ は $x+\\alpha=\\pi/2$、最小値 $-\\sqrt7$ は $x+\\alpha=3\\pi/2$。",
     level: 3,
@@ -6080,6 +6083,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "$t>0$ を考慮している",
       "元の $x$ に戻して解を求めている",
     ],
+    rubricWeights: [1.2, 1.0, 1.5],
     solution:
       "$t=2^x(>0)$ とおくと $t^2+t-6=0$ で $(t-2)(t+3)=0$。$t=2$ より $2^x=2$、$x=1$。",
     level: 3,
@@ -6110,6 +6114,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "周期を調べている",
       "最小の $n$ を答えている",
     ],
+    rubricWeights: [1.2, 1.0, 1.5],
     solution:
       "$7^2=49\\equiv5$、$7^3\\equiv5\\cdot7=35\\equiv2$、$7^4\\equiv2\\cdot7=14\\equiv3$、$7^5\\equiv3\\cdot7=21\\equiv10$、$7^6\\equiv10\\cdot7=70\\equiv4$、$7^7\\equiv4\\cdot7=28\\equiv6$、$7^8\\equiv6\\cdot7=42\\equiv9$、$7^9\\equiv9\\cdot7=63\\equiv8$、$7^{10}\\equiv8\\cdot7=56\\equiv1$。よって最小は $n=10$。",
     level: 3,
@@ -6125,6 +6130,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "点 $(1,-1)$ を代入して方程式を作っている",
       "$a$ を正しく求めている",
     ],
+    rubricWeights: [1.2, 1.0, 1.5],
     solution:
       "$f(x)=x^3-3x+1$、$f'(x)=3x^2-3$。接線は $y=f'(a)(x-a)+f(a)$。点 $(1,-1)$ を代入して $-1=(3a^2-3)(1-a)+a^3-3a+1$。整理して $-1= -3a^3+6a^2-3 +a^3-3a+1$ より $-1=-2a^3+6a^2-3a-2$。$0=2a^3-6a^2+3a+1=(a-1)(2a^2-4a-1)$。$a=1$ または $a=1\pm\sqrt{\tfrac{3}{2}}$。",
     level: 3,
@@ -6140,6 +6146,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "積分で面積を計算している",
       "結論が簡潔である",
     ],
+    rubricWeights: [1.2, 1.0, 1.5],
     solution:
       "交点は $x^2=2x$ より $x=0,2$。面積は $\int_0^2 (2x-x^2)\,dx=\left[x^2-\tfrac{x^3}{3}\right]_0^2=4-\tfrac{8}{3}=\tfrac{4}{3}$。",
     level: 3,
@@ -6155,6 +6162,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "$t>0$ を考慮している",
       "判別式と範囲を正しくまとめている",
     ],
+    rubricWeights: [1.2, 1.0, 1.5],
     solution:
       "$t=3^x(>0)$ とすると $t^2-t+(m-2)=0$。判別式 $D=1-4(m-2)=9-4m\ge0$ より $m\le\tfrac94$。さらに実数解 $t$ が正である必要がある。二次方程式の解は $\tfrac{1\pm\sqrt{9-4m}}{2}$。小さい方が正となるには $1-\sqrt{9-4m}>0\Rightarrow 9-4m<1\Rightarrow m>2$。よって $2<m\le\tfrac94$。$m=2$ のとき $t(t-1)=0$ で $t=1$ があり解をもつので結論は $2\le m\le\tfrac94$。",
     level: 3,
@@ -6170,6 +6178,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "方程式を解いている",
       "区間内の解を列挙している",
     ],
+    rubricWeights: [1.2, 1.0, 1.5],
     solution:
       "$\sin x+\sqrt3\cos x=2\sin(x+\pi/3)$。よって $2\sin(x+\pi/3)=1$、$\sin(x+\pi/3)=1/2$。$x+\pi/3=\pi/6,5\pi/6$。したがって $x=-\pi/6, \; x=\pi/2$。区間内では $x=11\pi/6,\pi/2$。",
     level: 3,
@@ -6185,6 +6194,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "係数の指数条件を正しく適用している",
       "計算が正しい",
     ],
+    rubricWeights: [1.2, 1.0, 1.5],
     solution:
       "一般項は $\binom{8}{k}x^{8-k}2^k$。$8-k=3$ より $k=5$。係数は $\binom{8}{5}2^5=56\times32=1792$。",
     level: 3,
@@ -6200,6 +6210,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "$a,b$ を正しく解いている",
       "結論が簡潔である",
     ],
+    rubricWeights: [1.2, 1.0, 1.5],
     solution:
       "$P(1)=1+a+b+1=2\Rightarrow a+b=0$。$P(-1)=-1+a-b+1=0\Rightarrow a-b=0$。よって $a=b=0$。",
     level: 3,
@@ -6215,6 +6226,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "次数を比較して極限を求めている",
       "結論が簡潔である",
     ],
+    rubricWeights: [1.2, 1.0, 1.5],
     solution:
       "$\sin x = x-\tfrac{x^3}{6}+\tfrac{x^5}{120}+\cdots$ より分子は $\tfrac{x^5}{120}+\cdots$。したがって極限は $1/120$。",
     level: 3,
@@ -6230,6 +6242,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "$f'(1)=0$ を用いている",
       "極小条件を確認している",
     ],
+    rubricWeights: [1.2, 1.0, 1.5],
     solution:
       "$f'(x)=4x^3-12x^2+12x-4=4(x-1)^3$。$f'(1)=0$ は常に成り立つので $m$ によらない。$f''(x)=12(x-1)^2$ で $x=1$ で $0$ だが $f'(x)$ の符号は $(x-1)^3$ によって変わり、$x=1$ は極小。従って $m$ は任意。",
     level: 3,
@@ -6245,6 +6258,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "計算が正しい",
       "結論が簡潔である",
     ],
+    rubricWeights: [1.2, 1.0, 1.5],
     solution:
       "$u=\ln(1+x),\,dv=x\,dx$ とすると $du=\tfrac{1}{1+x}dx,\,v=\tfrac{x^2}{2}$。よって $\int_0^1 x\ln(1+x)dx=\left[\tfrac{x^2}{2}\ln(1+x)\right]_0^1-\tfrac12\int_0^1 \tfrac{x^2}{1+x}dx$。後者は $\tfrac12\int_0^1 (x-1+\tfrac{1}{1+x})dx=\tfrac12\left[\tfrac{x^2}{2}-x+\ln(1+x)\right]_0^1=\tfrac12(\tfrac12-1+\ln2)$. したがって全体は $\tfrac12\ln2-\tfrac12(\tfrac12-1+\ln2)=\tfrac14$.",
     level: 3,
@@ -6260,6 +6274,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "$c^2=a^2-b^2$ を用いている",
       "離心率 $e=c/a$ を求めている",
     ],
+    rubricWeights: [1.2, 1.0, 1.5],
     solution:
       "$a^2=9,b^2=4$ より $c^2=5$、$c=\sqrt5$。焦点は $(\pm\sqrt5,0)$、離心率 $e=\sqrt5/3$。",
     level: 3,
@@ -6275,6 +6290,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "法線ベクトルを求めている",
       "平面方程式を立てている",
     ],
+    rubricWeights: [1.2, 1.0, 1.5],
     solution:
       "$\overrightarrow{AB}=(1,1,1),\overrightarrow{AC}=(-1,1,-1)$。外積より法線 $n=( -2,0,2)\sim( -1,0,1)$。点 $A$ を通るので $-(x-1)+ (z-2)=0$、すなわち $z-x-1=0$。",
     level: 3,
@@ -6290,6 +6306,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "ド・モアブルの定理を用いている",
       "結果を正しく計算している",
     ],
+    rubricWeights: [1.2, 1.0, 1.5],
     solution:
       "$z=\sqrt2\,\mathrm{cis}(\pi/4)$。よって $z^5=(\sqrt2)^5\,\mathrm{cis}(5\pi/4)=4\sqrt2\,(\!-\tfrac{\sqrt2}{2}-\tfrac{\sqrt2}{2}i)=-4-4i$。",
     level: 3,
@@ -6305,6 +6322,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "ド・モアブルの定理を用いている",
       "結果を正しく計算している",
     ],
+    rubricWeights: [1.2, 1.0, 1.5],
     solution:
       "$z=2\,\mathrm{cis}(-\pi/6)$。よって $z^6=2^6\,\mathrm{cis}(-\pi)=64(-1)=-64$。",
     level: 3,
@@ -6320,6 +6338,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "実部・虚部に分けて整理している",
       "軌跡を直線として答えている",
     ],
+    rubricWeights: [1.2, 1.0, 1.5],
     solution:
       "$z=x+iy$ とすると $(x-1)^2+y^2=(x+1)^2+y^2$ より $x=0$。よって虚軸。",
     level: 3,
@@ -6335,6 +6354,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "距離公式を用いている",
       "計算が正しい",
     ],
+    rubricWeights: [1.2, 1.0, 1.5],
     solution:
       "平面は $x+y+z=1$。距離は $\frac{|1+1+1-1|}{\sqrt{1^2+1^2+1^2}}=\frac{2}{\sqrt3}$。",
     level: 3,
@@ -6350,6 +6370,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "内積と長さを正しく計算している",
       "ベクトルとして答えている",
     ],
+    rubricWeights: [1.2, 1.0, 1.5],
     solution:
       "$\mathrm{proj}_{\vec b}\vec a=\frac{\vec a\cdot \vec b}{\|\vec b\|^2}\vec b$。$\vec a\cdot\vec b=2+2+4=8$、$\|\vec b\|^2=1+4+4=9$。よって $\frac{8}{9}(1,2,2)=(8/9,16/9,16/9)$。",
     level: 3,
@@ -6365,6 +6386,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "焦点と準線を正しく書いている",
       "結論が簡潔である",
     ],
+    rubricWeights: [1.2, 1.0, 1.5],
     solution:
       "焦点は $(p,0)$、準線は $x=-p$。",
     level: 3,
@@ -6380,6 +6402,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "漸近線が $y=\pm \frac{b}{a}x$ と分かっている",
       "結論が簡潔である",
     ],
+    rubricWeights: [1.2, 1.0, 1.5],
     solution:
       "$a=3,b=2$ より漸近線は $y=\pm \frac{2}{3}x$。",
     level: 3,
