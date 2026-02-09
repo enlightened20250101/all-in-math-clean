@@ -19,11 +19,44 @@ export default function CourseContinueFloatingClient() {
   const [lastTopic, setLastTopic] = useState<LastTopic | null>(null);
   const [now, setNow] = useState<number | null>(null);
   const [currentCourseId, setCurrentCourseId] = useState<string | null>(null);
+  const [allowedTopicIds, setAllowedTopicIds] = useState<Set<string> | null>(null);
 
   const activeUserCourse = useMemo(
     () => userCourses.find((course) => course.isActive && !course.isArchived) ?? null,
     [userCourses]
   );
+
+  const activeCourseId = useMemo(
+    () => currentCourseId ?? activeUserCourse?.baseCourseId ?? lastTopic?.courseId ?? null,
+    [currentCourseId, activeUserCourse, lastTopic]
+  );
+
+  useEffect(() => {
+    if (!activeCourseId) {
+      setAllowedTopicIds(null);
+      return;
+    }
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch(
+          `/api/course/catalog?courseId=${encodeURIComponent(activeCourseId)}`,
+          { cache: "no-store" }
+        );
+        const data = await res.json().catch(() => null);
+        if (!res.ok || !data?.ok) throw new Error("catalog error");
+        const ids = new Set<string>(
+          Array.isArray(data.catalog?.topics) ? data.catalog.topics.map((t: any) => t.id) : []
+        );
+        if (!cancelled) setAllowedTopicIds(ids);
+      } catch {
+        if (!cancelled) setAllowedTopicIds(null);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [activeCourseId]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -68,15 +101,18 @@ export default function CourseContinueFloatingClient() {
   }, []);
 
   const topic = useMemo(() => {
-    const activeCourseId = currentCourseId ?? activeUserCourse?.baseCourseId ?? lastTopic?.courseId ?? null;
-    const allowedUnits = activeCourseId ? courseMap.get(activeCourseId)?.units ?? [] : [];
     const last = lastTopic?.topicId ? TOPICS.find((t) => t.id === lastTopic.topicId) ?? null : null;
+    if (allowedTopicIds && allowedTopicIds.size > 0) {
+      if (last && allowedTopicIds.has(last.id)) return last;
+      return TOPICS.find((t) => allowedTopicIds.has(t.id)) ?? null;
+    }
+    const allowedUnits = activeCourseId ? courseMap.get(activeCourseId)?.units ?? [] : [];
     if (last && (!activeCourseId || allowedUnits.includes(last.unit))) return last;
     if (activeCourseId && allowedUnits.length) {
       return TOPICS.find((t) => allowedUnits.includes(t.unit)) ?? null;
     }
     return last;
-  }, [currentCourseId, lastTopic, courseMap, activeUserCourse]);
+  }, [activeCourseId, allowedTopicIds, lastTopic, courseMap]);
 
   const resumeLabel = useMemo(() => {
     if (!lastTopic?.updatedAt) return "";
@@ -108,7 +144,6 @@ export default function CourseContinueFloatingClient() {
 
   if (!topic) return null;
 
-  const activeCourseId = currentCourseId ?? activeUserCourse?.baseCourseId ?? lastTopic?.courseId ?? null;
   const courseLabel = activeCourseId ? courseMap.get(activeCourseId)?.title ?? null : null;
   const courseQuery = activeCourseId ? `&course=${encodeURIComponent(activeCourseId)}` : "";
   const href =
