@@ -4446,7 +4446,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
     topicId: "identity_coeff_quadratic_basic",
     title: "恒等式の係数比較",
     statement:
-      "$(x+1)^2\\equiv x^2+ax+b$ が恒等式となるとき $a,b$ を求めよ。",
+      "$\\,(x+1)^2\\equiv x^2+ax+b$ が恒等式となるとき $a,b$ を求めよ。",
     rubric: [
       "展開して係数比較する方針が書けている",
       "$x^2+2x+1$ と比較している",
@@ -5207,7 +5207,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
     title: "一次独立",
     statement: "$\\vec{a}=(1,0,1)$, $\\vec{b}=(2,0,2)$ が一次独立か判定せよ。",
     rubric: ["一次従属の定義を用いている"],
-    solution: "\\vec{b}=2\\vec{a}$ なので一次独立ではない。",
+    solution: "$\\vec{b}=2\\vec{a}$ なので一次独立ではない。",
     level: 2,
   },
   {
@@ -5216,7 +5216,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
     title: "直交の判定",
     statement: "$\\vec{a}=(1,2)$, $\\vec{b}=(2,-1)$ が直交するか判定せよ。",
     rubric: ["内積で判定している"],
-    solution: "$1cdot2+2cdot(-1)=0$ より直交。",
+    solution: "$1\\cdot2+2\\cdot(-1)=0$ より直交。",
     level: 1,
   },
   {
