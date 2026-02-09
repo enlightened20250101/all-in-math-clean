@@ -3656,6 +3656,153 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "距離は $\\frac{|1+4-6-4|}{\\sqrt{1^2+2^2+(-2)^2}}=\\frac{5}{3}$。",
     level: 3,
   },
+  {
+    id: "writeup_quad_solve_1",
+    topicId: "quad_solve_basic",
+    title: "二次方程式の解法",
+    statement: "方程式 $x^2-5x+6=0$ を解け。",
+    rubric: [
+      "因数分解または解の公式を使う方針が書けている",
+      "因数分解 $(x-2)(x-3)=0$ もしくは公式で $x=2,3$ を導いている",
+      "解を結論として明記している",
+    ],
+    rubricKeywords: [["因数分解", "解の公式"], ["x=2", "x=3"], ["解"]],
+    solution: "$(x-2)(x-3)=0$ より $x=2,3$。",
+    level: 2,
+  },
+  {
+    id: "writeup_quad_discriminant_1",
+    topicId: "quad_discriminant_basic",
+    title: "判別式と実数解",
+    statement:
+      "方程式 $x^2-2(k-1)x+k+2=0$ が実数解をもつような $k$ の範囲を求めよ。",
+    rubric: [
+      "判別式 $D=b^2-4ac$ を用いる方針が書けている",
+      "$D\\ge0$ の条件を立てている",
+      "$k$ の範囲を結論として示している",
+    ],
+    rubricKeywords: [["判別式", "D"], ["D\\ge0"], ["k"]],
+    solution: "判別式 $D=4(k-1)^2-4(k+2)$。$D\\ge0$ より $k\\le -1$ または $k\\ge2$。",
+    level: 2,
+  },
+  {
+    id: "writeup_quad_roots_relations_1",
+    topicId: "quad_roots_relations_basic",
+    title: "解と係数の関係",
+    statement:
+      "方程式 $x^2-3x+m=0$ の解を $\\alpha,\\beta$ とする。$\\alpha^2+\\beta^2=10$ のとき $m$ を求めよ。",
+    rubric: [
+      "$\\alpha+\\beta=3,\\ \\alpha\\beta=m$ を用いている",
+      "$\\alpha^2+\\beta^2=(\\alpha+\\beta)^2-2\\alpha\\beta$ に変形している",
+      "$m=-\\frac{1}{2}$ を結論として示している",
+    ],
+    rubricKeywords: [["α+β=3", "αβ=m"], ["(α+β)^2-2αβ"], ["m=-1/2"]],
+    solution:
+      "$10=(\\alpha+\\beta)^2-2\\alpha\\beta=9-2m$ より $m=-\\frac12$。",
+    level: 2,
+  },
+  {
+    id: "writeup_trig_ratio_1",
+    topicId: "trig_ratio_basic",
+    title: "三角比の基本",
+    statement:
+      "直角三角形で斜辺が $5$、一方の辺が $3$ のとき、残りの辺の長さと $\\sin\\theta,\\cos\\theta,\\tan\\theta$ を求めよ（$\\theta$ は長さ $3$ の辺の向かい角）。",
+    rubric: [
+      "三平方の定理で残りの辺を求めている",
+      "$\\sin,\\cos,\\tan$ の定義に従って値を出している",
+      "結果を整理して示している",
+    ],
+    rubricKeywords: [["三平方", "5-3"], ["sin", "cos", "tan"], ["結論"]],
+    solution:
+      "残りの辺は $4$。よって $\\sin\\theta=\\frac35,\\ \\cos\\theta=\\frac45,\\ \\tan\\theta=\\frac34$。",
+    level: 2,
+  },
+  {
+    id: "writeup_trig_special_angles_1",
+    topicId: "trig_special_angles_basic",
+    title: "特殊角の三角比",
+    statement: "$\\sin30^\\circ,\\cos60^\\circ,\\tan45^\\circ$ を求めよ。",
+    rubric: [
+      "特殊角の値を使う方針が書けている",
+      "$\\sin30^\\circ=\\frac12,\\ \\cos60^\\circ=\\frac12$ を示している",
+      "$\\tan45^\\circ=1$ を結論として示している",
+    ],
+    rubricKeywords: [["特殊角"], ["1/2"], ["1"]],
+    solution: "$\\sin30^\\circ=\\frac12,\\ \\cos60^\\circ=\\frac12,\\ \\tan45^\\circ=1$。",
+    level: 1,
+  },
+  {
+    id: "writeup_geo_right_triangle_1",
+    topicId: "geo_measure_right_triangle_basic",
+    title: "直角三角形の計量",
+    statement: "直角三角形で直角をはさむ辺が $6,8$ のとき、斜辺の長さを求めよ。",
+    rubric: [
+      "三平方の定理を使う方針が書けている",
+      "$c^2=6^2+8^2$ を計算している",
+      "斜辺 $10$ を結論として示している",
+    ],
+    rubricKeywords: [["三平方"], ["6^2+8^2"], ["10"]],
+    solution: "$c^2=36+64=100$ より $c=10$。",
+    level: 1,
+  },
+  {
+    id: "writeup_data_summary_1",
+    topicId: "data_summary_basic",
+    title: "平均と中央値",
+    statement: "データ $2,3,4,6,9$ の平均と中央値を求めよ。",
+    rubric: [
+      "平均の定義（和÷個数）を使っている",
+      "中央値が並べたときの中央であることを使っている",
+      "平均と中央値を結論として示している",
+    ],
+    rubricKeywords: [["平均"], ["中央値"], ["結論"]],
+    solution: "平均は $\\frac{2+3+4+6+9}{5}=4.8$、中央値は $4$。",
+    level: 1,
+  },
+  {
+    id: "writeup_data_variance_1",
+    topicId: "data_variance_sd_basic",
+    title: "分散と標準偏差",
+    statement: "データ $1,2,3,4$ の分散と標準偏差を求めよ。",
+    rubric: [
+      "平均を求めている",
+      "分散 $\\frac{1}{n}\\sum(x_i-\\bar{x})^2$ を計算している",
+      "標準偏差を結論として示している",
+    ],
+    rubricKeywords: [["平均"], ["分散"], ["標準偏差"]],
+    solution:
+      "平均 $\\bar{x}=2.5$。分散 $\\frac{(1.5)^2+(0.5)^2+(0.5)^2+(1.5)^2}{4}=1.25$、標準偏差 $\\sqrt{1.25}$。",
+    level: 2,
+  },
+  {
+    id: "writeup_data_scatter_1",
+    topicId: "data_scatter_basic",
+    title: "散布図の傾向",
+    statement: "点 $(1,2),(2,3),(3,5),(4,6)$ の散布図の傾向（正の相関・負の相関・相関なし）を述べよ。",
+    rubric: [
+      "点の並びから増加傾向を読み取っている",
+      "正の相関と判断している",
+      "結論を簡潔に示している",
+    ],
+    rubricKeywords: [["正の相関"], ["増加傾向"], ["結論"]],
+    solution: "右上がりに並ぶため正の相関。",
+    level: 1,
+  },
+  {
+    id: "writeup_data_covariance_1",
+    topicId: "data_covariance_basic",
+    title: "共分散",
+    statement: "データ $(x,y)=(1,2),(2,4),(3,5)$ の共分散を求めよ。",
+    rubric: [
+      "$\\bar{x},\\bar{y}$ を求めている",
+      "共分散 $\\frac{1}{n}\\sum(x_i-\\bar{x})(y_i-\\bar{y})$ を計算している",
+      "結果を結論として示している",
+    ],
+    rubricKeywords: [["共分散"], ["(x-\\bar{x})(y-\\bar{y})"], ["結論"]],
+    solution:
+      "$\\bar{x}=2,\\ \\bar{y}=\\frac{11}{3}$。共分散 $\\frac{1}{3}[(-1)(-\\tfrac53)+0(\\tfrac13)+(1)(\\tfrac23)]=1$。",
+    level: 2,
+  },
 ];
 
 export function getWriteupProblemsByTopic(topicId?: TopicId) {
