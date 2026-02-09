@@ -52,7 +52,7 @@ export default async function AdminHomePage() {
         ))}
       </section>
 
-      <section className="grid gap-3 sm:grid-cols-2">
+      <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         <Link
           href="/admin/reports"
           className="rounded-2xl border bg-white p-4 hover:shadow-lg hover:-translate-y-0.5 transition"
@@ -66,6 +66,13 @@ export default async function AdminHomePage() {
         >
           <div className="text-sm font-semibold">お問い合わせ一覧</div>
           <div className="text-[11px] text-slate-500 mt-1">受信したお問い合わせの確認</div>
+        </Link>
+        <Link
+          href="/admin/users"
+          className="rounded-2xl border bg-white p-4 hover:shadow-lg hover:-translate-y-0.5 transition"
+        >
+          <div className="text-sm font-semibold">ユーザー管理</div>
+          <div className="text-[11px] text-slate-500 mt-1">権限・基本情報の管理</div>
         </Link>
       </section>
     </div>
