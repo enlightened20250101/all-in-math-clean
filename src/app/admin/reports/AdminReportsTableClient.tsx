@@ -20,7 +20,7 @@ type ReportRow = {
 type SortKey = created_desc | created_asc | status_open | status_resolved;
 
 export default function AdminReportsTableClient({ rows }: { rows: ReportRow[] }) {
-  const [sortKey, setSortKey] = useState<SortKey>(created_desc);
+  const [sortKey, setSortKey] = useState<SortKey>("created_desc");
   const [selected, setSelected] = useState<Set<number>>(() => new Set());
   const [pending, startTransition] = useTransition();
 
