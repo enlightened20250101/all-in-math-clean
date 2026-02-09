@@ -18,7 +18,7 @@ type ReportRow = {
   preview?: string | null;
 };
 
-type SortKey = created_desc | created_asc | status_open | status_resolved;
+type SortKey = "created_desc" | "created_asc" | "status_open" | "status_resolved";
 
 export default function AdminReportsTableClient({ rows }: { rows: ReportRow[] }) {
   const [sortKey, setSortKey] = useState<SortKey>("created_desc");
