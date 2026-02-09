@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { getTopicById } from "@/lib/course/topics";
 import WriteupClient from "@/app/course/writeup/WriteupClient";
+import MathMarkdown from "@/components/MathMarkdown";
 
 type TopicWriteupPageProps = {
   params: Promise<{ topicId: string }>;
@@ -32,7 +33,7 @@ export default async function TopicWriteupPage({ params }: TopicWriteupPageProps
           <div>
             <div className="text-xs uppercase tracking-[0.2em] text-slate-400">Topic Writeup</div>
             <div className="mt-2 text-lg sm:text-xl font-semibold">{topic.title}</div>
-            <div className="mt-1 text-sm text-slate-600">{topic.description}</div>
+            <MathMarkdown content={topic.description} className="mt-1 text-sm text-slate-600" />
           </div>
           <div className="flex flex-wrap gap-2">
             <Link

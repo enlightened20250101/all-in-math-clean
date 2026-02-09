@@ -342,10 +342,14 @@ export default function WriteupListClient() {
             const tags = deriveTags(problem);
             const problemStats = entryStats.byProblem.get(problem.id);
             const topicStats = problem.topicId ? entryStats.byTopic.get(problem.topicId) : undefined;
+            const targetHref = problem.topicId
+              ? `/course/topics/${problem.topicId}/writeup`
+              : "/course/writeup";
             return (
-              <div
+              <Link
                 key={problem.id}
-                className="group flex h-full flex-col rounded-[24px] border border-slate-200/80 bg-white/90 p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                href={targetHref}
+                className="group flex h-full flex-col rounded-[24px] border border-slate-200/80 bg-white/90 p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300"
               >
                 <div className="flex items-center justify-between gap-2 text-[11px]">
                   <span className="rounded-full border border-slate-200 bg-white px-2 py-1 text-slate-500">
@@ -389,24 +393,12 @@ export default function WriteupListClient() {
                   </div>
                   <div className="flex items-center justify-between gap-2">
                     <span>記述演習でこの単元を解く</span>
-                    {problem.topicId ? (
-                      <Link
-                        href={`/course/topics/${problem.topicId}/writeup`}
-                        className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-3 py-1 text-slate-600 transition group-hover:border-slate-400 group-hover:text-slate-900"
-                      >
-                        開く
-                      </Link>
-                    ) : (
-                      <Link
-                        href="/course/writeup"
-                        className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-3 py-1 text-slate-600 transition group-hover:border-slate-400 group-hover:text-slate-900"
-                      >
-                        開く
-                      </Link>
-                    )}
+                    <span className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-3 py-1 text-slate-600 transition group-hover:border-slate-400 group-hover:text-slate-900">
+                      開く
+                    </span>
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })
         )}

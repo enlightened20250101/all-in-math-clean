@@ -8,6 +8,7 @@ import { cachedFetchJson } from "@/lib/course/clientFetchCache";
 import { loadCourseSettingsExtra, type CourseSettingsExtra } from "@/lib/course/settingsStorage";
 import { getCourseElectiveOptions, isTopicIncludedByElectives, normalizeElectiveSelection } from "@/lib/course/electives";
 import { useCourseIndex } from "@/lib/course/useCourseIndex";
+import MathMarkdown from "@/components/MathMarkdown";
 
 type CatalogTopic = {
   id: string;
@@ -391,7 +392,10 @@ export default function RecommendedNextClient({
           <div className="text-[10px] sm:text-sm text-gray-800">
             <span className="font-semibold">{recommended.topic!.title}</span>
           </div>
-          <div className="text-[10px] sm:text-sm text-gray-600">{recommended.topic!.description}</div>
+          <MathMarkdown
+            content={recommended.topic!.description}
+            className="text-[10px] sm:text-sm text-gray-600"
+          />
 
           <div className="grid gap-2 sm:flex sm:gap-2 pt-3">
             <Link
