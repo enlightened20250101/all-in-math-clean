@@ -4,7 +4,7 @@ import { useState, useTransition } from "react";
 import { updateUserRank } from "./actions";
 
 export default function UserRankSelect({ userId, initialRank }: { userId: string; initialRank: string | null }) {
-  const [rank, setRank] = useState(initialRank ?? user);
+  const [rank, setRank] = useState(initialRank ?? "user");
   const [pending, startTransition] = useTransition();
 
   return (
