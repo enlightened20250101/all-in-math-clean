@@ -108,8 +108,9 @@ export default function WriteupClient({ topicTitle, topicId }: WriteupClientProp
         ...extractMathTokens(overrideTokens.join(" ")),
         ...extractMathTokens(solutionTextForTokens),
       ]);
+      const normalizedMathTokens = uniqueTokens(mathTokens.map((token) => normalizeMathToken(token)));
       const hitByText = tokens.some((token) => normalizedAnswer.includes(token));
-      const hitByMath = mathTokens.some((token) => normalizedAnswer.includes(token));
+      const hitByMath = normalizedMathTokens.some((token) => normalizedAnswer.includes(token));
       return {
         item,
         hit: combinedAnswer.trim().length > 0 && (hitByText || hitByMath),
@@ -699,7 +700,25 @@ function normalizeText(value: string): string {
   return value
     .toLowerCase()
     .replace(/\s+/g, "")
-    .replace(/[、。,.!?]/g, "");
+    .replace(/　/g, "")
+    .replace(/[、。・,.!?]/g, "")
+    .replace(/\$/g, "")
+    .replace(/\\\(|\\\)/g, "");
+}
+
+function normalizeMathToken(value: string): string {
+  return value
+    .toLowerCase()
+    .replace(/\s+/g, "")
+    .replace(/\$/g, "")
+    .replace(/\\\(|\\\)/g, "")
+    .replace(/\\cdot/g, "*")
+    .replace(/\\times/g, "*")
+    .replace(/\\div/g, "/")
+    .replace(/\\frac\{([^}]*)\}\{([^}]*)\}/g, "($1)/($2)")
+    .replace(/\^\{([^}]*)\}/g, "^$1")
+    .replace(/\^([0-9]+)/g, "^$1")
+    .replace(/\{([^}]*)\}/g, "$1");
 }
 
 function extractTokens(value: string): string[] {
