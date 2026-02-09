@@ -161,11 +161,11 @@ export default function AdminReportsTableClient({ rows }: { rows: ReportRow[] })
                       {r.linkLabel ?? 対象}
                     </a>
                   ) : (
-                    -
+                    "-"
                   )}
                 </td>
                 <td className="px-3 py-2 whitespace-pre-wrap">{r.reason}</td>
-                <td className="px-3 py-2 font-mono text-[11px]">{r.created_by ?? -}</td>
+                <td className="px-3 py-2 font-mono text-[11px]">{r.created_by ?? "-"}</td>
                 <td className="px-3 py-2">{new Date(r.created_at).toLocaleString()}</td>
                 <td className="px-3 py-2">
                   <ReportStatusSelect reportId={r.id} initialStatus={r.status} />
