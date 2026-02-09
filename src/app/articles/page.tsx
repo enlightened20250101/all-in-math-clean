@@ -65,6 +65,28 @@ function getArticleLastActivity(row: any) {
   return row?.last_comment_at ?? row?.last_activity_at ?? row?.updated_at ?? null;
 }
 
+function LearningLinks() {
+  return (
+    <div className="rounded-2xl border border-slate-200 bg-slate-50/60 p-4">
+      <div className="text-[11px] font-semibold text-slate-600">学習を進める</div>
+      <div className="mt-2 flex flex-wrap gap-2 text-[11px] sm:text-sm">
+        <Link className="rounded-full border border-slate-200 bg-white px-3 py-1.5" href="/course">
+          コース学習
+        </Link>
+        <Link className="rounded-full border border-slate-200 bg-white px-3 py-1.5" href="/course/topics">
+          トピック一覧
+        </Link>
+        <Link className="rounded-full border border-slate-200 bg-white px-3 py-1.5" href="/posts">
+          質問一覧
+        </Link>
+        <Link className="rounded-full border border-slate-200 bg-white px-3 py-1.5" href="/threads">
+          スレッド一覧
+        </Link>
+      </div>
+    </div>
+  );
+}
+
  
 
 /* ---------- Hot / Top / New 取得（タグ列が無くても落ちない） ---------- */
