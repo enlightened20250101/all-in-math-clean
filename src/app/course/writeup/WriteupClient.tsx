@@ -119,18 +119,22 @@ export default function WriteupClient({ topicTitle, topicId }: WriteupClientProp
             ? "数式一致"
             : "未検出"
         : "自動判定対象外";
+      const weight = getRubricWeight(item);
       return {
         item,
         hit: combinedAnswer.trim().length > 0 && (hitByText || hitByMath),
         reason,
+        weight,
       };
     });
   }, [rubric, combinedAnswer, activeProblem]);
 
   const rubricScore = useMemo(() => {
     if (rubricChecks.length === 0) return 0;
-    const hits = rubricChecks.filter((check) => check.hit).length;
-    return Math.round((hits / rubricChecks.length) * 100);
+    const totalWeight = rubricChecks.reduce((sum, check) => sum + check.weight, 0);
+    if (totalWeight === 0) return 0;
+    const hitWeight = rubricChecks.reduce((sum, check) => sum + (check.hit ? check.weight : 0), 0);
+    return Math.round((hitWeight / totalWeight) * 100);
   }, [rubricChecks]);
 
   useEffect(() => {
@@ -557,17 +561,22 @@ export default function WriteupClient({ topicTitle, topicId }: WriteupClientProp
                   />
                   <div className="flex-1">
                     <MathMarkdown content={check.item} className="text-sm" />
-                    <span
-                      className={`mt-1 inline-flex rounded-full px-2 py-[2px] text-[10px] ${
-                        check.hit
-                          ? "bg-emerald-50 text-emerald-700"
-                          : check.reason === "自動判定対象外"
-                            ? "bg-slate-100 text-slate-500"
-                            : "bg-amber-50 text-amber-700"
-                      }`}
-                    >
-                      {check.reason}
-                    </span>
+                    <div className="mt-1 flex flex-wrap gap-1 text-[10px]">
+                      <span
+                        className={`inline-flex rounded-full px-2 py-[2px] ${
+                          check.hit
+                            ? "bg-emerald-50 text-emerald-700"
+                            : check.reason === "自動判定対象外"
+                              ? "bg-slate-100 text-slate-500"
+                              : "bg-amber-50 text-amber-700"
+                        }`}
+                      >
+                        {check.reason}
+                      </span>
+                      <span className="inline-flex rounded-full bg-slate-100 px-2 py-[2px] text-slate-600">
+                        重み {check.weight.toFixed(1)}
+                      </span>
+                    </div>
                   </div>
                 </li>
               ))}
@@ -741,6 +750,21 @@ function normalizeMathToken(value: string): string {
     .replace(/\^\{([^}]*)\}/g, "^$1")
     .replace(/\^([0-9]+)/g, "^$1")
     .replace(/\{([^}]*)\}/g, "$1");
+}
+
+function getRubricWeight(item: string): number {
+  const normalized = normalizeText(item);
+  if (!normalized) return 1;
+  if (normalized.includes("結論") || normalized.includes("答") || normalized.includes("最終")) {
+    return 1.5;
+  }
+  if (normalized.includes("方針") || normalized.includes("立式") || normalized.includes("設定")) {
+    return 1.2;
+  }
+  if (normalized.includes("検算") || normalized.includes("確認")) {
+    return 0.8;
+  }
+  return 1;
 }
 
 function extractTokens(value: string): string[] {
