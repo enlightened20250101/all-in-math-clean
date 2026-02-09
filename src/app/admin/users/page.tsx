@@ -1,7 +1,11 @@
 import { supabaseServerReadOnly } from "@/lib/supabaseServer";
 import UserRankSelect from "./UserRankSelect";
 
-export default async function AdminUsersPage() {
+export default async function AdminUsersPage({
+  searchParams,
+}: {
+  searchParams?: { q?: string; rank?: string };
+}) {
   const sb = await supabaseServerReadOnly();
   const { data: auth } = await sb.auth.getUser();
   const userId = auth.user?.id ?? null;
@@ -20,11 +24,24 @@ export default async function AdminUsersPage() {
     );
   }
 
-  const { data: users } = await sb
+  const q = (searchParams?.q ?? "").trim();
+  const rank = (searchParams?.rank ?? "all").trim();
+
+  let query = sb
     .from("profiles")
     .select("id, display_name, grade_level, user_rank, created_at, avatar_url")
     .order("created_at", { ascending: false })
     .limit(200);
+
+  if (rank && rank !== "all") {
+    query = query.eq("user_rank", rank);
+  }
+  if (q) {
+    const qSafe = q.replace(/[%_]/g, "\\$&");
+    query = query.or(`display_name.ilike.%${qSafe}%,id.ilike.%${qSafe}%`);
+  }
+
+  const { data: users } = await query;
 
   return (
     <div className="max-w-5xl mx-auto px-3 sm:px-4 py-6 space-y-4">
@@ -42,6 +59,23 @@ export default async function AdminUsersPage() {
           管理トップへ
         </a>
       </div>
+
+      <form className="flex flex-wrap items-center gap-2 text-[11px] sm:text-sm">
+        <input
+          name="q"
+          placeholder="表示名 or ユーザーID"
+          defaultValue={q}
+          className="w-56 rounded border px-2 py-1"
+        />
+        <select name="rank" defaultValue={rank} className="rounded border px-2 py-1">
+          <option value="all">全権限</option>
+          <option value="user">user</option>
+          <option value="admin">admin</option>
+        </select>
+        <button type="submit" className="rounded-full border px-3 py-1 text-[10px] sm:text-xs">
+          検索
+        </button>
+      </form>
 
       <div className="overflow-x-auto border rounded-xl bg-white">
         <table className="min-w-full text-[11px] sm:text-sm">
