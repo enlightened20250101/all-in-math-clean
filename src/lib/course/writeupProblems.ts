@@ -6026,7 +6026,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
   },
   {
     id: "writeup_hd_quad_param_range_2",
-    topicId: "quad_param_range_basic",
+    topicId: "quad_inequality_basic",
     title: "2次関数と範囲（難）",
     statement:
       "$f(x)=x^2-2ax+a^2-1$ が区間 $[0,2]$ で常に負となるような $a$ の範囲を求めよ。",
