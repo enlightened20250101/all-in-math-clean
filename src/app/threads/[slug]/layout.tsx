@@ -35,6 +35,44 @@ export async function generateMetadata({
   };
 }
 
-export default function ThreadLayout({ children }: { children: React.ReactNode }) {
-  return children;
+export default async function ThreadLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const sb = supabaseServerPublic();
+  const { data } = await sb
+    .from("threads")
+    .select("title")
+    .eq("slug", slug)
+    .maybeSingle();
+
+  const baseUrl = "https://all-in-math.com";
+  const breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "ホーム", item: baseUrl },
+      { "@type": "ListItem", position: 2, name: "スレッド一覧", item: `${baseUrl}/threads` },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: data?.title ?? "スレッド",
+        item: `${baseUrl}/threads/${slug}`,
+      },
+    ],
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+      />
+      {children}
+    </>
+  );
 }
