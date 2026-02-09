@@ -160,7 +160,7 @@ export default function AdminReportsTableClient({ rows }: { rows: ReportRow[] })
                 <td className="px-3 py-2">
                   {r.linkHref ? (
                     <a className="text-blue-600 underline" href={r.linkHref} target="_blank" rel="noreferrer">
-                      {r.linkLabel ?? 対象}
+                      {r.linkLabel ?? "対象"}
                     </a>
                   ) : (
                     "-"
