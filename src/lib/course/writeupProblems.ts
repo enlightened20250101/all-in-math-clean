@@ -6023,6 +6023,96 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "$f(-1)=0$ から $a=b$。導関数は $3x^2+2ax+b$、$x=-1$ で $3-2a+b=0$。$a=b$ より $a=b=3$。",
     level: 3,
   },
+  {
+    id: "writeup_hd_quad_param_range_2",
+    topicId: "quad_param_range_basic",
+    title: "2次関数と範囲（難）",
+    statement:
+      "$f(x)=x^2-2ax+a^2-1$ が区間 $[0,2]$ で常に負となるような $a$ の範囲を求めよ。",
+    rubric: [
+      "平方完成して $f(x)=(x-a)^2-1$ としている",
+      "区間端点と頂点位置の場合分けをしている",
+      "範囲を不等式で正しくまとめている",
+    ],
+    solution:
+      "$f(x)=(x-a)^2-1$。区間内での最大値が $<0$ となる必要がある。頂点 $x=a$ が $[0,2]$ にあるとき最大は端点なので $\\max\\{(0-a)^2-1,(2-a)^2-1\\}<0$。これは $a^2<1$ かつ $(2-a)^2<1$ より $-1<a<1$ と $1<a<3$ を同時に満たせず不可。頂点が区間外なら端点で最大。$a\\le0$ のとき最大は $x=2$: $(2-a)^2-1<0\\Rightarrow 1<a<3$ は矛盾。$a\\ge2$ のとき最大は $x=0$: $a^2-1<0\\Rightarrow -1<a<1$ は矛盾。よって該当なし。",
+    level: 3,
+  },
+  {
+    id: "writeup_hd_quad_intersection_1",
+    topicId: "quad_graph_through_points_variant_basic",
+    title: "2曲線の共有点（難）",
+    statement:
+      "放物線 $y=x^2+px+q$ と直線 $y=2x+1$ が異なる2点で交わり、その2点の $x$ 座標の和が $4$ である。$p,q$ の関係式を求めよ。",
+    rubric: [
+      "交点を二次方程式で表している",
+      "解の和が係数から $4$ と置けている",
+      "$p,q$ の関係式を導いている",
+    ],
+    solution:
+      "交点は $x^2+px+q=2x+1\\Rightarrow x^2+(p-2)x+(q-1)=0$。解の和は $-(p-2)=4$ より $p-2=-4$、$p=-2$。異なる2点条件は判別式 $D=(p-2)^2-4(q-1)>0$。$p=-2$ から $16-4(q-1)>0\\Rightarrow q<5$。関係は $p=-2$ かつ $q<5$。",
+    level: 3,
+  },
+  {
+    id: "writeup_hd_trig_range_1",
+    topicId: "trig_range_basic",
+    title: "三角関数の値域（難）",
+    statement:
+      "$f(x)=2\\sin x+\\sqrt{3}\\cos x$ の最大値・最小値と、それをとる $x$ を $0\\le x<2\\pi$ で求めよ。",
+    rubric: [
+      "合成して $R\\sin(x+\\alpha)$ の形にしている",
+      "最大最小が $\\pm R$ と分かっている",
+      "対応する $x$ を正しく求めている",
+    ],
+    solution:
+      "$f(x)=R\\sin(x+\\alpha)$ とおくと $R=\\sqrt{2^2+(\\sqrt3)^2}=\\sqrt7$。$\\cos\\alpha=2/\\sqrt7,\\sin\\alpha=\\sqrt3/\\sqrt7$。最大値 $\\sqrt7$ は $x+\\alpha=\\pi/2$、最小値 $-\\sqrt7$ は $x+\\alpha=3\\pi/2$。",
+    level: 3,
+  },
+  {
+    id: "writeup_hd_exp_log_1",
+    topicId: "exp_log_equations_basic",
+    title: "指数方程式（難）",
+    statement:
+      "$2^{2x}+2^x-6=0$ を解け。",
+    rubric: [
+      "$2^x=t$ とおき二次方程式にしている",
+      "$t>0$ を考慮している",
+      "元の $x$ に戻して解を求めている",
+    ],
+    solution:
+      "$t=2^x(>0)$ とおくと $t^2+t-6=0$ で $(t-2)(t+3)=0$。$t=2$ より $2^x=2$、$x=1$。",
+    level: 3,
+  },
+  {
+    id: "writeup_hd_data_regression_1",
+    topicId: "data_regression_basic",
+    title: "回帰直線（難）",
+    statement:
+      "データ $(1,2),(2,3),(3,5),(4,4)$ について回帰直線 $y=ax+b$ を求めよ。",
+    rubric: [
+      "平均 $\\bar{x},\\bar{y}$ を求めている",
+      "$a=\\frac{\\sum (x-\\bar{x})(y-\\bar{y})}{\\sum (x-\\bar{x})^2}$ を使っている",
+      "$b=\\bar{y}-a\\bar{x}$ を使っている",
+    ],
+    solution:
+      "$\\bar{x}=2.5,\\bar{y}=3.5$。$\\sum (x-\\bar{x})(y-\\bar{y})=3.5$、$\\sum (x-\\bar{x})^2=5$ より $a=0.7$。$b=3.5-0.7\\times2.5=1.75$。",
+    level: 3,
+  },
+  {
+    id: "writeup_hd_int_mod_1",
+    topicId: "int_mod_arithmetic_intro",
+    title: "合同式（難）",
+    statement:
+      "$7^n$ を $11$ で割った余りが $1$ となる最小の正の整数 $n$ を求めよ。",
+    rubric: [
+      "合同式の性質を使っている",
+      "周期を調べている",
+      "最小の $n$ を答えている",
+    ],
+    solution:
+      "$7^2=49\\equiv5$、$7^3\\equiv5\\cdot7=35\\equiv2$、$7^4\\equiv2\\cdot7=14\\equiv3$、$7^5\\equiv3\\cdot7=21\\equiv10$、$7^6\\equiv10\\cdot7=70\\equiv4$、$7^7\\equiv4\\cdot7=28\\equiv6$、$7^8\\equiv6\\cdot7=42\\equiv9$、$7^9\\equiv9\\cdot7=63\\equiv8$、$7^{10}\\equiv8\\cdot7=56\\equiv1$。よって最小は $n=10$。",
+    level: 3,
+  },
 
 ];
 
