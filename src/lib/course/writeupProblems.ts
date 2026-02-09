@@ -6042,7 +6042,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
   },
   {
     id: "writeup_hd_quad_intersection_1",
-    topicId: "quad_graph_through_points_variant_basic",
+    topicId: "quad_roots_relations_basic",
     title: "2曲線の共有点（難）",
     statement:
       "放物線 $y=x^2+px+q$ と直線 $y=2x+1$ が異なる2点で交わり、その2点の $x$ 座標の和が $4$ である。$p,q$ の関係式を求めよ。",
