@@ -279,9 +279,10 @@ export default async function TopicDetailPage({ params, searchParams }: Props) {
 export async function generateMetadata({
   params,
 }: {
-  params: { topicId: string };
+  params: Promise<{ topicId: string }>;
 }): Promise<Metadata> {
-  const topic = getTopicById(params.topicId);
+  const { topicId } = await params;
+  const topic = getTopicById(topicId);
   if (!topic) {
     return { title: "トピックが見つかりません" };
   }
