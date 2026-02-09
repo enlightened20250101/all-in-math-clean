@@ -5941,6 +5941,89 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
     level: 3,
   },
 
+  {
+    id: "writeup_hd_calc_extrema_param_1",
+    topicId: "calc_extrema_basic",
+    title: "極値とパラメータ（難）",
+    statement: "関数 $f(x)=x^3-3x^2+ax$ が極大値と極小値をともに持つための $a$ の範囲を求めよ。",
+    rubric: [
+      "導関数を求めている",
+      "判別式または増減表で条件を立てている",
+      "範囲を正しく結論付けている",
+    ],
+    solution:
+      "導関数は $3x^2-6x+a$。これが異なる2実数解を持てばよい。判別式 $36-12a>0$ より $a<3$。",
+    level: 3,
+  },
+  {
+    id: "writeup_hd_integral_area_1",
+    topicId: "calc_curve_area_basic",
+    title: "2曲線で囲む面積（難）",
+    statement: "曲線 $y=x^2$ と $y=2x$ で囲まれる部分の面積を求めよ。",
+    rubric: [
+      "交点を求めている",
+      "上下面を判断して積分している",
+      "面積を正しく計算している",
+    ],
+    solution:
+      "交点は $x=0,2$。面積は $\int_0^2(2x-x^2)dx=[x^2-\frac{x^3}{3}]_0^2=\frac{4}{3}$。",
+    level: 3,
+  },
+  {
+    id: "writeup_hd_trig_equation_1",
+    topicId: "trig_equations_basic",
+    title: "三角方程式（難）",
+    statement: "$0\le x<2\pi$ において $2\sin x+\sqrt{3}=0$ を解け。",
+    rubric: [
+      "$\sin x=-\sqrt{3}/2$ を導いている",
+      "解の範囲を正しく取っている",
+    ],
+    solution:
+      "$x=\frac{4\pi}{3},\frac{5\pi}{3}$。",
+    level: 3,
+  },
+  {
+    id: "writeup_hd_exp_log_eq_1",
+    topicId: "exp_log_log_equation_basic",
+    title: "対数方程式（難）",
+    statement: "$\log_2(x-1)+\log_2(x-3)=3$ を解け。",
+    rubric: [
+      "定義域を考慮している",
+      "積の形にまとめている",
+      "解を正しく判定している",
+    ],
+    solution:
+      "$(x-1)(x-3)=2^3=8$ より $x^2-4x-5=0$。$x=5,-1$。定義域から $x=5$。",
+    level: 3,
+  },
+  {
+    id: "writeup_hd_binomial_coeff_1",
+    topicId: "binomial_xy_coeff_basic",
+    title: "二項定理（難）",
+    statement: "$(x^2+\frac{1}{x})^6$ の $x^5$ の係数を求めよ。",
+    rubric: [
+      "一般項を立てて次数条件を解いている",
+      "係数を正しく判断している",
+    ],
+    solution:
+      "一般項は $\binom{6}{k}x^{12-3k}$。$12-3k=5$ は整数解を持たないため係数0。",
+    level: 3,
+  },
+  {
+    id: "writeup_hd_poly_factor_1",
+    topicId: "poly_factor_k_basic",
+    title: "因数分解とパラメータ（難）",
+    statement: "多項式 $x^3+ax^2+bx+1$ が $(x+1)^2$ を因数にもつとき、$a,b$ を求めよ。",
+    rubric: [
+      "$x=-1$ を代入して条件を立てている",
+      "導関数の条件を用いている",
+      "連立して $a,b$ を求めている",
+    ],
+    solution:
+      "$f(-1)=0$ から $a=b$。導関数は $3x^2+2ax+b$、$x=-1$ で $3-2a+b=0$。$a=b$ より $a=b=3$。",
+    level: 3,
+  },
+
 ];
 
 export function getWriteupProblemsByTopic(topicId?: TopicId) {
