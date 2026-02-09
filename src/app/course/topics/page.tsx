@@ -5,17 +5,17 @@ import AuthGate from "@/components/AuthGate";
 import TopicsClient from "./TopicsClient";
 export const metadata: Metadata = {
   title: "トピック一覧 | オルマ",
-  description: "オルマの数学トピック一覧。復習対象や解説ページに素早くアクセス。",
+  description: "数学トピック一覧。数I〜III/A/B/Cの解説・演習にすぐアクセスできます。",
   openGraph: {
     title: "トピック一覧 | オルマ",
-    description: "オルマの数学トピック一覧。復習対象や解説ページに素早くアクセス。",
+    description: "数学トピック一覧。数I〜III/A/B/Cの解説・演習にすぐアクセスできます。",
     type: "website",
     images: ["/opengraph-image"],
   },
   twitter: {
     card: "summary",
     title: "トピック一覧 | オルマ",
-    description: "オルマの数学トピック一覧。復習対象や解説ページに素早くアクセス。",
+    description: "数学トピック一覧。数I〜III/A/B/Cの解説・演習にすぐアクセスできます。",
     images: ["/twitter-image"],
   },
 };

@@ -12,11 +12,11 @@ import InlineMathText from "@/components/InlineMathText";
 export const metadata: Metadata = {
   title: "スレッド一覧 | オルマ",
   description:
-    "数学の質問・議論スレッドを一覧で検索。タグや並び替えで学習テーマを探せます。",
+    "数学の質問・議論スレッド一覧。高校数学・受験・定期テストの疑問をタグで検索。",
   openGraph: {
     title: "スレッド一覧 | オルマ",
     description:
-      "数学の質問・議論スレッドを一覧で検索。タグや並び替えで学習テーマを探せます。",
+      "数学の質問・議論スレッド一覧。高校数学・受験・定期テストの疑問をタグで検索。",
     type: "website",
     images: ["/opengraph-image"],
   },
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     card: "summary",
     title: "スレッド一覧 | オルマ",
     description:
-      "数学の質問・議論スレッドを一覧で検索。タグや並び替えで学習テーマを探せます。",
+      "数学の質問・議論スレッド一覧。高校数学・受験・定期テストの疑問をタグで検索。",
     images: ["/twitter-image"],
   },
 };

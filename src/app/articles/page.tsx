@@ -16,11 +16,11 @@ type Tab = "hot" | "top7d" | "new";
 export const metadata: Metadata = {
   title: "数学記事",
   description:
-    "オルマの数学記事一覧。高校数学から大学受験まで、解説・証明・考え方を日本語でわかりやすくまとめています。",
+    "高校数学の解説・証明・公式を日本語でまとめた記事一覧。数I〜III/A/B/Cや共通テスト対策に対応。",
   openGraph: {
     title: "数学記事",
     description:
-      "オルマの数学記事一覧。高校数学から大学受験まで、解説・証明・考え方を日本語でわかりやすくまとめています。",
+      "高校数学の解説・証明・公式を日本語でまとめた記事一覧。数I〜III/A/B/Cや共通テスト対策に対応。",
     type: "website",
     images: ["/opengraph-image"],
   },
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     card: "summary",
     title: "数学記事",
     description:
-      "オルマの数学記事一覧。高校数学から大学受験まで、解説・証明・考え方を日本語でわかりやすくまとめています。",
+      "高校数学の解説・証明・公式を日本語でまとめた記事一覧。数I〜III/A/B/Cや共通テスト対策に対応。",
     images: ["/twitter-image"],
   },
 };

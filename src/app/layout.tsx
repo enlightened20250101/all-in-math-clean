@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     template: "%s | オルマ",
   },
   description:
-    "オルマは数学の学習・質問・記事が一体化した日本語向け数学コミュニティ。TeX対応で式も書きやすく、コース学習・掲示板・Q&Aが揃っています。",
+    "オルマは高校数学〜大学受験の学習・質問・解説記事が揃う日本語数学コミュニティ。TeX対応の数式入力で、コース学習とQ&Aを効率化。",
   applicationName: "オルマ",
   keywords: [
     "数学",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "オルマ",
     description:
-      "数学の学習・質問・記事が一体化した日本語向け数学コミュニティ。TeX対応で数式もスムーズ。",
+      "高校数学〜大学受験の学習・質問・解説記事が揃う日本語数学コミュニティ。TeX対応の数式入力で学習を効率化。",
     type: "website",
     siteName: "オルマ",
     locale: "ja_JP",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "オルマ",
     description:
-      "数学の学習・質問・記事が一体化した日本語向け数学コミュニティ。TeX対応で数式もスムーズ。",
+      "高校数学〜大学受験の学習・質問・解説記事が揃う日本語数学コミュニティ。TeX対応の数式入力で学習を効率化。",
     images: ["/twitter-image"],
   },
   alternates: {

@@ -11,17 +11,17 @@ import CourseRoadmapClient from "./CourseRoadmapClient";
 import CourseContinueFloatingClient from "./CourseContinueFloatingClient";
 export const metadata: Metadata = {
   title: "コース学習 | オルマ",
-  description: "オルマのコース学習トップ。ロードマップと復習から次の学習を進めます。",
+  description: "高校数学の学習ロードマップと復習が一体化。オルマで次に学ぶ単元がすぐ分かります。",
   openGraph: {
     title: "コース学習 | オルマ",
-    description: "オルマのコース学習トップ。ロードマップと復習から次の学習を進めます。",
+    description: "高校数学の学習ロードマップと復習が一体化。オルマで次に学ぶ単元がすぐ分かります。",
     type: "website",
     images: ["/opengraph-image"],
   },
   twitter: {
     card: "summary",
     title: "コース学習 | オルマ",
-    description: "オルマのコース学習トップ。ロードマップと復習から次の学習を進めます。",
+    description: "高校数学の学習ロードマップと復習が一体化。オルマで次に学ぶ単元がすぐ分かります。",
     images: ["/twitter-image"],
   },
 };
