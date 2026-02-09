@@ -19,7 +19,7 @@ export default function UserRankSelect({ userId, initialRank }: { userId: string
           try {
             await updateUserRank(userId, next);
           } catch {
-            setRank(initialRank ?? user);
+            setRank(initialRank ?? "user");
           }
         });
       }}
