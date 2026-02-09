@@ -73,6 +73,12 @@ export default async function Home() {
               掲示板を見る
             </Link>
             <Link
+              href="/graphs"
+              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-white/90 hover:bg-white/20 transition"
+            >
+              グラフを描く
+            </Link>
+            <Link
               href="/posts/new"
               className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-white/90 hover:bg-white/20 transition"
             >
@@ -112,6 +118,13 @@ export default async function Home() {
           <p className="text-[11px] sm:text-sm text-gray-500 mt-1">人気記事・活発スレッド</p>
         </Link>
 
+        <Link
+          href="/graphs"
+          className="rounded-[18px] border border-slate-300/70 bg-white/95 p-4 hover:shadow-lg hover:-translate-y-0.5 transition"
+        >
+          <h3 className="font-semibold text-sm sm:text-base">📈 グラフ</h3>
+          <p className="text-[11px] sm:text-sm text-gray-500 mt-1">関数やデータを可視化</p>
+        </Link>
         <Link
           href="/posts"
           className="rounded-[18px] border border-slate-300/70 bg-white/95 p-4 hover:shadow-lg hover:-translate-y-0.5 transition cursor-pointer"
