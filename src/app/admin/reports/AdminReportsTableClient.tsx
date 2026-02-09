@@ -96,7 +96,7 @@ export default function AdminReportsTableClient({ rows }: { rows: ReportRow[] })
           <button
             type="button"
             className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-[10px] sm:text-xs text-emerald-700 disabled:opacity-50"
-            onClick={() => bulkUpdate(resolved)}
+            onClick={() => bulkUpdate("resolved")}
             disabled={!selectedIds.length || pending}
           >
             選択を解決
@@ -104,7 +104,7 @@ export default function AdminReportsTableClient({ rows }: { rows: ReportRow[] })
           <button
             type="button"
             className="rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-[10px] sm:text-xs text-amber-700 disabled:opacity-50"
-            onClick={() => bulkUpdate(triage)}
+            onClick={() => bulkUpdate("triage")}
             disabled={!selectedIds.length || pending}
           >
             選択を対応中
@@ -112,7 +112,7 @@ export default function AdminReportsTableClient({ rows }: { rows: ReportRow[] })
           <button
             type="button"
             className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[10px] sm:text-xs text-slate-700 disabled:opacity-50"
-            onClick={() => bulkUpdate(ignored)}
+            onClick={() => bulkUpdate("ignored")}
             disabled={!selectedIds.length || pending}
           >
             選択を無視
