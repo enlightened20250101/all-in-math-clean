@@ -1,6 +1,5 @@
 import { supabaseServerReadOnly } from "@/lib/supabaseServer";
-import ReportStatusSelect from "./ReportStatusSelect";
-import ReportActionButtons from "./ReportActionButtons";
+import AdminReportsTableClient from "./AdminReportsTableClient";
 
 export default async function AdminReportsPage() {
   const sb = await supabaseServerReadOnly();
@@ -71,6 +70,61 @@ export default async function AdminReportsPage() {
   const articleCommentMap: Map<string, any> = new Map((articleCommentsRes.data || []).map((c: any) => [String(c.id), c]));
   const articleMap: Map<string, any> = new Map((articlesRes || []).map((a: any) => [String(a.id), a]));
 
+  const rows = (reports || []).map((r: any) => {
+    let linkHref: string | null = null;
+    let linkLabel: string | null = null;
+    if (r.target_type === "post") {
+      const p = postMap.get(r.target_id);
+      if (p) {
+        linkHref = `/posts/${p.id}`;
+        linkLabel = p.title ?? "投稿";
+      }
+    } else if (r.target_type === "comment") {
+      const c = commentMap.get(r.target_id);
+      if (c) {
+        linkHref = `/posts/${c.post_id}?comment=${c.id}`;
+        linkLabel = "投稿コメント";
+      }
+    } else if (r.target_type === "thread") {
+      const t = threadMap.get(r.target_id);
+      if (t) {
+        const slug = t.slug ?? t.id;
+        linkHref = `/threads/${slug}`;
+        linkLabel = t.title ?? "スレッド";
+      }
+    } else if (r.target_type === "thread_post") {
+      const tp = threadPostMap.get(r.target_id);
+      if (tp) {
+        const t = threadFromPostMap.get(String(tp.thread_id));
+        if (t) {
+          const slug = t.slug ?? t.id;
+          linkHref = `/threads/${slug}?reply=${tp.id}`;
+          linkLabel = "返信";
+        }
+      }
+    } else if (r.target_type === "group_message") {
+      const m = groupMessageMap.get(r.target_id);
+      if (m) {
+        linkHref = `/groups/${m.group_id}?msg=${m.id}`;
+        linkLabel = "グループメッセージ";
+      }
+    } else if (r.target_type === "article_comment") {
+      const c = articleCommentMap.get(r.target_id);
+      if (c) {
+        const a = articleMap.get(String(c.article_id));
+        if (a) {
+          linkHref = `/articles/${a.slug}?comment=${c.id}`;
+          linkLabel = "記事コメント";
+        }
+      }
+    }
+    return {
+      ...r,
+      linkHref,
+      linkLabel,
+    };
+  });
+
   return (
     <div className="max-w-5xl mx-auto px-3 sm:px-4 py-6 space-y-4">
       <div>
@@ -80,134 +134,7 @@ export default async function AdminReportsPage() {
         </div>
       </div>
 
-      <div className="overflow-x-auto border rounded-xl bg-white">
-        <table className="min-w-full text-[11px] sm:text-sm">
-          <thead className="bg-slate-50 text-slate-600">
-            <tr>
-              <th className="px-3 py-2 text-left">ID</th>
-              <th className="px-3 py-2 text-left">対象</th>
-              <th className="px-3 py-2 text-left">リンク</th>
-              <th className="px-3 py-2 text-left">理由</th>
-              <th className="px-3 py-2 text-left">報告者</th>
-              <th className="px-3 py-2 text-left">日時</th>
-              <th className="px-3 py-2 text-left">状態</th>
-              <th className="px-3 py-2 text-left">操作</th>
-            </tr>
-          </thead>
-          <tbody>
-            {(reports || []).map((r: any) => (
-              <tr key={r.id} className="border-t">
-                <td className="px-3 py-2">{r.id}</td>
-                <td className="px-3 py-2">
-                  <div className="text-[10px] text-slate-400">{r.target_type}</div>
-                  <div className="font-mono text-[11px]">{r.target_id}</div>
-                </td>
-                <td className="px-3 py-2">
-                  {(() => {
-                    if (r.target_type === "post") {
-                      const p = postMap.get(r.target_id);
-                      if (!p) return "-";
-                      return (
-                        <a className="text-blue-600 underline" href={`/posts/${p.id}`} target="_blank" rel="noreferrer">
-                          {p.title ?? "投稿"}
-                        </a>
-                      );
-                    }
-                    if (r.target_type === "comment") {
-                      const c = commentMap.get(r.target_id);
-                      if (!c) return "-";
-                      return (
-                        <a
-                          className="text-blue-600 underline"
-                          href={`/posts/${c.post_id}?comment=${c.id}`}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          投稿コメント
-                        </a>
-                      );
-                    }
-                    if (r.target_type === "thread") {
-                      const t = threadMap.get(r.target_id);
-                      if (!t) return "-";
-                      const slug = t.slug ?? t.id;
-                      return (
-                        <a className="text-blue-600 underline" href={`/threads/${slug}`} target="_blank" rel="noreferrer">
-                          {t.title ?? "スレッド"}
-                        </a>
-                      );
-                    }
-                    if (r.target_type === "thread_post") {
-                      const tp = threadPostMap.get(r.target_id);
-                      if (!tp) return "-";
-                      const t = threadFromPostMap.get(String(tp.thread_id));
-                      if (!t) return "-";
-                      const slug = t.slug ?? t.id;
-                      return (
-                        <a
-                          className="text-blue-600 underline"
-                          href={`/threads/${slug}?reply=${tp.id}`}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          返信
-                        </a>
-                      );
-                    }
-                    if (r.target_type === "group_message") {
-                      const m = groupMessageMap.get(r.target_id);
-                      if (!m) return "-";
-                      return (
-                        <a
-                          className="text-blue-600 underline"
-                          href={`/groups/${m.group_id}?msg=${m.id}`}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          グループメッセージ
-                        </a>
-                      );
-                    }
-                    if (r.target_type === "article_comment") {
-                      const c = articleCommentMap.get(r.target_id);
-                      if (!c) return "-";
-                      const a = articleMap.get(String(c.article_id));
-                      if (!a) return "-";
-                      return (
-                        <a
-                          className="text-blue-600 underline"
-                          href={`/articles/${a.slug}?comment=${c.id}`}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          記事コメント
-                        </a>
-                      );
-                    }
-                    return "-";
-                  })()}
-                </td>
-                <td className="px-3 py-2 whitespace-pre-wrap">{r.reason}</td>
-                <td className="px-3 py-2 font-mono text-[11px]">{r.created_by ?? "-"}</td>
-                <td className="px-3 py-2">{new Date(r.created_at).toLocaleString()}</td>
-                <td className="px-3 py-2">
-                  <ReportStatusSelect reportId={r.id} initialStatus={r.status} />
-                </td>
-                <td className="px-3 py-2">
-                  <ReportActionButtons reportId={r.id} targetType={r.target_type} targetId={r.target_id} />
-                </td>
-              </tr>
-            ))}
-            {(!reports || reports.length === 0) && (
-              <tr>
-                <td colSpan={8} className="px-3 py-6 text-center text-slate-500">
-                  通報はまだありません。
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+      <AdminReportsTableClient rows={rows} />
     </div>
   );
 }

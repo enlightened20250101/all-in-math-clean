@@ -2,10 +2,23 @@
 
 import { supabaseServerAction } from "@/lib/supabaseServer";
 
-export async function updateReportStatus(reportId: number, status: string) {
+async function assertAdmin() {
   const sb = await supabaseServerAction();
   const { data: auth } = await sb.auth.getUser();
   const userId = auth.user?.id ?? null;
+  const { data: me } = await sb
+    .from("profiles")
+    .select("user_rank")
+    .eq("id", userId)
+    .maybeSingle();
+  if (!userId || me?.user_rank !== "admin") {
+    throw new Error("forbidden");
+  }
+  return { sb, userId };
+}
+
+export async function updateReportStatus(reportId: number, status: string) {
+  const { sb, userId } = await assertAdmin();
   const update = {
     status,
     resolved_at: status === "resolved" || status === "ignored" ? new Date().toISOString() : null,
@@ -17,18 +30,7 @@ export async function updateReportStatus(reportId: number, status: string) {
 }
 
 export async function moderateTarget(reportId: number, targetType: string, targetId: string) {
-  const sb = await supabaseServerAction();
-  const { data: auth } = await sb.auth.getUser();
-  const userId = auth.user?.id ?? null;
-
-  const { data: me } = await sb
-    .from("profiles")
-    .select("user_rank")
-    .eq("id", userId)
-    .maybeSingle();
-  if (!userId || me?.user_rank !== "admin") {
-    throw new Error("forbidden");
-  }
+  const { sb, userId } = await assertAdmin();
 
   const remove = async (table: string) => {
     const { error } = await sb.from(table).delete().eq("id", targetId);
@@ -65,5 +67,18 @@ export async function moderateTarget(reportId: number, targetType: string, targe
   };
   const { error: uerr } = await sb.from("reports").update(update).eq("id", reportId);
   if (uerr) throw new Error(uerr.message);
+  return { ok: true };
+}
+
+export async function bulkUpdateReportStatus(reportIds: number[], status: string) {
+  if (!reportIds.length) return { ok: true };
+  const { sb, userId } = await assertAdmin();
+  const update = {
+    status,
+    resolved_at: status === "resolved" || status === "ignored" ? new Date().toISOString() : null,
+    resolved_by: status === "resolved" || status === "ignored" ? userId : null,
+  };
+  const { error } = await sb.from("reports").update(update).in("id", reportIds);
+  if (error) throw new Error(error.message);
   return { ok: true };
 }
