@@ -3,6 +3,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import MathMarkdown from "@/components/MathMarkdown";
 import { TOPICS } from "@/lib/course/topics";
 import { WRITEUP_PROBLEMS } from "@/lib/course/writeupProblems";
 
@@ -365,7 +366,10 @@ export default function WriteupListClient() {
                   ))}
                 </div>
                 <div className="mt-3 text-sm font-semibold text-slate-800">{problem.title}</div>
-                <div className="mt-2 text-sm text-slate-600 line-clamp-3">{problem.statement}</div>
+                <MathMarkdown
+                  content={problem.statement}
+                  className="mt-2 text-sm text-slate-600 line-clamp-3"
+                />
                 <div className="mt-auto space-y-2 pt-4 text-[11px] text-slate-500">
                   <div className="flex flex-wrap items-center gap-2">
                     <span className="rounded-full border border-slate-200 bg-white px-2 py-1">
