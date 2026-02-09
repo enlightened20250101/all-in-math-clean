@@ -27,12 +27,12 @@ export default function AdminReportsTableClient({ rows }: { rows: ReportRow[] })
   const sortedRows = useMemo(() => {
     const copy = [...rows];
     switch (sortKey) {
-      case created_asc:
+      case "created_asc":
         return copy.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
-      case status_open:
-        return copy.sort((a, b) => (a.status === open ? -1 : 1));
-      case status_resolved:
-        return copy.sort((a, b) => (a.status === resolved ? 1 : -1));
+      case "status_open":
+        return copy.sort((a, b) => (a.status === "open" ? -1 : 1));
+      case "status_resolved":
+        return copy.sort((a, b) => (a.status === "resolved" ? 1 : -1));
       default:
         return copy.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
     }
