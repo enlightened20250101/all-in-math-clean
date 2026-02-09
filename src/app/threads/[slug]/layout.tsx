@@ -4,13 +4,14 @@ import { supabaseServerPublic } from "@/lib/supabaseServerPublic";
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const sb = supabaseServerPublic();
+  const { slug } = await params;
   const { data } = await sb
     .from("threads")
     .select("title, updated_at")
-    .eq("slug", params.slug)
+    .eq("slug", slug)
     .maybeSingle();
 
   if (!data?.title) {
