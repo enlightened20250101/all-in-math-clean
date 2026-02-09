@@ -1,5 +1,52 @@
 // src/app/loading.tsx
-export default function GlobalLoading() {
+const LOADING_STYLE = process.env.NEXT_PUBLIC_LOADING_STYLE ?? "skeleton";
+
+function SkeletonLoading() {
+  return (
+    <div className="fixed inset-0 z-[200] bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 text-white">
+      <div className="mx-auto flex h-full w-full max-w-5xl flex-col gap-6 px-6 py-8">
+        <div className="flex items-center justify-between">
+          <div className="h-8 w-40 rounded-full bg-white/10 animate-pulse" />
+          <div className="h-8 w-28 rounded-full bg-white/10 animate-pulse" />
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+            <div className="h-4 w-24 rounded-full bg-white/10 animate-pulse" />
+            <div className="mt-4 h-5 w-40 rounded-full bg-white/10 animate-pulse" />
+            <div className="mt-3 space-y-2">
+              <div className="h-3 w-full rounded-full bg-white/10 animate-pulse" />
+              <div className="h-3 w-5/6 rounded-full bg-white/10 animate-pulse" />
+              <div className="h-3 w-2/3 rounded-full bg-white/10 animate-pulse" />
+            </div>
+          </div>
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+            <div className="h-4 w-28 rounded-full bg-white/10 animate-pulse" />
+            <div className="mt-4 h-5 w-36 rounded-full bg-white/10 animate-pulse" />
+            <div className="mt-3 space-y-2">
+              <div className="h-3 w-full rounded-full bg-white/10 animate-pulse" />
+              <div className="h-3 w-4/5 rounded-full bg-white/10 animate-pulse" />
+              <div className="h-3 w-3/5 rounded-full bg-white/10 animate-pulse" />
+            </div>
+          </div>
+        </div>
+        <div className="grid gap-3">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div
+              key={i}
+              className="h-14 rounded-2xl border border-white/10 bg-white/5 animate-pulse"
+            />
+          ))}
+        </div>
+        <div className="mt-auto flex items-center gap-3">
+          <div className="h-3 w-20 rounded-full bg-white/10 animate-pulse" />
+          <div className="h-3 w-40 rounded-full bg-white/10 animate-pulse" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SpinnerLoading() {
   return (
     <div className="fixed inset-0 z-[200] grid place-items-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 text-white">
       <div className="relative flex flex-col items-center gap-6">
@@ -11,9 +58,7 @@ export default function GlobalLoading() {
         </div>
         <div className="text-center">
           <div className="text-[11px] uppercase tracking-[0.5em] text-white/50">Loading</div>
-          <div className="mt-2 text-sm text-white/80">
-            学習データを読み込んでいます
-          </div>
+          <div className="mt-2 text-sm text-white/80">学習データを読み込んでいます</div>
         </div>
         <div className="h-1 w-48 overflow-hidden rounded-full bg-white/10">
           <div className="h-full w-1/3 animate-[loading-bar_1.2s_ease-in-out_infinite] rounded-full bg-gradient-to-r from-sky-200/90 via-white/90 to-sky-200/60" />
@@ -28,4 +73,11 @@ export default function GlobalLoading() {
       `}</style>
     </div>
   );
+}
+
+export default function GlobalLoading() {
+  if (LOADING_STYLE === "spinner") {
+    return <SpinnerLoading />;
+  }
+  return <SkeletonLoading />;
 }

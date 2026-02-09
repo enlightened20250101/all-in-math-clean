@@ -4,6 +4,7 @@ import Script from 'next/script';
 import './globals.css';
 import Navbar from '@/components/Navbar';
 import 'katex/dist/katex.min.css';
+import PageTransition from '@/components/PageTransition';
 import SessionSync from '@/components/SessionSync';
 import SiteFooter from '@/components/SiteFooter';
 
@@ -106,7 +107,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-screen bg-white text-gray-900">
         <SessionSync />
         <Navbar />
-        <main className="mx-auto max-w-5xl px-4 py-6">{children}</main>
+        <main className="mx-auto max-w-5xl px-4 py-6"><PageTransition>{children}</PageTransition></main>
         <SiteFooter />
       </body>
     </html>
