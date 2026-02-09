@@ -1,7 +1,13 @@
+import type { Metadata } from "next";
 // src/app/course/topics/page.tsx
 import Link from "next/link";
 import AuthGate from "@/components/AuthGate";
 import TopicsClient from "./TopicsClient";
+export const metadata: Metadata = {
+
+
+};
+
 
 export default function CourseTopicsPage() {
   return (

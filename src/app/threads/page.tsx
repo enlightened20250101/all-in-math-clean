@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 // app/threads/page.tsx
 import Link from "next/link";
 import dayjs from "dayjs";
@@ -8,6 +9,11 @@ import LocalSaveButton from "@/components/LocalSaveButton";
 import SavedListMarker from "@/components/SavedListMarker";
 import TagOverflowDetails from "@/components/TagOverflowDetails";
 import InlineMathText from "@/components/InlineMathText";
+export const metadata: Metadata = {
+
+
+};
+
 
 const PAGE_SIZE = 20;
 type Tab = "hot" | "top7d" | "new";

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 // src/app/course/page.tsx
 import Link from "next/link";
 import ReviewSummaryCard from "./ReviewSummaryCard";
@@ -8,6 +9,11 @@ import CourseTipsClient from "./CourseTipsClient";
 import CourseRecentTopicLinkClient from "./CourseRecentTopicLinkClient";
 import CourseRoadmapClient from "./CourseRoadmapClient";
 import CourseContinueFloatingClient from "./CourseContinueFloatingClient";
+export const metadata: Metadata = {
+
+
+};
+
 
 export default function CourseHomePage() {
   return (

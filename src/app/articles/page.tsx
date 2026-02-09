@@ -1,4 +1,5 @@
 // app/articles/page.tsx
+import type { Metadata } from "next";
 import Link from "next/link";
 import dayjs from "dayjs";
 import { supabaseServerPublic } from "@/lib/supabaseServerPublic";
@@ -11,6 +12,24 @@ import InlineMathText from "@/components/InlineMathText";
 
 const PAGE_SIZE = 20;
 type Tab = "hot" | "top7d" | "new";
+
+export const metadata: Metadata = {
+  title: "数学記事",
+  description:
+    "オルマの数学記事一覧。高校数学から大学受験まで、解説・証明・考え方を日本語でわかりやすくまとめています。",
+  openGraph: {
+    title: "数学記事",
+    description:
+      "オルマの数学記事一覧。高校数学から大学受験まで、解説・証明・考え方を日本語でわかりやすくまとめています。",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "数学記事",
+    description:
+      "オルマの数学記事一覧。高校数学から大学受験まで、解説・証明・考え方を日本語でわかりやすくまとめています。",
+  },
+};
 
 // 全角→半角 + NFKC、空白/カンマ/読点/スラッシュで分割
 function splitTerms(s: string) {
