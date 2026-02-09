@@ -7,20 +7,60 @@ import SessionSync from '@/components/SessionSync';
 import SiteFooter from '@/components/SiteFooter';
 
 export const metadata: Metadata = {
-  title: "All in Math",
-  description: "数学のことならなんでもお任せ。数学コミュニティ × 記事 × 掲示板。",
-  applicationName: "All in Math",
+  metadataBase: new URL("https://all-in-math.com"),
+  title: {
+    default: "オルマ",
+    template: "%s | オルマ",
+  },
+  description:
+    "オルマは数学の学習・質問・記事が一体化した日本語向け数学コミュニティ。TeX対応で式も書きやすく、コース学習・掲示板・Q&Aが揃っています。",
+  applicationName: "オルマ",
+  keywords: [
+    "数学",
+    "高校数学",
+    "数1",
+    "数2",
+    "数3",
+    "数A",
+    "数B",
+    "数C",
+    "共通テスト",
+    "受験",
+    "質問",
+    "解説",
+    "掲示板",
+    "コミュニティ",
+    "TeX",
+    "数式",
+  ],
   openGraph: {
-    title: "All in Math",
-    description: "数学のことならなんでもお任せ。数学コミュニティ × 記事 × 掲示板。",
+    title: "オルマ",
+    description:
+      "数学の学習・質問・記事が一体化した日本語向け数学コミュニティ。TeX対応で数式もスムーズ。",
     type: "website",
-    siteName: "All in Math",
+    siteName: "オルマ",
     locale: "ja_JP",
+    url: "https://all-in-math.com",
   },
   twitter: {
     card: "summary_large_image",
-    title: "All in Math",
-    description: "数学のことならなんでもお任せ。数学コミュニティ × 記事 × 掲示板。",
+    title: "オルマ",
+    description:
+      "数学の学習・質問・記事が一体化した日本語向け数学コミュニティ。TeX対応で数式もスムーズ。",
+  },
+  alternates: {
+    canonical: "https://all-in-math.com",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
   icons: {
     icon: [{ url: "/icon" }],

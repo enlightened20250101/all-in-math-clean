@@ -46,12 +46,12 @@ export default async function Home() {
         <div className="absolute -top-24 -right-16 h-56 w-56 rounded-full bg-white/6 blur-3xl" />
         <div className="absolute -bottom-28 -left-10 h-56 w-56 rounded-full bg-white/5 blur-3xl" />
         <div className="relative z-10 space-y-4">
-          <div className="text-[10px] uppercase tracking-[0.28em] text-white/80">All in Math</div>
+          <div className="text-[10px] uppercase tracking-[0.28em] text-white/80">オルマ</div>
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight">
             学ぶ・語る・解決する数学コミュニティ
           </h1>
           <p className="text-[11px] sm:text-base text-white/85 max-w-2xl">
-            記事・掲示板・Q&A・コース学習をまとめて。Markdown + TeX で数式をスムーズに書けます。
+            オルマは、記事・掲示板・Q&A・コース学習が揃う日本語向け数学コミュニティ。Markdown + TeX で数式をスムーズに書けます。
           </p>
           <div className="flex flex-wrap gap-2 sm:gap-3 text-[11px] sm:text-sm">
             <Link
