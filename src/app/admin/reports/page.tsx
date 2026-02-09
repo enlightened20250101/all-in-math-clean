@@ -127,8 +127,14 @@ export default async function AdminReportsPage() {
 
   return (
     <div className="max-w-5xl mx-auto px-3 sm:px-4 py-6 space-y-4">
-      <div>
+      <div className="flex items-center justify-between">
         <h1 className="text-xl sm:text-2xl font-semibold">通報一覧</h1>
+        <a
+          href="/admin"
+          className="rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] text-slate-600 shadow-sm transition hover:bg-slate-50 sm:text-sm"
+        >
+          管理トップへ
+        </a>
         <div className="text-[11px] sm:text-sm text-slate-500 mt-1">
           通報内容の確認とステータス更新
         </div>
