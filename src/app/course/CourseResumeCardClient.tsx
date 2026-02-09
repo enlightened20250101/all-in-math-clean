@@ -7,12 +7,15 @@ import { TOPICS } from "@/lib/course/topics";
 type LastTopic = {
   topicId: string;
   updatedAt: string;
+  courseId?: string;
 };
 
 export default function CourseResumeCardClient() {
   const [lastTopic, setLastTopic] = useState<LastTopic | null>(null);
   const [hasStorage, setHasStorage] = useState(true);
   const [now, setNow] = useState<number | null>(null);
+  const [currentCourseId, setCurrentCourseId] = useState<string | null>(null);
+  const [allowedTopicIds, setAllowedTopicIds] = useState<Set<string> | null>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -31,10 +34,67 @@ export default function CourseResumeCardClient() {
     setNow(Date.now());
   }, []);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const readCurrent = () => {
+      try {
+        const raw = window.localStorage.getItem("course_roadmap_current");
+        if (!raw) return;
+        const parsed = JSON.parse(raw) as { courseId?: string } | null;
+        if (parsed?.courseId) setCurrentCourseId(parsed.courseId);
+      } catch {
+        // ignore
+      }
+    };
+    readCurrent();
+    const onStorage = (e: StorageEvent) => {
+      if (e.key !== "course_roadmap_current") return;
+      readCurrent();
+    };
+    const onCustom = () => readCurrent();
+    window.addEventListener("storage", onStorage);
+    window.addEventListener("course-roadmap-change", onCustom as EventListener);
+    return () => {
+      window.removeEventListener("storage", onStorage);
+      window.removeEventListener("course-roadmap-change", onCustom as EventListener);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!currentCourseId) {
+      setAllowedTopicIds(null);
+      return;
+    }
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch(
+          `/api/course/catalog?courseId=${encodeURIComponent(currentCourseId)}`,
+          { cache: "no-store" }
+        );
+        const data = await res.json().catch(() => null);
+        if (!res.ok || !data?.ok) throw new Error("catalog error");
+        const ids = new Set<string>(
+          Array.isArray(data.catalog?.topics) ? data.catalog.topics.map((t: any) => t.id) : []
+        );
+        if (!cancelled) setAllowedTopicIds(ids);
+      } catch {
+        if (!cancelled) setAllowedTopicIds(null);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [currentCourseId]);
+
   const topic = useMemo(() => {
-    if (!lastTopic?.topicId) return null;
-    return TOPICS.find((t) => t.id === lastTopic.topicId) ?? null;
-  }, [lastTopic]);
+    const last = lastTopic?.topicId ? TOPICS.find((t) => t.id === lastTopic.topicId) ?? null : null;
+    if (allowedTopicIds && allowedTopicIds.size > 0) {
+      if (last && allowedTopicIds.has(last.id)) return last;
+      return TOPICS.find((t) => allowedTopicIds.has(t.id)) ?? null;
+    }
+    return last;
+  }, [lastTopic, allowedTopicIds]);
 
   const resumeLabel = useMemo(() => {
     if (!lastTopic?.updatedAt) return "";
@@ -107,19 +167,25 @@ export default function CourseResumeCardClient() {
       {lastLabel ? <div className="text-[10px] sm:text-xs text-gray-500">最終学習: {lastLabel}</div> : null}
       <div className="grid gap-2 sm:flex sm:gap-2">
         <Link
-          href={`/course/topics/${topic.id}?unit=${topic.unit}`}
+          href={`/course/topics/${topic.id}?unit=${topic.unit}${
+            currentCourseId ? `&course=${encodeURIComponent(currentCourseId)}` : ""
+          }`}
           className="inline-flex w-full items-center justify-center gap-2 rounded-full border px-4 py-2.5 text-[11px] sm:text-sm hover:bg-gray-50 transition active:scale-[0.98] active:shadow-inner sm:w-auto"
         >
           解説へ
         </Link>
         <Link
-          href={`/course/topics?unit=${topic.unit}`}
+          href={`/course/topics?unit=${topic.unit}${
+            currentCourseId ? `&course=${encodeURIComponent(currentCourseId)}` : ""
+          }`}
           className="inline-flex w-full items-center justify-center gap-2 rounded-full border px-4 py-2.5 text-[11px] sm:text-sm hover:bg-gray-50 transition active:scale-[0.98] active:shadow-inner sm:w-auto"
         >
           一覧へ
         </Link>
         <Link
-          href={`/course/practice/session?topic=${topic.id}`}
+          href={`/course/practice/session?topic=${topic.id}${
+            currentCourseId ? `&course=${encodeURIComponent(currentCourseId)}` : ""
+          }`}
           className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-blue-600 px-4 py-2.5 text-[11px] sm:text-sm text-white hover:bg-blue-700 transition active:scale-[0.98] active:shadow-inner sm:w-auto"
         >
           演習へ
