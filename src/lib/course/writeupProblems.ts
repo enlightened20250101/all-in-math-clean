@@ -22,7 +22,7 @@ const DEFAULT_RUBRIC = [
 export const WRITEUP_PROBLEMS: WriteupProblem[] = [
   {
     id: "writeup_quad_vertex_1",
-    topicId: "quad_graph_basic",
+    topicId: "quad_solve_basic",
     title: "二次関数の頂点",
     statement: "二次関数 $y=ax^2+bx+c$ の頂点の座標を求めよ（$a\\neq 0$）。",
     rubric: [
@@ -37,7 +37,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
   },
   {
     id: "writeup_quad_axis_1",
-    topicId: "quad_graph_basic",
+    topicId: "quad_solve_basic",
     title: "二次関数の軸",
     statement: "二次関数 $y=ax^2+bx+c$ の軸の求め方を説明せよ。",
     rubric: [
@@ -1529,7 +1529,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
   },
   {
     id: "writeup_quad_graph_3",
-    topicId: "quad_graph_basic",
+    topicId: "quad_solve_basic",
     title: "グラフの形の判断",
     statement: "二次関数のグラフの形を係数から判断する方法を説明せよ。",
     rubric: [
@@ -2034,7 +2034,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
   },
   {
     id: "writeup_quad_graph_4",
-    topicId: "quad_graph_basic",
+    topicId: "quad_solve_basic",
     title: "グラフの対称性",
     statement: "二次関数のグラフが軸に関して対称である理由を説明せよ。",
     rubric: [
@@ -3169,7 +3169,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
   },
   {
     id: "writeup_quad_graph_5",
-    topicId: "quad_graph_basic",
+    topicId: "quad_solve_basic",
     title: "頂点と軸の求め方",
     statement: "二次関数の頂点と軸を効率的に求める方法を説明せよ。",
     rubric: [
@@ -6058,7 +6058,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
   },
   {
     id: "writeup_hd_trig_range_1",
-    topicId: "trig_range_basic",
+    topicId: "trig_graph_range_basic",
     title: "三角関数の値域（難）",
     statement:
       "$f(x)=2\\sin x+\\sqrt{3}\\cos x$ の最大値・最小値と、それをとる $x$ を $0\\le x<2\\pi$ で求めよ。",
