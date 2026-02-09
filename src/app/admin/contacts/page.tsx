@@ -1,4 +1,5 @@
 import { supabaseServerReadOnly } from "@/lib/supabaseServer";
+import ContactStatusSelect from "./ContactStatusSelect";
 
 export default async function AdminContactsPage() {
   const sb = await supabaseServerReadOnly();
@@ -30,7 +31,7 @@ export default async function AdminContactsPage() {
       <div>
         <h1 className="text-xl sm:text-2xl font-semibold">お問い合わせ一覧</h1>
         <div className="text-[11px] sm:text-sm text-slate-500 mt-1">
-          受信した問い合わせを確認できます。
+          受信したお問い合わせを確認できます。
         </div>
       </div>
 
@@ -60,9 +61,7 @@ export default async function AdminContactsPage() {
                 <td className="px-3 py-2">{m.subject}</td>
                 <td className="px-3 py-2 whitespace-pre-wrap max-w-[420px]">{m.message}</td>
                 <td className="px-3 py-2">
-                  <span className="rounded-full bg-slate-100 px-2 py-[2px] text-[10px] text-slate-600">
-                    {m.status ?? "new"}
-                  </span>
+                  <ContactStatusSelect messageId={m.id} initialStatus={m.status ?? "new"} />
                 </td>
                 <td className="px-3 py-2">
                   {m.created_at ? new Date(m.created_at).toLocaleString() : "-"}
