@@ -720,7 +720,7 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
     level: 2,
   },
   {
-    id: "writeup_seq_recurrence_1",
+    id: "writeup_seq_recurrence_intro_1",
     topicId: "seq_recurrence_basic",
     title: "漸化式の意味",
     statement: "漸化式とは何か、一般項を求める意義を説明せよ。",
