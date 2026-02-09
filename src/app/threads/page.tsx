@@ -18,12 +18,14 @@ export const metadata: Metadata = {
     description:
       "数学の質問・議論スレッドを一覧で検索。タグや並び替えで学習テーマを探せます。",
     type: "website",
+    images: ["/opengraph-image"],
   },
   twitter: {
     card: "summary",
     title: "スレッド一覧 | オルマ",
     description:
       "数学の質問・議論スレッドを一覧で検索。タグや並び替えで学習テーマを探せます。",
+    images: ["/twitter-image"],
   },
 };
 

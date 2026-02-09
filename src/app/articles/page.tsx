@@ -22,12 +22,14 @@ export const metadata: Metadata = {
     description:
       "オルマの数学記事一覧。高校数学から大学受験まで、解説・証明・考え方を日本語でわかりやすくまとめています。",
     type: "website",
+    images: ["/opengraph-image"],
   },
   twitter: {
     card: "summary",
     title: "数学記事",
     description:
       "オルマの数学記事一覧。高校数学から大学受験まで、解説・証明・考え方を日本語でわかりやすくまとめています。",
+    images: ["/twitter-image"],
   },
 };
 

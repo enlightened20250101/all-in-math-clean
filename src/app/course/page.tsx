@@ -10,8 +10,20 @@ import CourseRecentTopicLinkClient from "./CourseRecentTopicLinkClient";
 import CourseRoadmapClient from "./CourseRoadmapClient";
 import CourseContinueFloatingClient from "./CourseContinueFloatingClient";
 export const metadata: Metadata = {
-
-
+  title: "コース学習 | オルマ",
+  description: "オルマのコース学習トップ。ロードマップと復習から次の学習を進めます。",
+  openGraph: {
+    title: "コース学習 | オルマ",
+    description: "オルマのコース学習トップ。ロードマップと復習から次の学習を進めます。",
+    type: "website",
+    images: ["/opengraph-image"],
+  },
+  twitter: {
+    card: "summary",
+    title: "コース学習 | オルマ",
+    description: "オルマのコース学習トップ。ロードマップと復習から次の学習を進めます。",
+    images: ["/twitter-image"],
+  },
 };
 
 

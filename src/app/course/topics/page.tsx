@@ -4,8 +4,20 @@ import Link from "next/link";
 import AuthGate from "@/components/AuthGate";
 import TopicsClient from "./TopicsClient";
 export const metadata: Metadata = {
-
-
+  title: "トピック一覧 | オルマ",
+  description: "オルマの数学トピック一覧。復習対象や解説ページに素早くアクセス。",
+  openGraph: {
+    title: "トピック一覧 | オルマ",
+    description: "オルマの数学トピック一覧。復習対象や解説ページに素早くアクセス。",
+    type: "website",
+    images: ["/opengraph-image"],
+  },
+  twitter: {
+    card: "summary",
+    title: "トピック一覧 | オルマ",
+    description: "オルマの数学トピック一覧。復習対象や解説ページに素早くアクセス。",
+    images: ["/twitter-image"],
+  },
 };
 
 

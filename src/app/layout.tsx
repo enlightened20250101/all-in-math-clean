@@ -42,12 +42,14 @@ export const metadata: Metadata = {
     siteName: "オルマ",
     locale: "ja_JP",
     url: "https://all-in-math.com",
+    images: ["/opengraph-image"],
   },
   twitter: {
     card: "summary_large_image",
     title: "オルマ",
     description:
       "数学の学習・質問・記事が一体化した日本語向け数学コミュニティ。TeX対応で数式もスムーズ。",
+    images: ["/twitter-image"],
   },
   alternates: {
     canonical: "https://all-in-math.com",
