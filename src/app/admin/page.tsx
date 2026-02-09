@@ -74,6 +74,13 @@ export default async function AdminHomePage() {
           <div className="text-sm font-semibold">ユーザー管理</div>
           <div className="text-[11px] text-slate-500 mt-1">権限・基本情報の管理</div>
         </Link>
+        <Link
+          href="/admin/logs"
+          className="rounded-2xl border bg-white p-4 hover:shadow-lg hover:-translate-y-0.5 transition"
+        >
+          <div className="text-sm font-semibold">操作ログ</div>
+          <div className="text-[11px] text-slate-500 mt-1">管理操作の履歴</div>
+        </Link>
       </section>
     </div>
   );

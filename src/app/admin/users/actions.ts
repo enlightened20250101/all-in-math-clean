@@ -14,12 +14,19 @@ async function assertAdmin() {
   if (!userId || me?.user_rank !== "admin") {
     throw new Error("forbidden");
   }
-  return { sb };
+  return { sb, adminId: userId };
 }
 
 export async function updateUserRank(userId: string, nextRank: string) {
-  const { sb } = await assertAdmin();
+  const { sb, adminId } = await assertAdmin();
   const { error } = await sb.from("profiles").update({ user_rank: nextRank }).eq("id", userId);
   if (error) throw new Error(error.message);
+  await sb.from("admin_audit_logs").insert({
+    admin_id: adminId,
+    action: "update_user_rank",
+    target_type: "profile",
+    target_id: userId,
+    detail: { nextRank },
+  });
   return { ok: true };
 }

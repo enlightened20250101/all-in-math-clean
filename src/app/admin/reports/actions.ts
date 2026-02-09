@@ -26,6 +26,13 @@ export async function updateReportStatus(reportId: number, status: string) {
   };
   const { error } = await sb.from("reports").update(update).eq("id", reportId);
   if (error) throw new Error(error.message);
+  await sb.from("admin_audit_logs").insert({
+    admin_id: userId,
+    action: "update_report_status",
+    target_type: "report",
+    target_id: String(reportId),
+    detail: { status },
+  });
   return { ok: true };
 }
 
@@ -67,6 +74,13 @@ export async function moderateTarget(reportId: number, targetType: string, targe
   };
   const { error: uerr } = await sb.from("reports").update(update).eq("id", reportId);
   if (uerr) throw new Error(uerr.message);
+  await sb.from("admin_audit_logs").insert({
+    admin_id: userId,
+    action: "moderate_target",
+    target_type: targetType,
+    target_id: targetId,
+    detail: { reportId },
+  });
   return { ok: true };
 }
 
@@ -80,5 +94,12 @@ export async function bulkUpdateReportStatus(reportIds: number[], status: string
   };
   const { error } = await sb.from("reports").update(update).in("id", reportIds);
   if (error) throw new Error(error.message);
+  await sb.from("admin_audit_logs").insert({
+    admin_id: userId,
+    action: "bulk_update_report_status",
+    target_type: "report",
+    target_id: reportIds.join(","),
+    detail: { status, count: reportIds.length },
+  });
   return { ok: true };
 }
