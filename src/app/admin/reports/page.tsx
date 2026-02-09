@@ -44,12 +44,12 @@ export default async function AdminReportsPage() {
   const articleCommentIds = toNums(byType.get("article_comment"));
 
   const [postsRes, commentsRes, threadsRes, threadPostsRes, groupMessagesRes, articleCommentsRes] = await Promise.all([
-    postIds.length ? sb.from("posts").select("id,title").in("id", postIds) : Promise.resolve({ data: [] as any[] }),
-    commentIds.length ? sb.from("comments").select("id,post_id").in("id", commentIds) : Promise.resolve({ data: [] as any[] }),
+    postIds.length ? sb.from("posts").select("id,title,body_md").in("id", postIds) : Promise.resolve({ data: [] as any[] }),
+    commentIds.length ? sb.from("comments").select("id,post_id,body_md").in("id", commentIds) : Promise.resolve({ data: [] as any[] }),
     threadIds.length ? sb.from("threads").select("id,slug,title").in("id", threadIds) : Promise.resolve({ data: [] as any[] }),
-    threadPostIds.length ? sb.from("thread_posts").select("id,thread_id").in("id", threadPostIds) : Promise.resolve({ data: [] as any[] }),
-    groupMessageIds.length ? sb.from("group_messages").select("id,group_id").in("id", groupMessageIds) : Promise.resolve({ data: [] as any[] }),
-    articleCommentIds.length ? sb.from("article_comments").select("id,article_id").in("id", articleCommentIds) : Promise.resolve({ data: [] as any[] }),
+    threadPostIds.length ? sb.from("thread_posts").select("id,thread_id,body_md").in("id", threadPostIds) : Promise.resolve({ data: [] as any[] }),
+    groupMessageIds.length ? sb.from("group_messages").select("id,group_id,body_md").in("id", groupMessageIds) : Promise.resolve({ data: [] as any[] }),
+    articleCommentIds.length ? sb.from("article_comments").select("id,article_id,body_md").in("id", articleCommentIds) : Promise.resolve({ data: [] as any[] }),
   ]);
 
   const articleIds = (articleCommentsRes.data || []).map((c: any) => c.article_id);
@@ -73,17 +73,20 @@ export default async function AdminReportsPage() {
   const rows = (reports || []).map((r: any) => {
     let linkHref: string | null = null;
     let linkLabel: string | null = null;
+    let preview: string | null = null;
     if (r.target_type === "post") {
       const p = postMap.get(r.target_id);
       if (p) {
         linkHref = `/posts/${p.id}`;
         linkLabel = p.title ?? "投稿";
+        preview = p.body_md ?? null;
       }
     } else if (r.target_type === "comment") {
       const c = commentMap.get(r.target_id);
       if (c) {
         linkHref = `/posts/${c.post_id}?comment=${c.id}`;
         linkLabel = "投稿コメント";
+        preview = c.body_md ?? null;
       }
     } else if (r.target_type === "thread") {
       const t = threadMap.get(r.target_id);
@@ -100,6 +103,7 @@ export default async function AdminReportsPage() {
           const slug = t.slug ?? t.id;
           linkHref = `/threads/${slug}?reply=${tp.id}`;
           linkLabel = "返信";
+          preview = tp.body_md ?? null;
         }
       }
     } else if (r.target_type === "group_message") {
@@ -107,6 +111,7 @@ export default async function AdminReportsPage() {
       if (m) {
         linkHref = `/groups/${m.group_id}?msg=${m.id}`;
         linkLabel = "グループメッセージ";
+        preview = m.body_md ?? null;
       }
     } else if (r.target_type === "article_comment") {
       const c = articleCommentMap.get(r.target_id);
@@ -115,6 +120,7 @@ export default async function AdminReportsPage() {
         if (a) {
           linkHref = `/articles/${a.slug}?comment=${c.id}`;
           linkLabel = "記事コメント";
+          preview = c.body_md ?? null;
         }
       }
     }
@@ -122,6 +128,7 @@ export default async function AdminReportsPage() {
       ...r,
       linkHref,
       linkLabel,
+      preview,
     };
   });
 

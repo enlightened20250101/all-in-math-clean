@@ -15,6 +15,7 @@ type ReportRow = {
   created_at: string;
   linkHref?: string | null;
   linkLabel?: string | null;
+  preview?: string | null;
 };
 
 type SortKey = created_desc | created_asc | status_open | status_resolved;
@@ -134,6 +135,7 @@ export default function AdminReportsTableClient({ rows }: { rows: ReportRow[] })
               <th className="px-3 py-2 text-left">対象</th>
               <th className="px-3 py-2 text-left">リンク</th>
               <th className="px-3 py-2 text-left">理由</th>
+              <th className="px-3 py-2 text-left">本文プレビュー</th>
               <th className="px-3 py-2 text-left">報告者</th>
               <th className="px-3 py-2 text-left">日時</th>
               <th className="px-3 py-2 text-left">状態</th>
@@ -165,6 +167,9 @@ export default function AdminReportsTableClient({ rows }: { rows: ReportRow[] })
                   )}
                 </td>
                 <td className="px-3 py-2 whitespace-pre-wrap">{r.reason}</td>
+                <td className="px-3 py-2 text-[10px] text-slate-600 whitespace-pre-wrap">
+                  {r.preview ? r.preview.slice(0, 140) : "-"}
+                </td>
                 <td className="px-3 py-2 font-mono text-[11px]">{r.created_by ?? "-"}</td>
                 <td className="px-3 py-2">{new Date(r.created_at).toLocaleString()}</td>
                 <td className="px-3 py-2">
@@ -177,7 +182,7 @@ export default function AdminReportsTableClient({ rows }: { rows: ReportRow[] })
             ))}
             {sortedRows.length === 0 && (
               <tr>
-                <td colSpan={9} className="px-3 py-6 text-center text-slate-500">
+                <td colSpan={10} className="px-3 py-6 text-center text-slate-500">
                   通報はまだありません。
                 </td>
               </tr>
