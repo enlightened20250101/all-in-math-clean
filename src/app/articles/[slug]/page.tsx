@@ -76,8 +76,23 @@ export default async function ArticleDetailPage({
     related = [];
   }
 
+  const baseUrl = 'https://all-in-math.com';
+  const breadcrumb = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'ホーム', item: baseUrl },
+      { '@type': 'ListItem', position: 2, name: '記事', item: `${baseUrl}/articles` },
+      { '@type': 'ListItem', position: 3, name: article.title, item: `${baseUrl}/articles/${slug}` },
+    ],
+  };
+
   return (
     <div className="max-w-4xl mx-auto px-3 sm:px-4 space-y-6 sm:space-y-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+      />
       {serverError ? (
         <div className="rounded-xl border border-rose-200 bg-rose-50 px-3 py-2 text-[11px] sm:text-sm text-rose-700">
           {serverError}

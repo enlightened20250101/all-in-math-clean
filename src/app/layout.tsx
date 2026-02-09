@@ -1,5 +1,6 @@
 // src/app/layout.tsx
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import './globals.css';
 import Navbar from '@/components/Navbar';
 import 'katex/dist/katex.min.css';
@@ -69,12 +70,35 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const baseUrl = 'https://all-in-math.com';
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'オルマ',
+    url: baseUrl,
+    inLanguage: 'ja-JP',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: `${baseUrl}/search?q={search_term_string}`,
+      'query-input': 'required name=search_term_string',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'オルマ',
+      url: baseUrl,
+    },
+  };
   return (
     <html lang="ja">
       <head>
         <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css"
+        />
+        <Script
+          id="ld-web-site"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </head>
       <body className="min-h-screen bg-white text-gray-900">

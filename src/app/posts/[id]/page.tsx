@@ -38,6 +38,17 @@ export default async function PostDetailPage({ params }: Props) {
 
   if (postErr || !post) notFound();
 
+  const baseUrl = 'https://all-in-math.com';
+  const breadcrumb = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'ホーム', item: baseUrl },
+      { '@type': 'ListItem', position: 2, name: '質問一覧', item: `${baseUrl}/posts` },
+      { '@type': 'ListItem', position: 3, name: post.title, item: `${baseUrl}/posts/${post.id}` },
+    ],
+  };
+
   // --- 4) コメント一覧 ---
   let comments: any[] = [];
   try {
@@ -87,6 +98,10 @@ export default async function PostDetailPage({ params }: Props) {
 
   return (
     <div className="max-w-3xl mx-auto px-3 sm:px-4 py-4 sm:py-6 space-y-5 sm:space-y-6">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+      />
       {serverError ? (
         <div className="rounded-xl border border-rose-200 bg-rose-50 px-3 py-2 text-[11px] sm:text-sm text-rose-700">
           {serverError}

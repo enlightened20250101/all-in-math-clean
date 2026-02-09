@@ -59,8 +59,23 @@ export default async function TopicDetailPage({ params, searchParams }: Props) {
   const prereqs = prereqIds.map((id) => getTopicById(id)).filter(Boolean);
   const nexts = nextIds.map((id) => getTopicById(id)).filter(Boolean);
 
+  const baseUrl = 'https://all-in-math.com';
+  const breadcrumb = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'ホーム', item: baseUrl },
+      { '@type': 'ListItem', position: 2, name: 'トピック一覧', item: `${baseUrl}/course/topics` },
+      { '@type': 'ListItem', position: 3, name: topic.title, item: `${baseUrl}/course/topics/${topic.id}` },
+    ],
+  };
+
   return (
     <div className="space-y-5 sm:space-y-6">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+      />
       <Link
         href={backHref}
         className="inline-flex items-center justify-center sm:justify-start gap-2 text-[11px] sm:text-sm text-blue-700 px-4 py-2.5 rounded-full bg-white border border-slate-200 hover:bg-slate-50 transition active:scale-[0.98] active:shadow-inner focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-200 w-full sm:w-auto"
