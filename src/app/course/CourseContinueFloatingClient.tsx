@@ -20,6 +20,11 @@ export default function CourseContinueFloatingClient() {
   const [now, setNow] = useState<number | null>(null);
   const [currentCourseId, setCurrentCourseId] = useState<string | null>(null);
 
+  const activeUserCourse = useMemo(
+    () => userCourses.find((course) => course.isActive && !course.isArchived) ?? null,
+    [userCourses]
+  );
+
   useEffect(() => {
     if (typeof window === "undefined") return;
     try {
@@ -63,7 +68,7 @@ export default function CourseContinueFloatingClient() {
   }, []);
 
   const topic = useMemo(() => {
-    const activeCourseId = currentCourseId ?? lastTopic?.courseId ?? null;
+    const activeCourseId = currentCourseId ?? activeUserCourse?.baseCourseId ?? lastTopic?.courseId ?? null;
     const allowedUnits = activeCourseId ? courseMap.get(activeCourseId)?.units ?? [] : [];
     const last = lastTopic?.topicId ? TOPICS.find((t) => t.id === lastTopic.topicId) ?? null : null;
     if (last && (!activeCourseId || allowedUnits.includes(last.unit))) return last;
@@ -71,7 +76,7 @@ export default function CourseContinueFloatingClient() {
       return TOPICS.find((t) => allowedUnits.includes(t.unit)) ?? null;
     }
     return last;
-  }, [currentCourseId, lastTopic, courseMap]);
+  }, [currentCourseId, lastTopic, courseMap, activeUserCourse]);
 
   const resumeLabel = useMemo(() => {
     if (!lastTopic?.updatedAt) return "";
@@ -103,12 +108,13 @@ export default function CourseContinueFloatingClient() {
 
   if (!topic) return null;
 
-  const activeCourseId = currentCourseId ?? lastTopic?.courseId ?? null;
+  const activeCourseId = currentCourseId ?? activeUserCourse?.baseCourseId ?? lastTopic?.courseId ?? null;
   const courseLabel = activeCourseId ? courseMap.get(activeCourseId)?.title ?? null : null;
+  const courseQuery = activeCourseId ? `&course=${encodeURIComponent(activeCourseId)}` : "";
   const href =
     resumeLabel === "復習"
-      ? `/course/practice/session?topic=${topic.id}`
-      : `/course/topics/${topic.id}?unit=${topic.unit}`;
+      ? `/course/practice/session?topic=${topic.id}${courseQuery}`
+      : `/course/topics/${topic.id}?unit=${topic.unit}${courseQuery}`;
 
   return (
     <div className="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-40">

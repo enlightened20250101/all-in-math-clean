@@ -1,8 +1,9 @@
 // src/app/course/writeup/WriteupClient.tsx
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import MathMarkdown from "@/components/MathMarkdown";
 import MarkdownEditor from "@/components/MarkdownEditor";
 import { getDefaultRubric, getWriteupProblemsByTopic } from "@/lib/course/writeupProblems";
@@ -81,9 +82,12 @@ export default function WriteupClient({ topicTitle, topicId }: WriteupClientProp
   const [editingId, setEditingId] = useState<string | null>(null);
   const [lastSavedAt, setLastSavedAt] = useState<string | null>(null);
   const [submitNotice, setSubmitNotice] = useState<string | null>(null);
+  const [submitLoading, setSubmitLoading] = useState(false);
   const [historyFilter, setHistoryFilter] = useState<"all" | "topic">("all");
   const [orderMode, setOrderMode] = useState<"recommended" | "shuffle">("recommended");
   const [solutionView, setSolutionView] = useState<"full" | "steps">("full");
+  const submitLockRef = useRef(false);
+  const router = useRouter();
   const combinedAnswer = useMemo(() => {
     if (mode === "summary") return summary;
     return [plan, work, conclusion].filter(Boolean).join("\n");
@@ -152,6 +156,9 @@ export default function WriteupClient({ topicTitle, topicId }: WriteupClientProp
   const draftKey = `${DRAFT_KEY_PREFIX}:${topicId ?? "common"}:${activeProblem?.id ?? "default"}`;
 
   function handleSubmit() {
+    if (submitLockRef.current || submitLoading) return;
+    submitLockRef.current = true;
+    setSubmitLoading(true);
     try {
       const fallbackId = `${Date.now()}-${Math.random().toString(16).slice(2, 8)}`;
       const newEntry: WriteupEntry = {
@@ -174,12 +181,17 @@ export default function WriteupClient({ topicTitle, topicId }: WriteupClientProp
       setImagePreview(null);
       if (typeof window !== "undefined") {
         window.localStorage.removeItem(draftKey);
+        window.localStorage.setItem("course_writeup_last_submitted", newEntry.id);
       }
-      setSubmitNotice("保存しました");
+      setSubmitNotice("保存しました。採点ページへ移動します…");
       window.setTimeout(() => setSubmitNotice(null), 1800);
+      const nextUrl = `/course/writeup/grade?entry=${encodeURIComponent(newEntry.id)}`;
+      router.push(nextUrl);
     } catch {
       setSubmitNotice("保存に失敗しました。もう一度お試しください。");
       window.setTimeout(() => setSubmitNotice(null), 2200);
+      submitLockRef.current = false;
+      setSubmitLoading(false);
     }
   }
 
@@ -460,9 +472,16 @@ export default function WriteupClient({ topicTitle, topicId }: WriteupClientProp
             <button
               type="button"
               onClick={handleSubmit}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-slate-900 px-4 py-3 text-xs sm:text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800 active:scale-[0.98]"
+              disabled={submitLoading}
+              className={`inline-flex w-full items-center justify-center gap-2 rounded-full px-4 py-3 text-xs sm:text-sm font-semibold text-white shadow-sm transition active:scale-[0.98] ${
+                submitLoading ? "bg-slate-400 cursor-not-allowed" : "bg-slate-900 hover:bg-slate-800"
+              }`}
             >
-              {editingId ? "編集内容を保存" : "提出して保存する"}
+              {submitLoading
+                ? "採点ページへ移動中..."
+                : editingId
+                  ? "編集内容を保存"
+                  : "提出して保存する"}
             </button>
             {submitNotice ? (
               <div className="text-[11px] text-slate-500">{submitNotice}</div>

@@ -232,6 +232,7 @@ export default function PracticeSessionClient({
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+    if (!courseId) return;
     try {
       window.localStorage.setItem(
         "course_last_topic",
