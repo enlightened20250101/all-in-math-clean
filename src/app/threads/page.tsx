@@ -10,8 +10,21 @@ import SavedListMarker from "@/components/SavedListMarker";
 import TagOverflowDetails from "@/components/TagOverflowDetails";
 import InlineMathText from "@/components/InlineMathText";
 export const metadata: Metadata = {
-
-
+  title: "スレッド一覧 | オルマ",
+  description:
+    "数学の質問・議論スレッドを一覧で検索。タグや並び替えで学習テーマを探せます。",
+  openGraph: {
+    title: "スレッド一覧 | オルマ",
+    description:
+      "数学の質問・議論スレッドを一覧で検索。タグや並び替えで学習テーマを探せます。",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "スレッド一覧 | オルマ",
+    description:
+      "数学の質問・議論スレッドを一覧で検索。タグや並び替えで学習テーマを探せます。",
+  },
 };
 
 
