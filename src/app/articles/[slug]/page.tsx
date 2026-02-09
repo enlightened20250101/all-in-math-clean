@@ -12,10 +12,10 @@ import InlineMathText from "@/components/InlineMathText";
 export default async function ArticleDetailPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
   const sb = await supabaseServerReadOnly();
-  const { slug } = params;
+  const { slug } = await params;
 
   let article: any = null;
   let articleErr: any = null;
@@ -171,10 +171,10 @@ export default async function ArticleDetailPage({
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const sb = await supabaseServerReadOnly();
-  const { slug } = params;
+  const { slug } = await params;
   const { data } = await sb
     .from("articles")
     .select("title, body_mdx, images, updated_at")
