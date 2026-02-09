@@ -90,7 +90,7 @@ export default function AdminReportsTableClient({ rows }: { rows: ReportRow[] })
             className="rounded-full border px-3 py-1 text-[10px] sm:text-xs"
             onClick={toggleAll}
           >
-            {selected.size === sortedRows.length ? 全解除 : 全選択}
+            {selected.size === sortedRows.length ? "全解除" : "全選択"}
           </button>
           <button
             type="button"
