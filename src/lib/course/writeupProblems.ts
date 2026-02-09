@@ -4311,6 +4311,64 @@ export const WRITEUP_PROBLEMS: WriteupProblem[] = [
       "$\\tan\\theta+\\cot\\theta=\\frac{\\sin\\theta}{\\cos\\theta}+\\frac{\\cos\\theta}{\\sin\\theta}=\\frac{\\sin^2\\theta+\\cos^2\\theta}{\\sin\\theta\\cos\\theta}=\\frac{1}{\\sin\\theta\\cos\\theta}$。",
     level: 3,
   },
+  {
+    id: "writeup_geo_ratio_1",
+    topicId: "geo_ratio_theorems",
+    title: "中点連結定理",
+    statement:
+      "三角形 $ABC$ で $AB=AC$ とする。$AB$ の中点を $D$、$AC$ の中点を $E$ とするとき、$DE\\parallel BC$ を示せ。",
+    rubric: [
+      "中点連結定理（中点を結ぶ線分が平行）を用いている",
+      "$D,E$ がそれぞれ中点であることを明示している",
+      "$DE\\parallel BC$ を結論として示している",
+    ],
+    rubricKeywords: [["中点連結定理"], ["中点"], ["DE\\parallel BC"]],
+    solution: "三角形の2辺の中点を結ぶ線分は第三辺に平行なので $DE\\parallel BC$。",
+    level: 2,
+  },
+  {
+    id: "writeup_geo_circle_geometry_1",
+    topicId: "geo_circle_geometry",
+    title: "円周角の定理",
+    statement: "円周上の点 $A,B,C$ に対し、弧 $BC$ に対する円周角 $\\angle BAC$ が中心角の半分であることを述べよ。",
+    rubric: [
+      "円周角の定理を使う方針が書けている",
+      "中心角 $\\angle BOC$ と円周角 $\\angle BAC$ の関係を述べている",
+      "結論として「円周角は中心角の半分」を示している",
+    ],
+    rubricKeywords: [["円周角", "中心角"], ["1/2"], ["結論"]],
+    solution: "円周角の定理より $\\angle BAC=\\frac12\\angle BOC$。",
+    level: 2,
+  },
+  {
+    id: "writeup_geo_triangle_centers_1",
+    topicId: "geo_triangle_centers",
+    title: "三角形の重心",
+    statement:
+      "三角形の3本の中線は1点で交わり、その点は各中線を $2:1$ に内分することを示せ。",
+    rubric: [
+      "中線の交点が重心であることを述べている",
+      "内分比 $2:1$ を示している",
+      "結論を明確に書いている",
+    ],
+    rubricKeywords: [["重心"], ["2:1"], ["中線"]],
+    solution: "中線は一点で交わり、その点（重心）は各中線を頂点側から $2:1$ に内分する。",
+    level: 2,
+  },
+  {
+    id: "writeup_geo_circle_relations_1",
+    topicId: "geo_circle_relations",
+    title: "接線と半径",
+    statement: "円の接線は接点における半径と直交することを示せ。",
+    rubric: [
+      "接線の性質を用いる方針が書けている",
+      "半径が最短距離になることを述べている",
+      "直交を結論として示している",
+    ],
+    rubricKeywords: [["接線"], ["半径"], ["直交"]],
+    solution: "円の中心から接点への半径が最短距離となるため接線と直交する。",
+    level: 2,
+  },
 ];
 
 export function getWriteupProblemsByTopic(topicId?: TopicId) {
