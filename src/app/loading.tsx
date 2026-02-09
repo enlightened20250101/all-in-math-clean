@@ -1,31 +1,31 @@
 // src/app/loading.tsx
 const LOADING_STYLE = process.env.NEXT_PUBLIC_LOADING_STYLE ?? "skeleton";
 
-function SkeletonLoading() {
+function SkeletonLoading({ showSpinner }: { showSpinner?: boolean }) {
   return (
-    <div className="fixed inset-0 z-[200] bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 text-white">
-      <div className="mx-auto flex h-full w-full max-w-5xl flex-col gap-6 px-6 py-8">
+    <div className="fixed inset-0 z-[200] bg-white text-slate-900">
+      <div className="relative mx-auto flex h-full w-full max-w-5xl flex-col gap-6 px-6 py-8">
         <div className="flex items-center justify-between">
-          <div className="h-8 w-40 rounded-full bg-white/10 animate-pulse" />
-          <div className="h-8 w-28 rounded-full bg-white/10 animate-pulse" />
+          <div className="h-8 w-40 rounded-full bg-slate-100 animate-pulse" />
+          <div className="h-8 w-28 rounded-full bg-slate-100 animate-pulse" />
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-            <div className="h-4 w-24 rounded-full bg-white/10 animate-pulse" />
-            <div className="mt-4 h-5 w-40 rounded-full bg-white/10 animate-pulse" />
+          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div className="h-4 w-24 rounded-full bg-slate-100 animate-pulse" />
+            <div className="mt-4 h-5 w-40 rounded-full bg-slate-100 animate-pulse" />
             <div className="mt-3 space-y-2">
-              <div className="h-3 w-full rounded-full bg-white/10 animate-pulse" />
-              <div className="h-3 w-5/6 rounded-full bg-white/10 animate-pulse" />
-              <div className="h-3 w-2/3 rounded-full bg-white/10 animate-pulse" />
+              <div className="h-3 w-full rounded-full bg-slate-100 animate-pulse" />
+              <div className="h-3 w-5/6 rounded-full bg-slate-100 animate-pulse" />
+              <div className="h-3 w-2/3 rounded-full bg-slate-100 animate-pulse" />
             </div>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-            <div className="h-4 w-28 rounded-full bg-white/10 animate-pulse" />
-            <div className="mt-4 h-5 w-36 rounded-full bg-white/10 animate-pulse" />
+          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div className="h-4 w-28 rounded-full bg-slate-100 animate-pulse" />
+            <div className="mt-4 h-5 w-36 rounded-full bg-slate-100 animate-pulse" />
             <div className="mt-3 space-y-2">
-              <div className="h-3 w-full rounded-full bg-white/10 animate-pulse" />
-              <div className="h-3 w-4/5 rounded-full bg-white/10 animate-pulse" />
-              <div className="h-3 w-3/5 rounded-full bg-white/10 animate-pulse" />
+              <div className="h-3 w-full rounded-full bg-slate-100 animate-pulse" />
+              <div className="h-3 w-4/5 rounded-full bg-slate-100 animate-pulse" />
+              <div className="h-3 w-3/5 rounded-full bg-slate-100 animate-pulse" />
             </div>
           </div>
         </div>
@@ -33,13 +33,21 @@ function SkeletonLoading() {
           {Array.from({ length: 4 }).map((_, i) => (
             <div
               key={i}
-              className="h-14 rounded-2xl border border-white/10 bg-white/5 animate-pulse"
+              className="h-14 rounded-2xl border border-slate-200 bg-white animate-pulse"
             />
           ))}
         </div>
         <div className="mt-auto flex items-center gap-3">
-          <div className="h-3 w-20 rounded-full bg-white/10 animate-pulse" />
-          <div className="h-3 w-40 rounded-full bg-white/10 animate-pulse" />
+          <div className="h-3 w-20 rounded-full bg-slate-100 animate-pulse" />
+          <div className="h-3 w-40 rounded-full bg-slate-100 animate-pulse" />
+          {showSpinner ? (
+            <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+              <div className="flex items-center gap-3 rounded-full border border-slate-200 bg-white/95 px-4 py-2 text-xs text-slate-700 shadow-sm">
+                <span className="inline-flex h-5 w-5 animate-spin rounded-full border-2 border-slate-300 border-t-slate-800" />
+                読み込み中
+              </div>
+            </div>
+          ) : null}
         </div>
       </div>
     </div>
@@ -78,6 +86,9 @@ function SpinnerLoading() {
 export default function GlobalLoading() {
   if (LOADING_STYLE === "spinner") {
     return <SpinnerLoading />;
+  }
+  if (LOADING_STYLE === "hybrid") {
+    return <SkeletonLoading showSpinner />;
   }
   return <SkeletonLoading />;
 }
