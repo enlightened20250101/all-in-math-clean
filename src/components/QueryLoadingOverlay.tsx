@@ -32,7 +32,7 @@ export default function QueryLoadingOverlay() {
 
     timersRef.current.show = window.setTimeout(() => {
       setActive(true);
-    }, 120);
+    }, 30);
 
     timersRef.current.hide = window.setTimeout(() => {
       setActive(false);
