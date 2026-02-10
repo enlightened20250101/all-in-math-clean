@@ -1175,6 +1175,25 @@ export default function GraphStudio() {
             </button>
           </div>
         </div>
+                  {activeEqIndex === i && isEqInputOpen ? (
+                    <div className="mt-2 rounded-xl border border-slate-200 bg-white p-2">
+                      <SmartMathInput
+                        value={equations[activeEqIndex] ?? ""}
+                        onChange={(v) => updateEquation(activeEqIndex, v)}
+                        label=""
+                        description="sin, cos, log, sqrt などの関数が使えます"
+                        size="sm"
+                      />
+                      <div className="mt-2 flex justify-end">
+                        <button
+                          className="rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] text-slate-600 shadow-sm"
+                          onClick={() => setIsEqInputOpen(false)}
+                        >
+                          閉じる
+                        </button>
+                      </div>
+                    </div>
+                  ) : null}
       </div>
   
       {/* 複数式の行 */}
@@ -1254,7 +1273,7 @@ export default function GraphStudio() {
                       "
                       onClick={() => {
                         setActiveEqIndex(i);
-                        setIsEqInputOpen(true);
+                        setIsEqInputOpen((prev) => (activeEqIndex === i ? !prev : true));
                       }}
                     >
                       <div className="flex items-center justify-between gap-2">
@@ -1319,6 +1338,26 @@ export default function GraphStudio() {
                   </div>
                 </div>
               )}
+
+              {activeEqIndex === i && isEqInputOpen ? (
+                <div className="mt-2 rounded-xl border border-slate-200 bg-white p-2">
+                  <SmartMathInput
+                    value={equations[activeEqIndex] ?? ""}
+                    onChange={(v) => updateEquation(activeEqIndex, v)}
+                    label=""
+                    description="sin, cos, log, sqrt などの関数が使えます"
+                    size="sm"
+                  />
+                  <div className="mt-2 flex justify-end">
+                    <button
+                      className="rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] text-slate-600 shadow-sm"
+                      onClick={() => setIsEqInputOpen(false)}
+                    >
+                      閉じる
+                    </button>
+                  </div>
+                </div>
+              ) : null}
 
               {/* ── 以下は PC / SP 共通：定義域・パラメータ ── */}
               <div className="text-xs text-slate-600 space-y-1">
@@ -1920,40 +1959,29 @@ export default function GraphStudio() {
           </div>
         </div>
       )}
-      {/* ── SP専用：式一覧パネル ＋ 式専用入力パネル ── */}
+      {/* ── SP専用：式一覧パネル（画面下に固定、グラフは見える） ── */}
       {tab === 'equation' && (
         <div
-          className={`md:hidden fixed inset-0 z-40 ${
+          className={`md:hidden fixed inset-x-0 bottom-0 z-40 ${
             isPanelOpen ? '' : 'pointer-events-none'
           }`}
         >
-          {/* 背景オーバーレイ（タップでパネル全体を閉じる） */}
-          <div
-            className={`absolute inset-0 bg-black/30 transition-opacity ${
-              isPanelOpen ? 'opacity-100' : 'opacity-0'
-            }`}
-            onClick={() => {
-              setIsPanelOpen(false);
-              setIsEqInputOpen(false);
-              setActiveEqIndex(null);
-            }}
-          />
-          
-          {/* 式一覧パネル（上側に出るシート） */}
           <div
             className={`
-              absolute inset-x-0 bottom-0 bg-white rounded-t-2xl shadow-lg
-              max-h-[80vh] overflow-y-auto
+              rounded-t-2xl border-t border-slate-200 bg-white/95 backdrop-blur
+              shadow-[0_-12px_40px_-20px_rgba(15,23,42,0.35)]
+              max-h-[55vh] overflow-y-auto
               transform transition-transform
               ${isPanelOpen ? 'translate-y-0' : 'translate-y-full'}
             `}
           >
-            <div className="flex items-center justify-between px-4 py-2 border-b">
-              <div className="flex-1 flex justify-center">
-                <div className="w-10 h-1 rounded-full bg-gray-300" />
+            <div className="flex items-center justify-between px-4 py-2 border-b bg-white/90">
+              <div className="flex items-center gap-2">
+                <div className="h-1 w-10 rounded-full bg-slate-300" />
+                <span className="text-[11px] text-slate-500">式パネル</span>
               </div>
               <button
-                className="text-xs text-gray-500"
+                className="text-xs text-slate-500"
                 onClick={() => {
                   setIsPanelOpen(false);
                   setIsEqInputOpen(false);
@@ -1963,61 +1991,9 @@ export default function GraphStudio() {
                 閉じる
               </button>
             </div>
-            
-            <div className="p-3 space-y-3">
-              {equationInputPanel}
-            </div>
+
+            <div className="p-3 space-y-3">{equationInputPanel}</div>
           </div>
-          
-          {/* 式専用 SmartInput パネル（さらに上から出るシート） */}
-          {isMobile && activeEqIndex !== null && (
-            <div
-              className={`
-                fixed inset-0 z-50 flex items-end justify-center
-                ${isEqInputOpen ? '' : 'pointer-events-none'}
-              `}
-            >
-              {/* 内側オーバーレイ：タップで専用パネルだけ閉じる */}
-              <div
-                className={`absolute inset-0 bg-black/30 transition-opacity ${
-                  isEqInputOpen ? 'opacity-100' : 'opacity-0'
-                }`}
-                onClick={() => setIsEqInputOpen(false)}
-              />
-              
-              <div
-                className={`
-                  relative w-full bg-white rounded-t-2xl shadow-xl
-                  max-height-[70vh] overflow-y-auto
-                  transform transition-transform
-                  ${isEqInputOpen ? 'translate-y-0' : 'translate-y-full'}
-                `}
-              >
-                <div className="flex items-center justify-between px-4 py-2 border-b">
-                  <span className="text-xs text-gray-600">
-                    式 {activeEqIndex + 1} を編集
-                  </span>
-                  <button
-                    className="text-xs text-gray-500"
-                    onClick={() => setIsEqInputOpen(false)}
-                  >
-                    完了
-                  </button>
-                </div>
-                
-                <div className="p-3">
-                  <SmartMathInput
-                    value={equations[activeEqIndex] ?? ''}
-                    onChange={(v) => updateEquation(activeEqIndex, v)}
-                    label=""
-                    description="sin, cos, log, sqrt などの関数が使えます"
-                    size="md"
-                    // GraphStudio 側でボトムシートを持つので、内蔵シートはオフ
-                  />
-                </div>
-              </div>
-            </div>
-          )}
         </div>
       )}
     </div>
