@@ -1175,25 +1175,6 @@ export default function GraphStudio() {
             </button>
           </div>
         </div>
-                  {activeEqIndex === i && isEqInputOpen ? (
-                    <div className="mt-2 rounded-xl border border-slate-200 bg-white p-2">
-                      <SmartMathInput
-                        value={equations[activeEqIndex] ?? ""}
-                        onChange={(v) => updateEquation(activeEqIndex, v)}
-                        label=""
-                        description="sin, cos, log, sqrt などの関数が使えます"
-                        size="sm"
-                      />
-                      <div className="mt-2 flex justify-end">
-                        <button
-                          className="rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] text-slate-600 shadow-sm"
-                          onClick={() => setIsEqInputOpen(false)}
-                        >
-                          閉じる
-                        </button>
-                      </div>
-                    </div>
-                  ) : null}
       </div>
   
       {/* 複数式の行 */}
