@@ -5,6 +5,7 @@ import './globals.css';
 import Navbar from '@/components/Navbar';
 import 'katex/dist/katex.min.css';
 import PageTransition from '@/components/PageTransition';
+import QueryLoadingOverlay from '@/components/QueryLoadingOverlay';
 import SessionSync from '@/components/SessionSync';
 import SiteFooter from '@/components/SiteFooter';
 
@@ -105,6 +106,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="min-h-screen bg-white text-gray-900">
+        <QueryLoadingOverlay />
         <SessionSync />
         <Navbar />
         <main className="mx-auto max-w-5xl px-4 py-6"><PageTransition>{children}</PageTransition></main>
