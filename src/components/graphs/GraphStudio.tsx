@@ -206,6 +206,10 @@ export default function GraphStudio() {
     'y=sin(x)',
     'y=cos(x)',
   ]);
+  const [enabledList, setEnabledList] = useState<boolean[]>([
+    true,
+    true,
+  ]);
   const [colors, setColors] = useState<string[]>([PALETTE[0], PALETTE[1]]);
   const [title, setTitle] = useState('Overlay');
 
@@ -336,6 +340,22 @@ export default function GraphStudio() {
   const [legendSnapshot, setLegendSnapshot] = useState<string[]>([]);
   const [isDrawing, setIsDrawing] = useState(false);
   const [equationErrors, setEquationErrors] = useState<string[]>([]);
+  const autoDrawTimerRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (tab !== 'equation') return;
+    if (autoDrawTimerRef.current) {
+      window.clearTimeout(autoDrawTimerRef.current);
+    }
+    autoDrawTimerRef.current = window.setTimeout(() => {
+      setDrawVersion((v) => v + 1);
+    }, 180);
+    return () => {
+      if (autoDrawTimerRef.current) {
+        window.clearTimeout(autoDrawTimerRef.current);
+      }
+    };
+  }, [tab, equations, domains, paramList, enabledList, yMin, yMax, nx, ny]);
 
   useEffect(() => {
     if (!fromId) return;         // from がないなら何もしない
@@ -505,6 +525,10 @@ export default function GraphStudio() {
         };
   
         const trimmed = eq.trim();
+        const isEnabled = enabledList[i] ?? true;
+        if (!isEnabled) {
+          return null;
+        }
         if (!trimmed) {
           // 式が空
           newErrors[i] = '式が空です';
@@ -1021,6 +1045,7 @@ export default function GraphStudio() {
   
     setDomains((prev) => [...prev, { ...DEFAULT_DOMAIN }]);
     setParamList((prev) => [...prev, { a: 1, b: 1, c: 0 }]);
+    setEnabledList((prev) => [...prev, true]);
   
     // SP の場合は即座に「式を編集」パネル＋専用入力パネルを開く
     if (isMobile) {
@@ -1037,6 +1062,7 @@ export default function GraphStudio() {
     setColors((prev) => prev.filter((_, i) => i !== idx));
     setDomains((prev) => prev.filter((_, i) => i !== idx));
     setParamList((prev) => prev.filter((_, i) => i !== idx));
+    setEnabledList((prev) => prev.filter((_, i) => i !== idx));
   
     // すでに描画済み（parsedList に反映済み）の式があれば、その分も削除しておく
     setParsedList((prev) =>
@@ -1186,6 +1212,19 @@ export default function GraphStudio() {
                       onChange={(e) => updateColor(i, e.target.value)}
                       className="h-9 w-9 rounded-lg border border-slate-200 bg-white"
                     />
+                    <label className="mt-1 inline-flex items-center gap-1 text-[10px] text-slate-500">
+                      <input
+                        type="checkbox"
+                        className="h-3 w-3 accent-slate-700"
+                        checked={enabledList[i] ?? true}
+                        onChange={(e) =>
+                          setEnabledList((prev) =>
+                            prev.map((v, idx) => (idx === i ? e.target.checked : v)),
+                          )
+                        }
+                      />
+                      表示
+                    </label>
                   </div>
                   <div className="col-span-2 flex items-start justify-end">
                     <button
@@ -1255,6 +1294,19 @@ export default function GraphStudio() {
                           className="h-7 w-7 rounded-lg border border-slate-200 bg-white"
                         />
                       </div>
+                      <label className="inline-flex items-center gap-1 text-[10px] text-slate-500">
+                        <input
+                          type="checkbox"
+                          className="h-3 w-3 accent-slate-700"
+                          checked={enabledList[i] ?? true}
+                          onChange={(e) =>
+                            setEnabledList((prev) =>
+                              prev.map((v, idx) => (idx === i ? e.target.checked : v)),
+                            )
+                          }
+                        />
+                        表示
+                      </label>
                       <div className="flex">
                         <button
                           className="rounded-full border border-slate-200 bg-white px-2.5 py-1 text-[11px] text-slate-600 shadow-sm"
