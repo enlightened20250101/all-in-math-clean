@@ -1747,6 +1747,52 @@ export default function GraphStudio() {
     );
   }, [bivarLevels, bivarGridData, bivarLevelShift]);
 
+  const bivarCriticalPoints = useMemo(() => {
+    if (!bivarGridData) return [];
+    const { xs, ys, grid, zMin, zMax } = bivarGridData;
+    const nx = xs.length;
+    const ny = ys.length;
+    if (nx < 3 || ny < 3) return [];
+    const dx = xs[1] - xs[0];
+    const dy = ys[1] - ys[0];
+    const span = Math.max(1e-6, Math.abs(zMax - zMin));
+    const gradScale = span / Math.max(Math.abs(dx), Math.abs(dy), 1e-6);
+    const threshold = Math.max(1e-4, 0.02 * gradScale);
+    const candidates: { x: number; y: number; z: number; score: number }[] = [];
+    for (let j = 1; j < ny - 1; j += 1) {
+      for (let i = 1; i < nx - 1; i += 1) {
+        const zc = grid[j]?.[i];
+        if (!Number.isFinite(zc)) continue;
+        const zx1 = grid[j]?.[i + 1];
+        const zx0 = grid[j]?.[i - 1];
+        const zy1 = grid[j + 1]?.[i];
+        const zy0 = grid[j - 1]?.[i];
+        if (![zx1, zx0, zy1, zy0].every((v) => Number.isFinite(v))) continue;
+        const fx = (zx1! - zx0!) / (2 * dx);
+        const fy = (zy1! - zy0!) / (2 * dy);
+        const score = Math.abs(fx) + Math.abs(fy);
+        if (Math.abs(fx) < threshold && Math.abs(fy) < threshold) {
+          candidates.push({ x: xs[i], y: ys[j], z: zc, score });
+        }
+      }
+    }
+    candidates.sort((a, b) => a.score - b.score);
+    const merged: typeof candidates = [];
+    const minDist = Math.max(Math.abs(dx), Math.abs(dy)) * 1.5;
+    for (const cand of candidates) {
+      if (
+        merged.some(
+          (p) => Math.hypot(p.x - cand.x, p.y - cand.y) < minDist,
+        )
+      ) {
+        continue;
+      }
+      merged.push(cand);
+      if (merged.length >= 6) break;
+    }
+    return merged;
+  }, [bivarGridData]);
+
   const bivarContours = useMemo(() => {
     if (bivarView !== 'contour') return [];
     if (!bivarGridData || bivarLevelsList.length === 0 || isBivarDragging) return [];
@@ -4426,6 +4472,33 @@ export default function GraphStudio() {
                         </text>
                       ))
                     : null}
+                  {bivarGridData && bivarCriticalPoints.length
+                    ? bivarCriticalPoints.map((p, idx) => (
+                        <g key={`crit-${idx}`}>
+                          <circle
+                            cx={bivarXScale(p.x)}
+                            cy={bivarYScale(p.y)}
+                            r={4}
+                            fill="#0f172a"
+                            stroke="#ffffff"
+                            strokeWidth={2}
+                          />
+                          <text
+                            x={bivarXScale(p.x)}
+                            y={bivarYScale(p.y) - 8}
+                            fill="#0f172a"
+                            fontSize="10"
+                            textAnchor="middle"
+                            dominantBaseline="middle"
+                            paintOrder="stroke"
+                            stroke="#ffffff"
+                            strokeWidth="3"
+                          >
+                            {`(${formatNumber(p.x)}, ${formatNumber(p.y)})`}
+                          </text>
+                        </g>
+                      ))
+                    : null}
                 </svg>
                   </div>
                   {bivarGridData && bivarLevelsList.length ? (
@@ -4442,6 +4515,21 @@ export default function GraphStudio() {
                           <span>{formatNumber(level)}</span>
                         </div>
                       ))}
+                    </div>
+                  ) : null}
+                  {bivarCriticalPoints.length ? (
+                    <div className="mt-3 rounded-xl border border-slate-200 bg-white px-3 py-2 text-[11px] text-slate-600">
+                      <div className="font-semibold text-slate-700">停留点（近似）</div>
+                      <div className="mt-1 flex flex-wrap gap-2">
+                        {bivarCriticalPoints.map((p, idx) => (
+                          <span
+                            key={`crit-chip-${idx}`}
+                            className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-2 py-1"
+                          >
+                            ({formatNumber(p.x)}, {formatNumber(p.y)}) → {formatNumber(p.z)}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   ) : null}
                 </>
