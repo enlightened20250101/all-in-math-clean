@@ -101,6 +101,13 @@ function getUsedParams(eq: string) {
   };
 }
 
+function estimateParamRange(eq: string) {
+  const nums = (eq || "").match(/-?\d+(?:\.\d+)?/g)?.map(Number) ?? [];
+  const maxAbs = nums.reduce((m, v) => Math.max(m, Math.abs(v)), 0);
+  const base = Math.max(10, Math.min(50, Math.ceil(maxAbs * 2)));
+  return base;
+}
+
 // ★ 不完全・破損した式を弾くための強力なバリデーション
 function validateEquationSyntax(input: string): string | null {
   const s = input.trim();
@@ -1361,6 +1368,7 @@ export default function GraphStudio() {
           const d = domains[i] ?? DEFAULT_DOMAIN;
           const param = paramList[i] ?? { a: 1, b: 1, c: 0 };
           const usedParams = getUsedParams(eq);
+          const range = estimateParamRange(eq);
 
           return (
             <div
@@ -1625,8 +1633,8 @@ export default function GraphStudio() {
                             </div>
                             <input
                               type="range"
-                              min={-10}
-                              max={10}
+                              min={-range}
+                              max={range}
                               step={0.1}
                               value={value}
                               onChange={(e) => {
