@@ -1682,6 +1682,16 @@ export default function GraphStudio() {
     bivarHeight -
     ((y - bivarDomain.yMin) / Math.max(bivarDomain.yMax - bivarDomain.yMin, 1e-6)) *
       bivarHeight;
+  const bivarLevelColors = useMemo(() => {
+    if (!bivarGridData) return [];
+    const { zMin, zMax } = bivarGridData;
+    const span = Math.max(1e-6, zMax - zMin);
+    return bivarLevelsList.map((level) => {
+      const t = Math.min(1, Math.max(0, (level - zMin) / span));
+      const hue = 210 - 180 * t; // blue -> red
+      return `hsl(${hue}, 70%, 45%)`;
+    });
+  }, [bivarGridData, bivarLevelsList]);
 
   const fillBetweenPathEq = useMemo(() => {
     if (
@@ -3936,8 +3946,8 @@ export default function GraphStudio() {
                             y1={bivarYScale(seg[1])}
                             x2={bivarXScale(seg[2])}
                             y2={bivarYScale(seg[3])}
-                            stroke="#0ea5e9"
-                            strokeOpacity={0.75}
+                            stroke={bivarLevelColors[idx] ?? '#0ea5e9'}
+                            strokeOpacity={0.8}
                             strokeWidth={1}
                           />
                         ))}
@@ -3957,6 +3967,22 @@ export default function GraphStudio() {
                   )}
                 </svg>
               </div>
+              {bivarGridData && bivarLevelsList.length ? (
+                <div className="mt-3 flex flex-wrap items-center gap-2 text-[11px] text-slate-600">
+                  {bivarLevelsList.map((level, i) => (
+                    <div
+                      key={`lvl-label-${i}`}
+                      className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-2 py-1"
+                    >
+                      <span
+                        className="inline-block h-2.5 w-2.5 rounded-full"
+                        style={{ backgroundColor: bivarLevelColors[i] ?? '#0ea5e9' }}
+                      />
+                      <span>{formatNumber(level)}</span>
+                    </div>
+                  ))}
+                </div>
+              ) : null}
             </div>
           </div>
         </div>
