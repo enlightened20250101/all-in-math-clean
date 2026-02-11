@@ -627,8 +627,6 @@ export default function GraphStudio() {
   const bivarShiftRafRef = useRef<number | null>(null);
   const bivarShiftNextRef = useRef<number | null>(null);
   const bivarShiftCommitRef = useRef<number | null>(null);
-  const bivarGridRef = useRef(bivarGrid);
-  const bivarGridDraftRef = useRef(bivarGridDrafts);
   const [bivarParamDrafts, setBivarParamDrafts] = useState({
     a: '1',
     b: '1',
@@ -644,6 +642,8 @@ export default function GraphStudio() {
     nx: '60',
     ny: '60',
   });
+  const bivarGridRef = useRef(bivarGrid);
+  const bivarGridDraftRef = useRef(bivarGridDrafts);
   const [colors, setColors] = useState<string[]>([PALETTE[0], PALETTE[1]]);
   const [title, setTitle] = useState('Overlay');
 
