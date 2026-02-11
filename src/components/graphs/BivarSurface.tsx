@@ -179,6 +179,14 @@ export default function BivarSurface({
 
       const gridHelper = new THREE.GridHelper(12, 12, 0x94a3b8, 0xe2e8f0);
       gridHelper.position.set(0, 0, 0);
+      const gridMats = Array.isArray(gridHelper.material)
+        ? gridHelper.material
+        : [gridHelper.material];
+      gridMats.forEach((mat) => {
+        mat.transparent = true;
+        mat.opacity = 0.35;
+        mat.depthWrite = false;
+      });
       gridRef.current = gridHelper;
       scene.add(gridHelper);
 
@@ -243,6 +251,19 @@ export default function BivarSurface({
     mesh.receiveShadow = false;
     meshRef.current = mesh;
     scene.add(mesh);
+
+    if (gridRef.current && gridData) {
+      const { xs, ys } = gridData;
+      const minX = xs[0] ?? 0;
+      const maxX = xs[xs.length - 1] ?? 0;
+      const minY = ys[0] ?? 0;
+      const maxY = ys[ys.length - 1] ?? 0;
+      const spanX = Math.max(1, Math.abs(maxX - minX));
+      const spanY = Math.max(1, Math.abs(maxY - minY));
+      const span = Math.max(spanX, spanY);
+      const scale = Math.max(0.5, span / 12);
+      gridRef.current.scale.set(scale, 1, scale);
+    }
   }, [geometryData]);
 
   useEffect(() => {
