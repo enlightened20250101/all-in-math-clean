@@ -621,6 +621,8 @@ export default function GraphStudio() {
     'blueRed' | 'viridis' | 'mono'
   >('blueRed');
   const [bivarLevelShift, setBivarLevelShift] = useState(0);
+  const bivarShiftTrackRef = useRef<HTMLDivElement | null>(null);
+  const bivarShiftDragRef = useRef(false);
   const [bivarParamDrafts, setBivarParamDrafts] = useState({
     a: '1',
     b: '1',
@@ -4028,18 +4030,43 @@ export default function GraphStudio() {
                 <div className="mt-2">
                   <label className="block text-[11px] text-slate-500">レベルオフセット</label>
                   <div className="flex items-center gap-2">
-                    <input
-                      type="range"
-                      min={-10}
-                      max={10}
-                      step={0.1}
-                      value={bivarLevelShift}
-                      onChange={(e) => setBivarLevelShift(Number(e.target.value))}
-                      onInput={(e) => setBivarLevelShift(Number((e.target as HTMLInputElement).value))}
-                      className="w-full accent-slate-900 touch-pan-x pointer-events-auto"
-                      onPointerDown={(e) => e.stopPropagation()}
-                      onTouchStart={(e) => e.stopPropagation()}
-                    />
+                    <div
+                      ref={bivarShiftTrackRef}
+                      className="relative h-7 w-full cursor-pointer"
+                      onPointerDown={(e) => {
+                        const rect = bivarShiftTrackRef.current?.getBoundingClientRect();
+                        if (!rect) return;
+                        bivarShiftDragRef.current = true;
+                        const ratio = (e.clientX - rect.left) / rect.width;
+                        const next = -10 + Math.min(1, Math.max(0, ratio)) * 20;
+                        setBivarLevelShift(Number(next.toFixed(2)));
+                        (e.currentTarget as HTMLDivElement).setPointerCapture?.(e.pointerId);
+                      }}
+                      onPointerMove={(e) => {
+                        if (!bivarShiftDragRef.current) return;
+                        const rect = bivarShiftTrackRef.current?.getBoundingClientRect();
+                        if (!rect) return;
+                        const ratio = (e.clientX - rect.left) / rect.width;
+                        const next = -10 + Math.min(1, Math.max(0, ratio)) * 20;
+                        setBivarLevelShift(Number(next.toFixed(2)));
+                      }}
+                      onPointerUp={(e) => {
+                        bivarShiftDragRef.current = false;
+                        (e.currentTarget as HTMLDivElement).releasePointerCapture?.(e.pointerId);
+                      }}
+                      onPointerLeave={() => {
+                        bivarShiftDragRef.current = false;
+                      }}
+                    >
+                      <div className="absolute left-0 right-0 top-1/2 h-1 rounded-full bg-slate-200" />
+                      <div
+                        className="absolute top-1/2 h-3 w-3 -translate-y-1/2 rounded-full bg-slate-900 shadow-sm"
+                        style={{
+                          left: `${((bivarLevelShift + 10) / 20) * 100}%`,
+                          transform: 'translate(-50%, -50%)',
+                        }}
+                      />
+                    </div>
                     <span className="min-w-[3rem] text-right text-[11px] text-slate-600">
                       {formatNumber(bivarLevelShift)}
                     </span>
