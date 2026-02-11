@@ -3159,16 +3159,6 @@ export default function GraphStudio() {
             </div>
           </div>
 
-          {/* SP版：下に「式を編集」ボタン */}
-          <div className="lg:hidden space-y-3">
-            <button
-              className="w-full mt-2 px-4 py-3 rounded-xl border border-slate-200 bg-slate-900 text-white text-sm font-medium shadow-sm active:scale-[0.98]"
-              onClick={openEquationPanel}
-            >
-              式を編集する（入力パネルを開く）
-            </button>
-          </div>
-
           {drawVersion > 0 && previewEmpty && (
             <div className="text-sm text-rose-600">
               描画できませんでした。式や範囲・解像度を見直してください。
