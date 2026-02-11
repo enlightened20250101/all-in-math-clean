@@ -606,6 +606,7 @@ export default function GraphStudio() {
   ]);
   // ---- 2変数関数（等高線/3D用） ----
   const [bivarExpr, setBivarExpr] = useState<string>('x^2 + y^2');
+  const [bivarView, setBivarView] = useState<'contour' | 'surface'>('contour');
   const [bivarDomain, setBivarDomain] = useState({
     xMin: -5,
     xMax: 5,
@@ -1736,6 +1737,7 @@ export default function GraphStudio() {
   }, [bivarLevels, bivarGridData, bivarLevelShift]);
 
   const bivarContours = useMemo(() => {
+    if (bivarView !== 'contour') return [];
     if (!bivarGridData || bivarLevelsList.length === 0 || isBivarDragging) return [];
     const { xs, ys, grid } = bivarGridData;
     return bivarLevelsList.map((level) => ({
@@ -1773,7 +1775,7 @@ export default function GraphStudio() {
   }, [bivarGridData, bivarLevelsList, bivarColorScale]);
 
   const bivarHeatmap = useMemo(() => {
-    if (isBivarDragging) return [];
+    if (bivarView !== 'contour' || isBivarDragging) return [];
     if (!bivarGridData || chartSizeBivar.width <= 0 || chartSizeBivar.height <= 0) return [];
     const { xs, ys, grid, zMin, zMax } = bivarGridData;
     const span = Math.max(1e-6, zMax - zMin);
@@ -1817,7 +1819,7 @@ export default function GraphStudio() {
   ]);
 
   const bivarContourLabels = useMemo(() => {
-    if (isBivarDragging) return [];
+    if (bivarView !== 'contour' || isBivarDragging) return [];
     if (!bivarContours.length || bivarWidth <= 1 || bivarHeight <= 1) return [];
     const labels: Array<{ x: number; y: number; text: string; color: string }> = [];
     const minDist = 56; // px
@@ -4231,6 +4233,30 @@ export default function GraphStudio() {
                   <button
                     type="button"
                     className={`rounded-full border px-3 py-1 text-[11px] shadow-sm transition ${
+                      bivarView === 'contour'
+                        ? 'border-slate-900 bg-slate-900 text-white'
+                        : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
+                    }`}
+                    onClick={() => setBivarView('contour')}
+                  >
+                    等高線
+                  </button>
+                  <button
+                    type="button"
+                    className={`rounded-full border px-3 py-1 text-[11px] shadow-sm transition ${
+                      bivarView === 'surface'
+                        ? 'border-slate-900 bg-slate-900 text-white'
+                        : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
+                    }`}
+                    onClick={() => setBivarView('surface')}
+                  >
+                    3D（準備中）
+                  </button>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    className={`rounded-full border px-3 py-1 text-[11px] shadow-sm transition ${
                       showBivarHeatmap
                         ? 'border-slate-900 bg-slate-900 text-white'
                         : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
@@ -4309,10 +4335,11 @@ export default function GraphStudio() {
                   : undefined
               }
             >
-              <div
-                ref={bivarChartRef}
-                className="relative h-[320px] sm:h-[420px] lg:h-[520px] w-full overflow-hidden touch-pan-y"
-              >
+              {bivarView === 'contour' ? (
+                <div
+                  ref={bivarChartRef}
+                  className="relative h-[320px] sm:h-[420px] lg:h-[520px] w-full overflow-hidden touch-pan-y"
+                >
                 <svg
                   className="absolute inset-0 pointer-events-none"
                   width={bivarWidth}
@@ -4388,23 +4415,28 @@ export default function GraphStudio() {
                       ))
                     : null}
                 </svg>
-              </div>
-              {bivarGridData && bivarLevelsList.length ? (
-                <div className="mt-3 flex flex-wrap items-center gap-2 text-[11px] text-slate-600">
-                  {bivarLevelsList.map((level, i) => (
-                    <div
-                      key={`lvl-label-${i}`}
-                      className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-2 py-1"
-                    >
-                      <span
-                        className="inline-block h-2.5 w-2.5 rounded-full"
-                        style={{ backgroundColor: bivarLevelColors[i] ?? '#0ea5e9' }}
-                      />
-                      <span>{formatNumber(level)}</span>
-                    </div>
-                  ))}
                 </div>
-              ) : null}
+                {bivarGridData && bivarLevelsList.length ? (
+                  <div className="mt-3 flex flex-wrap items-center gap-2 text-[11px] text-slate-600">
+                    {bivarLevelsList.map((level, i) => (
+                      <div
+                        key={`lvl-label-${i}`}
+                        className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-2 py-1"
+                      >
+                        <span
+                          className="inline-block h-2.5 w-2.5 rounded-full"
+                          style={{ backgroundColor: bivarLevelColors[i] ?? '#0ea5e9' }}
+                        />
+                        <span>{formatNumber(level)}</span>
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
+              ) : (
+                <div className="flex h-[320px] sm:h-[420px] lg:h-[520px] items-center justify-center rounded-2xl border border-dashed border-slate-200 bg-slate-50 text-sm text-slate-500">
+                  3D表示は準備中です。まずは等高線で結果を確認できます。
+                </div>
+              )}
             </div>
           </div>
           {isMobile ? (
@@ -4517,6 +4549,34 @@ export default function GraphStudio() {
                 {/*
                   デスクトップ用の左パネルと同じ内容を再利用
                 */}
+                <div className="space-y-2 text-xs text-slate-600">
+                  <div className="font-semibold text-slate-700">表示モード</div>
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      type="button"
+                      className={`rounded-full border px-3 py-1 text-[11px] shadow-sm transition ${
+                        bivarView === 'contour'
+                          ? 'border-slate-900 bg-slate-900 text-white'
+                          : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
+                      }`}
+                      onClick={() => setBivarView('contour')}
+                    >
+                      等高線
+                    </button>
+                    <button
+                      type="button"
+                      className={`rounded-full border px-3 py-1 text-[11px] shadow-sm transition ${
+                        bivarView === 'surface'
+                          ? 'border-slate-900 bg-slate-900 text-white'
+                          : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
+                      }`}
+                      onClick={() => setBivarView('surface')}
+                    >
+                      3D（準備中）
+                    </button>
+                  </div>
+                </div>
+
                 <div>
                   <label className="block text-sm font-semibold text-slate-700">
                     2変数関数（z = f(x, y)）
