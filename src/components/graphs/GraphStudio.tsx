@@ -237,6 +237,65 @@ function findXIntercepts(points: Array<{ x: number; y: number }>, limit = 3) {
   return unique.slice(0, limit);
 }
 
+function evalQuadraticSeries(
+  pts: Array<{ x: number; y: number }>,
+  i: number,
+  x: number,
+) {
+  const p0 = pts[i - 1];
+  const p1 = pts[i];
+  const p2 = pts[i + 1];
+  if (!p0 || !p1 || !p2) {
+    const a0 = pts[i - 1];
+    const a1 = pts[i];
+    if (!a0 || !a1) return NaN;
+    const t = (x - a0.x) / (a1.x - a0.x);
+    return a0.y + (a1.y - a0.y) * t;
+  }
+  const x0 = p0.x;
+  const x1 = p1.x;
+  const x2 = p2.x;
+  const denom = (x0 - x1) * (x0 - x2) * (x1 - x2);
+  if (Math.abs(denom) < 1e-9) {
+    const t = (x - p0.x) / (p1.x - p0.x);
+    return p0.y + (p1.y - p0.y) * t;
+  }
+  const aCoef =
+    (x2 * (p1.y - p0.y) + x1 * (p0.y - p2.y) + x0 * (p2.y - p1.y)) / denom;
+  const bCoef =
+    (x2 * x2 * (p0.y - p1.y) +
+      x1 * x1 * (p2.y - p0.y) +
+      x0 * x0 * (p1.y - p2.y)) /
+    denom;
+  const cCoef = p0.y - aCoef * x0 * x0 - bCoef * x0;
+  return aCoef * x * x + bCoef * x + cCoef;
+}
+
+function refineExtremum(points: Array<{ x: number; y: number }>, i: number) {
+  const p0 = points[i - 1];
+  const p1 = points[i];
+  const p2 = points[i + 1];
+  if (!p0 || !p1 || !p2) return p1;
+  let x = p1.x;
+  const left = Math.min(p0.x, p2.x);
+  const right = Math.max(p0.x, p2.x);
+  const span = Math.max(1e-6, right - left);
+  const h = span * 0.05;
+  for (let k = 0; k < 6; k += 1) {
+    const f1 = evalQuadraticSeries(points, i, x + h);
+    const f0 = evalQuadraticSeries(points, i, x - h);
+    const fp = (f1 - f0) / (2 * h);
+    const f2 = evalQuadraticSeries(points, i, x + h * 1.1);
+    const f3 = evalQuadraticSeries(points, i, x - h * 1.1);
+    const fpp = (f2 - 2 * evalQuadraticSeries(points, i, x) + f3) / (h * h * 1.21);
+    if (!Number.isFinite(fp) || !Number.isFinite(fpp) || Math.abs(fpp) < 1e-8) break;
+    const next = x - fp / fpp;
+    if (!Number.isFinite(next)) break;
+    x = Math.min(right, Math.max(left, next));
+  }
+  return { x, y: evalQuadraticSeries(points, i, x) };
+}
+
 function findExtrema(points: Array<{ x: number; y: number }>, limit = 2) {
   const maxima: Array<{ x: number; y: number }> = [];
   const minima: Array<{ x: number; y: number }> = [];
@@ -262,12 +321,11 @@ function findExtrema(points: Array<{ x: number; y: number }>, limit = 2) {
           denom;
         const xv = -b / (2 * a);
         if (xv >= Math.min(p0.x, p2.x) && xv <= Math.max(p0.x, p2.x)) {
-          const yv = a * xv * xv + b * xv + (y0 - a * p0.x * p0.x - b * p0.x);
-          maxima.push({ x: xv, y: yv });
+          maxima.push(refineExtremum(points, i));
           continue;
         }
       }
-      maxima.push(p1);
+      maxima.push(refineExtremum(points, i));
     }
     if (dy1 < 0 && dy2 > 0) {
       const denom = (p0.x - p1.x) * (p0.x - p2.x) * (p1.x - p2.x);
@@ -281,12 +339,11 @@ function findExtrema(points: Array<{ x: number; y: number }>, limit = 2) {
           denom;
         const xv = -b / (2 * a);
         if (xv >= Math.min(p0.x, p2.x) && xv <= Math.max(p0.x, p2.x)) {
-          const yv = a * xv * xv + b * xv + (y0 - a * p0.x * p0.x - b * p0.x);
-          minima.push({ x: xv, y: yv });
+          minima.push(refineExtremum(points, i));
           continue;
         }
       }
-      minima.push(p1);
+      minima.push(refineExtremum(points, i));
     }
   }
   return {
@@ -303,40 +360,7 @@ function findIntersections(
   const len = Math.min(a.length, b.length);
   const hits: Array<{ x: number; y: number }> = [];
 
-  const evalQuadratic = (
-    pts: Array<{ x: number; y: number }>,
-    i: number,
-    x: number,
-  ) => {
-    const p0 = pts[i - 1];
-    const p1 = pts[i];
-    const p2 = pts[i + 1];
-    if (!p0 || !p1 || !p2) {
-      // fallback to linear
-      const a0 = pts[i - 1];
-      const a1 = pts[i];
-      if (!a0 || !a1) return NaN;
-      const t = (x - a0.x) / (a1.x - a0.x);
-      return a0.y + (a1.y - a0.y) * t;
-    }
-    const x0 = p0.x;
-    const x1 = p1.x;
-    const x2 = p2.x;
-    const denom = (x0 - x1) * (x0 - x2) * (x1 - x2);
-    if (Math.abs(denom) < 1e-9) {
-      const t = (x - p0.x) / (p1.x - p0.x);
-      return p0.y + (p1.y - p0.y) * t;
-    }
-    const aCoef =
-      (x2 * (p1.y - p0.y) + x1 * (p0.y - p2.y) + x0 * (p2.y - p1.y)) / denom;
-    const bCoef =
-      (x2 * x2 * (p0.y - p1.y) +
-        x1 * x1 * (p2.y - p0.y) +
-        x0 * x0 * (p1.y - p2.y)) /
-      denom;
-    const cCoef = p0.y - aCoef * x0 * x0 - bCoef * x0;
-    return aCoef * x * x + bCoef * x + cCoef;
-  };
+  const evalQuadratic = evalQuadraticSeries;
 
   for (let i = 1; i < len - 1; i += 1) {
     const p0 = a[i - 1];
@@ -1363,14 +1387,39 @@ export default function GraphStudio() {
   const fillBetweenArea = useMemo(() => {
     if (!fillBetweenData || fillBetweenData.length < 2) return null;
     let area = 0;
-    for (let i = 1; i < fillBetweenData.length; i += 1) {
-      const p0 = fillBetweenData[i - 1];
-      const p1 = fillBetweenData[i];
-      if (![p0.x, p0.y1, p0.y2, p1.x, p1.y1, p1.y2].every(Number.isFinite)) continue;
-      const h = p1.x - p0.x;
-      const f0 = Math.abs(p0.y1 - p0.y2);
-      const f1 = Math.abs(p1.y1 - p1.y2);
-      area += (f0 + f1) * 0.5 * h;
+    const n = fillBetweenData.length - 1;
+    const step = fillBetweenData[1].x - fillBetweenData[0].x;
+    if (n >= 2 && n % 2 === 0 && Number.isFinite(step)) {
+      // Simpson's rule
+      let sum = 0;
+      for (let i = 0; i <= n; i += 1) {
+        const p = fillBetweenData[i];
+        if (!p || ![p.x, p.y1, p.y2].every(Number.isFinite)) continue;
+        const f = Math.abs(p.y1 - p.y2);
+        if (i === 0 || i === n) {
+          sum += f;
+        } else if (i % 2 === 0) {
+          sum += 2 * f;
+        } else {
+          sum += 4 * f;
+        }
+      }
+      area = (step / 3) * sum;
+    } else {
+      // Trapezoid fallback
+      for (let i = 1; i < fillBetweenData.length; i += 1) {
+        const p0 = fillBetweenData[i - 1];
+        const p1 = fillBetweenData[i];
+        if (
+          ![p0.x, p0.y1, p0.y2, p1.x, p1.y1, p1.y2].every(Number.isFinite)
+        ) {
+          continue;
+        }
+        const h = p1.x - p0.x;
+        const f0 = Math.abs(p0.y1 - p0.y2);
+        const f1 = Math.abs(p1.y1 - p1.y2);
+        area += (f0 + f1) * 0.5 * h;
+      }
     }
     return area;
   }, [fillBetweenData]);
