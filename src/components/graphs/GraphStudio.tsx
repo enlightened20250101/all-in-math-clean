@@ -2588,7 +2588,7 @@ export default function GraphStudio() {
               data={fillBetweenData}
               type="linear"
               dataKey="y1"
-              baseLine={(d: any) => d.y2}
+              baseLine={fillBetweenData.map((d) => ({ x: d.x, y: d.y2 }))}
               stroke="none"
               fill="#38bdf8"
               fillOpacity={0.16}
