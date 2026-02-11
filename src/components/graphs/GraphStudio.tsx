@@ -4065,7 +4065,7 @@ export default function GraphStudio() {
                       ref={bivarShiftTrackRef}
                       className="relative h-7 w-full cursor-pointer touch-none"
                       onPointerDown={(e) => {
-                        const rect = bivarShiftTrackRef.current?.getBoundingClientRect();
+                        const rect = (e.currentTarget as HTMLDivElement).getBoundingClientRect();
                         if (!rect) return;
                         bivarShiftDragRef.current = true;
                         setIsBivarDragging(true);
@@ -4076,7 +4076,7 @@ export default function GraphStudio() {
                       }}
                       onPointerMove={(e) => {
                         if (!bivarShiftDragRef.current) return;
-                        const rect = bivarShiftTrackRef.current?.getBoundingClientRect();
+                        const rect = (e.currentTarget as HTMLDivElement).getBoundingClientRect();
                         if (!rect) return;
                         const now = e.timeStamp ?? performance.now();
                         if (now - bivarShiftLastTsRef.current < 16) return;
@@ -4107,7 +4107,7 @@ export default function GraphStudio() {
                         }, 120);
                       }}
                       onTouchStart={(e) => {
-                        const rect = bivarShiftTrackRef.current?.getBoundingClientRect();
+                        const rect = (e.currentTarget as HTMLDivElement).getBoundingClientRect();
                         if (!rect) return;
                         bivarShiftDragRef.current = true;
                         setIsBivarDragging(true);
@@ -4120,7 +4120,7 @@ export default function GraphStudio() {
                       }}
                       onTouchMove={(e) => {
                         if (!bivarShiftDragRef.current) return;
-                        const rect = bivarShiftTrackRef.current?.getBoundingClientRect();
+                        const rect = (e.currentTarget as HTMLDivElement).getBoundingClientRect();
                         if (!rect) return;
                         const now = e.timeStamp ?? performance.now();
                         if (now - bivarShiftLastTsRef.current < 16) return;
@@ -4722,7 +4722,7 @@ export default function GraphStudio() {
                         ref={bivarShiftTrackRef}
                         className="relative h-7 w-full cursor-pointer touch-none"
                         onPointerDown={(e) => {
-                          const rect = bivarShiftTrackRef.current?.getBoundingClientRect();
+                          const rect = (e.currentTarget as HTMLDivElement).getBoundingClientRect();
                           if (!rect) return;
                           bivarShiftDragRef.current = true;
                           setIsBivarDragging(true);
@@ -4733,7 +4733,7 @@ export default function GraphStudio() {
                         }}
                         onPointerMove={(e) => {
                           if (!bivarShiftDragRef.current) return;
-                          const rect = bivarShiftTrackRef.current?.getBoundingClientRect();
+                          const rect = (e.currentTarget as HTMLDivElement).getBoundingClientRect();
                           if (!rect) return;
                           const now = e.timeStamp ?? performance.now();
                           if (now - bivarShiftLastTsRef.current < 16) return;
@@ -4764,7 +4764,7 @@ export default function GraphStudio() {
                           }, 120);
                         }}
                         onTouchStart={(e) => {
-                          const rect = bivarShiftTrackRef.current?.getBoundingClientRect();
+                          const rect = (e.currentTarget as HTMLDivElement).getBoundingClientRect();
                           if (!rect) return;
                           bivarShiftDragRef.current = true;
                           setIsBivarDragging(true);
@@ -4777,7 +4777,7 @@ export default function GraphStudio() {
                         }}
                         onTouchMove={(e) => {
                           if (!bivarShiftDragRef.current) return;
-                          const rect = bivarShiftTrackRef.current?.getBoundingClientRect();
+                          const rect = (e.currentTarget as HTMLDivElement).getBoundingClientRect();
                           if (!rect) return;
                           const now = e.timeStamp ?? performance.now();
                           if (now - bivarShiftLastTsRef.current < 16) return;
