@@ -157,10 +157,29 @@ function validateEquationSyntax(input: string): string | null {
   return null; // OK
 }
 
+function encodeShareState(state: unknown) {
+  try {
+    const json = JSON.stringify(state);
+    return btoa(encodeURIComponent(json));
+  } catch {
+    return null;
+  }
+}
+
+function decodeShareState(raw: string) {
+  try {
+    const json = decodeURIComponent(atob(raw));
+    return JSON.parse(json);
+  } catch {
+    return null;
+  }
+}
+
 export default function GraphStudio() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const fromId = searchParams.get('from');   // ← ここで取得
+  const shareParam = searchParams.get('g');
   const [userId, setUserId] = useState<string | null>(null);
   const [toast, setToast] = useState<{ message: string; type: 'error' | 'success' } | null>(null);
 
@@ -180,6 +199,64 @@ export default function GraphStudio() {
   // === DOM参照 ===
   const equationChartRef = useRef<HTMLDivElement | null>(null);
   const seriesChartRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    if (!shareParam) {
+      shareReady.current = true;
+      return;
+    }
+    const decoded = decodeShareState(shareParam);
+    if (decoded && typeof decoded === 'object') {
+      const state = decoded as Partial<{
+        equations: string[];
+        colors: string[];
+        domains: Domain1D[];
+        paramList: { a: number; b: number; c: number }[];
+        enabledList: boolean[];
+        xLabel: string;
+        yLabel: string;
+        title: string;
+      }>;
+      if (Array.isArray(state.equations)) setEquations(state.equations);
+      if (Array.isArray(state.colors)) setColors(state.colors);
+      if (Array.isArray(state.domains)) setDomains(state.domains);
+      if (Array.isArray(state.paramList)) setParamList(state.paramList);
+      if (Array.isArray(state.enabledList)) setEnabledList(state.enabledList);
+      if (typeof state.xLabel === 'string') setXLabel(state.xLabel);
+      if (typeof state.yLabel === 'string') setYLabel(state.yLabel);
+      if (typeof state.title === 'string') setTitle(state.title);
+    }
+    shareReady.current = true;
+  }, [shareParam]);
+
+  useEffect(() => {
+    if (!shareReady.current) return;
+    const encoded = encodeShareState({
+      equations,
+      colors,
+      domains,
+      paramList,
+      enabledList,
+      xLabel,
+      yLabel,
+      title,
+    });
+    if (!encoded || encoded === lastShare.current) return;
+    lastShare.current = encoded;
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('g', encoded);
+    router.replace(`?${params.toString()}`, { scroll: false });
+  }, [
+    equations,
+    colors,
+    domains,
+    paramList,
+    enabledList,
+    xLabel,
+    yLabel,
+    title,
+    router,
+    searchParams,
+  ]);
 
   // プロット領域（実測値）: 式タブ
   const [plotBoxEq, setPlotBoxEq] = useState<{
@@ -258,6 +335,8 @@ export default function GraphStudio() {
     y: number;
     domain: { xMin: number; xMax: number; yMin: number; yMax: number };
   } | null>(null);
+  const shareReady = useRef(false);
+  const lastShare = useRef<string | null>(null);
   const openEquationPanel = () => {
     setIsPanelOpen(true);
     if (activeEqIndex === null && equations.length) {
@@ -1827,6 +1906,19 @@ export default function GraphStudio() {
             filename={`${title || 'graph'}.png`}
             onError={(message) => setToast({ message, type: 'error' })}
           />
+          <button
+            className="rounded-full border border-slate-200 bg-white px-4 py-2 text-[11px] font-medium text-slate-700 shadow-sm transition hover:bg-slate-50 md:text-sm"
+            onClick={async () => {
+              try {
+                await navigator.clipboard.writeText(window.location.href);
+                setToast({ message: '共有リンクをコピーしました', type: 'success' });
+              } catch {
+                setToast({ message: 'リンクのコピーに失敗しました', type: 'error' });
+              }
+            }}
+          >
+            共有リンク
+          </button>
           <button
             className="rounded-full border border-slate-200 bg-white px-4 py-2 text-[11px] font-medium text-slate-700 shadow-sm transition hover:bg-slate-50 md:text-sm"
             onClick={clearDraft}
