@@ -621,6 +621,7 @@ export default function GraphStudio() {
     'blueRed' | 'viridis' | 'mono'
   >('blueRed');
   const [bivarLevelShift, setBivarLevelShift] = useState(0);
+  const [bivarLevelShiftLive, setBivarLevelShiftLive] = useState(0);
   const bivarShiftTrackRef = useRef<HTMLDivElement | null>(null);
   const bivarShiftDragRef = useRef(false);
   const bivarShiftRafRef = useRef<number | null>(null);
@@ -978,6 +979,7 @@ export default function GraphStudio() {
       }
       if (typeof draft.bivarLevelShift === 'number' && Number.isFinite(draft.bivarLevelShift)) {
         setBivarLevelShift(draft.bivarLevelShift);
+        setBivarLevelShiftLive(draft.bivarLevelShift);
       }
 
       if (draft.tab === 'equation' || draft.tab === 'series' || draft.tab === 'bivar') {
@@ -1698,7 +1700,7 @@ export default function GraphStudio() {
     if (!bivarGridData) return [];
     const raw = bivarLevels.trim();
     if (raw) {
-      return raw
+    return raw
         .split(/[\\s,]+/)
         .map((v) => Number(v))
         .filter((v) => Number.isFinite(v))
@@ -4041,7 +4043,7 @@ export default function GraphStudio() {
                         bivarShiftDragRef.current = true;
                         const ratio = (e.clientX - rect.left) / rect.width;
                         const next = -10 + Math.min(1, Math.max(0, ratio)) * 20;
-                        setBivarLevelShift(Number(next.toFixed(2)));
+                        setBivarLevelShiftLive(Number(next.toFixed(2)));
                         (e.currentTarget as HTMLDivElement).setPointerCapture?.(e.pointerId);
                       }}
                       onPointerMove={(e) => {
@@ -4056,13 +4058,14 @@ export default function GraphStudio() {
                           bivarShiftRafRef.current = window.requestAnimationFrame(() => {
                             bivarShiftRafRef.current = null;
                             if (bivarShiftNextRef.current != null) {
-                              setBivarLevelShift(bivarShiftNextRef.current);
+                              setBivarLevelShiftLive(bivarShiftNextRef.current);
                             }
                           });
                         }
                       }}
                       onPointerUp={(e) => {
                         bivarShiftDragRef.current = false;
+                        setBivarLevelShift(bivarShiftNextRef.current ?? bivarLevelShiftLive);
                         if (bivarShiftRafRef.current != null) {
                           window.cancelAnimationFrame(bivarShiftRafRef.current);
                           bivarShiftRafRef.current = null;
@@ -4081,13 +4084,13 @@ export default function GraphStudio() {
                       <div
                         className="absolute top-1/2 h-3 w-3 -translate-y-1/2 rounded-full bg-slate-900 shadow-sm"
                         style={{
-                          left: `${((bivarLevelShift + 10) / 20) * 100}%`,
+                          left: `${((bivarLevelShiftLive + 10) / 20) * 100}%`,
                           transform: 'translate(-50%, -50%)',
                         }}
                       />
                     </div>
                     <span className="min-w-[3rem] text-right text-[11px] text-slate-600">
-                      {formatNumber(bivarLevelShift)}
+                      {formatNumber(bivarLevelShiftLive)}
                     </span>
                   </div>
                   <p className="text-[11px] text-slate-500">
