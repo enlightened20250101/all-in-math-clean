@@ -405,6 +405,94 @@ function findIntersections(
   return unique.slice(0, limit);
 }
 
+function buildContourSegments(
+  xs: number[],
+  ys: number[],
+  grid: number[][],
+  level: number,
+) {
+  const segments: Array<[number, number, number, number]> = [];
+  const ny = ys.length;
+  const nx = xs.length;
+  if (nx < 2 || ny < 2) return segments;
+
+  const interp = (
+    x1: number,
+    y1: number,
+    v1: number,
+    x2: number,
+    y2: number,
+    v2: number,
+  ) => {
+    const t = (level - v1) / (v2 - v1);
+    return [x1 + (x2 - x1) * t, y1 + (y2 - y1) * t] as const;
+  };
+
+  for (let j = 0; j < ny - 1; j += 1) {
+    for (let i = 0; i < nx - 1; i += 1) {
+      const v0 = grid[j]?.[i];
+      const v1 = grid[j]?.[i + 1];
+      const v2 = grid[j + 1]?.[i + 1];
+      const v3 = grid[j + 1]?.[i];
+      if (![v0, v1, v2, v3].every(Number.isFinite)) continue;
+      const x0 = xs[i];
+      const x1 = xs[i + 1];
+      const y0 = ys[j];
+      const y1 = ys[j + 1];
+      const c0 = v0 >= level ? 1 : 0;
+      const c1 = v1 >= level ? 1 : 0;
+      const c2 = v2 >= level ? 1 : 0;
+      const c3 = v3 >= level ? 1 : 0;
+      const idx = (c0 << 3) | (c1 << 2) | (c2 << 1) | c3;
+      if (idx === 0 || idx === 15) continue;
+
+      const top = interp(x0, y0, v0, x1, y0, v1);
+      const right = interp(x1, y0, v1, x1, y1, v2);
+      const bottom = interp(x0, y1, v3, x1, y1, v2);
+      const left = interp(x0, y0, v0, x0, y1, v3);
+
+      switch (idx) {
+        case 1:
+        case 14:
+          segments.push(left.concat(bottom) as [number, number, number, number]);
+          break;
+        case 2:
+        case 13:
+          segments.push(bottom.concat(right) as [number, number, number, number]);
+          break;
+        case 3:
+        case 12:
+          segments.push(left.concat(right) as [number, number, number, number]);
+          break;
+        case 4:
+        case 11:
+          segments.push(top.concat(right) as [number, number, number, number]);
+          break;
+        case 5:
+          segments.push(top.concat(left) as [number, number, number, number]);
+          segments.push(bottom.concat(right) as [number, number, number, number]);
+          break;
+        case 6:
+        case 9:
+          segments.push(top.concat(bottom) as [number, number, number, number]);
+          break;
+        case 7:
+        case 8:
+          segments.push(top.concat(left) as [number, number, number, number]);
+          break;
+        case 10:
+          segments.push(top.concat(right) as [number, number, number, number]);
+          segments.push(bottom.concat(left) as [number, number, number, number]);
+          break;
+        default:
+          break;
+      }
+    }
+  }
+
+  return segments;
+}
+
 type HistorySnapshot = {
   equations: string[];
   colors: string[];
@@ -441,6 +529,7 @@ export default function GraphStudio() {
   // === DOM参照 ===
   const equationChartRef = useRef<HTMLDivElement | null>(null);
   const seriesChartRef = useRef<HTMLDivElement | null>(null);
+  const bivarChartRef = useRef<HTMLDivElement | null>(null);
 
   // プロット領域（実測値）: 式タブ
   const [plotBoxEq, setPlotBoxEq] = useState<{
@@ -486,6 +575,10 @@ export default function GraphStudio() {
     width: number;
     height: number;
   }>({ width: 0, height: 0 });
+  const [chartSizeBivar, setChartSizeBivar] = useState<{
+    width: number;
+    height: number;
+  }>({ width: 0, height: 0 });
 
   // グラフ再計算トリガー（「グラフ作成」ボタンで増やす）
   const [drawVersion, setDrawVersion] = useState(0);
@@ -499,6 +592,32 @@ export default function GraphStudio() {
     true,
     true,
   ]);
+  // ---- 2変数関数（等高線/3D用） ----
+  const [bivarExpr, setBivarExpr] = useState<string>('x^2 + y^2');
+  const [bivarDomain, setBivarDomain] = useState({
+    xMin: -5,
+    xMax: 5,
+    yMin: -5,
+    yMax: 5,
+  });
+  const [bivarGrid, setBivarGrid] = useState({ nx: 60, ny: 60 });
+  const [bivarLevels, setBivarLevels] = useState<string>('');
+  const [bivarParams, setBivarParams] = useState({ a: 1, b: 1, c: 1 });
+  const [bivarParamDrafts, setBivarParamDrafts] = useState({
+    a: '1',
+    b: '1',
+    c: '1',
+  });
+  const [bivarDomainDrafts, setBivarDomainDrafts] = useState({
+    xMin: '-5',
+    xMax: '5',
+    yMin: '-5',
+    yMax: '5',
+  });
+  const [bivarGridDrafts, setBivarGridDrafts] = useState({
+    nx: '60',
+    ny: '60',
+  });
   const [colors, setColors] = useState<string[]>([PALETTE[0], PALETTE[1]]);
   const [title, setTitle] = useState('Overlay');
 
@@ -715,7 +834,7 @@ export default function GraphStudio() {
   };
 
   // データタブ（任意）
-  const [tab, setTab] = useState<'equation' | 'series'>('equation');
+  const [tab, setTab] = useState<'equation' | 'series' | 'bivar'>('equation');
   const [sConf, setSConf] = useState<SeriesConfig>({
     title: 'Sample series',
     series: [
@@ -793,8 +912,39 @@ export default function GraphStudio() {
       if (typeof draft.yMax === 'number') setYMax(draft.yMax);
       if (typeof draft.nx === 'number') setNx(draft.nx);
       if (typeof draft.ny === 'number') setNy(draft.ny);
+      if (typeof draft.bivarExpr === 'string') setBivarExpr(draft.bivarExpr);
+      if (draft.bivarDomain && typeof draft.bivarDomain === 'object') {
+        setBivarDomain((prev) => ({
+          xMin: Number.isFinite(draft.bivarDomain.xMin) ? draft.bivarDomain.xMin : prev.xMin,
+          xMax: Number.isFinite(draft.bivarDomain.xMax) ? draft.bivarDomain.xMax : prev.xMax,
+          yMin: Number.isFinite(draft.bivarDomain.yMin) ? draft.bivarDomain.yMin : prev.yMin,
+          yMax: Number.isFinite(draft.bivarDomain.yMax) ? draft.bivarDomain.yMax : prev.yMax,
+        }));
+      }
+      if (draft.bivarGrid && typeof draft.bivarGrid === 'object') {
+        setBivarGrid((prev) => ({
+          nx: Number.isFinite(draft.bivarGrid.nx) ? draft.bivarGrid.nx : prev.nx,
+          ny: Number.isFinite(draft.bivarGrid.ny) ? draft.bivarGrid.ny : prev.ny,
+        }));
+      }
+      if (typeof draft.bivarLevels === 'string') setBivarLevels(draft.bivarLevels);
+      if (draft.bivarParams && typeof draft.bivarParams === 'object') {
+        const next = {
+          a: Number.isFinite(draft.bivarParams.a) ? draft.bivarParams.a : bivarParams.a,
+          b: Number.isFinite(draft.bivarParams.b) ? draft.bivarParams.b : bivarParams.b,
+          c: Number.isFinite(draft.bivarParams.c) ? draft.bivarParams.c : bivarParams.c,
+        };
+        setBivarParams(next);
+        setBivarParamDrafts({
+          a: String(next.a),
+          b: String(next.b),
+          c: String(next.c),
+        });
+      }
 
-      if (draft.tab === 'equation' || draft.tab === 'series') setTab(draft.tab);
+      if (draft.tab === 'equation' || draft.tab === 'series' || draft.tab === 'bivar') {
+        setTab(draft.tab);
+      }
 
       // ★ 何かしら復元できていたら、自動で一度だけグラフを描画
       if (restored) {
@@ -1044,12 +1194,36 @@ export default function GraphStudio() {
         nx,
         ny,
         tab,
+        bivarExpr,
+        bivarDomain,
+        bivarGrid,
+        bivarLevels,
+        bivarParams,
       };
       localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
     } catch (e) {
       console.error('failed to save GraphStudio draft', e);
     }
-  }, [drawVersion, equations, colors, domains, paramList, title, xLabel, yLabel, yMin, yMax, nx, ny, tab]);
+  }, [
+    drawVersion,
+    equations,
+    colors,
+    domains,
+    paramList,
+    title,
+    xLabel,
+    yLabel,
+    yMin,
+    yMax,
+    nx,
+    ny,
+    tab,
+    bivarExpr,
+    bivarDomain,
+    bivarGrid,
+    bivarLevels,
+    bivarParams,
+  ]);
 
   useEffect(() => {
     setGridDraft((prev) => ({
@@ -1069,6 +1243,22 @@ export default function GraphStudio() {
       })),
     );
   }, [domains]);
+
+  useEffect(() => {
+    setBivarDomainDrafts((prev) => ({
+      xMin: prev.xMin !== '' ? prev.xMin : String(bivarDomain.xMin),
+      xMax: prev.xMax !== '' ? prev.xMax : String(bivarDomain.xMax),
+      yMin: prev.yMin !== '' ? prev.yMin : String(bivarDomain.yMin),
+      yMax: prev.yMax !== '' ? prev.yMax : String(bivarDomain.yMax),
+    }));
+  }, [bivarDomain]);
+
+  useEffect(() => {
+    setBivarGridDrafts((prev) => ({
+      nx: prev.nx !== '' ? prev.nx : String(bivarGrid.nx),
+      ny: prev.ny !== '' ? prev.ny : String(bivarGrid.ny),
+    }));
+  }, [bivarGrid]);
 
   // 「グラフ作成」ボタンを押したときだけ再計算
   useEffect(() => {
@@ -1423,6 +1613,75 @@ export default function GraphStudio() {
     }
     return area;
   }, [fillBetweenData]);
+
+  const bivarGridData = useMemo(() => {
+    const nx = Math.max(10, Math.min(200, Math.round(bivarGrid.nx)));
+    const ny = Math.max(10, Math.min(200, Math.round(bivarGrid.ny)));
+    const xMin = bivarDomain.xMin;
+    const xMax = bivarDomain.xMax;
+    const yMin = bivarDomain.yMin;
+    const yMax = bivarDomain.yMax;
+    if (!Number.isFinite(xMin) || !Number.isFinite(xMax) || !Number.isFinite(yMin) || !Number.isFinite(yMax)) {
+      return null;
+    }
+    const f = buildFunction2D(bivarExpr, bivarParams);
+    const xs = Array.from({ length: nx }, (_, i) => xMin + (i / (nx - 1)) * (xMax - xMin));
+    const ys = Array.from({ length: ny }, (_, j) => yMin + (j / (ny - 1)) * (yMax - yMin));
+    const grid: number[][] = [];
+    let zMin = Infinity;
+    let zMax = -Infinity;
+    for (let j = 0; j < ny; j += 1) {
+      const row: number[] = [];
+      const y = ys[j];
+      for (let i = 0; i < nx; i += 1) {
+        const x = xs[i];
+        const z = f(x, y);
+        row.push(z);
+        if (Number.isFinite(z)) {
+          zMin = Math.min(zMin, z);
+          zMax = Math.max(zMax, z);
+        }
+      }
+      grid.push(row);
+    }
+    if (!Number.isFinite(zMin) || !Number.isFinite(zMax)) return null;
+    return { xs, ys, grid, zMin, zMax };
+  }, [bivarExpr, bivarDomain, bivarGrid, bivarParams]);
+
+  const bivarLevelsList = useMemo(() => {
+    if (!bivarGridData) return [];
+    const raw = bivarLevels.trim();
+    if (raw) {
+      return raw
+        .split(/[\\s,]+/)
+        .map((v) => Number(v))
+        .filter((v) => Number.isFinite(v))
+        .sort((a, b) => a - b);
+    }
+    const { zMin, zMax } = bivarGridData;
+    const count = 8;
+    if (zMax - zMin <= 1e-8) return [zMin];
+    return Array.from({ length: count }, (_, i) => zMin + ((i + 1) / (count + 1)) * (zMax - zMin));
+  }, [bivarLevels, bivarGridData]);
+
+  const bivarContours = useMemo(() => {
+    if (!bivarGridData || bivarLevelsList.length === 0) return [];
+    const { xs, ys, grid } = bivarGridData;
+    return bivarLevelsList.map((level) => ({
+      level,
+      segments: buildContourSegments(xs, ys, grid, level),
+    }));
+  }, [bivarGridData, bivarLevelsList]);
+
+  const bivarWidth = Math.max(chartSizeBivar.width, 1);
+  const bivarHeight = Math.max(chartSizeBivar.height, 1);
+  const bivarXScale = (x: number) =>
+    ((x - bivarDomain.xMin) / Math.max(bivarDomain.xMax - bivarDomain.xMin, 1e-6)) *
+    bivarWidth;
+  const bivarYScale = (y: number) =>
+    bivarHeight -
+    ((y - bivarDomain.yMin) / Math.max(bivarDomain.yMax - bivarDomain.yMin, 1e-6)) *
+      bivarHeight;
 
   const fillBetweenPathEq = useMemo(() => {
     if (
@@ -1941,7 +2200,12 @@ export default function GraphStudio() {
     );
   }
 
-  const activeChartRef = tab === 'equation' ? equationChartRef : seriesChartRef;
+  const activeChartRef =
+    tab === 'equation'
+      ? equationChartRef
+      : tab === 'series'
+      ? seriesChartRef
+      : bivarChartRef;
 
   // === プロット領域の実測 ===
 
@@ -1994,6 +2258,23 @@ export default function GraphStudio() {
     });
     return () => cancelAnimationFrame(id);
   }, [drawVersion, equalDomain, viewDomain, xTicks, yTicks]);
+
+  // bivarタブ用（等高線）
+  useEffect(() => {
+    const root = bivarChartRef.current;
+    if (!root || typeof ResizeObserver === 'undefined') return;
+    const obs = new ResizeObserver((entries) => {
+      const entry = entries[0];
+      if (!entry) return;
+      const { width, height } = entry.contentRect;
+      setChartSizeBivar({
+        width,
+        height,
+      });
+    });
+    obs.observe(root);
+    return () => obs.disconnect();
+  }, []);
 
   // ==== 式入力パネル（PCとSP共通で使う） ====
   const equationInputPanel = (
@@ -3236,6 +3517,16 @@ export default function GraphStudio() {
         >
           データから描く
         </button>
+        <button
+          className={`px-4 py-2 rounded-full text-xs md:text-sm transition ${
+            tab === 'bivar'
+              ? 'bg-white text-slate-900 font-semibold shadow-sm'
+              : 'text-slate-500 hover:text-slate-700'
+          }`}
+          onClick={() => setTab('bivar')}
+        >
+          2変数関数
+        </button>
       </div>
 
       {/* ── 式タブ ── */}
@@ -3433,6 +3724,229 @@ export default function GraphStudio() {
                 >
                   {ineqFillSeries}
                 </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── 2変数関数タブ（等高線） ── */}
+      {tab === 'bivar' && (
+        <div className="space-y-4">
+          <div className="grid gap-4 lg:grid-cols-[360px,1fr]">
+            <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm space-y-4">
+              <div>
+                <label className="block text-sm font-semibold text-slate-700">
+                  2変数関数（z = f(x, y)）
+                </label>
+                <SmartMathInput
+                  value={bivarExpr}
+                  onChange={(v) => {
+                    const trimmed = v.replace(/^z\\s*=/i, '').trim();
+                    setBivarExpr(trimmed);
+                  }}
+                  label=""
+                  description="x, y を使って z を表す式（例: x^2 + y^2）"
+                  placeholder="x^2 + y^2"
+                  size="sm"
+                />
+              </div>
+
+              <div className="space-y-2 text-xs text-slate-600">
+                <div className="font-semibold text-slate-700">表示範囲</div>
+                <div className="grid grid-cols-2 gap-2">
+                  <div>
+                    <label className="block text-[11px] text-slate-500">x 最小</label>
+                    <input
+                      type="text"
+                      inputMode="decimal"
+                      className="w-full rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs"
+                      value={bivarDomainDrafts.xMin}
+                      onChange={(e) => {
+                        const raw = e.target.value;
+                        setBivarDomainDrafts((prev) => ({ ...prev, xMin: raw }));
+                        const parsed = Number(raw);
+                        if (!Number.isNaN(parsed) && raw !== '' && raw !== '-') {
+                          setBivarDomain((prev) => ({ ...prev, xMin: parsed }));
+                        }
+                      }}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[11px] text-slate-500">x 最大</label>
+                    <input
+                      type="text"
+                      inputMode="decimal"
+                      className="w-full rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs"
+                      value={bivarDomainDrafts.xMax}
+                      onChange={(e) => {
+                        const raw = e.target.value;
+                        setBivarDomainDrafts((prev) => ({ ...prev, xMax: raw }));
+                        const parsed = Number(raw);
+                        if (!Number.isNaN(parsed) && raw !== '' && raw !== '-') {
+                          setBivarDomain((prev) => ({ ...prev, xMax: parsed }));
+                        }
+                      }}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[11px] text-slate-500">y 最小</label>
+                    <input
+                      type="text"
+                      inputMode="decimal"
+                      className="w-full rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs"
+                      value={bivarDomainDrafts.yMin}
+                      onChange={(e) => {
+                        const raw = e.target.value;
+                        setBivarDomainDrafts((prev) => ({ ...prev, yMin: raw }));
+                        const parsed = Number(raw);
+                        if (!Number.isNaN(parsed) && raw !== '' && raw !== '-') {
+                          setBivarDomain((prev) => ({ ...prev, yMin: parsed }));
+                        }
+                      }}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[11px] text-slate-500">y 最大</label>
+                    <input
+                      type="text"
+                      inputMode="decimal"
+                      className="w-full rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs"
+                      value={bivarDomainDrafts.yMax}
+                      onChange={(e) => {
+                        const raw = e.target.value;
+                        setBivarDomainDrafts((prev) => ({ ...prev, yMax: raw }));
+                        const parsed = Number(raw);
+                        if (!Number.isNaN(parsed) && raw !== '' && raw !== '-') {
+                          setBivarDomain((prev) => ({ ...prev, yMax: parsed }));
+                        }
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-2 text-xs text-slate-600">
+                <div className="font-semibold text-slate-700">グリッド解像度</div>
+                <div className="grid grid-cols-2 gap-2">
+                  <div>
+                    <label className="block text-[11px] text-slate-500">x 分割</label>
+                    <input
+                      type="text"
+                      inputMode="numeric"
+                      className="w-full rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs"
+                      value={bivarGridDrafts.nx}
+                      onChange={(e) => {
+                        const raw = e.target.value;
+                        setBivarGridDrafts((prev) => ({ ...prev, nx: raw }));
+                        const parsed = Number(raw);
+                        if (Number.isFinite(parsed) && raw !== '') {
+                          setBivarGrid((prev) => ({ ...prev, nx: Math.max(10, parsed) }));
+                        }
+                      }}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[11px] text-slate-500">y 分割</label>
+                    <input
+                      type="text"
+                      inputMode="numeric"
+                      className="w-full rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs"
+                      value={bivarGridDrafts.ny}
+                      onChange={(e) => {
+                        const raw = e.target.value;
+                        setBivarGridDrafts((prev) => ({ ...prev, ny: raw }));
+                        const parsed = Number(raw);
+                        if (Number.isFinite(parsed) && raw !== '') {
+                          setBivarGrid((prev) => ({ ...prev, ny: Math.max(10, parsed) }));
+                        }
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-2 text-xs text-slate-600">
+                <div className="font-semibold text-slate-700">等高線レベル</div>
+                <input
+                  type="text"
+                  className="w-full rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs"
+                  value={bivarLevels}
+                  placeholder="例: -4,-2,0,2,4（空なら自動）"
+                  onChange={(e) => setBivarLevels(e.target.value)}
+                />
+                <p className="text-[11px] text-slate-500">
+                  空欄の場合は自動でレベルを作成します。
+                </p>
+              </div>
+
+              <div className="space-y-2 text-xs text-slate-600">
+                <div className="font-semibold text-slate-700">パラメータ（a,b,c）</div>
+                <div className="grid grid-cols-3 gap-2">
+                  {(['a', 'b', 'c'] as const).map((key) => (
+                    <div key={key}>
+                      <label className="block text-[11px] text-slate-500">{key}</label>
+                      <input
+                        type="text"
+                        inputMode="decimal"
+                        className="w-full rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs"
+                        value={bivarParamDrafts[key]}
+                        onChange={(e) => {
+                          const raw = e.target.value;
+                          setBivarParamDrafts((prev) => ({ ...prev, [key]: raw }));
+                          const parsed = Number(raw);
+                          if (!Number.isNaN(parsed) && raw !== '' && raw !== '-') {
+                            setBivarParams((prev) => ({ ...prev, [key]: parsed }));
+                          }
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
+              <div
+                ref={bivarChartRef}
+                className="relative h-[420px] sm:h-[520px] w-full"
+              >
+                {bivarGridData ? (
+                  <svg
+                    className="absolute inset-0"
+                    width={bivarWidth}
+                    height={bivarHeight}
+                    viewBox={`0 0 ${bivarWidth} ${bivarHeight}`}
+                  >
+                    <rect
+                      x={0}
+                      y={0}
+                      width={bivarWidth}
+                      height={bivarHeight}
+                      fill="#ffffff"
+                    />
+                    {bivarContours.map((contour, idx) => (
+                      <g key={`lvl-${idx}`}>
+                        {contour.segments.map((seg, i) => (
+                          <line
+                            key={`seg-${idx}-${i}`}
+                            x1={bivarXScale(seg[0])}
+                            y1={bivarYScale(seg[1])}
+                            x2={bivarXScale(seg[2])}
+                            y2={bivarYScale(seg[3])}
+                            stroke="#0ea5e9"
+                            strokeOpacity={0.75}
+                            strokeWidth={1}
+                          />
+                        ))}
+                      </g>
+                    ))}
+                  </svg>
+                ) : (
+                  <div className="flex h-full items-center justify-center text-sm text-slate-400">
+                    入力内容を確認してください
+                  </div>
+                )}
               </div>
             </div>
           </div>
