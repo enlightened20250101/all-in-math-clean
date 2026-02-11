@@ -243,6 +243,13 @@ export default function GraphStudio() {
 
   // ★ SP用：式入力パネルの開閉フラグ
   const [isPanelOpen, setIsPanelOpen] = useState(false);
+  const openEquationPanel = () => {
+    setIsPanelOpen(true);
+    if (activeEqIndex === null && equations.length) {
+      setActiveEqIndex(0);
+    }
+    setIsEqInputOpen(true);
+  };
 
   // データタブ（任意）
   const [tab, setTab] = useState<'equation' | 'series'>('equation');
@@ -1767,7 +1774,7 @@ export default function GraphStudio() {
           <div className="lg:hidden space-y-3">
             <button
               className="w-full mt-2 px-4 py-3 rounded-xl border border-slate-200 bg-slate-900 text-white text-sm font-medium shadow-sm active:scale-[0.98]"
-              onClick={() => setIsPanelOpen(true)}
+              onClick={openEquationPanel}
             >
               式を編集する（入力パネルを開く）
             </button>
