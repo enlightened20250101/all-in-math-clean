@@ -502,7 +502,7 @@ function lerpColor(a: [number, number, number], b: [number, number, number], t: 
   ] as const;
 }
 
-function rgbToCss(c: [number, number, number]) {
+function rgbToCss(c: readonly [number, number, number]) {
   return `rgb(${c[0]}, ${c[1]}, ${c[2]})`;
 }
 
