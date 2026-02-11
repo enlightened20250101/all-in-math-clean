@@ -624,6 +624,8 @@ export default function GraphStudio() {
   >('blueRed');
   const [bivarLevelShift, setBivarLevelShift] = useState(0);
   const [bivarLevelShiftLive, setBivarLevelShiftLive] = useState(0);
+  const [bivarRotateSensitivity, setBivarRotateSensitivity] = useState(0.008);
+  const [bivarResetNonce, setBivarResetNonce] = useState(0);
   const bivarShiftTrackRef = useRef<HTMLDivElement | null>(null);
   const bivarShiftDragRef = useRef(false);
   const bivarShiftRafRef = useRef<number | null>(null);
