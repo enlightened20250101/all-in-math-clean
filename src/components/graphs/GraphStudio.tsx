@@ -2070,6 +2070,19 @@ export default function GraphStudio() {
           </button>
           <button
             className="rounded-full border border-slate-200 bg-white px-4 py-2 text-[11px] font-medium text-slate-700 shadow-sm transition hover:bg-slate-50 md:text-sm"
+            onClick={() => {
+              const params = new URLSearchParams(searchParams.toString());
+              params.delete('g');
+              router.replace(params.toString() ? `?${params.toString()}` : '?', {
+                scroll: false,
+              });
+              setToast({ message: '共有状態をリセットしました', type: 'success' });
+            }}
+          >
+            共有リセット
+          </button>
+          <button
+            className="rounded-full border border-slate-200 bg-white px-4 py-2 text-[11px] font-medium text-slate-700 shadow-sm transition hover:bg-slate-50 md:text-sm"
             onClick={clearDraft}
           >
             下書き削除
