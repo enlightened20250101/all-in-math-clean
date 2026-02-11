@@ -7,25 +7,26 @@ const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
 function colorFromScale(t: number, scale: 'blueRed' | 'viridis' | 'mono') {
   const clamped = Math.min(1, Math.max(0, t));
+  const smooth = clamped * clamped * (3 - 2 * clamped);
   if (scale === 'mono') {
-    const v = Math.round(230 - 180 * clamped);
+    const v = Math.round(245 - 200 * smooth);
     return new THREE.Color(`rgb(${v},${v},${v})`);
   }
   if (scale === 'viridis') {
     const a = [68, 1, 84];
     const b = [253, 231, 37];
     return new THREE.Color(
-      `rgb(${Math.round(lerp(a[0], b[0], clamped))},${Math.round(
-        lerp(a[1], b[1], clamped),
-      )},${Math.round(lerp(a[2], b[2], clamped))})`,
+      `rgb(${Math.round(lerp(a[0], b[0], smooth))},${Math.round(
+        lerp(a[1], b[1], smooth),
+      )},${Math.round(lerp(a[2], b[2], smooth))})`,
     );
   }
-  const a = [59, 130, 246];
-  const b = [239, 68, 68];
+  const a = [37, 99, 235];
+  const b = [248, 80, 73];
   return new THREE.Color(
-    `rgb(${Math.round(lerp(a[0], b[0], clamped))},${Math.round(
-      lerp(a[1], b[1], clamped),
-    )},${Math.round(lerp(a[2], b[2], clamped))})`,
+    `rgb(${Math.round(lerp(a[0], b[0], smooth))},${Math.round(
+      lerp(a[1], b[1], smooth),
+    )},${Math.round(lerp(a[2], b[2], smooth))})`,
   );
 }
 
