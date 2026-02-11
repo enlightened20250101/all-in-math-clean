@@ -887,22 +887,25 @@ export default function GraphStudio() {
   }, [viewDomain, equalDomain]);
 
   // 凡例ラベル
-  const legendLabels =
+  const baseLegendLabels =
     tab === 'series'
       ? sConf.series.map((s) => s.name || 'series')
-      : legendSnapshot
-          .filter((_, i) => parsedList[i] !== null)
-          .map((label, i) => legendNames[i] || label);
+      : legendSnapshot.filter((_, i) => parsedList[i] !== null);
+
+  const legendLabels =
+    tab === 'series'
+      ? baseLegendLabels
+      : baseLegendLabels.map((label, i) => legendNames[i] || label);
 
   useEffect(() => {
     if (tab !== 'equation') return;
     setLegendNames((prev) => {
-      const next = equations.map((_, i) => prev[i] ?? legendLabels[i] ?? `y${i + 1}`);
+      const next = equations.map((_, i) => prev[i] ?? baseLegendLabels[i] ?? `y${i + 1}`);
       const same =
         prev.length === next.length && prev.every((v, idx) => v === next[idx]);
       return same ? prev : next;
     });
-  }, [equations.length, tab, legendLabels]);
+  }, [equations.length, tab, baseLegendLabels]);
 
   // 保存：overlay と描画設定を一括保存
   async function handleSave() {
