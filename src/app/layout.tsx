@@ -1,6 +1,7 @@
 // src/app/layout.tsx
 import type { Metadata } from 'next';
 import Script from 'next/script';
+import { Suspense } from 'react';
 import './globals.css';
 import Navbar from '@/components/Navbar';
 import 'katex/dist/katex.min.css';
@@ -106,7 +107,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="min-h-screen bg-white text-gray-900">
-        <QueryLoadingOverlay />
+        <Suspense fallback={null}>
+          <QueryLoadingOverlay />
+        </Suspense>
         <SessionSync />
         <Navbar />
         <main className="mx-auto max-w-5xl px-4 py-6"><PageTransition>{children}</PageTransition></main>

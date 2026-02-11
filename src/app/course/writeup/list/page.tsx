@@ -1,5 +1,6 @@
 // src/app/course/writeup/list/page.tsx
 import Link from "next/link";
+import { Suspense } from "react";
 import WriteupListClient from "./writeupListClient";
 
 export default function CourseWriteupListPage() {
@@ -35,7 +36,15 @@ export default function CourseWriteupListPage() {
 
       <div className="rounded-[32px] bg-gradient-to-br from-slate-50 via-white to-sky-50 p-[1px] shadow-[0_18px_50px_-32px_rgba(15,23,42,0.25)]">
         <div className="rounded-[31px] bg-white/90 p-6 sm:p-8">
-          <WriteupListClient />
+          <Suspense
+            fallback={
+              <div className="py-10 text-center text-sm text-slate-500">
+                読み込み中…
+              </div>
+            }
+          >
+            <WriteupListClient />
+          </Suspense>
         </div>
       </div>
     </div>
