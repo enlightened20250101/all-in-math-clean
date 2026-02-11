@@ -191,6 +191,7 @@ type HistorySnapshot = {
   xLabel: string;
   yLabel: string;
   title: string;
+  legendNames: string[];
 };
 
 export default function GraphStudio() {
@@ -247,6 +248,7 @@ export default function GraphStudio() {
     xLabel,
     yLabel,
     title,
+    legendNames: [...legendNames],
   });
   const pushHistory = (snap: HistorySnapshot) => {
     setHistory((prev) => {
@@ -265,6 +267,7 @@ export default function GraphStudio() {
     setXLabel(snap.xLabel);
     setYLabel(snap.yLabel);
     setTitle(snap.title);
+    setLegendNames(snap.legendNames ?? []);
   };
 
   const [chartSizeSeries, setChartSizeSeries] = useState<{
@@ -373,6 +376,7 @@ export default function GraphStudio() {
         xLabel: string;
         yLabel: string;
         title: string;
+        legendNames: string[];
       }>;
       if (Array.isArray(state.equations)) setEquations(state.equations);
       if (Array.isArray(state.colors)) setColors(state.colors);
@@ -382,6 +386,7 @@ export default function GraphStudio() {
       if (typeof state.xLabel === 'string') setXLabel(state.xLabel);
       if (typeof state.yLabel === 'string') setYLabel(state.yLabel);
       if (typeof state.title === 'string') setTitle(state.title);
+      if (Array.isArray(state.legendNames)) setLegendNames(state.legendNames);
     }
     shareReady.current = true;
   }, [shareParam]);
@@ -510,6 +515,7 @@ export default function GraphStudio() {
   // ---- 解析結果（パース済みリスト） ----
   const [parsedList, setParsedList] = useState<(ParsedEquation | null)[]>([]);
   const [legendSnapshot, setLegendSnapshot] = useState<string[]>([]);
+  const [legendNames, setLegendNames] = useState<string[]>([]);
   const [isDrawing, setIsDrawing] = useState(false);
   const [equationErrors, setEquationErrors] = useState<string[]>([]);
   const autoDrawTimerRef = useRef<number | null>(null);
@@ -884,7 +890,16 @@ export default function GraphStudio() {
   const legendLabels =
     tab === 'series'
       ? sConf.series.map((s) => s.name || 'series')
-      : legendSnapshot.filter((_, i) => parsedList[i] !== null);
+      : legendSnapshot
+          .filter((_, i) => parsedList[i] !== null)
+          .map((label, i) => legendNames[i] || label);
+
+  useEffect(() => {
+    if (tab !== 'equation') return;
+    setLegendNames((prev) =>
+      equations.map((_, i) => prev[i] ?? legendLabels[i] ?? `y${i + 1}`),
+    );
+  }, [equations.length, tab, legendLabels]);
 
   // 保存：overlay と描画設定を一括保存
   async function handleSave() {
@@ -1404,6 +1419,22 @@ export default function GraphStudio() {
               key={i}
               className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm space-y-3"
             >
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2 text-xs text-slate-500">
+                  <span className="h-2 w-2 rounded-full" style={{ background: colors[i] ?? PALETTE[i % PALETTE.length] }} />
+                  <span>凡例</span>
+                </div>
+                <input
+                  value={legendNames[i] ?? ''}
+                  onChange={(e) =>
+                    setLegendNames((prev) =>
+                      prev.map((v, idx) => (idx === i ? e.target.value : v)),
+                    )
+                  }
+                  className="w-36 rounded-lg border border-slate-200 bg-white px-2 py-1 text-[11px] text-slate-700 shadow-sm"
+                  placeholder={`式 ${i + 1}`}
+                />
+              </div>
               {/* 上段：PC と SP で表示を分岐 */}
               {!isMobile ? (
                 // ── PC: これまで通り SmartMathInput を行内に直接置く ──
