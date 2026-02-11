@@ -1321,6 +1321,63 @@ export default function GraphStudio() {
     });
   }, [functionSeries]);
 
+  const [pinnedMarkers, setPinnedMarkers] = useState<
+    Array<{ kind: 'x' | 'y' | 'max' | 'min'; x: number; y: number; label: string }>
+  >([]);
+
+  const autoMarkers = useMemo(() => {
+    const markers: Array<{ kind: 'x' | 'y' | 'max' | 'min'; x: number; y: number; label: string }> = [];
+    autoInsights.forEach((insight) => {
+      insight.xIntercepts.forEach((x) => {
+        markers.push({
+          kind: 'x',
+          x,
+          y: 0,
+          label: insight.label,
+        });
+      });
+      if (insight.yIntercept) {
+        markers.push({
+          kind: 'y',
+          x: 0,
+          y: insight.yIntercept.y,
+          label: insight.label,
+        });
+      }
+      insight.maxima.forEach((p) => {
+        markers.push({
+          kind: 'max',
+          x: p.x,
+          y: p.y,
+          label: insight.label,
+        });
+      });
+      insight.minima.forEach((p) => {
+        markers.push({
+          kind: 'min',
+          x: p.x,
+          y: p.y,
+          label: insight.label,
+        });
+      });
+    });
+    return markers.slice(0, 12);
+  }, [autoInsights]);
+
+  const addPinnedMarker = (m: { kind: 'x' | 'y' | 'max' | 'min'; x: number; y: number; label: string }) => {
+    setPinnedMarkers((prev) => {
+      const exists = prev.some(
+        (p) => p.kind === m.kind && Math.abs(p.x - m.x) < 1e-4 && Math.abs(p.y - m.y) < 1e-4,
+      );
+      if (exists) {
+        return prev.filter(
+          (p) => !(p.kind === m.kind && Math.abs(p.x - m.x) < 1e-4 && Math.abs(p.y - m.y) < 1e-4),
+        );
+      }
+      return [...prev, m].slice(-12);
+    });
+  };
+
   // 保存：overlay と描画設定を一括保存
   async function handleSave() {
     if (!userId) {
@@ -2712,6 +2769,70 @@ export default function GraphStudio() {
           />
         </svg>
       ) : null}
+      {autoMarkers.length || pinnedMarkers.length ? (
+        <svg
+          className="absolute inset-0 z-20"
+          width={chartSizeEq.width}
+          height={chartSizeEq.height}
+        >
+          <defs>
+            <clipPath id="marker-clip-eq">
+              <rect
+                x={plotBoxEq.left}
+                y={plotBoxEq.top}
+                width={plotBoxEq.width}
+                height={plotBoxEq.height}
+              />
+            </clipPath>
+          </defs>
+          <g clipPath="url(#marker-clip-eq)">
+            {[...autoMarkers, ...pinnedMarkers].map((m, idx) => {
+              const dom = viewDomain ?? equalDomain;
+              const xRange = Math.max(dom.xMax - dom.xMin, 1e-6);
+              const yRange = Math.max(dom.yMax - dom.yMin, 1e-6);
+              const x = plotBoxEq.left + ((m.x - dom.xMin) / xRange) * plotBoxEq.width;
+              const y = plotBoxEq.top + (1 - (m.y - dom.yMin) / yRange) * plotBoxEq.height;
+              const label = `${m.label}: (${formatNumber(m.x)}, ${formatNumber(m.y)})`;
+              const isPinned = pinnedMarkers.some(
+                (p) => p.kind === m.kind && Math.abs(p.x - m.x) < 1e-4 && Math.abs(p.y - m.y) < 1e-4,
+              );
+              return (
+                <g
+                  key={`${m.kind}-${idx}-${m.x}`}
+                  transform={`translate(${x},${y})`}
+                  onClick={() => addPinnedMarker(m)}
+                  style={{ cursor: 'pointer' }}
+                >
+                  <circle
+                    r={3.5}
+                    fill={isPinned ? '#111827' : '#0ea5e9'}
+                    stroke="#ffffff"
+                    strokeWidth={1}
+                  />
+                  <rect
+                    x={6}
+                    y={-10}
+                    width={Math.min(160, label.length * 6.4)}
+                    height={18}
+                    rx={8}
+                    fill="white"
+                    opacity={0.9}
+                    stroke="#e2e8f0"
+                  />
+                  <text
+                    x={12}
+                    y={3}
+                    fontSize={10}
+                    fill="#0f172a"
+                  >
+                    {label}
+                  </text>
+                </g>
+              );
+            })}
+          </g>
+        </svg>
+      ) : null}
 
       {/* ▼ Legend をチャートの外に出す */}
       <div className="mt-2 flex justify-center">
@@ -2776,6 +2897,19 @@ export default function GraphStudio() {
               </div>
             </div>
           ))}
+        </div>
+      ) : null}
+      {pinnedMarkers.length ? (
+        <div className="mt-2 flex flex-wrap gap-2 text-[11px] text-slate-500">
+          <span className="rounded-full border border-slate-200 bg-white px-2 py-1">
+            固定ラベル: {pinnedMarkers.length}
+          </span>
+          <button
+            className="rounded-full border border-slate-200 bg-white px-2 py-1 text-slate-600 hover:bg-slate-50"
+            onClick={() => setPinnedMarkers([])}
+          >
+            解除
+          </button>
         </div>
       ) : null}
     </div>
