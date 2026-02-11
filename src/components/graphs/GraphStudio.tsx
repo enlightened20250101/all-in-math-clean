@@ -4047,7 +4047,7 @@ export default function GraphStudio() {
                   <div className="flex items-center gap-2">
                     <div
                       ref={bivarShiftTrackRef}
-                      className="relative h-7 w-full cursor-pointer"
+                      className="relative h-7 w-full cursor-pointer touch-none"
                       onPointerDown={(e) => {
                         const rect = bivarShiftTrackRef.current?.getBoundingClientRect();
                         if (!rect) return;
@@ -4085,6 +4085,67 @@ export default function GraphStudio() {
                             setBivarLevelShift(bivarShiftNextRef.current);
                           }
                         }, 120);
+                      }}
+                      onTouchStart={(e) => {
+                        const rect = bivarShiftTrackRef.current?.getBoundingClientRect();
+                        if (!rect) return;
+                        bivarShiftDragRef.current = true;
+                        const touch = e.touches[0];
+                        if (!touch) return;
+                        const ratio = (touch.clientX - rect.left) / rect.width;
+                        const next = -10 + Math.min(1, Math.max(0, ratio)) * 20;
+                        setBivarLevelShiftLive(Number(next.toFixed(2)));
+                        e.preventDefault();
+                      }}
+                      onTouchMove={(e) => {
+                        if (!bivarShiftDragRef.current) return;
+                        const rect = bivarShiftTrackRef.current?.getBoundingClientRect();
+                        if (!rect) return;
+                        const touch = e.touches[0];
+                        if (!touch) return;
+                        const ratio = (touch.clientX - rect.left) / rect.width;
+                        const next = -10 + Math.min(1, Math.max(0, ratio)) * 20;
+                        const nextValue = Number(next.toFixed(2));
+                        bivarShiftNextRef.current = nextValue;
+                        if (bivarGridRef.current.nx > 24 || bivarGridRef.current.ny > 24) {
+                          setBivarGrid({ nx: 24, ny: 24 });
+                          setBivarGridDrafts({ nx: '24', ny: '24' });
+                        }
+                        if (bivarShiftRafRef.current == null) {
+                          bivarShiftRafRef.current = window.requestAnimationFrame(() => {
+                            bivarShiftRafRef.current = null;
+                            if (bivarShiftNextRef.current != null) {
+                              setBivarLevelShiftLive(bivarShiftNextRef.current);
+                            }
+                          });
+                        }
+                        if (bivarShiftCommitRef.current != null) {
+                          window.clearTimeout(bivarShiftCommitRef.current);
+                        }
+                        bivarShiftCommitRef.current = window.setTimeout(() => {
+                          if (bivarShiftNextRef.current != null) {
+                            setBivarLevelShift(bivarShiftNextRef.current);
+                          }
+                        }, 120);
+                        e.preventDefault();
+                      }}
+                      onTouchEnd={() => {
+                        bivarShiftDragRef.current = false;
+                        setBivarLevelShift(bivarShiftNextRef.current ?? bivarLevelShiftLive);
+                        const restoreGrid = bivarGridRef.current;
+                        const restoreDraft = bivarGridDraftRef.current;
+                        if (restoreGrid && (restoreGrid.nx !== bivarGrid.nx || restoreGrid.ny !== bivarGrid.ny)) {
+                          setBivarGrid(restoreGrid);
+                          if (restoreDraft) setBivarGridDrafts(restoreDraft);
+                        }
+                        if (bivarShiftRafRef.current != null) {
+                          window.cancelAnimationFrame(bivarShiftRafRef.current);
+                          bivarShiftRafRef.current = null;
+                        }
+                        if (bivarShiftCommitRef.current != null) {
+                          window.clearTimeout(bivarShiftCommitRef.current);
+                          bivarShiftCommitRef.current = null;
+                        }
                       }}
                       onPointerUp={(e) => {
                         bivarShiftDragRef.current = false;
