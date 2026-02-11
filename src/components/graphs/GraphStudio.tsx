@@ -3911,23 +3911,23 @@ export default function GraphStudio() {
             <div className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
               <div
                 ref={bivarChartRef}
-                className="relative h-[420px] sm:h-[520px] w-full"
+                className="relative h-[420px] sm:h-[520px] w-full overflow-hidden"
               >
-                {bivarGridData ? (
-                  <svg
-                    className="absolute inset-0"
+                <svg
+                  className="absolute inset-0"
+                  width={bivarWidth}
+                  height={bivarHeight}
+                  viewBox={`0 0 ${bivarWidth} ${bivarHeight}`}
+                >
+                  <rect
+                    x={0}
+                    y={0}
                     width={bivarWidth}
                     height={bivarHeight}
-                    viewBox={`0 0 ${bivarWidth} ${bivarHeight}`}
-                  >
-                    <rect
-                      x={0}
-                      y={0}
-                      width={bivarWidth}
-                      height={bivarHeight}
-                      fill="#ffffff"
-                    />
-                    {bivarContours.map((contour, idx) => (
+                    fill="#ffffff"
+                  />
+                  {bivarGridData ? (
+                    bivarContours.map((contour, idx) => (
                       <g key={`lvl-${idx}`}>
                         {contour.segments.map((seg, i) => (
                           <line
@@ -3942,13 +3942,20 @@ export default function GraphStudio() {
                           />
                         ))}
                       </g>
-                    ))}
-                  </svg>
-                ) : (
-                  <div className="flex h-full items-center justify-center text-sm text-slate-400">
-                    入力内容を確認してください
-                  </div>
-                )}
+                    ))
+                  ) : (
+                    <text
+                      x={bivarWidth / 2}
+                      y={bivarHeight / 2}
+                      textAnchor="middle"
+                      dominantBaseline="middle"
+                      fill="#94a3b8"
+                      fontSize="12"
+                    >
+                      入力内容を確認してください
+                    </text>
+                  )}
+                </svg>
               </div>
             </div>
           </div>
