@@ -197,7 +197,7 @@ export default function BivarSurface({
       scene.add(fillLight);
       scene.add(new THREE.AmbientLight(0xffffff, 0.25));
 
-      const gridHelper = new THREE.GridHelper(12, 12, 0x94a3b8, 0xe2e8f0);
+      const gridHelper = new THREE.GridHelper(16, 16, 0x8b9bb4, 0xe7edf7);
       gridHelper.position.set(0, 0, 0);
       const gridMats = Array.isArray(gridHelper.material)
         ? gridHelper.material
