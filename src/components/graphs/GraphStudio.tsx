@@ -92,6 +92,15 @@ function substituteParamsInEquation(
   return out;
 }
 
+function getUsedParams(eq: string) {
+  const s = eq ?? "";
+  return {
+    a: /\ba\b/.test(s),
+    b: /\bb\b/.test(s),
+    c: /\bc\b/.test(s),
+  };
+}
+
 // ★ 不完全・破損した式を弾くための強力なバリデーション
 function validateEquationSyntax(input: string): string | null {
   const s = input.trim();
@@ -1222,6 +1231,7 @@ export default function GraphStudio() {
         {equations.map((eq, i) => {
           const d = domains[i] ?? DEFAULT_DOMAIN;
           const param = paramList[i] ?? { a: 1, b: 1, c: 0 };
+          const usedParams = getUsedParams(eq);
 
           return (
             <div
@@ -1427,58 +1437,56 @@ export default function GraphStudio() {
                   </div>
                 </div>
 
-                <div className="text-xs text-slate-600 space-y-1 mt-2">
+                <div className="text-xs text-slate-600 space-y-2 mt-2">
                   <span className="font-semibold text-slate-700">パラメータ a, b, c</span>
-                  <div className="flex flex-wrap gap-2 items-end">
-                    <div>
-                      <label className="block text-[11px] text-slate-500">a</label>
-                      <input
-                        type="number"
-                        className="w-24 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs"
-                        value={param.a}
-                        onChange={(e) => {
-                          const v = Number(e.target.value);
-                          setParamList((prev) =>
-                            prev.map((p, idx) =>
-                              idx === i ? { ...p, a: v } : p,
-                            ),
-                          );
-                        }}
-                      />
+                  {usedParams.a || usedParams.b || usedParams.c ? (
+                    <div className="grid gap-2">
+                      {(["a", "b", "c"] as const).map((key) => {
+                        if (!usedParams[key]) return null;
+                        const value = param[key];
+                        return (
+                          <div key={key} className="rounded-xl border border-slate-200 bg-slate-50 p-2">
+                            <div className="flex items-center justify-between">
+                              <span className="text-[11px] text-slate-500">{key}</span>
+                              <input
+                                type="number"
+                                className="w-20 rounded-lg border border-slate-200 bg-white px-2 py-1 text-xs"
+                                value={value}
+                                onChange={(e) => {
+                                  const v = Number(e.target.value);
+                                  setParamList((prev) =>
+                                    prev.map((p, idx) =>
+                                      idx === i ? { ...p, [key]: v } : p,
+                                    ),
+                                  );
+                                }}
+                              />
+                            </div>
+                            <input
+                              type="range"
+                              min={-10}
+                              max={10}
+                              step={0.1}
+                              value={value}
+                              onChange={(e) => {
+                                const v = Number(e.target.value);
+                                setParamList((prev) =>
+                                  prev.map((p, idx) =>
+                                    idx === i ? { ...p, [key]: v } : p,
+                                  ),
+                                );
+                              }}
+                              className="mt-2 w-full accent-slate-700"
+                            />
+                          </div>
+                        );
+                      })}
                     </div>
-                    <div>
-                      <label className="block text-[11px] text-slate-500">b</label>
-                      <input
-                        type="number"
-                        className="w-24 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs"
-                        value={param.b}
-                        onChange={(e) => {
-                          const v = Number(e.target.value);
-                          setParamList((prev) =>
-                            prev.map((p, idx) =>
-                              idx === i ? { ...p, b: v } : p,
-                            ),
-                          );
-                        }}
-                      />
+                  ) : (
+                    <div className="rounded-xl border border-dashed border-slate-200 bg-white px-3 py-2 text-[11px] text-slate-500">
+                      a, b, c を式に含めるとスライダーが自動で表示されます。
                     </div>
-                    <div>
-                      <label className="block text-[11px] text-slate-500">c</label>
-                      <input
-                        type="number"
-                        className="w-24 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs"
-                        value={param.c}
-                        onChange={(e) => {
-                          const v = Number(e.target.value);
-                          setParamList((prev) =>
-                            prev.map((p, idx) =>
-                              idx === i ? { ...p, c: v } : p,
-                            ),
-                          );
-                        }}
-                      />
-                    </div>
-                  </div>
+                  )}
                 </div>
               </div>
             </div>
