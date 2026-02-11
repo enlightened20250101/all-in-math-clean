@@ -1768,6 +1768,7 @@ export default function GraphStudio() {
       score: number;
       kind: 'max' | 'min' | 'saddle';
     }[] = [];
+    const f = buildFunction2D(bivarExpr, bivarParams);
     for (let j = 1; j < ny - 1; j += 1) {
       for (let i = 1; i < nx - 1; i += 1) {
         const zc = grid[j]?.[i];
@@ -1793,7 +1794,39 @@ export default function GraphStudio() {
         const kind = det > 0 && fxx > 0 ? 'min' : det > 0 && fxx < 0 ? 'max' : 'saddle';
         const score = Math.abs(fx) + Math.abs(fy);
         if (Math.abs(fx) < threshold && Math.abs(fy) < threshold) {
-          candidates.push({ x: xs[i], y: ys[j], z: zc, score, kind });
+          let rx = xs[i];
+          let ry = ys[j];
+          let rz = zc;
+          for (let k = 0; k < 6; k += 1) {
+            const hx = Math.max(1e-4, Math.abs(dx) * 0.35);
+            const hy = Math.max(1e-4, Math.abs(dy) * 0.35);
+            const f0 = f(rx, ry);
+            const fpx = f(rx + hx, ry);
+            const fmx = f(rx - hx, ry);
+            const fpy = f(rx, ry + hy);
+            const fmy = f(rx, ry - hy);
+            const g1 = (fpx - fmx) / (2 * hx);
+            const g2 = (fpy - fmy) / (2 * hy);
+            const h11 = (fpx - 2 * f0 + fmx) / (hx * hx);
+            const h22 = (fpy - 2 * f0 + fmy) / (hy * hy);
+            const fpypx = f(rx + hx, ry + hy);
+            const fpymx = f(rx - hx, ry + hy);
+            const fmypx = f(rx + hx, ry - hy);
+            const fmymx = f(rx - hx, ry - hy);
+            const h12 = (fpypx - fpymx - fmypx + fmymx) / (4 * hx * hy);
+            const detH = h11 * h22 - h12 * h12;
+            if (!Number.isFinite(detH) || Math.abs(detH) < 1e-8) break;
+            const stepX = (h22 * g1 - h12 * g2) / detH;
+            const stepY = (h11 * g2 - h12 * g1) / detH;
+            rx -= stepX;
+            ry -= stepY;
+            if (Math.abs(stepX) + Math.abs(stepY) < 1e-6) break;
+            if (!Number.isFinite(rx) || !Number.isFinite(ry)) break;
+          }
+          if (rx < xMin || rx > xMax || ry < yMin || ry > yMax) continue;
+          rz = f(rx, ry);
+          if (!Number.isFinite(rz)) continue;
+          candidates.push({ x: rx, y: ry, z: rz, score, kind });
         }
       }
     }
