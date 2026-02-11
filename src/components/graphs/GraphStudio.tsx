@@ -327,6 +327,26 @@ export default function GraphStudio() {
   }, [equations.length]);
 
   useEffect(() => {
+    setParamDrafts((prev) => {
+      const next = [...prev];
+      let changed = false;
+      for (let i = 0; i < paramList.length; i += 1) {
+        if (!next[i]) {
+          next[i] = {};
+          changed = true;
+        }
+        (["a", "b", "c"] as const).forEach((key) => {
+          if (next[i]![key] === undefined) {
+            next[i]![key] = String(paramList[i]?.[key] ?? "");
+            changed = true;
+          }
+        });
+      }
+      return changed ? next : prev;
+    });
+  }, [paramList]);
+
+  useEffect(() => {
     const handleMove = (e: PointerEvent) => {
       if (!panelDragRef.current?.active) return;
       const delta = panelDragRef.current.startY - e.clientY;
@@ -1718,8 +1738,7 @@ export default function GraphStudio() {
                         if (!usedParams[key]) return null;
                         const value = param[key];
                         const draft = paramDrafts[i]?.[key];
-                        const displayValue =
-                          draft !== undefined ? draft : String(value ?? '');
+                        const displayValue = draft ?? String(value ?? '');
                         return (
                           <div key={key} className="rounded-xl border border-slate-200 bg-slate-50 p-2">
                             <div className="flex items-center justify-between">
@@ -1729,15 +1748,6 @@ export default function GraphStudio() {
                                 inputMode="decimal"
                                 className="w-20 rounded-lg border border-slate-200 bg-white px-2 py-1 text-xs"
                                 value={displayValue}
-                                onFocus={() => {
-                                  if (paramDrafts[i]?.[key] === undefined) {
-                                    setParamDrafts((prev) => {
-                                      const next = [...prev];
-                                      next[i] = { ...(next[i] ?? {}), [key]: '' };
-                                      return next;
-                                    });
-                                  }
-                                }}
                                 onChange={(e) => {
                                   const raw = e.target.value;
                                   setParamDrafts((prev) => {
@@ -1771,8 +1781,7 @@ export default function GraphStudio() {
                                 );
                                 setParamDrafts((prev) => {
                                   const next = [...prev];
-                                  next[i] = { ...(next[i] ?? {}) };
-                                  delete next[i][key];
+                                  next[i] = { ...(next[i] ?? {}), [key]: String(v) };
                                   return next;
                                 });
                               }}
