@@ -182,6 +182,80 @@ function decodeShareState(raw: string) {
   }
 }
 
+function formatNumber(value: number) {
+  if (!Number.isFinite(value)) return '—';
+  const rounded = Math.abs(value) < 1e-6 ? 0 : value;
+  const fixed = Math.abs(rounded) >= 10 ? rounded.toFixed(2) : rounded.toFixed(3);
+  return fixed.replace(/\.?0+$/, '');
+}
+
+function pickClosestYIntercept(points: Array<{ x: number; y: number }>) {
+  if (points.length < 2) return null;
+  for (let i = 1; i < points.length; i += 1) {
+    const p0 = points[i - 1];
+    const p1 = points[i];
+    if (!Number.isFinite(p0.x) || !Number.isFinite(p1.x)) continue;
+    if ((p0.x <= 0 && p1.x >= 0) || (p0.x >= 0 && p1.x <= 0)) {
+      if (p0.x === p1.x) return { x: 0, y: p0.y };
+      const t = (0 - p0.x) / (p1.x - p0.x);
+      const y = p0.y + (p1.y - p0.y) * t;
+      return { x: 0, y };
+    }
+  }
+  let best = points[0];
+  let bestDist = Math.abs(points[0].x);
+  points.forEach((p) => {
+    const d = Math.abs(p.x);
+    if (d < bestDist) {
+      best = p;
+      bestDist = d;
+    }
+  });
+  return { x: 0, y: best.y };
+}
+
+function findXIntercepts(points: Array<{ x: number; y: number }>, limit = 3) {
+  const hits: number[] = [];
+  for (let i = 1; i < points.length; i += 1) {
+    const p0 = points[i - 1];
+    const p1 = points[i];
+    if (!Number.isFinite(p0.y) || !Number.isFinite(p1.y)) continue;
+    if (p0.y === 0) {
+      hits.push(p0.x);
+      continue;
+    }
+    if (p0.y * p1.y < 0) {
+      const t = -p0.y / (p1.y - p0.y);
+      const x = p0.x + (p1.x - p0.x) * t;
+      hits.push(x);
+    }
+  }
+  const unique: number[] = [];
+  hits.forEach((x) => {
+    if (unique.every((u) => Math.abs(u - x) > 1e-3)) unique.push(x);
+  });
+  return unique.slice(0, limit);
+}
+
+function findExtrema(points: Array<{ x: number; y: number }>, limit = 2) {
+  const maxima: Array<{ x: number; y: number }> = [];
+  const minima: Array<{ x: number; y: number }> = [];
+  for (let i = 1; i < points.length - 1; i += 1) {
+    const y0 = points[i - 1].y;
+    const y1 = points[i].y;
+    const y2 = points[i + 1].y;
+    if (![y0, y1, y2].every(Number.isFinite)) continue;
+    const dy1 = y1 - y0;
+    const dy2 = y2 - y1;
+    if (dy1 > 0 && dy2 < 0) maxima.push(points[i]);
+    if (dy1 < 0 && dy2 > 0) minima.push(points[i]);
+  }
+  return {
+    maxima: maxima.slice(0, limit),
+    minima: minima.slice(0, limit),
+  };
+}
+
 type HistorySnapshot = {
   equations: string[];
   colors: string[];
@@ -599,7 +673,68 @@ export default function GraphStudio() {
   const [legendNames, setLegendNames] = useState<string[]>([]);
   const [isDrawing, setIsDrawing] = useState(false);
   const [equationErrors, setEquationErrors] = useState<string[]>([]);
+  const [fillBetween, setFillBetween] = useState(false);
+  const [paramAuto, setParamAuto] = useState<Record<number, boolean>>({});
+  const paramAutoDir = useRef<Record<number, { a: number; b: number; c: number }>>({});
   const autoDrawTimerRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    const activeIndices = Object.entries(paramAuto)
+      .filter(([, v]) => v)
+      .map(([k]) => Number(k))
+      .filter((n) => Number.isFinite(n));
+    if (!activeIndices.length) return;
+
+    let frame = 0;
+    let last = performance.now();
+
+    const tick = (now: number) => {
+      const dt = Math.min(0.05, (now - last) / 1000);
+      last = now;
+
+      setParamList((prev) => {
+        const next = [...prev];
+        let changed = false;
+
+        activeIndices.forEach((idx) => {
+          const eq = equations[idx] ?? '';
+          const range = estimateParamRange(eq);
+          const speed = range * 0.35;
+          const used = getUsedParams(eq);
+          const dir = paramAutoDir.current[idx] ?? { a: 1, b: 1, c: 1 };
+          const current = next[idx] ?? { a: 0, b: 0, c: 0 };
+          const updated = { ...current };
+
+          (['a', 'b', 'c'] as const).forEach((key) => {
+            if (!used[key]) return;
+            let value = current[key] ?? 0;
+            value += dir[key] * speed * dt;
+            if (value > range) {
+              value = range;
+              dir[key] = -1;
+            } else if (value < -range) {
+              value = -range;
+              dir[key] = 1;
+            }
+            updated[key] = value;
+          });
+
+          paramAutoDir.current[idx] = dir;
+          next[idx] = updated;
+          changed = true;
+        });
+
+        return changed ? next : prev;
+      });
+
+      frame = window.requestAnimationFrame(tick);
+    };
+
+    frame = window.requestAnimationFrame(tick);
+    return () => {
+      window.cancelAnimationFrame(frame);
+    };
+  }, [paramAuto, equations]);
 
   useEffect(() => {
     if (tab !== 'equation') return;
@@ -1006,6 +1141,62 @@ export default function GraphStudio() {
       return same ? prev : next;
     });
   }, [equations.length, tab, legendSnapshot.length]);
+
+  const functionSeries = useMemo(() => {
+    if (tab !== 'equation') return [];
+    const list: Array<{
+      label: string;
+      color: string;
+      points: Array<{ x: number; y: number }>;
+    }> = [];
+    let cursor = 0;
+    parsedList.forEach((p, idx) => {
+      if (!p) return;
+      const series = previewSeriesList[cursor];
+      if (p.kind === 'function' && series) {
+        list.push({
+          label: legendLabels[idx] ?? series.name ?? `y${idx + 1}`,
+          color: colors[idx] ?? PALETTE[idx % PALETTE.length],
+          points: series.points,
+        });
+      }
+      cursor += 1;
+    });
+    return list;
+  }, [tab, parsedList, previewSeriesList, legendLabels, colors]);
+
+  const fillBetweenData = useMemo(() => {
+    if (!fillBetween) return null;
+    if (functionSeries.length < 2) return null;
+    const a = functionSeries[0].points;
+    const b = functionSeries[1].points;
+    const len = Math.min(a.length, b.length);
+    const data: Array<{ x: number; y1: number; y2: number }> = [];
+    for (let i = 0; i < len; i += 1) {
+      const p0 = a[i];
+      const p1 = b[i];
+      if (![p0?.x, p0?.y, p1?.y].every(Number.isFinite)) continue;
+      data.push({ x: p0.x, y1: p0.y, y2: p1.y });
+    }
+    return data.length ? data : null;
+  }, [fillBetween, functionSeries]);
+
+  const autoInsights = useMemo(() => {
+    return functionSeries.slice(0, 3).map((series) => {
+      const points = series.points;
+      const xIntercepts = findXIntercepts(points, 3);
+      const yIntercept = pickClosestYIntercept(points);
+      const { maxima, minima } = findExtrema(points, 2);
+      return {
+        label: series.label,
+        color: series.color,
+        xIntercepts,
+        yIntercept,
+        maxima,
+        minima,
+      };
+    });
+  }, [functionSeries]);
 
   // 保存：overlay と描画設定を一括保存
   async function handleSave() {
@@ -1508,6 +1699,16 @@ export default function GraphStudio() {
             >
               自動スケール
             </button>
+            <button
+              className={`rounded-full border px-3 py-2 text-xs font-medium shadow-sm transition ${
+                fillBetween
+                  ? 'border-emerald-200 bg-emerald-50 text-emerald-700'
+                  : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
+              }`}
+              onClick={() => setFillBetween((prev) => !prev)}
+            >
+              面積塗りつぶし{fillBetween ? '（ON）' : ''}
+            </button>
           </div>
         </div>
       </div>
@@ -1875,6 +2076,20 @@ export default function GraphStudio() {
                         );
                       })}
                     </div>
+                    <div className="flex justify-end">
+                      <button
+                        className={`rounded-full border px-3 py-1.5 text-[11px] shadow-sm transition ${
+                          paramAuto[i]
+                            ? 'border-emerald-200 bg-emerald-50 text-emerald-700'
+                            : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
+                        }`}
+                        onClick={() =>
+                          setParamAuto((prev) => ({ ...prev, [i]: !prev[i] }))
+                        }
+                      >
+                        {paramAuto[i] ? '停止' : '再生'}
+                      </button>
+                    </div>
                   ) : (
                     <div className="rounded-xl border border-dashed border-slate-200 bg-white px-3 py-2 text-[11px] text-slate-500">
                       a, b, c を式に含めるとスライダーが自動で表示されます。
@@ -2146,6 +2361,18 @@ export default function GraphStudio() {
               boxShadow: '0 8px 20px rgba(15, 23, 42, 0.08)',
             }}
           />
+          {fillBetweenData ? (
+            <Area
+              data={fillBetweenData}
+              type="linear"
+              dataKey="y1"
+              baseLine={fillBetweenData.map((d) => d.y2)}
+              stroke="none"
+              fill="#38bdf8"
+              fillOpacity={0.16}
+              isAnimationActive={false}
+            />
+          ) : null}
   
           {previewSeriesList.map((s, i) => {
             const kind = parsedList[i]?.kind;
@@ -2216,6 +2443,67 @@ export default function GraphStudio() {
       <div className="mt-2 flex justify-center">
         <CustomLegend labels={legendLabels} colors={colors} />
       </div>
+      {autoInsights.length ? (
+        <div className="mt-3 grid gap-3 rounded-2xl border border-slate-200 bg-white/80 p-3 text-xs text-slate-600 shadow-sm md:grid-cols-3">
+          {autoInsights.map((insight, idx) => (
+            <div key={`${insight.label}-${idx}`} className="space-y-1">
+              <div className="flex items-center gap-2 text-[11px] font-semibold text-slate-700">
+                <span
+                  className="h-2 w-2 rounded-full"
+                  style={{ background: insight.color }}
+                />
+                {insight.label}
+              </div>
+              <div>
+                x切片:{' '}
+                {insight.xIntercepts.length ? (
+                  insight.xIntercepts.map((x, i) => (
+                    <span key={i} className="mr-1">
+                      <InlineKatex tex={`(${formatNumber(x)},0)`} />
+                    </span>
+                  ))
+                ) : (
+                  'なし'
+                )}
+              </div>
+              <div>
+                y切片:{' '}
+                {insight.yIntercept ? (
+                  <InlineKatex
+                    tex={`(0,${formatNumber(insight.yIntercept.y)})`}
+                  />
+                ) : (
+                  'なし'
+                )}
+              </div>
+              <div>
+                極大:
+                {insight.maxima.length ? (
+                  insight.maxima.map((p, i) => (
+                    <span key={i} className="ml-1">
+                      <InlineKatex tex={`(${formatNumber(p.x)},${formatNumber(p.y)})`} />
+                    </span>
+                  ))
+                ) : (
+                  <span className="ml-1">なし</span>
+                )}
+              </div>
+              <div>
+                極小:
+                {insight.minima.length ? (
+                  insight.minima.map((p, i) => (
+                    <span key={i} className="ml-1">
+                      <InlineKatex tex={`(${formatNumber(p.x)},${formatNumber(p.y)})`} />
+                    </span>
+                  ))
+                ) : (
+                  <span className="ml-1">なし</span>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 
