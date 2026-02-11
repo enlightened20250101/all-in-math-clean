@@ -1733,7 +1733,7 @@ export default function GraphStudio() {
                                   if (paramDrafts[i]?.[key] === undefined) {
                                     setParamDrafts((prev) => {
                                       const next = [...prev];
-                                      next[i] = { ...(next[i] ?? {}), [key]: String(value ?? '') };
+                                      next[i] = { ...(next[i] ?? {}), [key]: '' };
                                       return next;
                                     });
                                   }
@@ -2454,7 +2454,6 @@ export default function GraphStudio() {
           >
             <div className="flex items-center justify-between gap-3 px-4 py-2 border-b bg-white/90">
               <div className="flex items-center gap-2">
-                <div className="h-1.5 w-12 rounded-full bg-slate-300" />
                 <span className="text-[11px] text-slate-500">式パネル</span>
               </div>
               <button
