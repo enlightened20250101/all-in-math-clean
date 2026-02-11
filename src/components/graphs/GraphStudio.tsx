@@ -1748,6 +1748,19 @@ export default function GraphStudio() {
                                 inputMode="decimal"
                                 className="w-20 rounded-lg border border-slate-200 bg-white px-2 py-1 text-xs"
                                 value={displayValue}
+                                onFocus={() => {
+                                  if (
+                                    value === 0 &&
+                                    (paramDrafts[i]?.[key] === undefined ||
+                                      paramDrafts[i]?.[key] === '0')
+                                  ) {
+                                    setParamDrafts((prev) => {
+                                      const next = [...prev];
+                                      next[i] = { ...(next[i] ?? {}), [key]: '' };
+                                      return next;
+                                    });
+                                  }
+                                }}
                                 onChange={(e) => {
                                   const raw = e.target.value;
                                   setParamDrafts((prev) => {
