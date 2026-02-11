@@ -175,6 +175,17 @@ function decodeShareState(raw: string) {
   }
 }
 
+type HistorySnapshot = {
+  equations: string[];
+  colors: string[];
+  domains: Domain1D[];
+  paramList: { a: number; b: number; c: number }[];
+  enabledList: boolean[];
+  xLabel: string;
+  yLabel: string;
+  title: string;
+};
+
 export default function GraphStudio() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -230,16 +241,9 @@ export default function GraphStudio() {
 
   useEffect(() => {
     if (!shareReady.current) return;
-    const encoded = encodeShareState({
-      equations,
-      colors,
-      domains,
-      paramList,
-      enabledList,
-      xLabel,
-      yLabel,
-      title,
-    });
+    const snapshot = captureSnapshot();
+    pushHistory(snapshot);
+    const encoded = encodeShareState(snapshot);
     if (!encoded || encoded === lastShare.current) return;
     lastShare.current = encoded;
     const params = new URLSearchParams(searchParams.toString());
@@ -278,6 +282,34 @@ export default function GraphStudio() {
     width: number;
     height: number;
   }>({ left: 0, top: 0, width: 0, height: 0 });
+  const captureSnapshot = () => ({
+    equations: [...equations],
+    colors: [...colors],
+    domains: domains.map((d) => ({ ...d })),
+    paramList: paramList.map((p) => ({ ...p })),
+    enabledList: [...enabledList],
+    xLabel,
+    yLabel,
+    title,
+  });
+  const pushHistory = (snap: HistorySnapshot) => {
+    setHistory((prev) => {
+      const next = prev.slice(0, historyIndex + 1);
+      next.push(snap);
+      return next.slice(-50);
+    });
+    setHistoryIndex((prev) => Math.min(prev + 1, 49));
+  };
+  const restoreSnapshot = (snap: HistorySnapshot) => {
+    setEquations(snap.equations);
+    setColors(snap.colors);
+    setDomains(snap.domains);
+    setParamList(snap.paramList);
+    setEnabledList(snap.enabledList);
+    setXLabel(snap.xLabel);
+    setYLabel(snap.yLabel);
+    setTitle(snap.title);
+  };
 
   const [chartSizeSeries, setChartSizeSeries] = useState<{
     width: number;
@@ -337,6 +369,8 @@ export default function GraphStudio() {
   } | null>(null);
   const shareReady = useRef(false);
   const lastShare = useRef<string | null>(null);
+  const [history, setHistory] = useState<HistorySnapshot[]>([]);
+  const [historyIndex, setHistoryIndex] = useState(-1);
   const openEquationPanel = () => {
     setIsPanelOpen(true);
     if (activeEqIndex === null && equations.length) {
@@ -1896,6 +1930,36 @@ export default function GraphStudio() {
         </div>
 
         <div className="flex flex-wrap items-center gap-2 justify-end">
+          <button
+            className="rounded-full border border-slate-200 bg-white px-3 py-2 text-[11px] font-medium text-slate-600 shadow-sm transition hover:bg-slate-50 disabled:opacity-50 md:text-sm"
+            onClick={() => {
+              if (historyIndex <= 0) return;
+              const nextIndex = historyIndex - 1;
+              const snap = history[nextIndex];
+              if (snap) {
+                setHistoryIndex(nextIndex);
+                restoreSnapshot(snap);
+              }
+            }}
+            disabled={historyIndex <= 0}
+          >
+            元に戻す
+          </button>
+          <button
+            className="rounded-full border border-slate-200 bg-white px-3 py-2 text-[11px] font-medium text-slate-600 shadow-sm transition hover:bg-slate-50 disabled:opacity-50 md:text-sm"
+            onClick={() => {
+              if (historyIndex >= history.length - 1) return;
+              const nextIndex = historyIndex + 1;
+              const snap = history[nextIndex];
+              if (snap) {
+                setHistoryIndex(nextIndex);
+                restoreSnapshot(snap);
+              }
+            }}
+            disabled={historyIndex >= history.length - 1}
+          >
+            やり直す
+          </button>
           <ExportSvgButton
             targetRef={activeChartRef}
             filename={`${title || 'graph'}.svg`}
