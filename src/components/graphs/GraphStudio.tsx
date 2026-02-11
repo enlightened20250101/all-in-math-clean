@@ -527,7 +527,7 @@ export default function GraphStudio() {
     }
     autoDrawTimerRef.current = window.setTimeout(() => {
       setDrawVersion((v) => v + 1);
-    }, 180);
+    }, 80);
     return () => {
       if (autoDrawTimerRef.current) {
         window.clearTimeout(autoDrawTimerRef.current);

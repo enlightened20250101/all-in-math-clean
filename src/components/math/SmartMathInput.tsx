@@ -30,6 +30,7 @@ const MOBILE_KEY_ROWS = [
       { label: '8', text: '8' },
       { label: '9', text: '9' },
       { label: '0', text: '0' },
+      { label: '−', text: '-' },
       { label: '.', text: '.' },
       { label: '⌫', text: 'BACKSPACE' }, // ← 特別扱い用
     ],
@@ -47,7 +48,6 @@ const MOBILE_KEY_ROWS = [
     // 2段目：基本演算・括弧
     [
       { label: '+', text: '+' },
-      { label: '−', text: '-' },
       { label: '×', text: '*' },
       { label: '÷', text: '/' },
       { label: '(', text: '(' },
@@ -273,13 +273,25 @@ export default function SmartMathInput({
   }
 
   function applyTemplate(template: string) {
-    onChange(template);
-    requestAnimationFrame(() => {
-      if (!inputRef.current) return;
-      const pos = template.length;
-      inputRef.current.focus();
-      inputRef.current.setSelectionRange(pos, pos);
-    });
+    const current = value ?? '';
+    if (!current) {
+      onChange(template);
+      requestAnimationFrame(() => {
+        if (!inputRef.current) return;
+        const pos = template.length;
+        inputRef.current.focus();
+        inputRef.current.setSelectionRange(pos, pos);
+      });
+      return;
+    }
+
+    if (/^y\\s*=/.test(current) && /^y\\s*=/.test(template)) {
+      const rhs = template.split('=').slice(1).join('=').trim();
+      insertAtCursor(`${current.endsWith(' ') ? '' : ' '}${rhs}`);
+      return;
+    }
+
+    insertAtCursor(` ${template}`);
   }
 
   const wrapperBase =
@@ -371,13 +383,13 @@ export default function SmartMathInput({
       {showMobileKeyboard && (
         <div className="mt-2 rounded-2xl border border-slate-200 bg-slate-50 p-2 shadow-sm space-y-1.5">
           {MOBILE_KEY_ROWS.map((row, idx) => (
-            <div key={idx} className="grid grid-cols-6 gap-1.5">
+            <div key={idx} className="flex gap-1.5">
               {row.map((key) => (
                 <button
                   key={key.label + idx}
                   type="button"
                   className="
-                    rounded-xl border border-slate-200 bg-white px-2 py-2 text-xs
+                    flex-1 rounded-xl border border-slate-200 bg-white px-2 py-2 text-xs
                     text-slate-700 shadow-sm transition
                     hover:bg-slate-50 active:bg-slate-100 active:scale-[0.98]
                   "
