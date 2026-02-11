@@ -243,6 +243,12 @@ export default function GraphStudio() {
 
   // ★ SP用：式入力パネルの開閉フラグ
   const [isPanelOpen, setIsPanelOpen] = useState(false);
+  const chartWrapRef = useRef<HTMLDivElement | null>(null);
+  const panState = useRef<{
+    x: number;
+    y: number;
+    domain: { xMin: number; xMax: number; yMin: number; yMax: number };
+  } | null>(null);
   const openEquationPanel = () => {
     setIsPanelOpen(true);
     if (activeEqIndex === null && equations.length) {
@@ -681,23 +687,39 @@ export default function GraphStudio() {
     [previewSeriesList],
   );
 
+  const [viewDomain, setViewDomain] = useState<{
+    xMin: number;
+    xMax: number;
+    yMin: number;
+    yMax: number;
+  } | null>(null);
+  const [isUserViewport, setIsUserViewport] = useState(false);
+
+  useEffect(() => {
+    if (!isUserViewport) {
+      setViewDomain(equalDomain);
+    }
+  }, [equalDomain, isUserViewport]);
+
   // X軸の整数tick
   const xTicks = useMemo(() => {
+    const domain = viewDomain ?? equalDomain;
     const ticks: number[] = [];
-    const min = Math.ceil(equalDomain.xMin);
-    const max = Math.floor(equalDomain.xMax);
+    const min = Math.ceil(domain.xMin);
+    const max = Math.floor(domain.xMax);
     for (let t = min; t <= max && ticks.length < 41; t++) ticks.push(t);
     return ticks;
-  }, [equalDomain]);
+  }, [viewDomain, equalDomain]);
 
   // Y軸の整数tick
   const yTicks = useMemo(() => {
+    const domain = viewDomain ?? equalDomain;
     const ticks: number[] = [];
-    const min = Math.ceil(equalDomain.yMin);
-    const max = Math.floor(equalDomain.yMax);
+    const min = Math.ceil(domain.yMin);
+    const max = Math.floor(domain.yMax);
     for (let t = min; t <= max && ticks.length < 41; t++) ticks.push(t);
     return ticks;
-  }, [equalDomain]);
+  }, [viewDomain, equalDomain]);
 
   // 凡例ラベル
   const legendLabels =
@@ -798,10 +820,11 @@ export default function GraphStudio() {
         return cmpNorm === 'le' ? val <= 0 : val >= 0;
       };
   
-      const domXMin = equalDomain.xMin;
-      const domXMax = equalDomain.xMax;
-      const domYMin = equalDomain.yMin;
-      const domYMax = equalDomain.yMax;
+      const dom = viewDomain ?? equalDomain;
+      const domXMin = dom.xMin;
+      const domXMax = dom.xMax;
+      const domYMin = dom.yMin;
+      const domYMax = dom.yMax;
   
       const xRange = Math.max(domXMax - domXMin, 1e-6);
       const yRange = Math.max(domYMax - domYMin, 1e-6);
@@ -887,7 +910,7 @@ export default function GraphStudio() {
         <g clipPath="url(#ineq2d-clip-eq)">{elements}</g>
       </>
     );
-  }, [parsedList, paramList, colors, equalDomain, plotBoxEq, chartSizeEq]);  
+  }, [parsedList, paramList, colors, equalDomain, viewDomain, plotBoxEq, chartSizeEq]);  
 
   const ineqFillSeries = useMemo(() => {
     if (
@@ -918,10 +941,11 @@ export default function GraphStudio() {
         return cmpNorm === 'le' ? val <= 0 : val >= 0;
       };
   
-      const domXMin = equalDomain.xMin;
-      const domXMax = equalDomain.xMax;
-      const domYMin = equalDomain.yMin;
-      const domYMax = equalDomain.yMax;
+      const dom = viewDomain ?? equalDomain;
+      const domXMin = dom.xMin;
+      const domXMax = dom.xMax;
+      const domYMin = dom.yMin;
+      const domYMax = dom.yMax;
   
       const xRange = Math.max(domXMax - domXMin, 1e-6);
       const yRange = Math.max(domYMax - domYMin, 1e-6);
@@ -1008,7 +1032,7 @@ export default function GraphStudio() {
         <g clipPath="url(#ineq2d-clip-series)">{elements}</g>
       </>
     );
-  }, [parsedList, paramList, colors, equalDomain, plotBoxSeries, chartSizeSeries]);  
+  }, [parsedList, paramList, colors, equalDomain, viewDomain, plotBoxSeries, chartSizeSeries]);  
 
   // CSV → series（seriesタブ用）
   function parseCsv(text: string) {
@@ -1118,7 +1142,7 @@ export default function GraphStudio() {
       });
     });
     return () => cancelAnimationFrame(id);
-  }, [drawVersion, equalDomain, xTicks, yTicks]);
+  }, [drawVersion, equalDomain, viewDomain, xTicks, yTicks]);
 
   // seriesタブ用
   useEffect(() => {
@@ -1143,7 +1167,7 @@ export default function GraphStudio() {
       });
     });
     return () => cancelAnimationFrame(id);
-  }, [drawVersion, equalDomain, xTicks, yTicks]);
+  }, [drawVersion, equalDomain, viewDomain, xTicks, yTicks]);
 
   // ==== 式入力パネル（PCとSP共通で使う） ====
   const equationInputPanel = (
@@ -1532,7 +1556,10 @@ export default function GraphStudio() {
   // ==== 式タブのグラフビュー（PC/SP共通） ====
   const equationChartView = (
     <div
-      ref={equationChartRef}
+      ref={(node) => {
+        equationChartRef.current = node;
+        chartWrapRef.current = node;
+      }}
       className="
         relative w-full max-w-full
         aspect-square                /* SP：常に正方形 */
@@ -1540,15 +1567,91 @@ export default function GraphStudio() {
         transform
         -translate-x-2    /* SP のときだけ少し左にズラす */
         md:translate-x-0  /* PC では補正しない */
+        touch-none
       "
+      onWheel={(e) => {
+        if (!chartWrapRef.current) return;
+        e.preventDefault();
+        const domain = viewDomain ?? equalDomain;
+        const rect = chartWrapRef.current.getBoundingClientRect();
+        const fx = (e.clientX - rect.left) / rect.width;
+        const fy = (e.clientY - rect.top) / rect.height;
+        const x = domain.xMin + fx * (domain.xMax - domain.xMin);
+        const y = domain.yMax - fy * (domain.yMax - domain.yMin);
+        const zoom = e.deltaY > 0 ? 1.12 : 0.88;
+        const nextRangeX = (domain.xMax - domain.xMin) * zoom;
+        const nextRangeY = (domain.yMax - domain.yMin) * zoom;
+        const nextXMin = x - fx * nextRangeX;
+        const nextXMax = nextXMin + nextRangeX;
+        const nextYMax = y + fy * nextRangeY;
+        const nextYMin = nextYMax - nextRangeY;
+        setViewDomain({
+          xMin: nextXMin,
+          xMax: nextXMax,
+          yMin: nextYMin,
+          yMax: nextYMax,
+        });
+        setIsUserViewport(true);
+      }}
+      onPointerDown={(e) => {
+        if (!chartWrapRef.current) return;
+        const domain = viewDomain ?? equalDomain;
+        panState.current = {
+          x: e.clientX,
+          y: e.clientY,
+          domain,
+        };
+        chartWrapRef.current.setPointerCapture(e.pointerId);
+      }}
+      onPointerMove={(e) => {
+        if (!chartWrapRef.current || !panState.current) return;
+        const rect = chartWrapRef.current.getBoundingClientRect();
+        const dx = e.clientX - panState.current.x;
+        const dy = e.clientY - panState.current.y;
+        const base = panState.current.domain;
+        const rangeX = base.xMax - base.xMin;
+        const rangeY = base.yMax - base.yMin;
+        const shiftX = (dx / rect.width) * rangeX;
+        const shiftY = (dy / rect.height) * rangeY;
+        setViewDomain({
+          xMin: base.xMin - shiftX,
+          xMax: base.xMax - shiftX,
+          yMin: base.yMin + shiftY,
+          yMax: base.yMax + shiftY,
+        });
+        setIsUserViewport(true);
+      }}
+      onPointerUp={(e) => {
+        panState.current = null;
+        chartWrapRef.current?.releasePointerCapture(e.pointerId);
+      }}
+      onPointerLeave={() => {
+        panState.current = null;
+      }}
     >
+      <div className="absolute right-3 top-3 z-20 flex items-center gap-2">
+        {isUserViewport ? (
+          <button
+            className="rounded-full border border-slate-200 bg-white/90 px-3 py-1 text-[11px] text-slate-600 shadow-sm"
+            onClick={() => {
+              setIsUserViewport(false);
+              setViewDomain(equalDomain);
+            }}
+          >
+            表示リセット
+          </button>
+        ) : null}
+      </div>
       <ResponsiveContainer width="100%" height="100%">
         <ComposedChart margin={chartMargin}>
           <CartesianGrid stroke="#e2e8f0" strokeDasharray="4 4" />
           <XAxis
             type="number"
             dataKey="x"
-            domain={[equalDomain.xMin, equalDomain.xMax]}
+            domain={[
+              (viewDomain ?? equalDomain).xMin,
+              (viewDomain ?? equalDomain).xMax,
+            ]}
             ticks={xTicks}
             label={
               isMobile
@@ -1566,7 +1669,10 @@ export default function GraphStudio() {
           <YAxis
             type="number"
             dataKey="y"
-            domain={[equalDomain.yMin, equalDomain.yMax]}
+            domain={[
+              (viewDomain ?? equalDomain).yMin,
+              (viewDomain ?? equalDomain).yMax,
+            ]}
             ticks={yTicks}
             label={
               isMobile
