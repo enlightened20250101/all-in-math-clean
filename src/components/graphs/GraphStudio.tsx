@@ -1264,6 +1264,46 @@ export default function GraphStudio() {
     return data.length ? data : null;
   }, [fillConfig, functionSeries]);
 
+  const fillBetweenPathEq = useMemo(() => {
+    if (
+      !fillBetweenData ||
+      chartSizeEq.width <= 0 ||
+      chartSizeEq.height <= 0 ||
+      plotBoxEq.width <= 0 ||
+      plotBoxEq.height <= 0
+    ) {
+      return null;
+    }
+    const dom = viewDomain ?? equalDomain;
+    const xRange = Math.max(dom.xMax - dom.xMin, 1e-6);
+    const yRange = Math.max(dom.yMax - dom.yMin, 1e-6);
+    const xScale = (x: number) =>
+      plotBoxEq.left + ((x - dom.xMin) / xRange) * plotBoxEq.width;
+    const yScale = (y: number) =>
+      plotBoxEq.top + (1 - (y - dom.yMin) / yRange) * plotBoxEq.height;
+
+    const top = fillBetweenData.map((d) => [xScale(d.x), yScale(d.y1)] as const);
+    const bottom = [...fillBetweenData]
+      .reverse()
+      .map((d) => [xScale(d.x), yScale(d.y2)] as const);
+    if (top.length < 2 || bottom.length < 2) return null;
+
+    const path = [
+      `M ${top[0][0]} ${top[0][1]}`,
+      ...top.slice(1).map(([x, y]) => `L ${x} ${y}`),
+      ...bottom.map(([x, y]) => `L ${x} ${y}`),
+      'Z',
+    ].join(' ');
+
+    return path;
+  }, [
+    fillBetweenData,
+    plotBoxEq,
+    chartSizeEq,
+    viewDomain,
+    equalDomain,
+  ]);
+
   const autoInsights = useMemo(() => {
     return functionSeries.slice(0, 3).map((series) => {
       const points = series.points;
@@ -2583,19 +2623,6 @@ export default function GraphStudio() {
               boxShadow: '0 8px 20px rgba(15, 23, 42, 0.08)',
             }}
           />
-          {fillBetweenData ? (
-            <Area
-              data={fillBetweenData}
-              type="linear"
-              dataKey="y1"
-              baseLine={fillBetweenData.map((d) => ({ x: d.x, y: d.y2 }))}
-              stroke="none"
-              fill="#38bdf8"
-              fillOpacity={0.16}
-              isAnimationActive={false}
-            />
-          ) : null}
-  
           {previewSeriesList.map((s, i) => {
             const kind = parsedList[i]?.kind;
             const color =
@@ -2660,6 +2687,31 @@ export default function GraphStudio() {
       >
         {ineqFillEq}
       </svg>
+      {fillBetweenPathEq ? (
+        <svg
+          className="pointer-events-none absolute inset-0 z-[5]"
+          width={chartSizeEq.width}
+          height={chartSizeEq.height}
+        >
+          <defs>
+            <clipPath id="fill-between-clip-eq">
+              <rect
+                x={plotBoxEq.left}
+                y={plotBoxEq.top}
+                width={plotBoxEq.width}
+                height={plotBoxEq.height}
+              />
+            </clipPath>
+          </defs>
+          <path
+            d={fillBetweenPathEq}
+            clipPath="url(#fill-between-clip-eq)"
+            fill="#38bdf8"
+            fillOpacity={0.16}
+            stroke="none"
+          />
+        </svg>
+      ) : null}
 
       {/* ▼ Legend をチャートの外に出す */}
       <div className="mt-2 flex justify-center">
