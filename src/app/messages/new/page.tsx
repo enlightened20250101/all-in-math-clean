@@ -1,5 +1,4 @@
 import { Suspense } from "react";
-import { Suspense } from "react";
 import DirectMessageCreateClient from "./DirectMessageCreateClient";
 
 export default function DirectMessageCreatePage() {
