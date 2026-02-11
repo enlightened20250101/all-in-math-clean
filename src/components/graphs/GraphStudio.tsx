@@ -1882,6 +1882,16 @@ export default function GraphStudio() {
             </button>
             <button
               className={`rounded-full border px-3 py-2 text-xs font-medium shadow-sm transition ${
+                showAutoMarkers
+                  ? 'border-slate-300 bg-slate-900 text-white'
+                  : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
+              }`}
+              onClick={() => setShowAutoMarkers((prev) => !prev)}
+            >
+              {showAutoMarkers ? 'ラベル非表示' : 'ラベル表示'}
+            </button>
+            <button
+              className={`rounded-full border px-3 py-2 text-xs font-medium shadow-sm transition ${
                 fillConfig.enabled
                   ? 'border-emerald-200 bg-emerald-50 text-emerald-700'
                   : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
@@ -2901,19 +2911,6 @@ export default function GraphStudio() {
           ))}
         </div>
       ) : null}
-      <div className="mt-2 flex flex-wrap items-center gap-2 text-[11px] text-slate-500">
-        <button
-          className={`rounded-full border px-2.5 py-1 text-[11px] shadow-sm transition ${
-            showAutoMarkers
-              ? 'border-slate-300 bg-slate-900 text-white'
-              : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
-          }`}
-          onClick={() => setShowAutoMarkers((prev) => !prev)}
-        >
-          {showAutoMarkers ? 'ラベル非表示' : 'ラベル表示'}
-        </button>
-        <span>交点/極値/切片のマーカー表示</span>
-      </div>
       {pinnedMarkers.length ? (
         <div className="mt-2 flex flex-wrap gap-2 text-[11px] text-slate-500">
           <span className="rounded-full border border-slate-200 bg-white px-2 py-1">
