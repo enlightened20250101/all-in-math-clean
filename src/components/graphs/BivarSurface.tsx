@@ -35,6 +35,7 @@ export default function BivarSurface({
   height,
   colorScale,
   sensitivity = 0.008,
+  viewPreset = 'default',
   resetNonce = 0,
 }: {
   gridData:
@@ -50,6 +51,7 @@ export default function BivarSurface({
   height: number;
   colorScale: 'blueRed' | 'viridis' | 'mono';
   sensitivity?: number;
+  viewPreset?: 'default' | 'iso' | 'top' | 'front' | 'side';
   resetNonce?: number;
 }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -66,20 +68,49 @@ export default function BivarSurface({
   const rotationRef = useRef({ x: -0.8, y: 0.6 });
   const sensitivityRef = useRef(sensitivity);
 
+  const applyRotation = (x: number, y: number) => {
+    rotationRef.current = { x, y };
+    const renderer = rendererRef.current;
+    const scene = sceneRef.current;
+    const camera = cameraRef.current;
+    const mesh = meshRef.current;
+    const axes = axesRef.current;
+    if (!renderer || !scene || !camera || !mesh) return;
+    mesh.rotation.set(x, y, 0);
+    if (axes) axes.rotation.set(x, y, 0);
+    renderer.render(scene, camera);
+  };
+
   useEffect(() => {
     sensitivityRef.current = sensitivity;
   }, [sensitivity]);
 
   useEffect(() => {
     rotationRef.current = { x: -0.8, y: 0.6 };
-    const renderer = rendererRef.current;
-    const scene = sceneRef.current;
-    const camera = cameraRef.current;
-    const mesh = meshRef.current;
-    if (!renderer || !scene || !camera || !mesh) return;
-    mesh.rotation.set(rotationRef.current.x, rotationRef.current.y, 0);
-    renderer.render(scene, camera);
+    applyRotation(-0.8, 0.6);
   }, [resetNonce]);
+
+  useEffect(() => {
+    if (viewPreset === 'default') {
+      applyRotation(-0.8, 0.6);
+      return;
+    }
+    if (viewPreset === 'iso') {
+      applyRotation(-0.75, 0.8);
+      return;
+    }
+    if (viewPreset === 'top') {
+      applyRotation(-1.4, 0);
+      return;
+    }
+    if (viewPreset === 'front') {
+      applyRotation(-0.1, 0);
+      return;
+    }
+    if (viewPreset === 'side') {
+      applyRotation(-0.1, Math.PI / 2);
+    }
+  }, [viewPreset]);
 
   const geometryData = useMemo(() => {
     if (!gridData) return null;

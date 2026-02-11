@@ -625,6 +625,9 @@ export default function GraphStudio() {
   const [bivarLevelShift, setBivarLevelShift] = useState(0);
   const [bivarLevelShiftLive, setBivarLevelShiftLive] = useState(0);
   const [bivarRotateSensitivity, setBivarRotateSensitivity] = useState(0.008);
+  const [bivarViewPreset, setBivarViewPreset] = useState<
+    'default' | 'iso' | 'top' | 'front' | 'side'
+  >('default');
   const [bivarResetNonce, setBivarResetNonce] = useState(0);
   const bivarShiftTrackRef = useRef<HTMLDivElement | null>(null);
   const bivarShiftDragRef = useRef(false);
@@ -4448,6 +4451,7 @@ export default function GraphStudio() {
                     height={bivarHeight}
                     colorScale={bivarColorScale}
                     sensitivity={bivarRotateSensitivity}
+                    viewPreset={bivarViewPreset}
                     resetNonce={bivarResetNonce}
                   />
                   <div className="pointer-events-none absolute right-3 top-3 rounded-full border border-slate-200 bg-white/90 px-3 py-1 text-[11px] text-slate-600 shadow-sm">
@@ -4597,6 +4601,57 @@ export default function GraphStudio() {
                     3D
                   </button>
                 </div>
+                {bivarView === 'surface' ? (
+                  <div className="mt-2 space-y-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">
+                    <div className="flex items-center justify-between text-[11px] text-slate-600">
+                      <span>回転感度</span>
+                      <span>{bivarRotateSensitivity.toFixed(3)}</span>
+                    </div>
+                    <input
+                      type="range"
+                      min={0.003}
+                      max={0.02}
+                      step={0.001}
+                      value={bivarRotateSensitivity}
+                      onChange={(e) => setBivarRotateSensitivity(Number(e.target.value))}
+                      className="w-full"
+                    />
+                    <div className="flex flex-wrap gap-2">
+                      {[
+                        { key: 'default', label: '標準' },
+                        { key: 'iso', label: '斜め' },
+                        { key: 'top', label: '上面' },
+                        { key: 'front', label: '正面' },
+                        { key: 'side', label: '側面' },
+                      ].map((opt) => (
+                        <button
+                          key={opt.key}
+                          type="button"
+                          className={`rounded-full border px-3 py-1 text-[11px] shadow-sm transition ${
+                            bivarViewPreset === opt.key
+                              ? 'border-slate-900 bg-slate-900 text-white'
+                              : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
+                          }`}
+                          onClick={() => setBivarViewPreset(opt.key as typeof bivarViewPreset)}
+                        >
+                          {opt.label}
+                        </button>
+                      ))}
+                    </div>
+                    <div className="flex justify-end">
+                      <button
+                        type="button"
+                        className="rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] text-slate-600 shadow-sm"
+                        onClick={() => {
+                          setBivarViewPreset('default');
+                          setBivarResetNonce((n) => n + 1);
+                        }}
+                      >
+                        視点リセット
+                      </button>
+                    </div>
+                  </div>
+                ) : null}
                 {bivarView === 'surface' && (
                   <div className="mt-2 space-y-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">
                     <div className="flex items-center justify-between text-[11px] text-slate-600">
@@ -4612,11 +4667,36 @@ export default function GraphStudio() {
                       onChange={(e) => setBivarRotateSensitivity(Number(e.target.value))}
                       className="w-full"
                     />
+                    <div className="flex flex-wrap gap-2">
+                      {[
+                        { key: 'default', label: '標準' },
+                        { key: 'iso', label: '斜め' },
+                        { key: 'top', label: '上面' },
+                        { key: 'front', label: '正面' },
+                        { key: 'side', label: '側面' },
+                      ].map((opt) => (
+                        <button
+                          key={opt.key}
+                          type="button"
+                          className={`rounded-full border px-3 py-1 text-[11px] shadow-sm transition ${
+                            bivarViewPreset === opt.key
+                              ? 'border-slate-900 bg-slate-900 text-white'
+                              : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
+                          }`}
+                          onClick={() => setBivarViewPreset(opt.key as typeof bivarViewPreset)}
+                        >
+                          {opt.label}
+                        </button>
+                      ))}
+                    </div>
                     <div className="flex justify-end">
                       <button
                         type="button"
                         className="rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] text-slate-600 shadow-sm"
-                        onClick={() => setBivarResetNonce((n) => n + 1)}
+                        onClick={() => {
+                          setBivarViewPreset('default');
+                          setBivarResetNonce((n) => n + 1);
+                        }}
                       >
                         視点リセット
                       </button>
