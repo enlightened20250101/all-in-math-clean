@@ -4436,7 +4436,10 @@ export default function GraphStudio() {
                   ) : null}
                 </>
               ) : bivarGridData ? (
-                <div className="relative h-[320px] sm:h-[420px] lg:h-[520px]">
+                <div
+                  ref={bivarChartRef}
+                  className="relative h-[320px] sm:h-[420px] lg:h-[520px] w-full overflow-hidden"
+                >
                   <BivarSurface
                     gridData={bivarGridData}
                     width={bivarWidth}

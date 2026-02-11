@@ -98,6 +98,9 @@ export default function BivarSurface({
     if (!rendererRef.current) {
       const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.domElement.style.width = '100%';
+      renderer.domElement.style.height = '100%';
+      renderer.domElement.style.display = 'block';
       rendererRef.current = renderer;
       containerRef.current.appendChild(renderer.domElement);
 
@@ -120,7 +123,7 @@ export default function BivarSurface({
     const scene = sceneRef.current;
     const camera = cameraRef.current;
     if (!renderer || !scene || !camera) return;
-    renderer.setSize(Math.max(1, width), Math.max(1, height), false);
+    renderer.setSize(Math.max(1, width), Math.max(1, height), true);
     camera.aspect = Math.max(1, width) / Math.max(1, height);
     camera.updateProjectionMatrix();
   }, [width, height]);
