@@ -316,6 +316,10 @@ export default function GraphStudio() {
   const [paramDrafts, setParamDrafts] = useState<
     { a?: string; b?: string; c?: string }[]
   >([]);
+  const [focusedParam, setFocusedParam] = useState<{
+    index: number;
+    key: "a" | "b" | "c";
+  } | null>(null);
 
   useEffect(() => {
     setParamDrafts((prev) => {
@@ -1718,8 +1722,14 @@ export default function GraphStudio() {
                         if (!usedParams[key]) return null;
                         const value = param[key];
                         const draft = paramDrafts[i]?.[key];
+                        const isFocused =
+                          focusedParam?.index === i && focusedParam.key === key;
                         const displayValue =
-                          draft !== undefined ? draft : String(value ?? '');
+                          draft !== undefined
+                            ? draft
+                            : isFocused
+                              ? ''
+                              : String(value ?? '');
                         return (
                           <div key={key} className="rounded-xl border border-slate-200 bg-slate-50 p-2">
                             <div className="flex items-center justify-between">
@@ -1729,6 +1739,7 @@ export default function GraphStudio() {
                                 inputMode="decimal"
                                 className="w-20 rounded-lg border border-slate-200 bg-white px-2 py-1 text-xs"
                                 value={displayValue}
+                                onFocus={() => setFocusedParam({ index: i, key })}
                                 onChange={(e) => {
                                   const raw = e.target.value;
                                   setParamDrafts((prev) => {
@@ -1743,6 +1754,14 @@ export default function GraphStudio() {
                                         idx === i ? { ...p, [key]: parsed } : p,
                                       ),
                                     );
+                                  }
+                                }}
+                                onBlur={() => {
+                                  if (
+                                    focusedParam?.index === i &&
+                                    focusedParam.key === key
+                                  ) {
+                                    setFocusedParam(null);
                                   }
                                 }}
                               />
@@ -2445,16 +2464,17 @@ export default function GraphStudio() {
           >
             <div className="flex items-center justify-between gap-3 px-4 py-2 border-b bg-white/90">
               <div
-                className="flex items-center gap-2 cursor-row-resize select-none"
+                className="flex items-center gap-2 cursor-row-resize select-none py-2 -my-2 touch-none"
                 onPointerDown={(e) => {
                   panelDragRef.current = {
                     active: true,
                     startY: e.clientY,
                     startVh: panelHeightVh,
                   };
+                  e.currentTarget.setPointerCapture(e.pointerId);
                 }}
               >
-                <div className="h-1 w-10 rounded-full bg-slate-300" />
+                <div className="h-1.5 w-12 rounded-full bg-slate-300" />
                 <span className="text-[11px] text-slate-500">式パネル</span>
               </div>
               <button
