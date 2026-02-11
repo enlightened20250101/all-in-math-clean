@@ -627,6 +627,8 @@ export default function GraphStudio() {
   const bivarShiftRafRef = useRef<number | null>(null);
   const bivarShiftNextRef = useRef<number | null>(null);
   const bivarShiftCommitRef = useRef<number | null>(null);
+  const bivarGridRef = useRef(bivarGrid);
+  const bivarGridDraftRef = useRef(bivarGridDrafts);
   const [bivarParamDrafts, setBivarParamDrafts] = useState({
     a: '1',
     b: '1',
@@ -703,6 +705,14 @@ export default function GraphStudio() {
       return next.slice(0, domains.length);
     });
   }, [domains.length]);
+
+  useEffect(() => {
+    bivarGridRef.current = bivarGrid;
+  }, [bivarGrid]);
+
+  useEffect(() => {
+    bivarGridDraftRef.current = bivarGridDrafts;
+  }, [bivarGridDrafts]);
 
   useEffect(() => {
     setParamDrafts((prev) => {
@@ -4055,6 +4065,10 @@ export default function GraphStudio() {
                         const next = -10 + Math.min(1, Math.max(0, ratio)) * 20;
                         const nextValue = Number(next.toFixed(2));
                         bivarShiftNextRef.current = nextValue;
+                        if (bivarGridRef.current.nx > 24 || bivarGridRef.current.ny > 24) {
+                          setBivarGrid({ nx: 24, ny: 24 });
+                          setBivarGridDrafts({ nx: '24', ny: '24' });
+                        }
                         if (bivarShiftRafRef.current == null) {
                           bivarShiftRafRef.current = window.requestAnimationFrame(() => {
                             bivarShiftRafRef.current = null;
@@ -4075,6 +4089,12 @@ export default function GraphStudio() {
                       onPointerUp={(e) => {
                         bivarShiftDragRef.current = false;
                         setBivarLevelShift(bivarShiftNextRef.current ?? bivarLevelShiftLive);
+                        const restoreGrid = bivarGridRef.current;
+                        const restoreDraft = bivarGridDraftRef.current;
+                        if (restoreGrid && (restoreGrid.nx !== bivarGrid.nx || restoreGrid.ny !== bivarGrid.ny)) {
+                          setBivarGrid(restoreGrid);
+                          if (restoreDraft) setBivarGridDrafts(restoreDraft);
+                        }
                         if (bivarShiftRafRef.current != null) {
                           window.cancelAnimationFrame(bivarShiftRafRef.current);
                           bivarShiftRafRef.current = null;
@@ -4087,6 +4107,12 @@ export default function GraphStudio() {
                       }}
                       onPointerLeave={() => {
                         bivarShiftDragRef.current = false;
+                        const restoreGrid = bivarGridRef.current;
+                        const restoreDraft = bivarGridDraftRef.current;
+                        if (restoreGrid && (restoreGrid.nx !== bivarGrid.nx || restoreGrid.ny !== bivarGrid.ny)) {
+                          setBivarGrid(restoreGrid);
+                          if (restoreDraft) setBivarGridDrafts(restoreDraft);
+                        }
                         if (bivarShiftRafRef.current != null) {
                           window.cancelAnimationFrame(bivarShiftRafRef.current);
                           bivarShiftRafRef.current = null;
