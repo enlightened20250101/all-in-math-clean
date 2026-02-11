@@ -438,17 +438,6 @@ export default function GraphStudio() {
     width: number;
     height: number;
   }>({ left: 0, top: 0, width: 0, height: 0 });
-  const captureSnapshot = () => ({
-    equations: [...equations],
-    colors: [...colors],
-    domains: domains.map((d) => ({ ...d })),
-    paramList: paramList.map((p) => ({ ...p })),
-    enabledList: [...enabledList],
-    xLabel,
-    yLabel,
-    title,
-    legendNames: [...legendNames],
-  });
   const pushHistory = (snap: HistorySnapshot) => {
     setHistory((prev) => {
       const next = prev.slice(0, historyIndex + 1);
@@ -798,6 +787,17 @@ export default function GraphStudio() {
   const [legendNames, setLegendNames] = useState<string[]>([]);
   const [isDrawing, setIsDrawing] = useState(false);
   const [equationErrors, setEquationErrors] = useState<string[]>([]);
+  const captureSnapshot = () => ({
+    equations: [...equations],
+    colors: [...colors],
+    domains: domains.map((d) => ({ ...d })),
+    paramList: paramList.map((p) => ({ ...p })),
+    enabledList: [...enabledList],
+    xLabel,
+    yLabel,
+    title,
+    legendNames: [...legendNames],
+  });
   const [fillConfig, setFillConfig] = useState<{
     enabled: boolean;
     idxA: number;
