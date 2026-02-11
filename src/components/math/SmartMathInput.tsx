@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useRef, useState } from 'react';
+import { useMemo, useRef } from 'react';
 import InlineKatex from '@/components/graphs/InlineKatex';
 import { useIsMobile } from '@/hooks/useIsMobile';
 
@@ -211,7 +211,6 @@ export default function SmartMathInput({
   const isMobile = useIsMobile();
   const showMobileKeyboard = isMobile && !disableMobilePanel;  // ★ ここで使う
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const [keyboardHeight, setKeyboardHeight] = useState(220);
 
   const mode: EquationMode = useMemo(() => detectEquationMode(value), [value]);
 
@@ -275,24 +274,20 @@ export default function SmartMathInput({
 
   function applyTemplate(template: string) {
     const current = value ?? '';
+    const rhsOnly = template.replace(/^y\s*=\s*/i, '').trim();
+    const insertValue = rhsOnly || template;
     if (!current) {
-      onChange(template);
+      onChange(insertValue);
       requestAnimationFrame(() => {
         if (!inputRef.current) return;
-        const pos = template.length;
+        const pos = insertValue.length;
         inputRef.current.focus();
         inputRef.current.setSelectionRange(pos, pos);
       });
       return;
     }
 
-    if (/^y\\s*=/.test(current) && /^y\\s*=/.test(template)) {
-      const rhs = template.split('=').slice(1).join('=').trim();
-      insertAtCursor(`${current.endsWith(' ') ? '' : ' '}${rhs}`);
-      return;
-    }
-
-    insertAtCursor(` ${template}`);
+    insertAtCursor(`${current.endsWith(' ') ? '' : ' '}${insertValue}`);
   }
 
   const wrapperBase =
@@ -382,23 +377,7 @@ export default function SmartMathInput({
 
       {/* モバイル専用ミニキーボード */}
       {showMobileKeyboard && (
-        <div className="fixed bottom-0 left-0 right-0 z-30 sm:static sm:z-auto sm:mt-2">
-          <div
-            className="mx-auto w-full max-w-5xl rounded-t-2xl border border-slate-200 bg-white/95 p-2 shadow-[0_-12px_30px_-24px_rgba(15,23,42,0.35)] backdrop-blur sm:rounded-2xl sm:bg-slate-50 sm:shadow-sm space-y-2"
-            style={{ height: keyboardHeight, minHeight: 180, maxHeight: 360, overflow: 'auto' }}
-          >
-            <div className="flex items-center justify-between text-[11px] text-slate-500">
-              <span>キーボードの高さ</span>
-              <input
-                type="range"
-                min={180}
-                max={360}
-                step={10}
-                value={keyboardHeight}
-                onChange={(e) => setKeyboardHeight(Number(e.target.value))}
-                className="w-36 accent-slate-700"
-              />
-            </div>
+        <div className="mt-2 rounded-2xl border border-slate-200 bg-slate-50 p-2 shadow-sm space-y-1.5">
             {MOBILE_KEY_ROWS.map((row, idx) => (
               <div key={idx} className="flex gap-1.5">
                 {row.map((key) => (
@@ -441,7 +420,6 @@ export default function SmartMathInput({
             <p className="mt-1 text-[10px] text-slate-500">
               ボタンはカーソル位置に挿入されます。長押しで選択 → 上書きもできます。
             </p>
-          </div>
         </div>
       )}
     </div>

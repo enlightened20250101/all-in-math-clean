@@ -332,6 +332,7 @@ export default function GraphStudio() {
 
   // ★ SP用：式入力パネルの開閉フラグ
   const [isPanelOpen, setIsPanelOpen] = useState(false);
+  const [panelHeightVh, setPanelHeightVh] = useState(45);
   const chartWrapRef = useRef<HTMLDivElement | null>(null);
   const panState = useRef<{
     x: number;
@@ -1718,14 +1719,6 @@ export default function GraphStudio() {
                                     );
                                   }
                                 }}
-                                onBlur={() => {
-                                  setParamDrafts((prev) => {
-                                    const next = [...prev];
-                                    next[i] = { ...(next[i] ?? {}) };
-                                    delete next[i][key];
-                                    return next;
-                                  });
-                                }}
                               />
                             </div>
                             <input
@@ -2220,6 +2213,11 @@ export default function GraphStudio() {
               className={`rounded-2xl border border-slate-200 bg-white p-3 shadow-sm ${
                 isMobile && isPanelOpen ? "pb-[45vh]" : ""
               }`}
+              style={
+                isMobile && isPanelOpen
+                  ? { paddingBottom: `${panelHeightVh}vh` }
+                  : undefined
+              }
             >
               {equationChartView}
             </div>
@@ -2413,26 +2411,41 @@ export default function GraphStudio() {
             className={`
               rounded-t-2xl border-t border-slate-200 bg-white/95 backdrop-blur
               shadow-[0_-12px_40px_-20px_rgba(15,23,42,0.35)]
-              max-h-[45vh] overflow-y-auto
+              overflow-y-auto
               transform transition-transform
               ${isPanelOpen ? 'translate-y-0' : 'translate-y-full'}
             `}
+            style={{ height: `${panelHeightVh}vh` }}
           >
-            <div className="flex items-center justify-between px-4 py-2 border-b bg-white/90">
+            <div className="flex items-center justify-between gap-3 px-4 py-2 border-b bg-white/90">
               <div className="flex items-center gap-2">
                 <div className="h-1 w-10 rounded-full bg-slate-300" />
                 <span className="text-[11px] text-slate-500">式パネル</span>
               </div>
-              <button
-                className="text-xs text-slate-500"
-                onClick={() => {
-                  setIsPanelOpen(false);
-                  setIsEqInputOpen(false);
-                  setActiveEqIndex(null);
-                }}
-              >
-                閉じる
-              </button>
+              <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 text-[10px] text-slate-500">
+                  高さ
+                  <input
+                    type="range"
+                    min={30}
+                    max={70}
+                    step={5}
+                    value={panelHeightVh}
+                    onChange={(e) => setPanelHeightVh(Number(e.target.value))}
+                    className="w-24 accent-slate-700"
+                  />
+                </div>
+                <button
+                  className="text-xs text-slate-500"
+                  onClick={() => {
+                    setIsPanelOpen(false);
+                    setIsEqInputOpen(false);
+                    setActiveEqIndex(null);
+                  }}
+                >
+                  閉じる
+                </button>
+              </div>
             </div>
 
             <div className="p-3 space-y-3 w-full">{equationInputPanel}</div>
