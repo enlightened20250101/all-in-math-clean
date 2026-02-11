@@ -627,6 +627,7 @@ export default function GraphStudio() {
   const bivarShiftRafRef = useRef<number | null>(null);
   const bivarShiftNextRef = useRef<number | null>(null);
   const bivarShiftCommitRef = useRef<number | null>(null);
+  const bivarShiftLastTsRef = useRef(0);
   const [bivarParamDrafts, setBivarParamDrafts] = useState({
     a: '1',
     b: '1',
@@ -4061,6 +4062,9 @@ export default function GraphStudio() {
                         if (!bivarShiftDragRef.current) return;
                         const rect = bivarShiftTrackRef.current?.getBoundingClientRect();
                         if (!rect) return;
+                        const now = e.timeStamp ?? performance.now();
+                        if (now - bivarShiftLastTsRef.current < 16) return;
+                        bivarShiftLastTsRef.current = now;
                         const ratio = (e.clientX - rect.left) / rect.width;
                         const next = -10 + Math.min(1, Math.max(0, ratio)) * 20;
                         const nextValue = Number(next.toFixed(2));
@@ -4101,6 +4105,9 @@ export default function GraphStudio() {
                         if (!bivarShiftDragRef.current) return;
                         const rect = bivarShiftTrackRef.current?.getBoundingClientRect();
                         if (!rect) return;
+                        const now = e.timeStamp ?? performance.now();
+                        if (now - bivarShiftLastTsRef.current < 16) return;
+                        bivarShiftLastTsRef.current = now;
                         const touch = e.touches[0];
                         if (!touch) return;
                         const ratio = (touch.clientX - rect.left) / rect.width;
