@@ -197,9 +197,13 @@ export default function BivarSurface({
     geometry.setIndex(geometryData.indices);
     geometry.computeVertexNormals();
 
-    const material = new THREE.MeshLambertMaterial({
+    const material = new THREE.MeshStandardMaterial({
       vertexColors: true,
       side: THREE.DoubleSide,
+      roughness: 0.65,
+      metalness: 0.05,
+      emissive: new THREE.Color(0x0f172a),
+      emissiveIntensity: 0.08,
     });
     const mesh = new THREE.Mesh(geometry, material);
     mesh.castShadow = true;
