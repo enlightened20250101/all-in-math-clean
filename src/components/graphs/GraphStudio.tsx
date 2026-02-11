@@ -327,6 +327,35 @@ export default function GraphStudio() {
   const lastShare = useRef<string | null>(null);
   const [history, setHistory] = useState<HistorySnapshot[]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (!(e.ctrlKey || e.metaKey)) return;
+      const key = e.key.toLowerCase();
+      if (key === "z" && !e.shiftKey) {
+        e.preventDefault();
+        if (historyIndex <= 0) return;
+        const nextIndex = historyIndex - 1;
+        const snap = history[nextIndex];
+        if (snap) {
+          setHistoryIndex(nextIndex);
+          restoreSnapshot(snap);
+        }
+        return;
+      }
+      if (key === "y" || (key === "z" && e.shiftKey)) {
+        e.preventDefault();
+        if (historyIndex >= history.length - 1) return;
+        const nextIndex = historyIndex + 1;
+        const snap = history[nextIndex];
+        if (snap) {
+          setHistoryIndex(nextIndex);
+          restoreSnapshot(snap);
+        }
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [history, historyIndex]);
 
   useEffect(() => {
     if (!shareParam) {
