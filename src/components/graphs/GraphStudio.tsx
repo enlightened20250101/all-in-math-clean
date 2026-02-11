@@ -326,6 +326,26 @@ export default function GraphStudio() {
     });
   }, [equations.length]);
 
+  useEffect(() => {
+    const handleMove = (e: PointerEvent) => {
+      if (!panelDragRef.current?.active) return;
+      const delta = panelDragRef.current.startY - e.clientY;
+      const deltaVh = (delta / window.innerHeight) * 100;
+      const next = Math.max(30, Math.min(70, panelDragRef.current.startVh + deltaVh));
+      setPanelHeightVh(next);
+    };
+    const handleUp = () => {
+      if (!panelDragRef.current) return;
+      panelDragRef.current.active = false;
+    };
+    window.addEventListener('pointermove', handleMove);
+    window.addEventListener('pointerup', handleUp);
+    return () => {
+      window.removeEventListener('pointermove', handleMove);
+      window.removeEventListener('pointerup', handleUp);
+    };
+  }, []);
+
   // ★ SP用：式専用入力パネル用の状態
   const [activeEqIndex, setActiveEqIndex] = useState<number | null>(null);
   const [isEqInputOpen, setIsEqInputOpen] = useState(false);
@@ -333,6 +353,11 @@ export default function GraphStudio() {
   // ★ SP用：式入力パネルの開閉フラグ
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [panelHeightVh, setPanelHeightVh] = useState(45);
+  const panelDragRef = useRef<{
+    active: boolean;
+    startY: number;
+    startVh: number;
+  } | null>(null);
   const chartWrapRef = useRef<HTMLDivElement | null>(null);
   const panState = useRef<{
     x: number;
@@ -1693,7 +1718,8 @@ export default function GraphStudio() {
                         if (!usedParams[key]) return null;
                         const value = param[key];
                         const draft = paramDrafts[i]?.[key];
-                        const displayValue = draft ?? String(value);
+                        const displayValue =
+                          draft !== undefined ? draft : String(value ?? '');
                         return (
                           <div key={key} className="rounded-xl border border-slate-200 bg-slate-50 p-2">
                             <div className="flex items-center justify-between">
@@ -2418,34 +2444,29 @@ export default function GraphStudio() {
             style={{ height: `${panelHeightVh}vh` }}
           >
             <div className="flex items-center justify-between gap-3 px-4 py-2 border-b bg-white/90">
-              <div className="flex items-center gap-2">
+              <div
+                className="flex items-center gap-2 cursor-row-resize select-none"
+                onPointerDown={(e) => {
+                  panelDragRef.current = {
+                    active: true,
+                    startY: e.clientY,
+                    startVh: panelHeightVh,
+                  };
+                }}
+              >
                 <div className="h-1 w-10 rounded-full bg-slate-300" />
                 <span className="text-[11px] text-slate-500">式パネル</span>
               </div>
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-2 text-[10px] text-slate-500">
-                  高さ
-                  <input
-                    type="range"
-                    min={30}
-                    max={70}
-                    step={5}
-                    value={panelHeightVh}
-                    onChange={(e) => setPanelHeightVh(Number(e.target.value))}
-                    className="w-24 accent-slate-700"
-                  />
-                </div>
-                <button
-                  className="text-xs text-slate-500"
-                  onClick={() => {
-                    setIsPanelOpen(false);
-                    setIsEqInputOpen(false);
-                    setActiveEqIndex(null);
-                  }}
-                >
-                  閉じる
-                </button>
-              </div>
+              <button
+                className="text-xs text-slate-500"
+                onClick={() => {
+                  setIsPanelOpen(false);
+                  setIsEqInputOpen(false);
+                  setActiveEqIndex(null);
+                }}
+              >
+                閉じる
+              </button>
             </div>
 
             <div className="p-3 space-y-3 w-full">{equationInputPanel}</div>
