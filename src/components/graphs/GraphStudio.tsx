@@ -1204,6 +1204,15 @@ export default function GraphStudio() {
             >
               {isDrawing ? 'グラフ作成中…' : 'グラフ作成'}
             </button>
+            <button
+              className="rounded-full border border-slate-200 bg-white px-3 py-2 text-xs font-medium text-slate-600 shadow-sm transition hover:bg-slate-50"
+              onClick={() => {
+                setIsUserViewport(false);
+                setViewDomain(equalDomain);
+              }}
+            >
+              自動スケール
+            </button>
           </div>
         </div>
       </div>
