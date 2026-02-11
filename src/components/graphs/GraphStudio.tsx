@@ -1758,7 +1758,13 @@ export default function GraphStudio() {
     const span = Math.max(1e-6, Math.abs(zMax - zMin));
     const gradScale = span / Math.max(Math.abs(dx), Math.abs(dy), 1e-6);
     const threshold = Math.max(1e-4, 0.02 * gradScale);
-    const candidates: { x: number; y: number; z: number; score: number }[] = [];
+    const candidates: {
+      x: number;
+      y: number;
+      z: number;
+      score: number;
+      kind: 'max' | 'min' | 'saddle';
+    }[] = [];
     for (let j = 1; j < ny - 1; j += 1) {
       for (let i = 1; i < nx - 1; i += 1) {
         const zc = grid[j]?.[i];
@@ -1770,9 +1776,21 @@ export default function GraphStudio() {
         if (![zx1, zx0, zy1, zy0].every((v) => Number.isFinite(v))) continue;
         const fx = (zx1! - zx0!) / (2 * dx);
         const fy = (zy1! - zy0!) / (2 * dy);
+        const fxx = (zx1! - 2 * zc + zx0!) / (dx * dx);
+        const fyy = (zy1! - 2 * zc + zy0!) / (dy * dy);
+        const zxy1 = grid[j + 1]?.[i + 1];
+        const zxy2 = grid[j + 1]?.[i - 1];
+        const zxy3 = grid[j - 1]?.[i + 1];
+        const zxy4 = grid[j - 1]?.[i - 1];
+        const fxy =
+          [zxy1, zxy2, zxy3, zxy4].every((v) => Number.isFinite(v))
+            ? (zxy1! - zxy2! - zxy3! + zxy4!) / (4 * dx * dy)
+            : 0;
+        const det = fxx * fyy - fxy * fxy;
+        const kind = det > 0 && fxx > 0 ? 'min' : det > 0 && fxx < 0 ? 'max' : 'saddle';
         const score = Math.abs(fx) + Math.abs(fy);
         if (Math.abs(fx) < threshold && Math.abs(fy) < threshold) {
-          candidates.push({ x: xs[i], y: ys[j], z: zc, score });
+          candidates.push({ x: xs[i], y: ys[j], z: zc, score, kind });
         }
       }
     }
@@ -4479,7 +4497,7 @@ export default function GraphStudio() {
                             cx={bivarXScale(p.x)}
                             cy={bivarYScale(p.y)}
                             r={4}
-                            fill="#0f172a"
+                            fill={p.kind === 'max' ? '#ef4444' : p.kind === 'min' ? '#22c55e' : '#0f172a'}
                             stroke="#ffffff"
                             strokeWidth={2}
                           />
@@ -4526,6 +4544,14 @@ export default function GraphStudio() {
                             key={`crit-chip-${idx}`}
                             className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-2 py-1"
                           >
+                            <span
+                              className="inline-block h-2 w-2 rounded-full"
+                              style={{
+                                backgroundColor:
+                                  p.kind === 'max' ? '#ef4444' : p.kind === 'min' ? '#22c55e' : '#0f172a',
+                              }}
+                            />
+                            {p.kind === 'max' ? '極大' : p.kind === 'min' ? '極小' : '鞍点'}:
                             ({formatNumber(p.x)}, {formatNumber(p.y)}) → {formatNumber(p.z)}
                           </span>
                         ))}
