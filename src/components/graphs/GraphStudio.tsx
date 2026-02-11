@@ -1328,7 +1328,7 @@ export default function GraphStudio() {
               )}
 
               {activeEqIndex === i && isEqInputOpen ? (
-                <div className="mt-2 rounded-xl border border-slate-200 bg-white p-2">
+                <div className="mt-2 w-full rounded-xl border border-slate-200 bg-white p-2">
                   <SmartMathInput
                     value={equations[activeEqIndex] ?? ""}
                     onChange={(v) => updateEquation(activeEqIndex, v)}
@@ -1760,12 +1760,16 @@ export default function GraphStudio() {
       {tab === 'equation' && (
         <div className="space-y-4">
           <div className="grid gap-4 lg:grid-cols-[360px,1fr]">
-            <div className="hidden lg:block">
+            <div className="hidden md:block">
               <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
                 {equationInputPanel}
               </div>
             </div>
-            <div className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
+            <div
+              className={`rounded-2xl border border-slate-200 bg-white p-3 shadow-sm ${
+                isMobile && isPanelOpen ? "pb-[45vh]" : ""
+              }`}
+            >
               {equationChartView}
             </div>
           </div>
@@ -1958,7 +1962,7 @@ export default function GraphStudio() {
             className={`
               rounded-t-2xl border-t border-slate-200 bg-white/95 backdrop-blur
               shadow-[0_-12px_40px_-20px_rgba(15,23,42,0.35)]
-              max-h-[55vh] overflow-y-auto
+              max-h-[45vh] overflow-y-auto
               transform transition-transform
               ${isPanelOpen ? 'translate-y-0' : 'translate-y-full'}
             `}
@@ -1980,7 +1984,7 @@ export default function GraphStudio() {
               </button>
             </div>
 
-            <div className="p-3 space-y-3">{equationInputPanel}</div>
+            <div className="p-3 space-y-3 w-full">{equationInputPanel}</div>
           </div>
         </div>
       )}
