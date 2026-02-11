@@ -4251,7 +4251,7 @@ export default function GraphStudio() {
                     }`}
                     onClick={() => setBivarView('surface')}
                   >
-                    3D（準備中）
+                    3D
                   </button>
                 </div>
                 <div className="flex flex-wrap gap-2">
@@ -4445,6 +4445,8 @@ export default function GraphStudio() {
                     width={bivarWidth}
                     height={bivarHeight}
                     colorScale={bivarColorScale}
+                    sensitivity={bivarRotateSensitivity}
+                    resetNonce={bivarResetNonce}
                   />
                   <div className="pointer-events-none absolute right-3 top-3 rounded-full border border-slate-200 bg-white/90 px-3 py-1 text-[11px] text-slate-600 shadow-sm">
                     ドラッグで回転
@@ -4569,30 +4571,56 @@ export default function GraphStudio() {
                 */}
                 <div className="space-y-2 text-xs text-slate-600">
                   <div className="font-semibold text-slate-700">表示モード</div>
-                  <div className="flex flex-wrap gap-2">
-                    <button
-                      type="button"
-                      className={`rounded-full border px-3 py-1 text-[11px] shadow-sm transition ${
-                        bivarView === 'contour'
-                          ? 'border-slate-900 bg-slate-900 text-white'
-                          : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
-                      }`}
-                      onClick={() => setBivarView('contour')}
-                    >
-                      等高線
-                    </button>
-                    <button
-                      type="button"
-                      className={`rounded-full border px-3 py-1 text-[11px] shadow-sm transition ${
-                        bivarView === 'surface'
-                          ? 'border-slate-900 bg-slate-900 text-white'
-                          : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
-                      }`}
-                      onClick={() => setBivarView('surface')}
-                    >
-                      3D（準備中）
-                    </button>
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    className={`rounded-full border px-3 py-1 text-[11px] shadow-sm transition ${
+                      bivarView === 'contour'
+                        ? 'border-slate-900 bg-slate-900 text-white'
+                        : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
+                    }`}
+                    onClick={() => setBivarView('contour')}
+                  >
+                    等高線
+                  </button>
+                  <button
+                    type="button"
+                    className={`rounded-full border px-3 py-1 text-[11px] shadow-sm transition ${
+                      bivarView === 'surface'
+                        ? 'border-slate-900 bg-slate-900 text-white'
+                        : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
+                    }`}
+                    onClick={() => setBivarView('surface')}
+                  >
+                    3D
+                  </button>
+                </div>
+                {bivarView === 'surface' && (
+                  <div className="mt-2 space-y-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">
+                    <div className="flex items-center justify-between text-[11px] text-slate-600">
+                      <span>回転感度</span>
+                      <span>{bivarRotateSensitivity.toFixed(3)}</span>
+                    </div>
+                    <input
+                      type="range"
+                      min={0.003}
+                      max={0.02}
+                      step={0.001}
+                      value={bivarRotateSensitivity}
+                      onChange={(e) => setBivarRotateSensitivity(Number(e.target.value))}
+                      className="w-full"
+                    />
+                    <div className="flex justify-end">
+                      <button
+                        type="button"
+                        className="rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] text-slate-600 shadow-sm"
+                        onClick={() => setBivarResetNonce((n) => n + 1)}
+                      >
+                        視点リセット
+                      </button>
+                    </div>
                   </div>
+                )}
                 </div>
 
                 <div>

@@ -34,6 +34,8 @@ export default function BivarSurface({
   width,
   height,
   colorScale,
+  sensitivity = 0.008,
+  resetNonce = 0,
 }: {
   gridData:
     | {
@@ -47,6 +49,8 @@ export default function BivarSurface({
   width: number;
   height: number;
   colorScale: 'blueRed' | 'viridis' | 'mono';
+  sensitivity?: number;
+  resetNonce?: number;
 }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
@@ -59,6 +63,22 @@ export default function BivarSurface({
     y: 0,
   });
   const rotationRef = useRef({ x: -0.8, y: 0.6 });
+  const sensitivityRef = useRef(sensitivity);
+
+  useEffect(() => {
+    sensitivityRef.current = sensitivity;
+  }, [sensitivity]);
+
+  useEffect(() => {
+    rotationRef.current = { x: -0.8, y: 0.6 };
+    const renderer = rendererRef.current;
+    const scene = sceneRef.current;
+    const camera = cameraRef.current;
+    const mesh = meshRef.current;
+    if (!renderer || !scene || !camera || !mesh) return;
+    mesh.rotation.set(rotationRef.current.x, rotationRef.current.y, 0);
+    renderer.render(scene, camera);
+  }, [resetNonce]);
 
   const geometryData = useMemo(() => {
     if (!gridData) return null;
@@ -184,12 +204,13 @@ export default function BivarSurface({
     };
     const onPointerMove = (e: PointerEvent) => {
       if (!dragRef.current.active) return;
-      const dx = (e.clientX - dragRef.current.x) * 0.01;
-      const dy = (e.clientY - dragRef.current.y) * 0.01;
+      const factor = sensitivityRef.current;
+      const dx = (e.clientX - dragRef.current.x) * factor;
+      const dy = (e.clientY - dragRef.current.y) * factor;
       dragRef.current.x = e.clientX;
       dragRef.current.y = e.clientY;
       rotationRef.current = {
-        x: rotationRef.current.x + dy,
+        x: Math.max(-1.5, Math.min(1.5, rotationRef.current.x + dy)),
         y: rotationRef.current.y + dx,
       };
       mesh.rotation.set(rotationRef.current.x, rotationRef.current.y, 0);
