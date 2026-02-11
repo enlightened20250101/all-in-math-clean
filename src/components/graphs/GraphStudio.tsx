@@ -1771,6 +1771,8 @@ export default function GraphStudio() {
       z: number;
       score: number;
       kind: 'max' | 'min' | 'saddle';
+      grad: number;
+      det: number;
     }[] = [];
     const f = buildFunction2D(bivarExpr, bivarParams);
     for (let j = 1; j < ny - 1; j += 1) {
@@ -1801,6 +1803,8 @@ export default function GraphStudio() {
           let rx = xs[i];
           let ry = ys[j];
           let rz = zc;
+          let finalGrad = Math.abs(fx) + Math.abs(fy);
+          let finalDet = det;
           for (let k = 0; k < 6; k += 1) {
             const hx = Math.max(1e-4, Math.abs(dx) * 0.35);
             const hy = Math.max(1e-4, Math.abs(dy) * 0.35);
@@ -1824,13 +1828,23 @@ export default function GraphStudio() {
             const stepY = (h11 * g2 - h12 * g1) / detH;
             rx -= stepX;
             ry -= stepY;
+            finalGrad = Math.abs(g1) + Math.abs(g2);
+            finalDet = detH;
             if (Math.abs(stepX) + Math.abs(stepY) < 1e-6) break;
             if (!Number.isFinite(rx) || !Number.isFinite(ry)) break;
           }
           if (rx < xMin || rx > xMax || ry < yMin || ry > yMax) continue;
           rz = f(rx, ry);
           if (!Number.isFinite(rz)) continue;
-          candidates.push({ x: rx, y: ry, z: rz, score, kind });
+          candidates.push({
+            x: rx,
+            y: ry,
+            z: rz,
+            score,
+            kind,
+            grad: finalGrad,
+            det: finalDet,
+          });
         }
       }
     }
@@ -1866,6 +1880,8 @@ export default function GraphStudio() {
         y: p.y,
         z: p.z,
         kind: p.kind,
+        grad: p.grad,
+        det: p.det,
       })),
     );
   }, [bivarView, bivarCriticalPoints]);
@@ -4611,7 +4627,8 @@ export default function GraphStudio() {
                               }}
                             />
                             {p.kind === 'max' ? '極大' : p.kind === 'min' ? '極小' : '鞍点'}:
-                            ({formatNumber(p.x)}, {formatNumber(p.y)}) → {formatNumber(p.z)}
+                            ({formatNumber(p.x)}, {formatNumber(p.y)}) → {formatNumber(p.z)} /
+                            |∇f|={formatNumber(p.grad)} / det={formatNumber(p.det)}
                           </span>
                         ))}
                       </div>

@@ -56,7 +56,14 @@ export default function BivarSurface({
   colorScale: 'blueRed' | 'viridis' | 'mono';
   sensitivity?: number;
   viewPreset?: 'default' | 'iso' | 'top' | 'front' | 'side';
-  points?: { x: number; y: number; z: number; kind: 'max' | 'min' | 'saddle' }[];
+  points?: {
+    x: number;
+    y: number;
+    z: number;
+    kind: 'max' | 'min' | 'saddle';
+    grad?: number;
+    det?: number;
+  }[];
   onHover?: (point: { x: number; y: number; z: number }) => void;
   onHoverEnd?: () => void;
   resetNonce?: number;
