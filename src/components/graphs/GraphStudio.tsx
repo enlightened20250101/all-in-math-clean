@@ -726,6 +726,9 @@ export default function GraphStudio() {
     xMax: '',
   });
   const [paramAuto, setParamAuto] = useState<Record<number, boolean>>({});
+  const [paramAutoConfig, setParamAutoConfig] = useState<
+    Record<number, { speed: number; range: number }>
+  >({});
   const paramAutoDir = useRef<Record<number, { a: number; b: number; c: number }>>({});
   const autoDrawTimerRef = useRef<number | null>(null);
 
@@ -749,8 +752,11 @@ export default function GraphStudio() {
 
         activeIndices.forEach((idx) => {
           const eq = equations[idx] ?? '';
-          const range = estimateParamRange(eq);
-          const speed = range * 0.35;
+          const baseRange = estimateParamRange(eq);
+          const config = paramAutoConfig[idx];
+          const range = config?.range && Number.isFinite(config.range) ? config.range : baseRange;
+          const speedBase = config?.speed && Number.isFinite(config.speed) ? config.speed : 0.35;
+          const speed = range * speedBase;
           const used = getUsedParams(eq);
           const dir = paramAutoDir.current[idx] ?? { a: 1, b: 1, c: 1 };
           const current = next[idx] ?? { a: 0, b: 0, c: 0 };
@@ -785,7 +791,7 @@ export default function GraphStudio() {
     return () => {
       window.cancelAnimationFrame(frame);
     };
-  }, [paramAuto, equations]);
+  }, [paramAuto, paramAutoConfig, equations]);
 
   useEffect(() => {
     if (tab !== 'equation') return;
@@ -2228,6 +2234,62 @@ export default function GraphStudio() {
                       a, b, c を式に含めるとスライダーが自動で表示されます。
                     </div>
                   )}
+                  {usedParams.a || usedParams.b || usedParams.c ? (
+                    <div className="mt-2 grid gap-2 rounded-xl border border-slate-200 bg-white p-2">
+                      <div className="flex flex-wrap items-center gap-2 text-[11px] text-slate-500">
+                        <span className="font-semibold text-slate-600">再生速度</span>
+                        <input
+                          type="range"
+                          min={0.1}
+                          max={1.5}
+                          step={0.05}
+                          value={paramAutoConfig[i]?.speed ?? 0.35}
+                          onChange={(e) => {
+                            const v = Number(e.target.value);
+                            setParamAutoConfig((prev) => ({
+                              ...prev,
+                              [i]: {
+                                speed: v,
+                                range: prev[i]?.range ?? estimateParamRange(eq),
+                              },
+                            }));
+                          }}
+                          className="w-32 accent-slate-700"
+                        />
+                        <span className="text-[11px] text-slate-400">
+                          {formatNumber((paramAutoConfig[i]?.speed ?? 0.35) * 100)}%
+                        </span>
+                      </div>
+                      <div className="flex flex-wrap items-center gap-2 text-[11px] text-slate-500">
+                        <span className="font-semibold text-slate-600">再生範囲</span>
+                        <input
+                          type="text"
+                          inputMode="decimal"
+                          className="w-20 rounded-lg border border-slate-200 bg-white px-2 py-1 text-xs"
+                          value={
+                            paramAutoConfig[i]?.range !== undefined
+                              ? String(paramAutoConfig[i]?.range)
+                              : ''
+                          }
+                          placeholder={String(estimateParamRange(eq))}
+                          onChange={(e) => {
+                            const raw = e.target.value;
+                            const parsed = Number(raw);
+                            setParamAutoConfig((prev) => ({
+                              ...prev,
+                              [i]: {
+                                speed: prev[i]?.speed ?? 0.35,
+                                range: Number.isFinite(parsed) ? parsed : prev[i]?.range ?? estimateParamRange(eq),
+                              },
+                            }));
+                          }}
+                        />
+                        <span className="text-[11px] text-slate-400">
+                          目安 {estimateParamRange(eq)}
+                        </span>
+                      </div>
+                    </div>
+                  ) : null}
                 </div>
               </div>
             </div>
