@@ -126,10 +126,17 @@ export default function BivarSurface({
 
       const scene = new THREE.Scene();
       sceneRef.current = scene;
-      const light = new THREE.DirectionalLight(0xffffff, 0.9);
-      light.position.set(5, 10, 8);
-      scene.add(light);
-      scene.add(new THREE.AmbientLight(0xffffff, 0.4));
+      const keyLight = new THREE.DirectionalLight(0xffffff, 0.95);
+      keyLight.position.set(6, 10, 8);
+      scene.add(keyLight);
+      const fillLight = new THREE.DirectionalLight(0xffffff, 0.45);
+      fillLight.position.set(-6, 6, -6);
+      scene.add(fillLight);
+      scene.add(new THREE.AmbientLight(0xffffff, 0.25));
+
+      const gridHelper = new THREE.GridHelper(12, 12, 0x94a3b8, 0xe2e8f0);
+      gridHelper.position.set(0, 0, 0);
+      scene.add(gridHelper);
 
       const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
       camera.position.set(8, 8, 8);
