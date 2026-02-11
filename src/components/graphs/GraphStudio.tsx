@@ -633,6 +633,9 @@ export default function GraphStudio() {
     y: number;
     z: number;
   } | null>(null);
+  const [bivarSurfacePoints, setBivarSurfacePoints] = useState<
+    { x: number; y: number; z: number; kind: 'max' | 'min' | 'saddle' }[]
+  >([]);
   const [bivarResetNonce, setBivarResetNonce] = useState(0);
   const bivarShiftTrackRef = useRef<HTMLDivElement | null>(null);
   const bivarShiftDragRef = useRef(false);
@@ -1810,6 +1813,25 @@ export default function GraphStudio() {
     }
     return merged;
   }, [bivarGridData]);
+
+  useEffect(() => {
+    if (bivarView !== 'surface') {
+      setBivarSurfacePoints([]);
+      return;
+    }
+    if (!bivarCriticalPoints.length) {
+      setBivarSurfacePoints([]);
+      return;
+    }
+    setBivarSurfacePoints(
+      bivarCriticalPoints.map((p) => ({
+        x: p.x,
+        y: p.y,
+        z: p.z,
+        kind: p.kind,
+      })),
+    );
+  }, [bivarView, bivarCriticalPoints]);
 
   const bivarContours = useMemo(() => {
     if (bivarView !== 'contour') return [];
@@ -4571,6 +4593,7 @@ export default function GraphStudio() {
                     colorScale={bivarColorScale}
                     sensitivity={bivarRotateSensitivity}
                     viewPreset={bivarViewPreset}
+                    points={bivarSurfacePoints}
                     onHover={(point) => setBivarHoverPoint(point)}
                     onHoverEnd={() => setBivarHoverPoint(null)}
                     resetNonce={bivarResetNonce}
@@ -4582,6 +4605,11 @@ export default function GraphStudio() {
                     <div className="pointer-events-none absolute left-3 top-3 rounded-full border border-slate-200 bg-white/90 px-3 py-1 text-[11px] text-slate-700 shadow-sm">
                       x={formatNumber(bivarHoverPoint.x)} / y={formatNumber(bivarHoverPoint.y)} / z=
                       {formatNumber(bivarHoverPoint.z)}
+                    </div>
+                  ) : null}
+                  {bivarSurfacePoints.length ? (
+                    <div className="pointer-events-none absolute left-3 bottom-3 rounded-full border border-slate-200 bg-white/90 px-3 py-1 text-[11px] text-slate-700 shadow-sm">
+                      3D停留点: {bivarSurfacePoints.length}個
                     </div>
                   ) : null}
                 </div>

@@ -37,6 +37,7 @@ export default function BivarSurface({
   colorScale,
   sensitivity = 0.008,
   viewPreset = 'default',
+  points = [],
   onHover,
   onHoverEnd,
   resetNonce = 0,
@@ -55,6 +56,7 @@ export default function BivarSurface({
   colorScale: 'blueRed' | 'viridis' | 'mono';
   sensitivity?: number;
   viewPreset?: 'default' | 'iso' | 'top' | 'front' | 'side';
+  points?: { x: number; y: number; z: number; kind: 'max' | 'min' | 'saddle' }[];
   onHover?: (point: { x: number; y: number; z: number }) => void;
   onHoverEnd?: () => void;
   resetNonce?: number;
@@ -64,6 +66,7 @@ export default function BivarSurface({
   const sceneRef = useRef<THREE.Scene | null>(null);
   const meshRef = useRef<THREE.Mesh | null>(null);
   const gridRef = useRef<THREE.GridHelper | null>(null);
+  const pointsGroupRef = useRef<THREE.Group | null>(null);
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
   const dragRef = useRef<{ active: boolean; x: number; y: number }>({
     active: false,
@@ -270,6 +273,29 @@ export default function BivarSurface({
       gridRef.current.scale.set(scale, 1, scale);
     }
   }, [geometryData]);
+
+  useEffect(() => {
+    const scene = sceneRef.current;
+    if (!scene) return;
+    if (pointsGroupRef.current) {
+      scene.remove(pointsGroupRef.current);
+      pointsGroupRef.current.clear();
+      pointsGroupRef.current = null;
+    }
+    if (!points.length) return;
+    const group = new THREE.Group();
+    points.forEach((p) => {
+      const color =
+        p.kind === 'max' ? 0xef4444 : p.kind === 'min' ? 0x22c55e : 0x0f172a;
+      const mat = new THREE.MeshStandardMaterial({ color });
+      const geom = new THREE.SphereGeometry(0.12, 12, 12);
+      const sphere = new THREE.Mesh(geom, mat);
+      sphere.position.set(p.x, p.z, p.y);
+      group.add(sphere);
+    });
+    pointsGroupRef.current = group;
+    scene.add(group);
+  }, [points]);
 
   useEffect(() => {
     const renderer = rendererRef.current;
