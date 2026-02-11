@@ -712,7 +712,19 @@ export default function GraphStudio() {
   const [legendNames, setLegendNames] = useState<string[]>([]);
   const [isDrawing, setIsDrawing] = useState(false);
   const [equationErrors, setEquationErrors] = useState<string[]>([]);
-  const [fillBetween, setFillBetween] = useState(false);
+  const [fillConfig, setFillConfig] = useState<{
+    enabled: boolean;
+    idxA: number;
+    idxB: number;
+    xMin: string;
+    xMax: string;
+  }>({
+    enabled: false,
+    idxA: 0,
+    idxB: 1,
+    xMin: '',
+    xMax: '',
+  });
   const [paramAuto, setParamAuto] = useState<Record<number, boolean>>({});
   const paramAutoDir = useRef<Record<number, { a: number; b: number; c: number }>>({});
   const autoDrawTimerRef = useRef<number | null>(null);
@@ -1205,20 +1217,29 @@ export default function GraphStudio() {
   }, [tab, parsedList, previewSeriesList, legendLabels, colors]);
 
   const fillBetweenData = useMemo(() => {
-    if (!fillBetween) return null;
+    if (!fillConfig.enabled) return null;
     if (functionSeries.length < 2) return null;
-    const a = functionSeries[0].points;
-    const b = functionSeries[1].points;
+    const idxA = Math.min(functionSeries.length - 1, Math.max(0, fillConfig.idxA));
+    const idxB = Math.min(functionSeries.length - 1, Math.max(0, fillConfig.idxB));
+    if (idxA === idxB) return null;
+    const a = functionSeries[idxA].points;
+    const b = functionSeries[idxB].points;
     const len = Math.min(a.length, b.length);
     const data: Array<{ x: number; y1: number; y2: number }> = [];
+    const xMin = Number(fillConfig.xMin);
+    const xMax = Number(fillConfig.xMax);
+    const hasXMin = Number.isFinite(xMin);
+    const hasXMax = Number.isFinite(xMax);
     for (let i = 0; i < len; i += 1) {
       const p0 = a[i];
       const p1 = b[i];
       if (![p0?.x, p0?.y, p1?.y].every(Number.isFinite)) continue;
+      if (hasXMin && p0.x < xMin) continue;
+      if (hasXMax && p0.x > xMax) continue;
       data.push({ x: p0.x, y1: p0.y, y2: p1.y });
     }
     return data.length ? data : null;
-  }, [fillBetween, functionSeries]);
+  }, [fillConfig, functionSeries]);
 
   const autoInsights = useMemo(() => {
     return functionSeries.slice(0, 3).map((series) => {
@@ -1740,17 +1761,88 @@ export default function GraphStudio() {
             </button>
             <button
               className={`rounded-full border px-3 py-2 text-xs font-medium shadow-sm transition ${
-                fillBetween
+                fillConfig.enabled
                   ? 'border-emerald-200 bg-emerald-50 text-emerald-700'
                   : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
               }`}
-              onClick={() => setFillBetween((prev) => !prev)}
+              onClick={() =>
+                setFillConfig((prev) => ({ ...prev, enabled: !prev.enabled }))
+              }
             >
-              面積塗りつぶし{fillBetween ? '（ON）' : ''}
+              面積塗りつぶし{fillConfig.enabled ? '（ON）' : ''}
             </button>
           </div>
         </div>
       </div>
+      {fillConfig.enabled ? (
+        <div className="rounded-2xl border border-slate-200 bg-white p-3 text-xs text-slate-600">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="text-[11px] text-slate-500">対象</span>
+            <select
+              className="rounded-lg border border-slate-200 bg-white px-2 py-1 text-xs"
+              value={fillConfig.idxA}
+              onChange={(e) =>
+                setFillConfig((prev) => ({
+                  ...prev,
+                  idxA: Number(e.target.value),
+                }))
+              }
+            >
+              {functionSeries.map((s, idx) => (
+                <option key={`${s.label}-a-${idx}`} value={idx}>
+                  {s.label}
+                </option>
+              ))}
+            </select>
+            <span className="text-[11px] text-slate-500">と</span>
+            <select
+              className="rounded-lg border border-slate-200 bg-white px-2 py-1 text-xs"
+              value={fillConfig.idxB}
+              onChange={(e) =>
+                setFillConfig((prev) => ({
+                  ...prev,
+                  idxB: Number(e.target.value),
+                }))
+              }
+            >
+              {functionSeries.map((s, idx) => (
+                <option key={`${s.label}-b-${idx}`} value={idx}>
+                  {s.label}
+                </option>
+              ))}
+            </select>
+            <span className="text-[11px] text-slate-500">の間</span>
+          </div>
+          <div className="mt-2 flex flex-wrap items-end gap-2">
+            <div>
+              <label className="block text-[10px] text-slate-400">x最小</label>
+              <input
+                type="text"
+                inputMode="decimal"
+                className="w-24 rounded-lg border border-slate-200 bg-white px-2 py-1 text-xs"
+                value={fillConfig.xMin}
+                onChange={(e) =>
+                  setFillConfig((prev) => ({ ...prev, xMin: e.target.value }))
+                }
+                placeholder="任意"
+              />
+            </div>
+            <div>
+              <label className="block text-[10px] text-slate-400">x最大</label>
+              <input
+                type="text"
+                inputMode="decimal"
+                className="w-24 rounded-lg border border-slate-200 bg-white px-2 py-1 text-xs"
+                value={fillConfig.xMax}
+                onChange={(e) =>
+                  setFillConfig((prev) => ({ ...prev, xMax: e.target.value }))
+                }
+                placeholder="任意"
+              />
+            </div>
+          </div>
+        </div>
+      ) : null}
   
       {/* 複数式の行 */}
       <div className="space-y-4">
