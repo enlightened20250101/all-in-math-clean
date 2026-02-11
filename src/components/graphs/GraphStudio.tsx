@@ -302,7 +302,43 @@ function findIntersections(
 ) {
   const len = Math.min(a.length, b.length);
   const hits: Array<{ x: number; y: number }> = [];
-  for (let i = 1; i < len; i += 1) {
+
+  const evalQuadratic = (
+    pts: Array<{ x: number; y: number }>,
+    i: number,
+    x: number,
+  ) => {
+    const p0 = pts[i - 1];
+    const p1 = pts[i];
+    const p2 = pts[i + 1];
+    if (!p0 || !p1 || !p2) {
+      // fallback to linear
+      const a0 = pts[i - 1];
+      const a1 = pts[i];
+      if (!a0 || !a1) return NaN;
+      const t = (x - a0.x) / (a1.x - a0.x);
+      return a0.y + (a1.y - a0.y) * t;
+    }
+    const x0 = p0.x;
+    const x1 = p1.x;
+    const x2 = p2.x;
+    const denom = (x0 - x1) * (x0 - x2) * (x1 - x2);
+    if (Math.abs(denom) < 1e-9) {
+      const t = (x - p0.x) / (p1.x - p0.x);
+      return p0.y + (p1.y - p0.y) * t;
+    }
+    const aCoef =
+      (x2 * (p1.y - p0.y) + x1 * (p0.y - p2.y) + x0 * (p2.y - p1.y)) / denom;
+    const bCoef =
+      (x2 * x2 * (p0.y - p1.y) +
+        x1 * x1 * (p2.y - p0.y) +
+        x0 * x0 * (p1.y - p2.y)) /
+      denom;
+    const cCoef = p0.y - aCoef * x0 * x0 - bCoef * x0;
+    return aCoef * x * x + bCoef * x + cCoef;
+  };
+
+  for (let i = 1; i < len - 1; i += 1) {
     const p0 = a[i - 1];
     const p1 = a[i];
     const q0 = b[i - 1];
@@ -315,12 +351,29 @@ function findIntersections(
       continue;
     }
     if (d0 * d1 < 0) {
-      const t = -d0 / (d1 - d0);
-      const x = p0.x + (p1.x - p0.x) * t;
-      const yA = p0.y + (p1.y - p0.y) * t;
-      hits.push({ x, y: yA });
+      let left = p0.x;
+      let right = p1.x;
+      let mid = (left + right) / 2;
+      for (let k = 0; k < 12; k += 1) {
+        mid = (left + right) / 2;
+        const yA = evalQuadratic(a, i, mid);
+        const yB = evalQuadratic(b, i, mid);
+        const d = yA - yB;
+        if (!Number.isFinite(d)) break;
+        if (d === 0) break;
+        if (d0 * d < 0) {
+          right = mid;
+        } else {
+          left = mid;
+        }
+      }
+      const yFinal = evalQuadratic(a, i, mid);
+      if (Number.isFinite(yFinal)) {
+        hits.push({ x: mid, y: yFinal });
+      }
     }
   }
+
   const unique: Array<{ x: number; y: number }> = [];
   hits.forEach((p) => {
     if (unique.every((u) => Math.abs(u.x - p.x) > 1e-3)) unique.push(p);
