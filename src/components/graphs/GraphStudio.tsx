@@ -210,57 +210,6 @@ export default function GraphStudio() {
   // === DOM参照 ===
   const equationChartRef = useRef<HTMLDivElement | null>(null);
   const seriesChartRef = useRef<HTMLDivElement | null>(null);
-  useEffect(() => {
-    if (!shareParam) {
-      shareReady.current = true;
-      return;
-    }
-    const decoded = decodeShareState(shareParam);
-    if (decoded && typeof decoded === 'object') {
-      const state = decoded as Partial<{
-        equations: string[];
-        colors: string[];
-        domains: Domain1D[];
-        paramList: { a: number; b: number; c: number }[];
-        enabledList: boolean[];
-        xLabel: string;
-        yLabel: string;
-        title: string;
-      }>;
-      if (Array.isArray(state.equations)) setEquations(state.equations);
-      if (Array.isArray(state.colors)) setColors(state.colors);
-      if (Array.isArray(state.domains)) setDomains(state.domains);
-      if (Array.isArray(state.paramList)) setParamList(state.paramList);
-      if (Array.isArray(state.enabledList)) setEnabledList(state.enabledList);
-      if (typeof state.xLabel === 'string') setXLabel(state.xLabel);
-      if (typeof state.yLabel === 'string') setYLabel(state.yLabel);
-      if (typeof state.title === 'string') setTitle(state.title);
-    }
-    shareReady.current = true;
-  }, [shareParam]);
-
-  useEffect(() => {
-    if (!shareReady.current) return;
-    const snapshot = captureSnapshot();
-    pushHistory(snapshot);
-    const encoded = encodeShareState(snapshot);
-    if (!encoded || encoded === lastShare.current) return;
-    lastShare.current = encoded;
-    const params = new URLSearchParams(searchParams.toString());
-    params.set('g', encoded);
-    router.replace(`?${params.toString()}`, { scroll: false });
-  }, [
-    equations,
-    colors,
-    domains,
-    paramList,
-    enabledList,
-    xLabel,
-    yLabel,
-    title,
-    router,
-    searchParams,
-  ]);
 
   // プロット領域（実測値）: 式タブ
   const [plotBoxEq, setPlotBoxEq] = useState<{
@@ -371,6 +320,58 @@ export default function GraphStudio() {
   const lastShare = useRef<string | null>(null);
   const [history, setHistory] = useState<HistorySnapshot[]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
+
+  useEffect(() => {
+    if (!shareParam) {
+      shareReady.current = true;
+      return;
+    }
+    const decoded = decodeShareState(shareParam);
+    if (decoded && typeof decoded === 'object') {
+      const state = decoded as Partial<{
+        equations: string[];
+        colors: string[];
+        domains: Domain1D[];
+        paramList: { a: number; b: number; c: number }[];
+        enabledList: boolean[];
+        xLabel: string;
+        yLabel: string;
+        title: string;
+      }>;
+      if (Array.isArray(state.equations)) setEquations(state.equations);
+      if (Array.isArray(state.colors)) setColors(state.colors);
+      if (Array.isArray(state.domains)) setDomains(state.domains);
+      if (Array.isArray(state.paramList)) setParamList(state.paramList);
+      if (Array.isArray(state.enabledList)) setEnabledList(state.enabledList);
+      if (typeof state.xLabel === 'string') setXLabel(state.xLabel);
+      if (typeof state.yLabel === 'string') setYLabel(state.yLabel);
+      if (typeof state.title === 'string') setTitle(state.title);
+    }
+    shareReady.current = true;
+  }, [shareParam]);
+
+  useEffect(() => {
+    if (!shareReady.current) return;
+    const snapshot = captureSnapshot();
+    pushHistory(snapshot);
+    const encoded = encodeShareState(snapshot);
+    if (!encoded || encoded === lastShare.current) return;
+    lastShare.current = encoded;
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('g', encoded);
+    router.replace(`?${params.toString()}`, { scroll: false });
+  }, [
+    equations,
+    colors,
+    domains,
+    paramList,
+    enabledList,
+    xLabel,
+    yLabel,
+    title,
+    router,
+    searchParams,
+  ]);
   const openEquationPanel = () => {
     setIsPanelOpen(true);
     if (activeEqIndex === null && equations.length) {
@@ -1228,6 +1229,21 @@ export default function GraphStudio() {
   function updateEquation(idx: number, val: string) {
     setEquations((prev) => prev.map((v, i) => (i === idx ? val : v)));
   }
+
+  function moveEquation(idx: number, dir: 'up' | 'down') {
+    const next = idx + (dir === 'up' ? -1 : 1);
+    if (next < 0 || next >= equations.length) return;
+    const swap = <T,>(arr: T[]) => {
+      const copy = [...arr];
+      [copy[idx], copy[next]] = [copy[next], copy[idx]];
+      return copy;
+    };
+    setEquations((prev) => swap(prev));
+    setColors((prev) => swap(prev));
+    setDomains((prev) => swap(prev));
+    setParamList((prev) => swap(prev));
+    setEnabledList((prev) => swap(prev));
+  }
   function updateColor(idx: number, val: string) {
     setColors((prev) => prev.map((c, i) => (i === idx ? val : c)));
   }
@@ -1389,7 +1405,23 @@ export default function GraphStudio() {
                       表示
                     </label>
                   </div>
-                  <div className="col-span-2 flex items-start justify-end">
+                  <div className="col-span-2 flex flex-col items-end gap-1">
+                    <div className="flex items-center gap-1">
+                      <button
+                        className="rounded-full border border-slate-200 bg-white px-2 py-1 text-[10px] text-slate-600 shadow-sm disabled:opacity-40"
+                        onClick={() => moveEquation(i, 'up')}
+                        disabled={i === 0}
+                      >
+                        ↑
+                      </button>
+                      <button
+                        className="rounded-full border border-slate-200 bg-white px-2 py-1 text-[10px] text-slate-600 shadow-sm disabled:opacity-40"
+                        onClick={() => moveEquation(i, 'down')}
+                        disabled={i === equations.length - 1}
+                      >
+                        ↓
+                      </button>
+                    </div>
                     <button
                       className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs text-slate-600 shadow-sm transition hover:bg-slate-50"
                       onClick={() => removeEquation(i)}
@@ -1448,6 +1480,22 @@ export default function GraphStudio() {
                     </button>
 
                     <div className="flex flex-col items-end gap-1">
+                      <div className="flex items-center gap-1">
+                        <button
+                          className="rounded-full border border-slate-200 bg-white px-2 py-0.5 text-[10px] text-slate-600 shadow-sm disabled:opacity-40"
+                          onClick={() => moveEquation(i, 'up')}
+                          disabled={i === 0}
+                        >
+                          ↑
+                        </button>
+                        <button
+                          className="rounded-full border border-slate-200 bg-white px-2 py-0.5 text-[10px] text-slate-600 shadow-sm disabled:opacity-40"
+                          onClick={() => moveEquation(i, 'down')}
+                          disabled={i === equations.length - 1}
+                        >
+                          ↓
+                        </button>
+                      </div>
                       <div className="flex items-center gap-1">
                         <span className="text-[11px] text-slate-500">色</span>
                         <input
