@@ -3881,7 +3881,7 @@ export default function GraphStudio() {
       {tab === 'bivar' && (
         <div className="space-y-4">
           <div className="grid gap-4 lg:grid-cols-[360px,1fr]">
-            <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm space-y-4">
+            <div className="order-2 lg:order-none rounded-2xl border border-slate-200 bg-white p-4 shadow-sm space-y-4">
               <div>
                 <label className="block text-sm font-semibold text-slate-700">
                   2変数関数（z = f(x, y)）
@@ -4035,7 +4035,8 @@ export default function GraphStudio() {
                       step={0.1}
                       value={bivarLevelShift}
                       onChange={(e) => setBivarLevelShift(Number(e.target.value))}
-                      className="w-full"
+                      onInput={(e) => setBivarLevelShift(Number((e.target as HTMLInputElement).value))}
+                      className="w-full accent-slate-900"
                     />
                     <span className="min-w-[3rem] text-right text-[11px] text-slate-600">
                       {formatNumber(bivarLevelShift)}
@@ -4121,10 +4122,10 @@ export default function GraphStudio() {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
+            <div className="order-1 lg:order-none rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
               <div
                 ref={bivarChartRef}
-                className="relative h-[420px] sm:h-[520px] w-full overflow-hidden"
+                className="relative h-[320px] sm:h-[420px] lg:h-[520px] w-full overflow-hidden"
               >
                 <svg
                   className="absolute inset-0"
