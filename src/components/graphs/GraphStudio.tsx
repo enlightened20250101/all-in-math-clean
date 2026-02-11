@@ -2005,6 +2005,7 @@ export default function GraphStudio() {
                 <div className="text-xs text-slate-600 space-y-2 mt-2">
                   <span className="font-semibold text-slate-700">パラメータ a, b, c</span>
                   {usedParams.a || usedParams.b || usedParams.c ? (
+                    <>
                     <div className="grid gap-2">
                       {(["a", "b", "c"] as const).map((key) => {
                         if (!usedParams[key]) return null;
@@ -2090,6 +2091,7 @@ export default function GraphStudio() {
                         {paramAuto[i] ? '停止' : '再生'}
                       </button>
                     </div>
+                    </>
                   ) : (
                     <div className="rounded-xl border border-dashed border-slate-200 bg-white px-3 py-2 text-[11px] text-slate-500">
                       a, b, c を式に含めるとスライダーが自動で表示されます。
