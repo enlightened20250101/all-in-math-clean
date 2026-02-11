@@ -2261,20 +2261,22 @@ export default function GraphStudio() {
 
   // bivarタブ用（等高線）
   useEffect(() => {
+    if (tab !== 'bivar') return;
     const root = bivarChartRef.current;
-    if (!root || typeof ResizeObserver === 'undefined') return;
-    const obs = new ResizeObserver((entries) => {
-      const entry = entries[0];
-      if (!entry) return;
-      const { width, height } = entry.contentRect;
+    if (!root) return;
+    const measure = () => {
+      const rect = root.getBoundingClientRect();
       setChartSizeBivar({
-        width,
-        height,
+        width: rect.width,
+        height: rect.height,
       });
-    });
+    };
+    measure();
+    if (typeof ResizeObserver === 'undefined') return;
+    const obs = new ResizeObserver(() => measure());
     obs.observe(root);
     return () => obs.disconnect();
-  }, []);
+  }, [tab]);
 
   // ==== 式入力パネル（PCとSP共通で使う） ====
   const equationInputPanel = (
