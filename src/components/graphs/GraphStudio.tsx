@@ -1153,6 +1153,20 @@ export default function GraphStudio() {
   const [isUserViewport, setIsUserViewport] = useState(false);
   const [isChartHover, setIsChartHover] = useState(false);
 
+  const isInsidePlot = (e: React.PointerEvent | React.WheelEvent) => {
+    if (!chartWrapRef.current) return false;
+    if (plotBoxEq.width <= 0 || plotBoxEq.height <= 0) return false;
+    const rect = chartWrapRef.current.getBoundingClientRect();
+    const localX = e.clientX - rect.left;
+    const localY = e.clientY - rect.top;
+    return (
+      localX >= plotBoxEq.left &&
+      localX <= plotBoxEq.left + plotBoxEq.width &&
+      localY >= plotBoxEq.top &&
+      localY <= plotBoxEq.top + plotBoxEq.height
+    );
+  };
+
   useEffect(() => {
     if (!isUserViewport) {
       setViewDomain(equalDomain);
@@ -2431,7 +2445,7 @@ export default function GraphStudio() {
         panState.current = null;
       }}
       onWheel={(e) => {
-        if (!isChartHover) return;
+        if (!isInsidePlot(e)) return;
         if (!chartWrapRef.current) return;
         e.preventDefault();
         const domain = viewDomain ?? equalDomain;
@@ -2457,6 +2471,7 @@ export default function GraphStudio() {
       }}
       onPointerDown={(e) => {
         if (!chartWrapRef.current) return;
+        if (!isInsidePlot(e)) return;
         setIsChartHover(true);
         const domain = viewDomain ?? equalDomain;
         panState.current = {
@@ -2573,7 +2588,7 @@ export default function GraphStudio() {
               data={fillBetweenData}
               type="linear"
               dataKey="y1"
-              baseLine={fillBetweenData.map((d) => d.y2)}
+              baseLine={(d: any) => d.y2}
               stroke="none"
               fill="#38bdf8"
               fillOpacity={0.16}
