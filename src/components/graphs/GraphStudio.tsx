@@ -295,6 +295,39 @@ function findExtrema(points: Array<{ x: number; y: number }>, limit = 2) {
   };
 }
 
+function findIntersections(
+  a: Array<{ x: number; y: number }>,
+  b: Array<{ x: number; y: number }>,
+  limit = 3,
+) {
+  const len = Math.min(a.length, b.length);
+  const hits: Array<{ x: number; y: number }> = [];
+  for (let i = 1; i < len; i += 1) {
+    const p0 = a[i - 1];
+    const p1 = a[i];
+    const q0 = b[i - 1];
+    const q1 = b[i];
+    if (![p0.x, p0.y, p1.x, p1.y, q0.y, q1.y].every(Number.isFinite)) continue;
+    const d0 = p0.y - q0.y;
+    const d1 = p1.y - q1.y;
+    if (d0 === 0) {
+      hits.push({ x: p0.x, y: p0.y });
+      continue;
+    }
+    if (d0 * d1 < 0) {
+      const t = -d0 / (d1 - d0);
+      const x = p0.x + (p1.x - p0.x) * t;
+      const yA = p0.y + (p1.y - p0.y) * t;
+      hits.push({ x, y: yA });
+    }
+  }
+  const unique: Array<{ x: number; y: number }> = [];
+  hits.forEach((p) => {
+    if (unique.every((u) => Math.abs(u.x - p.x) > 1e-3)) unique.push(p);
+  });
+  return unique.slice(0, limit);
+}
+
 type HistorySnapshot = {
   equations: string[];
   colors: string[];
@@ -1265,6 +1298,30 @@ export default function GraphStudio() {
     return data.length ? data : null;
   }, [fillConfig, functionSeries]);
 
+  const fillBetweenIntersections = useMemo(() => {
+    if (!fillBetweenData) return [];
+    if (functionSeries.length < 2) return [];
+    const idxA = Math.min(functionSeries.length - 1, Math.max(0, fillConfig.idxA));
+    const idxB = Math.min(functionSeries.length - 1, Math.max(0, fillConfig.idxB));
+    if (idxA === idxB) return [];
+    return findIntersections(functionSeries[idxA].points, functionSeries[idxB].points, 3);
+  }, [fillBetweenData, functionSeries, fillConfig.idxA, fillConfig.idxB]);
+
+  const fillBetweenArea = useMemo(() => {
+    if (!fillBetweenData || fillBetweenData.length < 2) return null;
+    let area = 0;
+    for (let i = 1; i < fillBetweenData.length; i += 1) {
+      const p0 = fillBetweenData[i - 1];
+      const p1 = fillBetweenData[i];
+      if (![p0.x, p0.y1, p0.y2, p1.x, p1.y1, p1.y2].every(Number.isFinite)) continue;
+      const h = p1.x - p0.x;
+      const f0 = Math.abs(p0.y1 - p0.y2);
+      const f1 = Math.abs(p1.y1 - p1.y2);
+      area += (f0 + f1) * 0.5 * h;
+    }
+    return area;
+  }, [fillBetweenData]);
+
   const fillBetweenPathEq = useMemo(() => {
     if (
       !fillBetweenData ||
@@ -1977,6 +2034,21 @@ export default function GraphStudio() {
               />
             </div>
           </div>
+          {fillBetweenIntersections.length ? (
+            <div className="mt-2 text-[11px] text-slate-500">
+              交点:{" "}
+              {fillBetweenIntersections.map((p, i) => (
+                <span key={i} className="mr-1">
+                  <InlineKatex tex={`(${formatNumber(p.x)},${formatNumber(p.y)})`} />
+                </span>
+              ))}
+            </div>
+          ) : null}
+          {fillBetweenArea !== null ? (
+            <div className="mt-1 text-[11px] text-slate-500">
+              近似面積: <InlineKatex tex={`${formatNumber(fillBetweenArea)}`} />
+            </div>
+          ) : null}
         </div>
       ) : null}
   
