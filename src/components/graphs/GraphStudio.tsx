@@ -1747,28 +1747,43 @@ export default function GraphStudio() {
   }, [bivarGridData, bivarWidth, bivarHeight, chartSizeBivar.width, chartSizeBivar.height]);
 
   const bivarContourLabels = useMemo(() => {
-    if (!bivarContours.length) return [];
+    if (!bivarContours.length || bivarWidth <= 1 || bivarHeight <= 1) return [];
     const labels: Array<{ x: number; y: number; text: string; color: string }> = [];
+    const minDist = 56; // px
+    const maxTotal = 36;
+    const maxPerLevel = 3;
+
+    const tooClose = (x: number, y: number) =>
+      labels.some((l) => {
+        const dx = l.x - x;
+        const dy = l.y - y;
+        return dx * dx + dy * dy < minDist * minDist;
+      });
+
     bivarContours.forEach((contour, idx) => {
+      if (labels.length >= maxTotal) return;
       const segs = contour.segments;
       if (!segs.length) return;
-      const step = Math.max(1, Math.floor(segs.length / 2));
+      const step = Math.max(1, Math.floor(segs.length / 3));
+      let placed = 0;
       for (let i = 0; i < segs.length; i += step) {
+        if (placed >= maxPerLevel || labels.length >= maxTotal) break;
         const seg = segs[i];
         if (!seg) continue;
-        const x = (seg[0] + seg[2]) / 2;
-        const y = (seg[1] + seg[3]) / 2;
+        const x = bivarXScale((seg[0] + seg[2]) / 2);
+        const y = bivarYScale((seg[1] + seg[3]) / 2);
+        if (tooClose(x, y)) continue;
         labels.push({
           x,
           y,
           text: formatNumber(contour.level),
           color: bivarLevelColors[idx] ?? '#0ea5e9',
         });
-        if (labels.length > 40) break;
+        placed += 1;
       }
     });
     return labels;
-  }, [bivarContours, bivarLevelColors]);
+  }, [bivarContours, bivarLevelColors, bivarWidth, bivarHeight, bivarXScale, bivarYScale]);
 
   const fillBetweenPathEq = useMemo(() => {
     if (
@@ -4087,8 +4102,8 @@ export default function GraphStudio() {
                     ? bivarContourLabels.map((label, idx) => (
                         <text
                           key={`lvl-text-${idx}`}
-                          x={bivarXScale(label.x)}
-                          y={bivarYScale(label.y)}
+                          x={label.x}
+                          y={label.y}
                           fill={label.color}
                           fontSize="11"
                           textAnchor="middle"
