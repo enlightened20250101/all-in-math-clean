@@ -241,14 +241,53 @@ function findExtrema(points: Array<{ x: number; y: number }>, limit = 2) {
   const maxima: Array<{ x: number; y: number }> = [];
   const minima: Array<{ x: number; y: number }> = [];
   for (let i = 1; i < points.length - 1; i += 1) {
-    const y0 = points[i - 1].y;
-    const y1 = points[i].y;
-    const y2 = points[i + 1].y;
-    if (![y0, y1, y2].every(Number.isFinite)) continue;
+    const p0 = points[i - 1];
+    const p1 = points[i];
+    const p2 = points[i + 1];
+    const y0 = p0.y;
+    const y1 = p1.y;
+    const y2 = p2.y;
+    if (![p0.x, p1.x, p2.x, y0, y1, y2].every(Number.isFinite)) continue;
     const dy1 = y1 - y0;
     const dy2 = y2 - y1;
-    if (dy1 > 0 && dy2 < 0) maxima.push(points[i]);
-    if (dy1 < 0 && dy2 > 0) minima.push(points[i]);
+    if (dy1 > 0 && dy2 < 0) {
+      const denom = (p0.x - p1.x) * (p0.x - p2.x) * (p1.x - p2.x);
+      if (Math.abs(denom) > 1e-9) {
+        const a =
+          (p2.x * (y1 - y0) + p1.x * (y0 - y2) + p0.x * (y2 - y1)) / denom;
+        const b =
+          (p2.x * p2.x * (y0 - y1) +
+            p1.x * p1.x * (y2 - y0) +
+            p0.x * p0.x * (y1 - y2)) /
+          denom;
+        const xv = -b / (2 * a);
+        if (xv >= Math.min(p0.x, p2.x) && xv <= Math.max(p0.x, p2.x)) {
+          const yv = a * xv * xv + b * xv + (y0 - a * p0.x * p0.x - b * p0.x);
+          maxima.push({ x: xv, y: yv });
+          continue;
+        }
+      }
+      maxima.push(p1);
+    }
+    if (dy1 < 0 && dy2 > 0) {
+      const denom = (p0.x - p1.x) * (p0.x - p2.x) * (p1.x - p2.x);
+      if (Math.abs(denom) > 1e-9) {
+        const a =
+          (p2.x * (y1 - y0) + p1.x * (y0 - y2) + p0.x * (y2 - y1)) / denom;
+        const b =
+          (p2.x * p2.x * (y0 - y1) +
+            p1.x * p1.x * (y2 - y0) +
+            p0.x * p0.x * (y1 - y2)) /
+          denom;
+        const xv = -b / (2 * a);
+        if (xv >= Math.min(p0.x, p2.x) && xv <= Math.max(p0.x, p2.x)) {
+          const yv = a * xv * xv + b * xv + (y0 - a * p0.x * p0.x - b * p0.x);
+          minima.push({ x: xv, y: yv });
+          continue;
+        }
+      }
+      minima.push(p1);
+    }
   }
   return {
     maxima: maxima.slice(0, limit),
