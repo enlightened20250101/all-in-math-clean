@@ -4455,7 +4455,7 @@ export default function GraphStudio() {
                     resetNonce={bivarResetNonce}
                   />
                   <div className="pointer-events-none absolute right-3 top-3 rounded-full border border-slate-200 bg-white/90 px-3 py-1 text-[11px] text-slate-600 shadow-sm">
-                    ドラッグで回転
+                    ドラッグで回転・ホイールでズーム
                   </div>
                 </div>
               ) : (
