@@ -170,8 +170,7 @@ export default function BivarSurface({
     if (!rendererRef.current) {
       const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.shadowMap.enabled = true;
-      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      renderer.shadowMap.enabled = false;
       renderer.domElement.style.width = '100%';
       renderer.domElement.style.height = '100%';
       renderer.domElement.style.display = 'block';
@@ -182,15 +181,6 @@ export default function BivarSurface({
       sceneRef.current = scene;
       const keyLight = new THREE.DirectionalLight(0xffffff, 0.95);
       keyLight.position.set(6, 10, 8);
-      keyLight.castShadow = true;
-      keyLight.shadow.mapSize.set(1024, 1024);
-      keyLight.shadow.bias = -0.0002;
-      keyLight.shadow.camera.near = 1;
-      keyLight.shadow.camera.far = 50;
-      keyLight.shadow.camera.left = -12;
-      keyLight.shadow.camera.right = 12;
-      keyLight.shadow.camera.top = 12;
-      keyLight.shadow.camera.bottom = -12;
       scene.add(keyLight);
       const fillLight = new THREE.DirectionalLight(0xffffff, 0.45);
       fillLight.position.set(-6, 6, -6);
@@ -209,15 +199,6 @@ export default function BivarSurface({
       });
       gridRef.current = gridHelper;
       scene.add(gridHelper);
-
-      const shadowPlane = new THREE.Mesh(
-        new THREE.PlaneGeometry(40, 40),
-        new THREE.ShadowMaterial({ opacity: 0.18 }),
-      );
-      shadowPlane.rotation.x = -Math.PI / 2;
-      shadowPlane.position.y = -0.01;
-      shadowPlane.receiveShadow = true;
-      scene.add(shadowPlane);
 
       const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
       camera.position.set(8, 8, 8);
@@ -267,8 +248,6 @@ export default function BivarSurface({
       emissiveIntensity: 0.08,
     });
     const mesh = new THREE.Mesh(geometry, material);
-    mesh.castShadow = true;
-    mesh.receiveShadow = false;
     meshRef.current = mesh;
     scene.add(mesh);
 
