@@ -333,17 +333,26 @@ export default function BivarSurface({
       dragRef.current.active = false;
       el.releasePointerCapture(e.pointerId);
     };
+    const onWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      const delta = Math.sign(e.deltaY);
+      const next = Math.min(18, Math.max(4, cameraDistanceRef.current + delta * 0.6));
+      if (Math.abs(next - cameraDistanceRef.current) < 0.001) return;
+      setCameraDistance(next);
+    };
 
     el.addEventListener('pointerdown', onPointerDown);
     el.addEventListener('pointermove', onPointerMove);
     el.addEventListener('pointerup', onPointerUp);
     el.addEventListener('pointerleave', onPointerUp);
+    el.addEventListener('wheel', onWheel, { passive: false });
 
     return () => {
       el.removeEventListener('pointerdown', onPointerDown);
       el.removeEventListener('pointermove', onPointerMove);
       el.removeEventListener('pointerup', onPointerUp);
       el.removeEventListener('pointerleave', onPointerUp);
+      el.removeEventListener('wheel', onWheel);
     };
   }, [geometryData, width, height]);
 
