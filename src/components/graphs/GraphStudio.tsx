@@ -1151,6 +1151,7 @@ export default function GraphStudio() {
     yMax: number;
   } | null>(null);
   const [isUserViewport, setIsUserViewport] = useState(false);
+  const [isChartHover, setIsChartHover] = useState(false);
 
   useEffect(() => {
     if (!isUserViewport) {
@@ -1232,10 +1233,12 @@ export default function GraphStudio() {
     const b = functionSeries[idxB].points;
     const len = Math.min(a.length, b.length);
     const data: Array<{ x: number; y1: number; y2: number }> = [];
-    const xMin = Number(fillConfig.xMin);
-    const xMax = Number(fillConfig.xMax);
-    const hasXMin = Number.isFinite(xMin);
-    const hasXMax = Number.isFinite(xMax);
+    const xMinRaw = fillConfig.xMin.trim();
+    const xMaxRaw = fillConfig.xMax.trim();
+    const xMin = Number(xMinRaw);
+    const xMax = Number(xMaxRaw);
+    const hasXMin = xMinRaw !== '' && Number.isFinite(xMin);
+    const hasXMax = xMaxRaw !== '' && Number.isFinite(xMax);
     for (let i = 0; i < len; i += 1) {
       const p0 = a[i];
       const p1 = b[i];
@@ -1782,6 +1785,11 @@ export default function GraphStudio() {
       </div>
       {fillConfig.enabled ? (
         <div className="rounded-2xl border border-slate-200 bg-white p-3 text-xs text-slate-600">
+          {functionSeries.length < 2 ? (
+            <div className="mb-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-[11px] text-amber-700">
+              面積塗りつぶしは「関数（y=...）」が2本以上あるときに有効です。
+            </div>
+          ) : null}
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-[11px] text-slate-500">対象</span>
             <select
@@ -2417,7 +2425,13 @@ export default function GraphStudio() {
         md:translate-x-0  /* PC では補正しない */
         touch-none
       "
+      onPointerEnter={() => setIsChartHover(true)}
+      onPointerLeave={() => {
+        setIsChartHover(false);
+        panState.current = null;
+      }}
       onWheel={(e) => {
+        if (!isChartHover) return;
         if (!chartWrapRef.current) return;
         e.preventDefault();
         const domain = viewDomain ?? equalDomain;
@@ -2443,6 +2457,7 @@ export default function GraphStudio() {
       }}
       onPointerDown={(e) => {
         if (!chartWrapRef.current) return;
+        setIsChartHover(true);
         const domain = viewDomain ?? equalDomain;
         panState.current = {
           x: e.clientX,
@@ -2452,7 +2467,7 @@ export default function GraphStudio() {
         chartWrapRef.current.setPointerCapture(e.pointerId);
       }}
       onPointerMove={(e) => {
-        if (!chartWrapRef.current || !panState.current) return;
+        if (!isChartHover || !chartWrapRef.current || !panState.current) return;
         const rect = chartWrapRef.current.getBoundingClientRect();
         const dx = e.clientX - panState.current.x;
         const dy = e.clientY - panState.current.y;
@@ -2472,9 +2487,6 @@ export default function GraphStudio() {
       onPointerUp={(e) => {
         panState.current = null;
         chartWrapRef.current?.releasePointerCapture(e.pointerId);
-      }}
-      onPointerLeave={() => {
-        panState.current = null;
       }}
     >
       <div className="absolute right-3 top-3 z-20 flex items-center gap-2">
