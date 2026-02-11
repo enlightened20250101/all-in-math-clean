@@ -620,6 +620,7 @@ export default function GraphStudio() {
   const [bivarColorScale, setBivarColorScale] = useState<
     'blueRed' | 'viridis' | 'mono'
   >('blueRed');
+  const [bivarLevelShift, setBivarLevelShift] = useState(0);
   const [bivarParamDrafts, setBivarParamDrafts] = useState({
     a: '1',
     b: '1',
@@ -971,6 +972,9 @@ export default function GraphStudio() {
       ) {
         setBivarColorScale(draft.bivarColorScale);
       }
+      if (typeof draft.bivarLevelShift === 'number' && Number.isFinite(draft.bivarLevelShift)) {
+        setBivarLevelShift(draft.bivarLevelShift);
+      }
 
       if (draft.tab === 'equation' || draft.tab === 'series' || draft.tab === 'bivar') {
         setTab(draft.tab);
@@ -1232,6 +1236,7 @@ export default function GraphStudio() {
         showBivarHeatmap,
         showBivarLabels,
         bivarColorScale,
+        bivarLevelShift,
       };
       localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
     } catch (e) {
@@ -1259,6 +1264,7 @@ export default function GraphStudio() {
     showBivarHeatmap,
     showBivarLabels,
     bivarColorScale,
+    bivarLevelShift,
   ]);
 
   useEffect(() => {
@@ -1692,13 +1698,16 @@ export default function GraphStudio() {
         .split(/[\\s,]+/)
         .map((v) => Number(v))
         .filter((v) => Number.isFinite(v))
+        .map((v) => v + bivarLevelShift)
         .sort((a, b) => a - b);
     }
     const { zMin, zMax } = bivarGridData;
     const count = 8;
     if (zMax - zMin <= 1e-8) return [zMin];
-    return Array.from({ length: count }, (_, i) => zMin + ((i + 1) / (count + 1)) * (zMax - zMin));
-  }, [bivarLevels, bivarGridData]);
+    return Array.from({ length: count }, (_, i) => zMin + ((i + 1) / (count + 1)) * (zMax - zMin)).map(
+      (v) => v + bivarLevelShift,
+    );
+  }, [bivarLevels, bivarGridData, bivarLevelShift]);
 
   const bivarContours = useMemo(() => {
     if (!bivarGridData || bivarLevelsList.length === 0) return [];
@@ -4016,6 +4025,26 @@ export default function GraphStudio() {
                 <p className="text-[11px] text-slate-500">
                   空欄の場合は自動でレベルを作成します。
                 </p>
+                <div className="mt-2">
+                  <label className="block text-[11px] text-slate-500">レベルオフセット</label>
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="range"
+                      min={-10}
+                      max={10}
+                      step={0.1}
+                      value={bivarLevelShift}
+                      onChange={(e) => setBivarLevelShift(Number(e.target.value))}
+                      className="w-full"
+                    />
+                    <span className="min-w-[3rem] text-right text-[11px] text-slate-600">
+                      {formatNumber(bivarLevelShift)}
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-slate-500">
+                    ドラッグで等高線レベルをまとめて上下できます。
+                  </p>
+                </div>
               </div>
 
               <div className="space-y-2 text-xs text-slate-600">
