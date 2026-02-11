@@ -2772,9 +2772,10 @@ export default function GraphStudio() {
       ) : null}
       {showAutoMarkers && (autoMarkers.length || pinnedMarkers.length) ? (
         <svg
-          className="absolute inset-0 z-20"
+          className="absolute z-20"
           width={chartSizeEq.width}
           height={chartSizeEq.height}
+          style={{ left: 0, top: 0 }}
         >
           <defs>
             <clipPath id="marker-clip-eq">
