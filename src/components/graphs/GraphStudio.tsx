@@ -626,6 +626,7 @@ export default function GraphStudio() {
   const bivarShiftDragRef = useRef(false);
   const bivarShiftRafRef = useRef<number | null>(null);
   const bivarShiftNextRef = useRef<number | null>(null);
+  const bivarShiftCommitRef = useRef<number | null>(null);
   const [bivarParamDrafts, setBivarParamDrafts] = useState({
     a: '1',
     b: '1',
@@ -4062,6 +4063,14 @@ export default function GraphStudio() {
                             }
                           });
                         }
+                        if (bivarShiftCommitRef.current != null) {
+                          window.clearTimeout(bivarShiftCommitRef.current);
+                        }
+                        bivarShiftCommitRef.current = window.setTimeout(() => {
+                          if (bivarShiftNextRef.current != null) {
+                            setBivarLevelShift(bivarShiftNextRef.current);
+                          }
+                        }, 120);
                       }}
                       onPointerUp={(e) => {
                         bivarShiftDragRef.current = false;
@@ -4070,6 +4079,10 @@ export default function GraphStudio() {
                           window.cancelAnimationFrame(bivarShiftRafRef.current);
                           bivarShiftRafRef.current = null;
                         }
+                        if (bivarShiftCommitRef.current != null) {
+                          window.clearTimeout(bivarShiftCommitRef.current);
+                          bivarShiftCommitRef.current = null;
+                        }
                         (e.currentTarget as HTMLDivElement).releasePointerCapture?.(e.pointerId);
                       }}
                       onPointerLeave={() => {
@@ -4077,6 +4090,10 @@ export default function GraphStudio() {
                         if (bivarShiftRafRef.current != null) {
                           window.cancelAnimationFrame(bivarShiftRafRef.current);
                           bivarShiftRafRef.current = null;
+                        }
+                        if (bivarShiftCommitRef.current != null) {
+                          window.clearTimeout(bivarShiftCommitRef.current);
+                          bivarShiftCommitRef.current = null;
                         }
                       }}
                     >
