@@ -628,6 +628,8 @@ export default function GraphStudio() {
   const bivarShiftNextRef = useRef<number | null>(null);
   const bivarShiftCommitRef = useRef<number | null>(null);
   const bivarShiftLastTsRef = useRef(0);
+  const [isBivarDragging, setIsBivarDragging] = useState(false);
+  const [isBivarPanelOpen, setIsBivarPanelOpen] = useState(false);
   const [bivarParamDrafts, setBivarParamDrafts] = useState({
     a: '1',
     b: '1',
@@ -645,6 +647,7 @@ export default function GraphStudio() {
   });
   const bivarGridRef = useRef(bivarGrid);
   const bivarGridDraftRef = useRef(bivarGridDrafts);
+  const legendSnapshotRef = useRef<string[]>([]);
   const [colors, setColors] = useState<string[]>([PALETTE[0], PALETTE[1]]);
   const [title, setTitle] = useState('Overlay');
 
@@ -1566,14 +1569,19 @@ export default function GraphStudio() {
       : baseLegendLabels.map((label, i) => legendNames[i] || label);
 
   useEffect(() => {
+    legendSnapshotRef.current = legendSnapshot;
+  }, [legendSnapshot]);
+
+  useEffect(() => {
     if (tab !== 'equation') return;
     setLegendNames((prev) => {
-      const next = equations.map((_, i) => prev[i] ?? legendSnapshot[i] ?? `y${i + 1}`);
+      const snapshot = legendSnapshotRef.current;
+      const next = equations.map((_, i) => prev[i] ?? snapshot[i] ?? `y${i + 1}`);
       const same =
         prev.length === next.length && prev.every((v, idx) => v === next[idx]);
       return same ? prev : next;
     });
-  }, [equations.length, tab, legendSnapshot.length]);
+  }, [equations.length, tab]);
 
   const functionSeries = useMemo(() => {
     if (tab !== 'equation') return [];
@@ -1728,13 +1736,13 @@ export default function GraphStudio() {
   }, [bivarLevels, bivarGridData, bivarLevelShift]);
 
   const bivarContours = useMemo(() => {
-    if (!bivarGridData || bivarLevelsList.length === 0) return [];
+    if (!bivarGridData || bivarLevelsList.length === 0 || isBivarDragging) return [];
     const { xs, ys, grid } = bivarGridData;
     return bivarLevelsList.map((level) => ({
       level,
       segments: buildContourSegments(xs, ys, grid, level),
     }));
-  }, [bivarGridData, bivarLevelsList]);
+  }, [bivarGridData, bivarLevelsList, isBivarDragging]);
 
   const bivarWidth = Math.max(chartSizeBivar.width, 1);
   const bivarHeight = Math.max(chartSizeBivar.height, 1);
@@ -1765,6 +1773,7 @@ export default function GraphStudio() {
   }, [bivarGridData, bivarLevelsList, bivarColorScale]);
 
   const bivarHeatmap = useMemo(() => {
+    if (isBivarDragging) return [];
     if (!bivarGridData || chartSizeBivar.width <= 0 || chartSizeBivar.height <= 0) return [];
     const { xs, ys, grid, zMin, zMax } = bivarGridData;
     const span = Math.max(1e-6, zMax - zMin);
@@ -1808,6 +1817,7 @@ export default function GraphStudio() {
   ]);
 
   const bivarContourLabels = useMemo(() => {
+    if (isBivarDragging) return [];
     if (!bivarContours.length || bivarWidth <= 1 || bivarHeight <= 1) return [];
     const labels: Array<{ x: number; y: number; text: string; color: string }> = [];
     const minDist = 56; // px
@@ -3899,7 +3909,7 @@ export default function GraphStudio() {
       {tab === 'bivar' && (
         <div className="space-y-4 pb-24 md:pb-0">
           <div className="grid gap-4 lg:grid-cols-[360px,1fr]">
-            <div className="order-2 lg:order-none rounded-2xl border border-slate-200 bg-white p-4 shadow-sm space-y-4">
+            <div className="hidden md:block rounded-2xl border border-slate-200 bg-white p-4 shadow-sm space-y-4">
               <div>
                 <label className="block text-sm font-semibold text-slate-700">
                   2変数関数（z = f(x, y)）
@@ -4053,6 +4063,7 @@ export default function GraphStudio() {
                         const rect = bivarShiftTrackRef.current?.getBoundingClientRect();
                         if (!rect) return;
                         bivarShiftDragRef.current = true;
+                        setIsBivarDragging(true);
                         const ratio = (e.clientX - rect.left) / rect.width;
                         const next = -10 + Math.min(1, Math.max(0, ratio)) * 20;
                         setBivarLevelShiftLive(Number(next.toFixed(2)));
@@ -4094,6 +4105,7 @@ export default function GraphStudio() {
                         const rect = bivarShiftTrackRef.current?.getBoundingClientRect();
                         if (!rect) return;
                         bivarShiftDragRef.current = true;
+                        setIsBivarDragging(true);
                         const touch = e.touches[0];
                         if (!touch) return;
                         const ratio = (touch.clientX - rect.left) / rect.width;
@@ -4138,6 +4150,7 @@ export default function GraphStudio() {
                       }}
                       onTouchEnd={() => {
                         bivarShiftDragRef.current = false;
+                        setIsBivarDragging(false);
                         setBivarLevelShift(bivarShiftNextRef.current ?? bivarLevelShiftLive);
                         const restoreGrid = bivarGridRef.current;
                         const restoreDraft = bivarGridDraftRef.current;
@@ -4156,6 +4169,7 @@ export default function GraphStudio() {
                       }}
                       onPointerUp={(e) => {
                         bivarShiftDragRef.current = false;
+                        setIsBivarDragging(false);
                         setBivarLevelShift(bivarShiftNextRef.current ?? bivarLevelShiftLive);
                         const restoreGrid = bivarGridRef.current;
                         const restoreDraft = bivarGridDraftRef.current;
@@ -4175,6 +4189,7 @@ export default function GraphStudio() {
                       }}
                       onPointerLeave={() => {
                         bivarShiftDragRef.current = false;
+                        setIsBivarDragging(false);
                         const restoreGrid = bivarGridRef.current;
                         const restoreDraft = bivarGridDraftRef.current;
                         if (restoreGrid && (restoreGrid.nx !== bivarGrid.nx || restoreGrid.ny !== bivarGrid.ny)) {
@@ -4258,10 +4273,10 @@ export default function GraphStudio() {
                 </div>
               </div>
 
-              <div className="space-y-2 text-xs text-slate-600">
-                <div className="font-semibold text-slate-700">パラメータ（a,b,c）</div>
-                <div className="grid grid-cols-3 gap-2">
-                  {(['a', 'b', 'c'] as const).map((key) => (
+                <div className="space-y-2 text-xs text-slate-600">
+                  <div className="font-semibold text-slate-700">パラメータ（a,b,c）</div>
+                  <div className="grid grid-cols-3 gap-2">
+                    {(['a', 'b', 'c'] as const).map((key) => (
                     <div key={key}>
                       <label className="block text-[11px] text-slate-500">{key}</label>
                       <input
@@ -4284,7 +4299,16 @@ export default function GraphStudio() {
               </div>
             </div>
 
-            <div className="order-1 lg:order-none rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
+            <div
+              className={`order-1 lg:order-none rounded-2xl border border-slate-200 bg-white p-3 shadow-sm ${
+                isMobile && isBivarPanelOpen ? 'pb-[45vh]' : ''
+              }`}
+              style={
+                isMobile && isBivarPanelOpen
+                  ? { paddingBottom: `${panelHeightVh}vh` }
+                  : undefined
+              }
+            >
               <div
                 ref={bivarChartRef}
                 className="relative h-[320px] sm:h-[420px] lg:h-[520px] w-full overflow-hidden touch-pan-y"
@@ -4383,6 +4407,16 @@ export default function GraphStudio() {
               ) : null}
             </div>
           </div>
+          {isMobile ? (
+            <div className="space-y-3">
+              <button
+                className="w-full mt-2 px-4 py-3 rounded-xl border border-slate-200 bg-slate-900 text-white text-sm font-medium shadow-sm active:scale-[0.98]"
+                onClick={() => setIsBivarPanelOpen(true)}
+              >
+                2変数設定を開く
+              </button>
+            </div>
+          ) : null}
         </div>
       )}
       {/* ── SP専用：式一覧パネル（画面下に固定、グラフは見える） ── */}
@@ -4433,6 +4467,392 @@ export default function GraphStudio() {
             </div>
 
             <div className="p-3 space-y-3 w-full">{equationInputPanel}</div>
+          </div>
+        </div>
+      )}
+
+      {/* ── SP専用：2変数関数パネル ── */}
+      {tab === 'bivar' && (
+        <div
+          className={`md:hidden fixed inset-x-0 bottom-0 z-40 ${
+            isBivarPanelOpen ? '' : 'pointer-events-none'
+          }`}
+        >
+          <div
+            className={`
+              rounded-t-2xl border-t border-slate-200 bg-white/95 backdrop-blur
+              shadow-[0_-12px_40px_-20px_rgba(15,23,42,0.35)]
+              overflow-y-auto
+              transform transition-transform
+              ${isBivarPanelOpen ? 'translate-y-0' : 'translate-y-full'}
+            `}
+            style={{ height: `${panelHeightVh}vh` }}
+          >
+            <div className="flex items-center justify-between gap-3 px-4 py-2 border-b bg-white/90">
+              <div className="flex items-center gap-2">
+                <span className="text-[11px] text-slate-500">2変数設定</span>
+              </div>
+              <button
+                className="text-xs text-slate-500"
+                onClick={() => setIsBivarPanelOpen(false)}
+              >
+                閉じる
+              </button>
+            </div>
+            <div
+              className="flex items-center justify-center cursor-row-resize select-none touch-none py-2"
+              onPointerDown={(e) => {
+                panelDragRef.current = {
+                  active: true,
+                  startY: e.clientY,
+                  startVh: panelHeightVh,
+                };
+                e.currentTarget.setPointerCapture(e.pointerId);
+              }}
+            >
+              <div className="h-1 w-12 rounded-full bg-slate-300" />
+            </div>
+            <div className="px-4 pb-24">
+              <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm space-y-4">
+                {/*
+                  デスクトップ用の左パネルと同じ内容を再利用
+                */}
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700">
+                    2変数関数（z = f(x, y)）
+                  </label>
+                  <SmartMathInput
+                    value={bivarExpr}
+                    onChange={(v) => {
+                      const trimmed = v.replace(/^z\\s*=/i, '').trim();
+                      setBivarExpr(trimmed);
+                    }}
+                    label=""
+                    description="x, y を使って z を表す式（例: x^2 + y^2）"
+                    placeholder="x^2 + y^2"
+                    size="sm"
+                  />
+                </div>
+
+                <div className="space-y-2 text-xs text-slate-600">
+                  <div className="font-semibold text-slate-700">表示範囲</div>
+                  <div className="grid grid-cols-2 gap-2">
+                    {([
+                      { key: 'xMin', label: 'x 最小' },
+                      { key: 'xMax', label: 'x 最大' },
+                      { key: 'yMin', label: 'y 最小' },
+                      { key: 'yMax', label: 'y 最大' },
+                    ] as const).map((item) => (
+                      <div key={item.key}>
+                        <label className="block text-[11px] text-slate-500">{item.label}</label>
+                        <input
+                          type="text"
+                          inputMode="decimal"
+                          className="w-full rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs"
+                          value={bivarDomainDrafts[item.key]}
+                          onChange={(e) => {
+                            const raw = e.target.value;
+                            setBivarDomainDrafts((prev) => ({ ...prev, [item.key]: raw }));
+                            const parsed = Number(raw);
+                            if (!Number.isNaN(parsed) && raw !== '' && raw !== '-') {
+                              setBivarDomain((prev) => ({ ...prev, [item.key]: parsed }));
+                            }
+                          }}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="space-y-2 text-xs text-slate-600">
+                  <div className="font-semibold text-slate-700">グリッド解像度</div>
+                  <div className="grid grid-cols-2 gap-2">
+                    {([
+                      { key: 'nx', label: 'x 分割' },
+                      { key: 'ny', label: 'y 分割' },
+                    ] as const).map((item) => (
+                      <div key={item.key}>
+                        <label className="block text-[11px] text-slate-500">{item.label}</label>
+                        <input
+                          type="text"
+                          inputMode="numeric"
+                          className="w-full rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs"
+                          value={bivarGridDrafts[item.key]}
+                          onChange={(e) => {
+                            const raw = e.target.value;
+                            setBivarGridDrafts((prev) => ({ ...prev, [item.key]: raw }));
+                            const parsed = Number(raw);
+                            if (Number.isFinite(parsed) && raw !== '') {
+                              setBivarGrid((prev) => ({
+                                ...prev,
+                                [item.key]: Math.max(10, parsed),
+                              }));
+                            }
+                          }}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="space-y-2 text-xs text-slate-600">
+                  <div className="font-semibold text-slate-700">等高線レベル</div>
+                  <input
+                    type="text"
+                    className="w-full rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs"
+                    value={bivarLevels}
+                    placeholder="例: -4,-2,0,2,4（空なら自動）"
+                    onChange={(e) => setBivarLevels(e.target.value)}
+                  />
+                  <p className="text-[11px] text-slate-500">
+                    空欄の場合は自動でレベルを作成します。
+                  </p>
+                  <div className="mt-2">
+                    <label className="block text-[11px] text-slate-500">レベルオフセット</label>
+                    <div className="flex items-center gap-2">
+                      <div
+                        ref={bivarShiftTrackRef}
+                        className="relative h-7 w-full cursor-pointer touch-none"
+                        onPointerDown={(e) => {
+                          const rect = bivarShiftTrackRef.current?.getBoundingClientRect();
+                          if (!rect) return;
+                          bivarShiftDragRef.current = true;
+                          setIsBivarDragging(true);
+                          const ratio = (e.clientX - rect.left) / rect.width;
+                          const next = -10 + Math.min(1, Math.max(0, ratio)) * 20;
+                          setBivarLevelShiftLive(Number(next.toFixed(2)));
+                          (e.currentTarget as HTMLDivElement).setPointerCapture?.(e.pointerId);
+                        }}
+                        onPointerMove={(e) => {
+                          if (!bivarShiftDragRef.current) return;
+                          const rect = bivarShiftTrackRef.current?.getBoundingClientRect();
+                          if (!rect) return;
+                          const now = e.timeStamp ?? performance.now();
+                          if (now - bivarShiftLastTsRef.current < 16) return;
+                          bivarShiftLastTsRef.current = now;
+                          const ratio = (e.clientX - rect.left) / rect.width;
+                          const next = -10 + Math.min(1, Math.max(0, ratio)) * 20;
+                          const nextValue = Number(next.toFixed(2));
+                          bivarShiftNextRef.current = nextValue;
+                          if (bivarGridRef.current.nx > 24 || bivarGridRef.current.ny > 24) {
+                            setBivarGrid({ nx: 24, ny: 24 });
+                            setBivarGridDrafts({ nx: '24', ny: '24' });
+                          }
+                          if (bivarShiftRafRef.current == null) {
+                            bivarShiftRafRef.current = window.requestAnimationFrame(() => {
+                              bivarShiftRafRef.current = null;
+                              if (bivarShiftNextRef.current != null) {
+                                setBivarLevelShiftLive(bivarShiftNextRef.current);
+                              }
+                            });
+                          }
+                          if (bivarShiftCommitRef.current != null) {
+                            window.clearTimeout(bivarShiftCommitRef.current);
+                          }
+                          bivarShiftCommitRef.current = window.setTimeout(() => {
+                            if (bivarShiftNextRef.current != null) {
+                              setBivarLevelShift(bivarShiftNextRef.current);
+                            }
+                          }, 120);
+                        }}
+                        onTouchStart={(e) => {
+                          const rect = bivarShiftTrackRef.current?.getBoundingClientRect();
+                          if (!rect) return;
+                          bivarShiftDragRef.current = true;
+                          setIsBivarDragging(true);
+                          const touch = e.touches[0];
+                          if (!touch) return;
+                          const ratio = (touch.clientX - rect.left) / rect.width;
+                          const next = -10 + Math.min(1, Math.max(0, ratio)) * 20;
+                          setBivarLevelShiftLive(Number(next.toFixed(2)));
+                          e.preventDefault();
+                        }}
+                        onTouchMove={(e) => {
+                          if (!bivarShiftDragRef.current) return;
+                          const rect = bivarShiftTrackRef.current?.getBoundingClientRect();
+                          if (!rect) return;
+                          const now = e.timeStamp ?? performance.now();
+                          if (now - bivarShiftLastTsRef.current < 16) return;
+                          bivarShiftLastTsRef.current = now;
+                          const touch = e.touches[0];
+                          if (!touch) return;
+                          const ratio = (touch.clientX - rect.left) / rect.width;
+                          const next = -10 + Math.min(1, Math.max(0, ratio)) * 20;
+                          const nextValue = Number(next.toFixed(2));
+                          bivarShiftNextRef.current = nextValue;
+                          if (bivarGridRef.current.nx > 24 || bivarGridRef.current.ny > 24) {
+                            setBivarGrid({ nx: 24, ny: 24 });
+                            setBivarGridDrafts({ nx: '24', ny: '24' });
+                          }
+                          if (bivarShiftRafRef.current == null) {
+                            bivarShiftRafRef.current = window.requestAnimationFrame(() => {
+                              bivarShiftRafRef.current = null;
+                              if (bivarShiftNextRef.current != null) {
+                                setBivarLevelShiftLive(bivarShiftNextRef.current);
+                              }
+                            });
+                          }
+                          if (bivarShiftCommitRef.current != null) {
+                            window.clearTimeout(bivarShiftCommitRef.current);
+                          }
+                          bivarShiftCommitRef.current = window.setTimeout(() => {
+                            if (bivarShiftNextRef.current != null) {
+                              setBivarLevelShift(bivarShiftNextRef.current);
+                            }
+                          }, 120);
+                          e.preventDefault();
+                        }}
+                        onTouchEnd={() => {
+                          bivarShiftDragRef.current = false;
+                          setIsBivarDragging(false);
+                          setBivarLevelShift(bivarShiftNextRef.current ?? bivarLevelShiftLive);
+                          const restoreGrid = bivarGridRef.current;
+                          const restoreDraft = bivarGridDraftRef.current;
+                          if (restoreGrid && (restoreGrid.nx !== bivarGrid.nx || restoreGrid.ny !== bivarGrid.ny)) {
+                            setBivarGrid(restoreGrid);
+                            if (restoreDraft) setBivarGridDrafts(restoreDraft);
+                          }
+                          if (bivarShiftRafRef.current != null) {
+                            window.cancelAnimationFrame(bivarShiftRafRef.current);
+                            bivarShiftRafRef.current = null;
+                          }
+                          if (bivarShiftCommitRef.current != null) {
+                            window.clearTimeout(bivarShiftCommitRef.current);
+                            bivarShiftCommitRef.current = null;
+                          }
+                        }}
+                        onPointerUp={(e) => {
+                          bivarShiftDragRef.current = false;
+                          setIsBivarDragging(false);
+                          setBivarLevelShift(bivarShiftNextRef.current ?? bivarLevelShiftLive);
+                          const restoreGrid = bivarGridRef.current;
+                          const restoreDraft = bivarGridDraftRef.current;
+                          if (restoreGrid && (restoreGrid.nx !== bivarGrid.nx || restoreGrid.ny !== bivarGrid.ny)) {
+                            setBivarGrid(restoreGrid);
+                            if (restoreDraft) setBivarGridDrafts(restoreDraft);
+                          }
+                          if (bivarShiftRafRef.current != null) {
+                            window.cancelAnimationFrame(bivarShiftRafRef.current);
+                            bivarShiftRafRef.current = null;
+                          }
+                          if (bivarShiftCommitRef.current != null) {
+                            window.clearTimeout(bivarShiftCommitRef.current);
+                            bivarShiftCommitRef.current = null;
+                          }
+                          (e.currentTarget as HTMLDivElement).releasePointerCapture?.(e.pointerId);
+                        }}
+                        onPointerLeave={() => {
+                          bivarShiftDragRef.current = false;
+                          setIsBivarDragging(false);
+                          const restoreGrid = bivarGridRef.current;
+                          const restoreDraft = bivarGridDraftRef.current;
+                          if (restoreGrid && (restoreGrid.nx !== bivarGrid.nx || restoreGrid.ny !== bivarGrid.ny)) {
+                            setBivarGrid(restoreGrid);
+                            if (restoreDraft) setBivarGridDrafts(restoreDraft);
+                          }
+                          if (bivarShiftRafRef.current != null) {
+                            window.cancelAnimationFrame(bivarShiftRafRef.current);
+                            bivarShiftRafRef.current = null;
+                          }
+                          if (bivarShiftCommitRef.current != null) {
+                            window.clearTimeout(bivarShiftCommitRef.current);
+                            bivarShiftCommitRef.current = null;
+                          }
+                        }}
+                      >
+                        <div className="absolute left-0 right-0 top-1/2 h-1 rounded-full bg-slate-200" />
+                        <div
+                          className="absolute top-1/2 h-3 w-3 -translate-y-1/2 rounded-full bg-slate-900 shadow-sm"
+                          style={{
+                            left: `${((bivarLevelShiftLive + 10) / 20) * 100}%`,
+                            transform: 'translate(-50%, -50%)',
+                          }}
+                        />
+                      </div>
+                      <span className="min-w-[3rem] text-right text-[11px] text-slate-600">
+                        {formatNumber(bivarLevelShiftLive)}
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-slate-500">
+                      ドラッグで等高線レベルをまとめて上下できます。
+                    </p>
+                  </div>
+                </div>
+
+                <div className="space-y-2 text-xs text-slate-600">
+                  <div className="font-semibold text-slate-700">表示オプション</div>
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      type="button"
+                      className={`rounded-full border px-3 py-1 text-[11px] shadow-sm transition ${
+                        showBivarHeatmap
+                          ? 'border-slate-900 bg-slate-900 text-white'
+                          : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
+                      }`}
+                      onClick={() => setShowBivarHeatmap((prev) => !prev)}
+                    >
+                      ヒートマップ {showBivarHeatmap ? 'ON' : 'OFF'}
+                    </button>
+                    <button
+                      type="button"
+                      className={`rounded-full border px-3 py-1 text-[11px] shadow-sm transition ${
+                        showBivarLabels
+                          ? 'border-slate-900 bg-slate-900 text-white'
+                          : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
+                      }`}
+                      onClick={() => setShowBivarLabels((prev) => !prev)}
+                    >
+                      レベル表示 {showBivarLabels ? 'ON' : 'OFF'}
+                    </button>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {[
+                      { key: 'blueRed', label: 'ブルー→レッド' },
+                      { key: 'viridis', label: 'ビリディス' },
+                      { key: 'mono', label: 'モノクロ' },
+                    ].map((opt) => (
+                      <button
+                        key={opt.key}
+                        type="button"
+                        className={`rounded-full border px-3 py-1 text-[11px] shadow-sm transition ${
+                          bivarColorScale === opt.key
+                            ? 'border-slate-900 bg-slate-900 text-white'
+                            : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
+                        }`}
+                        onClick={() => setBivarColorScale(opt.key as typeof bivarColorScale)}
+                      >
+                        {opt.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="space-y-2 text-xs text-slate-600">
+                  <div className="font-semibold text-slate-700">パラメータ（a,b,c）</div>
+                  <div className="grid grid-cols-3 gap-2">
+                    {(['a', 'b', 'c'] as const).map((key) => (
+                      <div key={key}>
+                        <label className="block text-[11px] text-slate-500">{key}</label>
+                        <input
+                          type="text"
+                          inputMode="decimal"
+                          className="w-full rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs"
+                          value={bivarParamDrafts[key]}
+                          onChange={(e) => {
+                            const raw = e.target.value;
+                            setBivarParamDrafts((prev) => ({ ...prev, [key]: raw }));
+                            const parsed = Number(raw);
+                            if (!Number.isNaN(parsed) && raw !== '' && raw !== '-') {
+                              setBivarParams((prev) => ({ ...prev, [key]: parsed }));
+                            }
+                          }}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}
