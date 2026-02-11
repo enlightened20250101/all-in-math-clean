@@ -2,6 +2,7 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState, Fragment } from 'react';
+import BivarSurface from '@/components/graphs/BivarSurface';
 import { supabaseBrowser } from '@/lib/supabaseBrowser';
 import { useRouter, useSearchParams } from 'next/navigation';
 import {
@@ -4434,9 +4435,21 @@ export default function GraphStudio() {
                     </div>
                   ) : null}
                 </>
+              ) : bivarGridData ? (
+                <div className="relative h-[320px] sm:h-[420px] lg:h-[520px]">
+                  <BivarSurface
+                    gridData={bivarGridData}
+                    width={bivarWidth}
+                    height={bivarHeight}
+                    colorScale={bivarColorScale}
+                  />
+                  <div className="pointer-events-none absolute right-3 top-3 rounded-full border border-slate-200 bg-white/90 px-3 py-1 text-[11px] text-slate-600 shadow-sm">
+                    ドラッグで回転
+                  </div>
+                </div>
               ) : (
                 <div className="flex h-[320px] sm:h-[420px] lg:h-[520px] items-center justify-center rounded-2xl border border-dashed border-slate-200 bg-slate-50 text-sm text-slate-500">
-                  3D表示は準備中です。まずは等高線で結果を確認できます。
+                  計算中…
                 </div>
               )}
             </div>
