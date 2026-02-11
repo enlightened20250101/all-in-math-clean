@@ -617,6 +617,9 @@ export default function GraphStudio() {
   const [bivarParams, setBivarParams] = useState({ a: 1, b: 1, c: 1 });
   const [showBivarHeatmap, setShowBivarHeatmap] = useState(true);
   const [showBivarLabels, setShowBivarLabels] = useState(true);
+  const [bivarColorScale, setBivarColorScale] = useState<
+    'blueRed' | 'viridis' | 'mono'
+  >('blueRed');
   const [bivarParamDrafts, setBivarParamDrafts] = useState({
     a: '1',
     b: '1',
@@ -961,6 +964,13 @@ export default function GraphStudio() {
       if (typeof draft.showBivarLabels === 'boolean') {
         setShowBivarLabels(draft.showBivarLabels);
       }
+      if (
+        draft.bivarColorScale === 'blueRed' ||
+        draft.bivarColorScale === 'viridis' ||
+        draft.bivarColorScale === 'mono'
+      ) {
+        setBivarColorScale(draft.bivarColorScale);
+      }
 
       if (draft.tab === 'equation' || draft.tab === 'series' || draft.tab === 'bivar') {
         setTab(draft.tab);
@@ -1221,6 +1231,7 @@ export default function GraphStudio() {
         bivarParams,
         showBivarHeatmap,
         showBivarLabels,
+        bivarColorScale,
       };
       localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
     } catch (e) {
@@ -1247,6 +1258,7 @@ export default function GraphStudio() {
     bivarParams,
     showBivarHeatmap,
     showBivarLabels,
+    bivarColorScale,
   ]);
 
   useEffect(() => {
@@ -1712,17 +1724,27 @@ export default function GraphStudio() {
     const span = Math.max(1e-6, zMax - zMin);
     return bivarLevelsList.map((level) => {
       const t = Math.min(1, Math.max(0, (level - zMin) / span));
+      if (bivarColorScale === 'mono') {
+        const g = Math.round(40 + t * 140);
+        return `rgb(${g},${g},${g})`;
+      }
+      if (bivarColorScale === 'viridis') {
+        const c = lerpColor([68, 1, 84], [253, 231, 37], t);
+        return rgbToCss(c);
+      }
       const hue = 210 - 180 * t; // blue -> red
       return `hsl(${hue}, 70%, 45%)`;
     });
-  }, [bivarGridData, bivarLevelsList]);
+  }, [bivarGridData, bivarLevelsList, bivarColorScale]);
 
   const bivarHeatmap = useMemo(() => {
     if (!bivarGridData || chartSizeBivar.width <= 0 || chartSizeBivar.height <= 0) return [];
     const { xs, ys, grid, zMin, zMax } = bivarGridData;
     const span = Math.max(1e-6, zMax - zMin);
-    const colorA: [number, number, number] = [59, 130, 246]; // blue-500
-    const colorB: [number, number, number] = [239, 68, 68]; // red-500
+    const colorA: [number, number, number] =
+      bivarColorScale === 'viridis' ? [68, 1, 84] : [59, 130, 246];
+    const colorB: [number, number, number] =
+      bivarColorScale === 'viridis' ? [253, 231, 37] : [239, 68, 68];
     const cells: Array<{ x: number; y: number; w: number; h: number; color: string }> = [];
     const nx = xs.length;
     const ny = ys.length;
@@ -1733,7 +1755,12 @@ export default function GraphStudio() {
         const z = grid[j]?.[i];
         if (!Number.isFinite(z)) continue;
         const t = Math.min(1, Math.max(0, (z - zMin) / span));
-        const color = rgbToCss(lerpColor(colorA, colorB, t));
+        const color =
+          bivarColorScale === 'mono'
+            ? `rgb(${Math.round(230 - 180 * t)},${Math.round(230 - 180 * t)},${Math.round(
+                230 - 180 * t,
+              )})`
+            : rgbToCss(lerpColor(colorA, colorB, t));
         cells.push({
           x: i * stepX,
           y: bivarHeight - (j + 1) * stepY,
@@ -1744,7 +1771,14 @@ export default function GraphStudio() {
       }
     }
     return cells;
-  }, [bivarGridData, bivarWidth, bivarHeight, chartSizeBivar.width, chartSizeBivar.height]);
+  }, [
+    bivarGridData,
+    bivarWidth,
+    bivarHeight,
+    chartSizeBivar.width,
+    chartSizeBivar.height,
+    bivarColorScale,
+  ]);
 
   const bivarContourLabels = useMemo(() => {
     if (!bivarContours.length || bivarWidth <= 1 || bivarHeight <= 1) return [];
@@ -4009,6 +4043,26 @@ export default function GraphStudio() {
                   >
                     レベル表示 {showBivarLabels ? 'ON' : 'OFF'}
                   </button>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    { key: 'blueRed', label: 'ブルー→レッド' },
+                    { key: 'viridis', label: 'ビリディス' },
+                    { key: 'mono', label: 'モノクロ' },
+                  ].map((opt) => (
+                    <button
+                      key={opt.key}
+                      type="button"
+                      className={`rounded-full border px-3 py-1 text-[11px] shadow-sm transition ${
+                        bivarColorScale === opt.key
+                          ? 'border-slate-900 bg-slate-900 text-white'
+                          : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
+                      }`}
+                      onClick={() => setBivarColorScale(opt.key as typeof bivarColorScale)}
+                    >
+                      {opt.label}
+                    </button>
+                  ))}
                 </div>
               </div>
 
