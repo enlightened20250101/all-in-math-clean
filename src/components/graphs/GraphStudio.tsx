@@ -1753,6 +1753,10 @@ export default function GraphStudio() {
   const bivarCriticalPoints = useMemo(() => {
     if (!bivarGridData) return [];
     const { xs, ys, grid, zMin, zMax } = bivarGridData;
+    const xMin = xs[0] ?? 0;
+    const xMax = xs[xs.length - 1] ?? 0;
+    const yMin = ys[0] ?? 0;
+    const yMax = ys[ys.length - 1] ?? 0;
     const nx = xs.length;
     const ny = ys.length;
     if (nx < 3 || ny < 3) return [];
