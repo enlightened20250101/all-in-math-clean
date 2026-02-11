@@ -295,6 +295,9 @@ export default function GraphStudio() {
     { ...DEFAULT_DOMAIN },
     { ...DEFAULT_DOMAIN },
   ]);
+  const [domainDrafts, setDomainDrafts] = useState<
+    { xMin?: string; xMax?: string; step?: string }[]
+  >([]);
 
   // 軸ラベル（表示用）
   const [xLabel, setXLabel] = useState('x');
@@ -325,6 +328,15 @@ export default function GraphStudio() {
       return next.slice(0, equations.length);
     });
   }, [equations.length]);
+
+  useEffect(() => {
+    setDomainDrafts((prev) => {
+      if (prev.length === domains.length) return prev;
+      const next = [...prev];
+      while (next.length < domains.length) next.push({});
+      return next.slice(0, domains.length);
+    });
+  }, [domains.length]);
 
   useEffect(() => {
     setParamDrafts((prev) => {
@@ -724,6 +736,16 @@ export default function GraphStudio() {
       console.error('failed to save GraphStudio draft', e);
     }
   }, [drawVersion, equations, colors, domains, paramList, title, xLabel, yLabel, yMin, yMax, nx, ny, tab]);
+
+  useEffect(() => {
+    setDomainDrafts((prev) =>
+      prev.map((draft, idx) => ({
+        xMin: draft?.xMin ?? String(domains[idx]?.xMin ?? ''),
+        xMax: draft?.xMax ?? String(domains[idx]?.xMax ?? ''),
+        step: draft?.step ?? String(domains[idx]?.step ?? ''),
+      })),
+    );
+  }, [domains]);
 
   // 「グラフ作成」ボタンを押したときだけ再計算
   useEffect(() => {
@@ -1697,35 +1719,64 @@ export default function GraphStudio() {
                   <div>
                     <label className="block text-[11px] text-slate-500">最小</label>
                     <input
-                      type="number"
+                      type="text"
+                      inputMode="decimal"
                       className="w-24 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs"
-                      value={d.xMin}
-                      onChange={(e) =>
-                        updateDomain(i, { xMin: Number(e.target.value) })
-                      }
+                      value={domainDrafts[i]?.xMin ?? ''}
+                      onChange={(e) => {
+                        const raw = e.target.value;
+                        setDomainDrafts((prev) => {
+                          const next = [...prev];
+                          next[i] = { ...(next[i] ?? {}), xMin: raw };
+                          return next;
+                        });
+                        const parsed = Number(raw);
+                        if (!Number.isNaN(parsed) && raw !== '' && raw !== '-') {
+                          updateDomain(i, { xMin: parsed });
+                        }
+                      }}
                     />
                   </div>
                   <div>
                     <label className="block text-[11px] text-slate-500">最大</label>
                     <input
-                      type="number"
+                      type="text"
+                      inputMode="decimal"
                       className="w-24 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs"
-                      value={d.xMax}
-                      onChange={(e) =>
-                        updateDomain(i, { xMax: Number(e.target.value) })
-                      }
+                      value={domainDrafts[i]?.xMax ?? ''}
+                      onChange={(e) => {
+                        const raw = e.target.value;
+                        setDomainDrafts((prev) => {
+                          const next = [...prev];
+                          next[i] = { ...(next[i] ?? {}), xMax: raw };
+                          return next;
+                        });
+                        const parsed = Number(raw);
+                        if (!Number.isNaN(parsed) && raw !== '' && raw !== '-') {
+                          updateDomain(i, { xMax: parsed });
+                        }
+                      }}
                     />
                   </div>
                   <div>
                     <label className="block text-[11px] text-slate-500">step</label>
                     <input
-                      type="number"
-                      step="0.01"
+                      type="text"
+                      inputMode="decimal"
                       className="w-24 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs"
-                      value={d.step}
-                      onChange={(e) =>
-                        updateDomain(i, { step: Number(e.target.value) })
-                      }
+                      value={domainDrafts[i]?.step ?? ''}
+                      onChange={(e) => {
+                        const raw = e.target.value;
+                        setDomainDrafts((prev) => {
+                          const next = [...prev];
+                          next[i] = { ...(next[i] ?? {}), step: raw };
+                          return next;
+                        });
+                        const parsed = Number(raw);
+                        if (!Number.isNaN(parsed) && raw !== '' && raw !== '-') {
+                          updateDomain(i, { step: parsed });
+                        }
+                      }}
                     />
                   </div>
                 </div>
