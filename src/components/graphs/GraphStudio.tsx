@@ -4037,6 +4037,8 @@ export default function GraphStudio() {
                       onChange={(e) => setBivarLevelShift(Number(e.target.value))}
                       onInput={(e) => setBivarLevelShift(Number((e.target as HTMLInputElement).value))}
                       className="w-full accent-slate-900 touch-pan-x pointer-events-auto"
+                      onPointerDown={(e) => e.stopPropagation()}
+                      onTouchStart={(e) => e.stopPropagation()}
                     />
                     <span className="min-w-[3rem] text-right text-[11px] text-slate-600">
                       {formatNumber(bivarLevelShift)}
@@ -4125,10 +4127,10 @@ export default function GraphStudio() {
             <div className="order-1 lg:order-none rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
               <div
                 ref={bivarChartRef}
-                className="relative h-[320px] sm:h-[420px] lg:h-[520px] w-full overflow-hidden"
+                className="relative h-[320px] sm:h-[420px] lg:h-[520px] w-full overflow-hidden touch-pan-y"
               >
                 <svg
-                  className="absolute inset-0"
+                  className="absolute inset-0 pointer-events-none"
                   width={bivarWidth}
                   height={bivarHeight}
                   viewBox={`0 0 ${bivarWidth} ${bivarHeight}`}
