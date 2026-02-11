@@ -1738,7 +1738,7 @@ export default function GraphStudio() {
                         if (!usedParams[key]) return null;
                         const value = param[key];
                         const draft = paramDrafts[i]?.[key];
-                        const displayValue = draft ?? String(value ?? '');
+                        const displayValue = draft ?? '';
                         return (
                           <div key={key} className="rounded-xl border border-slate-200 bg-slate-50 p-2">
                             <div className="flex items-center justify-between">
