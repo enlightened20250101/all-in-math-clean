@@ -623,6 +623,8 @@ export default function GraphStudio() {
   const [bivarLevelShift, setBivarLevelShift] = useState(0);
   const bivarShiftTrackRef = useRef<HTMLDivElement | null>(null);
   const bivarShiftDragRef = useRef(false);
+  const bivarShiftRafRef = useRef<number | null>(null);
+  const bivarShiftNextRef = useRef<number | null>(null);
   const [bivarParamDrafts, setBivarParamDrafts] = useState({
     a: '1',
     b: '1',
@@ -4048,14 +4050,31 @@ export default function GraphStudio() {
                         if (!rect) return;
                         const ratio = (e.clientX - rect.left) / rect.width;
                         const next = -10 + Math.min(1, Math.max(0, ratio)) * 20;
-                        setBivarLevelShift(Number(next.toFixed(2)));
+                        const nextValue = Number(next.toFixed(2));
+                        bivarShiftNextRef.current = nextValue;
+                        if (bivarShiftRafRef.current == null) {
+                          bivarShiftRafRef.current = window.requestAnimationFrame(() => {
+                            bivarShiftRafRef.current = null;
+                            if (bivarShiftNextRef.current != null) {
+                              setBivarLevelShift(bivarShiftNextRef.current);
+                            }
+                          });
+                        }
                       }}
                       onPointerUp={(e) => {
                         bivarShiftDragRef.current = false;
+                        if (bivarShiftRafRef.current != null) {
+                          window.cancelAnimationFrame(bivarShiftRafRef.current);
+                          bivarShiftRafRef.current = null;
+                        }
                         (e.currentTarget as HTMLDivElement).releasePointerCapture?.(e.pointerId);
                       }}
                       onPointerLeave={() => {
                         bivarShiftDragRef.current = false;
+                        if (bivarShiftRafRef.current != null) {
+                          window.cancelAnimationFrame(bivarShiftRafRef.current);
+                          bivarShiftRafRef.current = null;
+                        }
                       }}
                     >
                       <div className="absolute left-0 right-0 top-1/2 h-1 rounded-full bg-slate-200" />
