@@ -56,6 +56,7 @@ export default function BivarSurface({
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
   const meshRef = useRef<THREE.Mesh | null>(null);
+  const axesRef = useRef<THREE.AxesHelper | null>(null);
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
   const dragRef = useRef<{ active: boolean; x: number; y: number }>({
     active: false,
@@ -149,6 +150,10 @@ export default function BivarSurface({
       gridHelper.position.set(0, 0, 0);
       scene.add(gridHelper);
 
+      const axesHelper = new THREE.AxesHelper(6);
+      axesRef.current = axesHelper;
+      scene.add(axesHelper);
+
       const shadowPlane = new THREE.Mesh(
         new THREE.PlaneGeometry(40, 40),
         new THREE.ShadowMaterial({ opacity: 0.18 }),
@@ -217,9 +222,13 @@ export default function BivarSurface({
     const scene = sceneRef.current;
     const camera = cameraRef.current;
     const mesh = meshRef.current;
+    const axes = axesRef.current;
     if (!renderer || !scene || !camera || !mesh) return;
     const { x, y } = rotationRef.current;
     mesh.rotation.set(x, y, 0);
+    if (axes) {
+      axes.rotation.set(x, y, 0);
+    }
     renderer.render(scene, camera);
   }, [geometryData, width, height]);
 
@@ -229,6 +238,7 @@ export default function BivarSurface({
     const scene = sceneRef.current;
     const camera = cameraRef.current;
     const mesh = meshRef.current;
+    const axes = axesRef.current;
     if (!el || !renderer || !scene || !camera || !mesh) return;
 
     const onPointerDown = (e: PointerEvent) => {
@@ -247,6 +257,9 @@ export default function BivarSurface({
         y: rotationRef.current.y + dx,
       };
       mesh.rotation.set(rotationRef.current.x, rotationRef.current.y, 0);
+      if (axes) {
+        axes.rotation.set(rotationRef.current.x, rotationRef.current.y, 0);
+      }
       renderer.render(scene, camera);
     };
     const onPointerUp = (e: PointerEvent) => {
