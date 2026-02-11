@@ -308,6 +308,17 @@ export default function GraphStudio() {
   const [yMax, setYMax] = useState(3);
   const [nx, setNx] = useState(80);
   const [ny, setNy] = useState(80);
+  const [gridDraft, setGridDraft] = useState<{
+    yMin: string;
+    yMax: string;
+    nx: string;
+    ny: string;
+  }>({
+    yMin: String(-3),
+    yMax: String(3),
+    nx: String(80),
+    ny: String(80),
+  });
 
   // ★ 式ごとのパラメータ（a,b,c）
   const [paramList, setParamList] = useState<
@@ -736,6 +747,15 @@ export default function GraphStudio() {
       console.error('failed to save GraphStudio draft', e);
     }
   }, [drawVersion, equations, colors, domains, paramList, title, xLabel, yLabel, yMin, yMax, nx, ny, tab]);
+
+  useEffect(() => {
+    setGridDraft((prev) => ({
+      yMin: prev.yMin !== '' ? prev.yMin : String(yMin),
+      yMax: prev.yMax !== '' ? prev.yMax : String(yMax),
+      nx: prev.nx !== '' ? prev.nx : String(nx),
+      ny: prev.ny !== '' ? prev.ny : String(ny),
+    }));
+  }, [yMin, yMax, nx, ny]);
 
   useEffect(() => {
     setDomainDrafts((prev) =>
@@ -1897,41 +1917,69 @@ export default function GraphStudio() {
           <div>
             <label className="block text-xs text-slate-500">yMin</label>
             <input
-              type="number"
+              type="text"
+              inputMode="decimal"
               className="w-full rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs"
-              value={yMin}
-              onChange={(e) => setYMin(Number(e.target.value))}
+              value={gridDraft.yMin}
+              onChange={(e) => {
+                const raw = e.target.value;
+                setGridDraft((prev) => ({ ...prev, yMin: raw }));
+                const parsed = Number(raw);
+                if (!Number.isNaN(parsed) && raw !== '' && raw !== '-') {
+                  setYMin(parsed);
+                }
+              }}
             />
           </div>
           <div>
             <label className="block text-xs text-slate-500">yMax</label>
             <input
-              type="number"
+              type="text"
+              inputMode="decimal"
               className="w-full rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs"
-              value={yMax}
-              onChange={(e) => setYMax(Number(e.target.value))}
+              value={gridDraft.yMax}
+              onChange={(e) => {
+                const raw = e.target.value;
+                setGridDraft((prev) => ({ ...prev, yMax: raw }));
+                const parsed = Number(raw);
+                if (!Number.isNaN(parsed) && raw !== '' && raw !== '-') {
+                  setYMax(parsed);
+                }
+              }}
             />
           </div>
           <div>
             <label className="block text-xs text-slate-500">nx（x方向分割数）</label>
             <input
-              type="number"
+              type="text"
+              inputMode="numeric"
               className="w-full rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs"
-              value={nx}
-              onChange={(e) =>
-                setNx(Math.max(10, Number(e.target.value) || 10))
-              }
+              value={gridDraft.nx}
+              onChange={(e) => {
+                const raw = e.target.value;
+                setGridDraft((prev) => ({ ...prev, nx: raw }));
+                const parsed = Number(raw);
+                if (Number.isFinite(parsed) && raw !== '') {
+                  setNx(Math.max(10, parsed));
+                }
+              }}
             />
           </div>
           <div>
             <label className="block text-xs text-slate-500">ny（y方向分割数）</label>
             <input
-              type="number"
+              type="text"
+              inputMode="numeric"
               className="w-full rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs"
-              value={ny}
-              onChange={(e) =>
-                setNy(Math.max(10, Number(e.target.value) || 10))
-              }
+              value={gridDraft.ny}
+              onChange={(e) => {
+                const raw = e.target.value;
+                setGridDraft((prev) => ({ ...prev, ny: raw }));
+                const parsed = Number(raw);
+                if (Number.isFinite(parsed) && raw !== '') {
+                  setNy(Math.max(10, parsed));
+                }
+              }}
             />
           </div>
         </div>
