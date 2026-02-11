@@ -896,9 +896,12 @@ export default function GraphStudio() {
 
   useEffect(() => {
     if (tab !== 'equation') return;
-    setLegendNames((prev) =>
-      equations.map((_, i) => prev[i] ?? legendLabels[i] ?? `y${i + 1}`),
-    );
+    setLegendNames((prev) => {
+      const next = equations.map((_, i) => prev[i] ?? legendLabels[i] ?? `y${i + 1}`);
+      const same =
+        prev.length === next.length && prev.every((v, idx) => v === next[idx]);
+      return same ? prev : next;
+    });
   }, [equations.length, tab, legendLabels]);
 
   // 保存：overlay と描画設定を一括保存
