@@ -628,6 +628,11 @@ export default function GraphStudio() {
   const [bivarViewPreset, setBivarViewPreset] = useState<
     'default' | 'iso' | 'top' | 'front' | 'side'
   >('default');
+  const [bivarHoverPoint, setBivarHoverPoint] = useState<{
+    x: number;
+    y: number;
+    z: number;
+  } | null>(null);
   const [bivarResetNonce, setBivarResetNonce] = useState(0);
   const bivarShiftTrackRef = useRef<HTMLDivElement | null>(null);
   const bivarShiftDragRef = useRef(false);
@@ -4452,11 +4457,19 @@ export default function GraphStudio() {
                     colorScale={bivarColorScale}
                     sensitivity={bivarRotateSensitivity}
                     viewPreset={bivarViewPreset}
+                    onHover={(point) => setBivarHoverPoint(point)}
+                    onHoverEnd={() => setBivarHoverPoint(null)}
                     resetNonce={bivarResetNonce}
                   />
                   <div className="pointer-events-none absolute right-3 top-3 rounded-full border border-slate-200 bg-white/90 px-3 py-1 text-[11px] text-slate-600 shadow-sm">
                     ドラッグで回転・ホイールでズーム
                   </div>
+                  {bivarHoverPoint ? (
+                    <div className="pointer-events-none absolute left-3 top-3 rounded-full border border-slate-200 bg-white/90 px-3 py-1 text-[11px] text-slate-700 shadow-sm">
+                      x={formatNumber(bivarHoverPoint.x)} / y={formatNumber(bivarHoverPoint.y)} / z=
+                      {formatNumber(bivarHoverPoint.z)}
+                    </div>
+                  ) : null}
                 </div>
               ) : (
                 <div className="flex h-[320px] sm:h-[420px] lg:h-[520px] items-center justify-center rounded-2xl border border-dashed border-slate-200 bg-slate-50 text-sm text-slate-500">

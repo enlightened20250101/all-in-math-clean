@@ -37,6 +37,8 @@ export default function BivarSurface({
   colorScale,
   sensitivity = 0.008,
   viewPreset = 'default',
+  onHover,
+  onHoverEnd,
   resetNonce = 0,
 }: {
   gridData:
@@ -53,6 +55,8 @@ export default function BivarSurface({
   colorScale: 'blueRed' | 'viridis' | 'mono';
   sensitivity?: number;
   viewPreset?: 'default' | 'iso' | 'top' | 'front' | 'side';
+  onHover?: (point: { x: number; y: number; z: number }) => void;
+  onHoverEnd?: () => void;
   resetNonce?: number;
 }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -70,6 +74,8 @@ export default function BivarSurface({
   const sensitivityRef = useRef(sensitivity);
   const cameraDistanceRef = useRef(8);
   const lastRenderRef = useRef(0);
+  const raycasterRef = useRef(new THREE.Raycaster());
+  const pointerRef = useRef(new THREE.Vector2());
 
   const applyRotation = (x: number, y: number) => {
     rotationRef.current = { x, y };
@@ -309,6 +315,27 @@ export default function BivarSurface({
       if (grid) grid.rotation.set(rotationRef.current.x, rotationRef.current.y, 0);
       renderer.render(scene, camera);
     };
+    const onPointerMoveHover = (e: PointerEvent) => {
+      if (dragRef.current.active) return;
+      if (!onHover && !onHoverEnd) return;
+      const rect = el.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      const y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+      pointerRef.current.set(x, y);
+      const raycaster = raycasterRef.current;
+      raycaster.setFromCamera(pointerRef.current, camera);
+      const hit = raycaster.intersectObject(mesh, false)[0];
+      if (!hit) {
+        onHoverEnd?.();
+        return;
+      }
+      const point = hit.point;
+      onHover?.({
+        x: point.x,
+        y: point.z,
+        z: point.y,
+      });
+    };
     const onPointerUp = (e: PointerEvent) => {
       dragRef.current.active = false;
       el.releasePointerCapture(e.pointerId);
@@ -323,6 +350,7 @@ export default function BivarSurface({
 
     el.addEventListener('pointerdown', onPointerDown);
     el.addEventListener('pointermove', onPointerMove);
+    el.addEventListener('pointermove', onPointerMoveHover);
     el.addEventListener('pointerup', onPointerUp);
     el.addEventListener('pointerleave', onPointerUp);
     el.addEventListener('wheel', onWheel, { passive: false });
@@ -330,6 +358,7 @@ export default function BivarSurface({
     return () => {
       el.removeEventListener('pointerdown', onPointerDown);
       el.removeEventListener('pointermove', onPointerMove);
+      el.removeEventListener('pointermove', onPointerMoveHover);
       el.removeEventListener('pointerup', onPointerUp);
       el.removeEventListener('pointerleave', onPointerUp);
       el.removeEventListener('wheel', onWheel);
