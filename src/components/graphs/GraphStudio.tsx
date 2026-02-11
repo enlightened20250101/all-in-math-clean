@@ -3158,6 +3158,16 @@ export default function GraphStudio() {
               {equationChartView}
             </div>
           </div>
+          {isMobile ? (
+            <div className="space-y-3">
+              <button
+                className="w-full mt-2 px-4 py-3 rounded-xl border border-slate-200 bg-slate-900 text-white text-sm font-medium shadow-sm active:scale-[0.98]"
+                onClick={openEquationPanel}
+              >
+                式を編集する（入力パネルを開く）
+              </button>
+            </div>
+          ) : null}
 
           {drawVersion > 0 && previewEmpty && (
             <div className="text-sm text-rose-600">
