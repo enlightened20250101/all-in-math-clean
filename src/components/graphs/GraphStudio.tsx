@@ -313,6 +313,18 @@ export default function GraphStudio() {
     { a: 1, b: 1, c: 0 }, // 1本目の式
     { a: 1, b: 1, c: 0 }, // 2本目の式
   ]);
+  const [paramDrafts, setParamDrafts] = useState<
+    { a?: string; b?: string; c?: string }[]
+  >([]);
+
+  useEffect(() => {
+    setParamDrafts((prev) => {
+      if (prev.length === equations.length) return prev;
+      const next = [...prev];
+      while (next.length < equations.length) next.push({});
+      return next.slice(0, equations.length);
+    });
+  }, [equations.length]);
 
   // ★ SP用：式専用入力パネル用の状態
   const [activeEqIndex, setActiveEqIndex] = useState<number | null>(null);
@@ -1679,21 +1691,40 @@ export default function GraphStudio() {
                       {(["a", "b", "c"] as const).map((key) => {
                         if (!usedParams[key]) return null;
                         const value = param[key];
+                        const draft = paramDrafts[i]?.[key];
+                        const displayValue = draft ?? String(value);
                         return (
                           <div key={key} className="rounded-xl border border-slate-200 bg-slate-50 p-2">
                             <div className="flex items-center justify-between">
                               <span className="text-[11px] text-slate-500">{key}</span>
                               <input
-                                type="number"
+                                type="text"
+                                inputMode="decimal"
                                 className="w-20 rounded-lg border border-slate-200 bg-white px-2 py-1 text-xs"
-                                value={value}
+                                value={displayValue}
                                 onChange={(e) => {
-                                  const v = Number(e.target.value);
-                                  setParamList((prev) =>
-                                    prev.map((p, idx) =>
-                                      idx === i ? { ...p, [key]: v } : p,
-                                    ),
-                                  );
+                                  const raw = e.target.value;
+                                  setParamDrafts((prev) => {
+                                    const next = [...prev];
+                                    next[i] = { ...(next[i] ?? {}), [key]: raw };
+                                    return next;
+                                  });
+                                  const parsed = Number(raw);
+                                  if (!Number.isNaN(parsed) && raw !== '' && raw !== '-') {
+                                    setParamList((prev) =>
+                                      prev.map((p, idx) =>
+                                        idx === i ? { ...p, [key]: parsed } : p,
+                                      ),
+                                    );
+                                  }
+                                }}
+                                onBlur={() => {
+                                  setParamDrafts((prev) => {
+                                    const next = [...prev];
+                                    next[i] = { ...(next[i] ?? {}) };
+                                    delete next[i][key];
+                                    return next;
+                                  });
                                 }}
                               />
                             </div>
@@ -1710,6 +1741,12 @@ export default function GraphStudio() {
                                     idx === i ? { ...p, [key]: v } : p,
                                   ),
                                 );
+                                setParamDrafts((prev) => {
+                                  const next = [...prev];
+                                  next[i] = { ...(next[i] ?? {}) };
+                                  delete next[i][key];
+                                  return next;
+                                });
                               }}
                               className="mt-2 w-full accent-slate-700"
                             />

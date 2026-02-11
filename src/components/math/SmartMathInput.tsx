@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useRef } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import InlineKatex from '@/components/graphs/InlineKatex';
 import { useIsMobile } from '@/hooks/useIsMobile';
 
@@ -211,6 +211,7 @@ export default function SmartMathInput({
   const isMobile = useIsMobile();
   const showMobileKeyboard = isMobile && !disableMobilePanel;  // ★ ここで使う
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const [keyboardHeight, setKeyboardHeight] = useState(220);
 
   const mode: EquationMode = useMemo(() => detectEquationMode(value), [value]);
 
@@ -381,49 +382,66 @@ export default function SmartMathInput({
 
       {/* モバイル専用ミニキーボード */}
       {showMobileKeyboard && (
-        <div className="mt-2 rounded-2xl border border-slate-200 bg-slate-50 p-2 shadow-sm space-y-1.5">
-          {MOBILE_KEY_ROWS.map((row, idx) => (
-            <div key={idx} className="flex gap-1.5">
-              {row.map((key) => (
-                <button
-                  key={key.label + idx}
-                  type="button"
-                  className="
-                    flex-1 rounded-xl border border-slate-200 bg-white px-2 py-2 text-xs
-                    text-slate-700 shadow-sm transition
-                    hover:bg-slate-50 active:bg-slate-100 active:scale-[0.98]
-                  "
-                  onClick={() => {
-                    if (key.label === '⌫') {
-                      deleteAtCursor();
-                    } else {
-                      insertAtCursor(key.text);
-                    }
-                  }}
-                >
-                  {key.label}
-                </button>
-              ))}
+        <div className="fixed bottom-0 left-0 right-0 z-30 sm:static sm:z-auto sm:mt-2">
+          <div
+            className="mx-auto w-full max-w-5xl rounded-t-2xl border border-slate-200 bg-white/95 p-2 shadow-[0_-12px_30px_-24px_rgba(15,23,42,0.35)] backdrop-blur sm:rounded-2xl sm:bg-slate-50 sm:shadow-sm space-y-2"
+            style={{ height: keyboardHeight, minHeight: 180, maxHeight: 360, overflow: 'auto' }}
+          >
+            <div className="flex items-center justify-between text-[11px] text-slate-500">
+              <span>キーボードの高さ</span>
+              <input
+                type="range"
+                min={180}
+                max={360}
+                step={10}
+                value={keyboardHeight}
+                onChange={(e) => setKeyboardHeight(Number(e.target.value))}
+                className="w-36 accent-slate-700"
+              />
             </div>
-          ))}
+            {MOBILE_KEY_ROWS.map((row, idx) => (
+              <div key={idx} className="flex gap-1.5">
+                {row.map((key) => (
+                  <button
+                    key={key.label + idx}
+                    type="button"
+                    className="
+                      flex-1 rounded-xl border border-slate-200 bg-white px-2 py-2 text-xs
+                      text-slate-700 shadow-sm transition
+                      hover:bg-slate-50 active:bg-slate-100 active:scale-[0.98]
+                    "
+                    onClick={() => {
+                      if (key.label === '⌫') {
+                        deleteAtCursor();
+                      } else {
+                        insertAtCursor(key.text);
+                      }
+                    }}
+                  >
+                    {key.label}
+                  </button>
+                ))}
+              </div>
+            ))}
 
-          {/* バックスペース（右寄せ） */}
-          <div className="flex justify-end">
-            <button
-              type="button"
-              className="
-                rounded-full border border-slate-200 bg-white px-3 py-1.5 text-[11px]
-                text-slate-700 shadow-sm transition hover:bg-slate-50 active:bg-slate-100
-              "
-              onClick={deleteAtCursor}
-            >
-              ⌫
-            </button>
+            {/* バックスペース（右寄せ） */}
+            <div className="flex justify-end">
+              <button
+                type="button"
+                className="
+                  rounded-full border border-slate-200 bg-white px-3 py-1.5 text-[11px]
+                  text-slate-700 shadow-sm transition hover:bg-slate-50 active:bg-slate-100
+                "
+                onClick={deleteAtCursor}
+              >
+                ⌫
+              </button>
+            </div>
+
+            <p className="mt-1 text-[10px] text-slate-500">
+              ボタンはカーソル位置に挿入されます。長押しで選択 → 上書きもできます。
+            </p>
           </div>
-
-          <p className="mt-1 text-[10px] text-slate-500">
-            ボタンはカーソル位置に挿入されます。長押しで選択 → 上書きもできます。
-          </p>
         </div>
       )}
     </div>
