@@ -3879,7 +3879,10 @@ export default function GraphStudio() {
 
       {/* ── 2変数関数タブ（等高線） ── */}
       {tab === 'bivar' && (
-        <div className="space-y-4">
+        <div
+          className="space-y-4 pb-20 md:pb-0 overflow-y-auto md:overflow-visible"
+          style={{ maxHeight: 'calc(100vh - 140px)', WebkitOverflowScrolling: 'touch' }}
+        >
           <div className="grid gap-4 lg:grid-cols-[360px,1fr]">
             <div className="order-2 lg:order-none rounded-2xl border border-slate-200 bg-white p-4 shadow-sm space-y-4">
               <div>
@@ -4036,7 +4039,7 @@ export default function GraphStudio() {
                       value={bivarLevelShift}
                       onChange={(e) => setBivarLevelShift(Number(e.target.value))}
                       onInput={(e) => setBivarLevelShift(Number((e.target as HTMLInputElement).value))}
-                      className="w-full accent-slate-900"
+                      className="w-full accent-slate-900 touch-pan-x pointer-events-auto"
                     />
                     <span className="min-w-[3rem] text-right text-[11px] text-slate-600">
                       {formatNumber(bivarLevelShift)}
