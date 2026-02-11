@@ -493,6 +493,18 @@ function buildContourSegments(
   return segments;
 }
 
+function lerpColor(a: [number, number, number], b: [number, number, number], t: number) {
+  return [
+    Math.round(a[0] + (b[0] - a[0]) * t),
+    Math.round(a[1] + (b[1] - a[1]) * t),
+    Math.round(a[2] + (b[2] - a[2]) * t),
+  ] as const;
+}
+
+function rgbToCss(c: [number, number, number]) {
+  return `rgb(${c[0]}, ${c[1]}, ${c[2]})`;
+}
+
 type HistorySnapshot = {
   equations: string[];
   colors: string[];
@@ -603,6 +615,8 @@ export default function GraphStudio() {
   const [bivarGrid, setBivarGrid] = useState({ nx: 60, ny: 60 });
   const [bivarLevels, setBivarLevels] = useState<string>('');
   const [bivarParams, setBivarParams] = useState({ a: 1, b: 1, c: 1 });
+  const [showBivarHeatmap, setShowBivarHeatmap] = useState(true);
+  const [showBivarLabels, setShowBivarLabels] = useState(true);
   const [bivarParamDrafts, setBivarParamDrafts] = useState({
     a: '1',
     b: '1',
@@ -941,6 +955,12 @@ export default function GraphStudio() {
           c: String(next.c),
         });
       }
+      if (typeof draft.showBivarHeatmap === 'boolean') {
+        setShowBivarHeatmap(draft.showBivarHeatmap);
+      }
+      if (typeof draft.showBivarLabels === 'boolean') {
+        setShowBivarLabels(draft.showBivarLabels);
+      }
 
       if (draft.tab === 'equation' || draft.tab === 'series' || draft.tab === 'bivar') {
         setTab(draft.tab);
@@ -1199,6 +1219,8 @@ export default function GraphStudio() {
         bivarGrid,
         bivarLevels,
         bivarParams,
+        showBivarHeatmap,
+        showBivarLabels,
       };
       localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
     } catch (e) {
@@ -1223,6 +1245,8 @@ export default function GraphStudio() {
     bivarGrid,
     bivarLevels,
     bivarParams,
+    showBivarHeatmap,
+    showBivarLabels,
   ]);
 
   useEffect(() => {
@@ -1692,6 +1716,59 @@ export default function GraphStudio() {
       return `hsl(${hue}, 70%, 45%)`;
     });
   }, [bivarGridData, bivarLevelsList]);
+
+  const bivarHeatmap = useMemo(() => {
+    if (!bivarGridData || chartSizeBivar.width <= 0 || chartSizeBivar.height <= 0) return [];
+    const { xs, ys, grid, zMin, zMax } = bivarGridData;
+    const span = Math.max(1e-6, zMax - zMin);
+    const colorA: [number, number, number] = [59, 130, 246]; // blue-500
+    const colorB: [number, number, number] = [239, 68, 68]; // red-500
+    const cells: Array<{ x: number; y: number; w: number; h: number; color: string }> = [];
+    const nx = xs.length;
+    const ny = ys.length;
+    const stepX = bivarWidth / Math.max(1, nx - 1);
+    const stepY = bivarHeight / Math.max(1, ny - 1);
+    for (let j = 0; j < ny - 1; j += 1) {
+      for (let i = 0; i < nx - 1; i += 1) {
+        const z = grid[j]?.[i];
+        if (!Number.isFinite(z)) continue;
+        const t = Math.min(1, Math.max(0, (z - zMin) / span));
+        const color = rgbToCss(lerpColor(colorA, colorB, t));
+        cells.push({
+          x: i * stepX,
+          y: bivarHeight - (j + 1) * stepY,
+          w: stepX,
+          h: stepY,
+          color,
+        });
+      }
+    }
+    return cells;
+  }, [bivarGridData, bivarWidth, bivarHeight, chartSizeBivar.width, chartSizeBivar.height]);
+
+  const bivarContourLabels = useMemo(() => {
+    if (!bivarContours.length) return [];
+    const labels: Array<{ x: number; y: number; text: string; color: string }> = [];
+    bivarContours.forEach((contour, idx) => {
+      const segs = contour.segments;
+      if (!segs.length) return;
+      const step = Math.max(1, Math.floor(segs.length / 2));
+      for (let i = 0; i < segs.length; i += step) {
+        const seg = segs[i];
+        if (!seg) continue;
+        const x = (seg[0] + seg[2]) / 2;
+        const y = (seg[1] + seg[3]) / 2;
+        labels.push({
+          x,
+          y,
+          text: formatNumber(contour.level),
+          color: bivarLevelColors[idx] ?? '#0ea5e9',
+        });
+        if (labels.length > 40) break;
+      }
+    });
+    return labels;
+  }, [bivarContours, bivarLevelColors]);
 
   const fillBetweenPathEq = useMemo(() => {
     if (
@@ -3893,6 +3970,34 @@ export default function GraphStudio() {
               </div>
 
               <div className="space-y-2 text-xs text-slate-600">
+                <div className="font-semibold text-slate-700">表示オプション</div>
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    className={`rounded-full border px-3 py-1 text-[11px] shadow-sm transition ${
+                      showBivarHeatmap
+                        ? 'border-slate-900 bg-slate-900 text-white'
+                        : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
+                    }`}
+                    onClick={() => setShowBivarHeatmap((prev) => !prev)}
+                  >
+                    ヒートマップ {showBivarHeatmap ? 'ON' : 'OFF'}
+                  </button>
+                  <button
+                    type="button"
+                    className={`rounded-full border px-3 py-1 text-[11px] shadow-sm transition ${
+                      showBivarLabels
+                        ? 'border-slate-900 bg-slate-900 text-white'
+                        : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
+                    }`}
+                    onClick={() => setShowBivarLabels((prev) => !prev)}
+                  >
+                    レベル表示 {showBivarLabels ? 'ON' : 'OFF'}
+                  </button>
+                </div>
+              </div>
+
+              <div className="space-y-2 text-xs text-slate-600">
                 <div className="font-semibold text-slate-700">パラメータ（a,b,c）</div>
                 <div className="grid grid-cols-3 gap-2">
                   {(['a', 'b', 'c'] as const).map((key) => (
@@ -3936,6 +4041,19 @@ export default function GraphStudio() {
                     height={bivarHeight}
                     fill="#ffffff"
                   />
+                  {bivarGridData && showBivarHeatmap
+                    ? bivarHeatmap.map((cell, idx) => (
+                        <rect
+                          key={`heat-${idx}`}
+                          x={cell.x}
+                          y={cell.y}
+                          width={cell.w}
+                          height={cell.h}
+                          fill={cell.color}
+                          opacity={0.35}
+                        />
+                      ))
+                    : null}
                   {bivarGridData ? (
                     bivarContours.map((contour, idx) => (
                       <g key={`lvl-${idx}`}>
@@ -3965,6 +4083,25 @@ export default function GraphStudio() {
                       入力内容を確認してください
                     </text>
                   )}
+                  {bivarGridData && showBivarLabels
+                    ? bivarContourLabels.map((label, idx) => (
+                        <text
+                          key={`lvl-text-${idx}`}
+                          x={bivarXScale(label.x)}
+                          y={bivarYScale(label.y)}
+                          fill={label.color}
+                          fontSize="11"
+                          textAnchor="middle"
+                          dominantBaseline="middle"
+                          opacity={0.85}
+                          paintOrder="stroke"
+                          stroke="#ffffff"
+                          strokeWidth="3"
+                        >
+                          {label.text}
+                        </text>
+                      ))
+                    : null}
                 </svg>
               </div>
               {bivarGridData && bivarLevelsList.length ? (
