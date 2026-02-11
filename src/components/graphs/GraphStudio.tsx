@@ -4336,10 +4336,11 @@ export default function GraphStudio() {
               }
             >
               {bivarView === 'contour' ? (
-                <div
-                  ref={bivarChartRef}
-                  className="relative h-[320px] sm:h-[420px] lg:h-[520px] w-full overflow-hidden touch-pan-y"
-                >
+                <>
+                  <div
+                    ref={bivarChartRef}
+                    className="relative h-[320px] sm:h-[420px] lg:h-[520px] w-full overflow-hidden touch-pan-y"
+                  >
                 <svg
                   className="absolute inset-0 pointer-events-none"
                   width={bivarWidth}
@@ -4415,23 +4416,24 @@ export default function GraphStudio() {
                       ))
                     : null}
                 </svg>
-                </div>
-                {bivarGridData && bivarLevelsList.length ? (
-                  <div className="mt-3 flex flex-wrap items-center gap-2 text-[11px] text-slate-600">
-                    {bivarLevelsList.map((level, i) => (
-                      <div
-                        key={`lvl-label-${i}`}
-                        className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-2 py-1"
-                      >
-                        <span
-                          className="inline-block h-2.5 w-2.5 rounded-full"
-                          style={{ backgroundColor: bivarLevelColors[i] ?? '#0ea5e9' }}
-                        />
-                        <span>{formatNumber(level)}</span>
-                      </div>
-                    ))}
                   </div>
-                ) : null}
+                  {bivarGridData && bivarLevelsList.length ? (
+                    <div className="mt-3 flex flex-wrap items-center gap-2 text-[11px] text-slate-600">
+                      {bivarLevelsList.map((level, i) => (
+                        <div
+                          key={`lvl-label-${i}`}
+                          className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-2 py-1"
+                        >
+                          <span
+                            className="inline-block h-2.5 w-2.5 rounded-full"
+                            style={{ backgroundColor: bivarLevelColors[i] ?? '#0ea5e9' }}
+                          />
+                          <span>{formatNumber(level)}</span>
+                        </div>
+                      ))}
+                    </div>
+                  ) : null}
+                </>
               ) : (
                 <div className="flex h-[320px] sm:h-[420px] lg:h-[520px] items-center justify-center rounded-2xl border border-dashed border-slate-200 bg-slate-50 text-sm text-slate-500">
                   3D表示は準備中です。まずは等高線で結果を確認できます。
