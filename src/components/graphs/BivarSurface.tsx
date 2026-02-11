@@ -67,6 +67,8 @@ export default function BivarSurface({
   });
   const rotationRef = useRef({ x: -0.8, y: 0.6 });
   const sensitivityRef = useRef(sensitivity);
+  const cameraDistanceRef = useRef(8);
+  const lastRenderRef = useRef(0);
 
   const applyRotation = (x: number, y: number) => {
     rotationRef.current = { x, y };
@@ -81,6 +83,18 @@ export default function BivarSurface({
     renderer.render(scene, camera);
   };
 
+  const setCameraDistance = (distance: number) => {
+    const camera = cameraRef.current;
+    const renderer = rendererRef.current;
+    const scene = sceneRef.current;
+    const mesh = meshRef.current;
+    if (!camera || !renderer || !scene || !mesh) return;
+    cameraDistanceRef.current = distance;
+    camera.position.set(distance, distance, distance);
+    camera.lookAt(0, 0, 0);
+    renderer.render(scene, camera);
+  };
+
   useEffect(() => {
     sensitivityRef.current = sensitivity;
   }, [sensitivity]);
@@ -92,22 +106,27 @@ export default function BivarSurface({
 
   useEffect(() => {
     if (viewPreset === 'default') {
+      setCameraDistance(8);
       applyRotation(-0.8, 0.6);
       return;
     }
     if (viewPreset === 'iso') {
+      setCameraDistance(9);
       applyRotation(-0.75, 0.8);
       return;
     }
     if (viewPreset === 'top') {
+      setCameraDistance(7.5);
       applyRotation(-1.4, 0);
       return;
     }
     if (viewPreset === 'front') {
+      setCameraDistance(7.5);
       applyRotation(-0.1, 0);
       return;
     }
     if (viewPreset === 'side') {
+      setCameraDistance(7.5);
       applyRotation(-0.1, Math.PI / 2);
     }
   }, [viewPreset]);
@@ -294,6 +313,9 @@ export default function BivarSurface({
     };
     const onPointerMove = (e: PointerEvent) => {
       if (!dragRef.current.active) return;
+      const now = performance.now();
+      if (now - lastRenderRef.current < 12) return;
+      lastRenderRef.current = now;
       const factor = sensitivityRef.current;
       const dx = (e.clientX - dragRef.current.x) * factor;
       const dy = (e.clientY - dragRef.current.y) * factor;
