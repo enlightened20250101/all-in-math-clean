@@ -55,9 +55,16 @@ function LoginPageInner() {
   async function onSendOtp() {
     setErr(null); setLoading(true);
     try {
+      const origin = typeof window !== "undefined" ? window.location.origin : "";
+      const emailRedirectTo = origin
+        ? `${origin}/auth/callback?returnTo=${encodeURIComponent(next)}`
+        : undefined;
       const { error } = await supabase.auth.signInWithOtp({
         email,
-        options: { shouldCreateUser: true }, // 新規も許可する場合
+        options: {
+          shouldCreateUser: true,
+          emailRedirectTo,
+        }, // 新規も許可する場合
       });
       if (error) throw error;
       setOtpSent(true);
@@ -146,6 +153,9 @@ function LoginPageInner() {
                 続行することで、<a className="underline" href="/terms">利用規約</a> と{" "}
                 <a className="underline" href="/privacy">プライバシーポリシー</a> に同意したものとみなされます。
               </div>
+              <div className="text-[11px] text-slate-500">
+                認証メールが届かない場合は、迷惑メール/プロモーションフォルダもご確認ください。
+              </div>
               {err && <p className="text-red-600 text-sm">{err}</p>}
               <button className="w-full bg-black text-white rounded p-2" disabled={loading || !email} onClick={onSendOtp}>
                 {loading ? "送信中…" : "6桁コードを送信"}
@@ -158,6 +168,9 @@ function LoginPageInner() {
               <div className="text-[11px] text-slate-600">
                 続行することで、<a className="underline" href="/terms">利用規約</a> と{" "}
                 <a className="underline" href="/privacy">プライバシーポリシー</a> に同意したものとみなされます。
+              </div>
+              <div className="text-[11px] text-slate-500">
+                認証メールが届かない場合は、迷惑メール/プロモーションフォルダもご確認ください。
               </div>
               {err && <p className="text-red-600 text-sm">{err}</p>}
               <button className="w-full bg-black text-white rounded p-2"
