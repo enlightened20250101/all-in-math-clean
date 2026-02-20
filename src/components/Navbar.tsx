@@ -8,14 +8,11 @@ type Me = { display_name: string | null; avatar_url: string | null } | null;
 
 // 公開版で押し出したい導線だけに絞る
 const NAV_ITEMS = [
-  { href: '/graphs',         label: 'グラフ' },
-  { href: '/graphs/new',     label: 'グラフ作成' },
-  { href: '/labs/animation', label: 'アニメーション' },
-  { href: '/course',         label: 'コース学習' },
-  { href: '/posts',          label: '知恵袋' },
-  { href: '/threads',        label: '掲示板' },
-  { href: '/articles',       label: '記事' },
-  { href: '/saved',          label: '保存' },
+  { href: '/course',   label: 'コース学習' },
+  { href: '/posts',    label: 'Q&A' },
+  { href: '/threads',  label: '掲示板' },
+  { href: '/articles', label: '記事' },
+  { href: '/graphs/new', label: 'グラフ' },
   // ★ /learn 系は一旦 Navbar から外しておく（後でβバッジ付きで復活させてもOK）
 ];
 
@@ -64,6 +61,11 @@ export default function Navbar() {
     let cancelled = false;
     (async () => {
       setLoading(true);
+      const { data: sessionData } = await supabase.auth.getSession();
+      if (!sessionData?.session) {
+        if (!cancelled) setLoading(false);
+        return;
+      }
       await loadProfile();
       if (!cancelled) setLoading(false);
     })();
@@ -142,6 +144,7 @@ export default function Navbar() {
 
   // プロフィール編集後の戻り先は「今いるページ or /」
   const nextAfterProfile = encodeURIComponent(pathname || '/');
+  const loginHref = `/login?next=${nextAfterProfile}`;
 
   const profileMenu = (
     <div className="absolute right-0 mt-2 w-48 rounded-xl border bg-white shadow-lg overflow-hidden z-20">
@@ -258,8 +261,11 @@ export default function Navbar() {
               </div>
             </>
           ) : (
-            <Link href="/login" className="underline whitespace-nowrap">
-              ログイン
+            <Link
+              href={loginHref}
+              className="inline-flex items-center rounded-full border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition whitespace-nowrap"
+            >
+              ログイン / 新規登録
             </Link>
           )}
         </div>

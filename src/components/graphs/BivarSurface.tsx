@@ -182,7 +182,6 @@ export default function BivarSurface({
   }, [gridData, colorScale]);
 
   useEffect(() => {
-    if (!containerRef.current) return;
     if (!rendererRef.current) {
       const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -191,7 +190,6 @@ export default function BivarSurface({
       renderer.domElement.style.height = '100%';
       renderer.domElement.style.display = 'block';
       rendererRef.current = renderer;
-      containerRef.current.appendChild(renderer.domElement);
 
       const scene = new THREE.Scene();
       sceneRef.current = scene;
@@ -221,16 +219,29 @@ export default function BivarSurface({
       camera.lookAt(0, 0, 0);
       cameraRef.current = camera;
     }
-  }, []);
+    const container = containerRef.current;
+    const renderer = rendererRef.current;
+    if (container && renderer && renderer.domElement.parentElement !== container) {
+      container.appendChild(renderer.domElement);
+    }
+  }, [width, height, gridData]);
 
   useEffect(() => {
     const renderer = rendererRef.current;
     const scene = sceneRef.current;
     const camera = cameraRef.current;
+    const mesh = meshRef.current;
+    const grid = gridRef.current;
     if (!renderer || !scene || !camera) return;
     renderer.setSize(Math.max(1, width), Math.max(1, height), true);
     camera.aspect = Math.max(1, width) / Math.max(1, height);
     camera.updateProjectionMatrix();
+    if (mesh) {
+      const { x, y } = rotationRef.current;
+      mesh.rotation.set(x, y, 0);
+      if (grid) grid.rotation.set(x, y, 0);
+      renderer.render(scene, camera);
+    }
   }, [width, height]);
 
   useEffect(() => {

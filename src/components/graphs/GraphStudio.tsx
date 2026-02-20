@@ -32,6 +32,7 @@ import ExportSvgButton from './ExportSvgButton';
 import InlineKatex from './InlineKatex';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import SmartMathInput from '@/components/math/SmartMathInput';
+import KaTeXBlock from '@/components/math/KaTeXBlock';
 
 type SeriesConfig = {
   title: string;
@@ -607,6 +608,10 @@ export default function GraphStudio() {
   ]);
   // ---- 2変数関数（等高線/3D用） ----
   const [bivarExpr, setBivarExpr] = useState<string>('x^2 + y^2');
+  const bivarExprDisplay = useMemo(
+    () => toDisplayTex(bivarExpr || 'f(x, y)'),
+    [bivarExpr],
+  );
   const [bivarView, setBivarView] = useState<'contour' | 'surface'>('contour');
   const [bivarDomain, setBivarDomain] = useState({
     xMin: -5,
@@ -2603,6 +2608,28 @@ export default function GraphStudio() {
     return () => obs.disconnect();
   }, [tab]);
 
+  useEffect(() => {
+    if (tab !== 'bivar') return;
+    const root = bivarChartRef.current;
+    if (!root) return;
+    let raf1 = 0;
+    let raf2 = 0;
+    const measure = () => {
+      const rect = root.getBoundingClientRect();
+      if (rect.width > 0 && rect.height > 0) {
+        setChartSizeBivar({ width: rect.width, height: rect.height });
+      }
+    };
+    raf1 = requestAnimationFrame(() => {
+      measure();
+      raf2 = requestAnimationFrame(measure);
+    });
+    return () => {
+      cancelAnimationFrame(raf1);
+      cancelAnimationFrame(raf2);
+    };
+  }, [tab, bivarView]);
+
   // ==== 式入力パネル（PCとSP共通で使う） ====
   const equationInputPanel = (
     <>
@@ -3878,17 +3905,6 @@ export default function GraphStudio() {
               {equationChartView}
             </div>
           </div>
-          {isMobile ? (
-            <div className="space-y-3">
-              <button
-                className="w-full mt-2 px-4 py-3 rounded-xl border border-slate-200 bg-slate-900 text-white text-sm font-medium shadow-sm active:scale-[0.98]"
-                onClick={openEquationPanel}
-              >
-                式を編集する（入力パネルを開く）
-              </button>
-            </div>
-          ) : null}
-
           {drawVersion > 0 && previewEmpty && (
             <div className="text-sm text-rose-600">
               描画できませんでした。式や範囲・解像度を見直してください。
@@ -4383,30 +4399,6 @@ export default function GraphStudio() {
                   <button
                     type="button"
                     className={`rounded-full border px-3 py-1 text-[11px] shadow-sm transition ${
-                      bivarView === 'contour'
-                        ? 'border-slate-900 bg-slate-900 text-white'
-                        : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
-                    }`}
-                    onClick={() => setBivarView('contour')}
-                  >
-                    等高線
-                  </button>
-                  <button
-                    type="button"
-                    className={`rounded-full border px-3 py-1 text-[11px] shadow-sm transition ${
-                      bivarView === 'surface'
-                        ? 'border-slate-900 bg-slate-900 text-white'
-                        : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
-                    }`}
-                    onClick={() => setBivarView('surface')}
-                  >
-                    3D
-                  </button>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  <button
-                    type="button"
-                    className={`rounded-full border px-3 py-1 text-[11px] shadow-sm transition ${
                       showBivarHeatmap
                         ? 'border-slate-900 bg-slate-900 text-white'
                         : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
@@ -4485,6 +4477,38 @@ export default function GraphStudio() {
                   : undefined
               }
             >
+              <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+                <div className="min-w-0">
+                  <div className="text-[11px] text-slate-500">2変数関数</div>
+                  <div className="text-sm font-semibold text-slate-800 truncate" title={`z = ${bivarExpr || 'f(x, y)'}`}>
+                    <KaTeXBlock tex={`z = ${bivarExprDisplay}`} inline />
+                  </div>
+                </div>
+                <div className="inline-flex rounded-full border border-slate-200 bg-white p-1 shadow-sm">
+                  <button
+                    type="button"
+                    className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+                      bivarView === 'contour'
+                        ? 'bg-slate-900 text-white'
+                        : 'text-slate-600 hover:bg-slate-50'
+                    }`}
+                    onClick={() => setBivarView('contour')}
+                  >
+                    等高線
+                  </button>
+                  <button
+                    type="button"
+                    className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+                      bivarView === 'surface'
+                        ? 'bg-slate-900 text-white'
+                        : 'text-slate-600 hover:bg-slate-50'
+                    }`}
+                    onClick={() => setBivarView('surface')}
+                  >
+                    3D
+                  </button>
+                </div>
+              </div>
               {bivarView === 'contour' ? (
                 <>
                   <div
@@ -4674,18 +4698,24 @@ export default function GraphStudio() {
               )}
             </div>
           </div>
-          {isMobile ? (
-            <div className="space-y-3">
-              <button
-                className="w-full mt-2 px-4 py-3 rounded-xl border border-slate-200 bg-slate-900 text-white text-sm font-medium shadow-sm active:scale-[0.98]"
-                onClick={() => setIsBivarPanelOpen(true)}
-              >
-                2変数設定を開く
-              </button>
-            </div>
-          ) : null}
         </div>
       )}
+      {isMobile && tab === 'equation' && !isPanelOpen ? (
+        <button
+          className="md:hidden fixed bottom-5 right-4 z-30 h-[72px] w-[72px] rounded-full border border-slate-900 bg-slate-900 text-[13px] font-semibold text-white shadow-lg shadow-slate-900/20 active:scale-[0.98] flex items-center justify-center text-center leading-tight"
+          onClick={openEquationPanel}
+        >
+          式を<br />編集
+        </button>
+      ) : null}
+      {isMobile && tab === 'bivar' && !isBivarPanelOpen ? (
+        <button
+          className="md:hidden fixed bottom-5 right-4 z-30 h-[72px] w-[72px] rounded-full border border-slate-900 bg-slate-900 text-[13px] font-semibold text-white shadow-lg shadow-slate-900/20 active:scale-[0.98] flex items-center justify-center text-center leading-tight"
+          onClick={() => setIsBivarPanelOpen(true)}
+        >
+          式を<br />編集
+        </button>
+      ) : null}
       {/* ── SP専用：式一覧パネル（画面下に固定、グラフは見える） ── */}
       {tab === 'equation' && (
         <div
@@ -4693,6 +4723,14 @@ export default function GraphStudio() {
             isPanelOpen ? '' : 'pointer-events-none'
           }`}
         >
+          {isPanelOpen ? (
+            <button
+              type="button"
+              aria-label="パネルを閉じる"
+              className="fixed inset-0 bg-transparent"
+              onClick={() => setIsPanelOpen(false)}
+            />
+          ) : null}
           <div
             className={`
               rounded-t-2xl border-t border-slate-200 bg-white/95 backdrop-blur
@@ -4702,6 +4740,7 @@ export default function GraphStudio() {
               ${isPanelOpen ? 'translate-y-0' : 'translate-y-full'}
             `}
             style={{ height: `${panelHeightVh}vh` }}
+            onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between gap-3 px-4 py-2 border-b bg-white/90">
               <div className="flex items-center gap-2">
@@ -4745,6 +4784,14 @@ export default function GraphStudio() {
             isBivarPanelOpen ? '' : 'pointer-events-none'
           }`}
         >
+          {isBivarPanelOpen ? (
+            <button
+              type="button"
+              aria-label="パネルを閉じる"
+              className="fixed inset-0 bg-transparent"
+              onClick={() => setIsBivarPanelOpen(false)}
+            />
+          ) : null}
           <div
             className={`
               rounded-t-2xl border-t border-slate-200 bg-white/95 backdrop-blur
@@ -4754,6 +4801,7 @@ export default function GraphStudio() {
               ${isBivarPanelOpen ? 'translate-y-0' : 'translate-y-full'}
             `}
             style={{ height: `${panelHeightVh}vh` }}
+            onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between gap-3 px-4 py-2 border-b bg-white/90">
               <div className="flex items-center gap-2">
@@ -4785,133 +4833,60 @@ export default function GraphStudio() {
                   デスクトップ用の左パネルと同じ内容を再利用
                 */}
                 <div className="space-y-2 text-xs text-slate-600">
-                  <div className="font-semibold text-slate-700">表示モード</div>
-                <div className="flex flex-wrap gap-2">
-                  <button
-                    type="button"
-                    className={`rounded-full border px-3 py-1 text-[11px] shadow-sm transition ${
-                      bivarView === 'contour'
-                        ? 'border-slate-900 bg-slate-900 text-white'
-                        : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
-                    }`}
-                    onClick={() => setBivarView('contour')}
-                  >
-                    等高線
-                  </button>
-                  <button
-                    type="button"
-                    className={`rounded-full border px-3 py-1 text-[11px] shadow-sm transition ${
-                      bivarView === 'surface'
-                        ? 'border-slate-900 bg-slate-900 text-white'
-                        : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
-                    }`}
-                    onClick={() => setBivarView('surface')}
-                  >
-                    3D
-                  </button>
-                </div>
-                {bivarView === 'surface' ? (
-                  <div className="mt-2 space-y-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">
-                    <div className="flex items-center justify-between text-[11px] text-slate-600">
-                      <span>回転感度</span>
-                      <span>{bivarRotateSensitivity.toFixed(3)}</span>
-                    </div>
-                    <input
-                      type="range"
-                      min={0.003}
-                      max={0.02}
-                      step={0.001}
-                      value={bivarRotateSensitivity}
-                      onChange={(e) => setBivarRotateSensitivity(Number(e.target.value))}
-                      className="w-full"
-                    />
-                    <div className="flex flex-wrap gap-2">
-                      {[
-                        { key: 'default', label: '標準' },
-                        { key: 'iso', label: '斜め' },
-                        { key: 'top', label: '上面' },
-                        { key: 'front', label: '正面' },
-                        { key: 'side', label: '側面' },
-                      ].map((opt) => (
-                        <button
-                          key={opt.key}
-                          type="button"
-                          className={`rounded-full border px-3 py-1 text-[11px] shadow-sm transition ${
-                            bivarViewPreset === opt.key
-                              ? 'border-slate-900 bg-slate-900 text-white'
-                              : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
-                          }`}
-                          onClick={() => setBivarViewPreset(opt.key as typeof bivarViewPreset)}
-                        >
-                          {opt.label}
-                        </button>
-                      ))}
-                    </div>
-                    <div className="flex justify-end">
-                      <button
-                        type="button"
-                        className="rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] text-slate-600 shadow-sm"
-                        onClick={() => {
-                          setBivarViewPreset('default');
-                          setBivarResetNonce((n) => n + 1);
-                        }}
-                      >
-                        視点リセット
-                      </button>
-                    </div>
-                  </div>
-                ) : null}
-                {bivarView === 'surface' && (
-                  <div className="mt-2 space-y-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">
-                    <div className="flex items-center justify-between text-[11px] text-slate-600">
-                      <span>回転感度</span>
-                      <span>{bivarRotateSensitivity.toFixed(3)}</span>
-                    </div>
-                    <input
-                      type="range"
-                      min={0.003}
-                      max={0.02}
-                      step={0.001}
-                      value={bivarRotateSensitivity}
-                      onChange={(e) => setBivarRotateSensitivity(Number(e.target.value))}
-                      className="w-full"
-                    />
-                    <div className="flex flex-wrap gap-2">
-                      {[
-                        { key: 'default', label: '標準' },
-                        { key: 'iso', label: '斜め' },
-                        { key: 'top', label: '上面' },
-                        { key: 'front', label: '正面' },
-                        { key: 'side', label: '側面' },
-                      ].map((opt) => (
-                        <button
-                          key={opt.key}
-                          type="button"
-                          className={`rounded-full border px-3 py-1 text-[11px] shadow-sm transition ${
-                            bivarViewPreset === opt.key
-                              ? 'border-slate-900 bg-slate-900 text-white'
-                              : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
-                          }`}
-                          onClick={() => setBivarViewPreset(opt.key as typeof bivarViewPreset)}
-                        >
-                          {opt.label}
-                        </button>
-                      ))}
-                    </div>
-                    <div className="flex justify-end">
-                      <button
-                        type="button"
-                        className="rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] text-slate-600 shadow-sm"
-                        onClick={() => {
-                          setBivarViewPreset('default');
-                          setBivarResetNonce((n) => n + 1);
-                        }}
-                      >
-                        視点リセット
-                      </button>
-                    </div>
-                  </div>
-                )}
+                  {bivarView === 'surface' ? (
+                    <>
+                      <div className="font-semibold text-slate-700">3Dオプション</div>
+                      <div className="mt-2 space-y-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">
+                        <div className="flex items-center justify-between text-[11px] text-slate-600">
+                          <span>回転感度</span>
+                          <span>{bivarRotateSensitivity.toFixed(3)}</span>
+                        </div>
+                        <input
+                          type="range"
+                          min={0.003}
+                          max={0.02}
+                          step={0.001}
+                          value={bivarRotateSensitivity}
+                          onChange={(e) => setBivarRotateSensitivity(Number(e.target.value))}
+                          className="w-full"
+                        />
+                        <div className="flex flex-wrap gap-2">
+                          {[
+                            { key: 'default', label: '標準' },
+                            { key: 'iso', label: '斜め' },
+                            { key: 'top', label: '上面' },
+                            { key: 'front', label: '正面' },
+                            { key: 'side', label: '側面' },
+                          ].map((opt) => (
+                            <button
+                              key={opt.key}
+                              type="button"
+                              className={`rounded-full border px-3 py-1 text-[11px] shadow-sm transition ${
+                                bivarViewPreset === opt.key
+                                  ? 'border-slate-900 bg-slate-900 text-white'
+                                  : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
+                              }`}
+                              onClick={() => setBivarViewPreset(opt.key as typeof bivarViewPreset)}
+                            >
+                              {opt.label}
+                            </button>
+                          ))}
+                        </div>
+                        <div className="flex justify-end">
+                          <button
+                            type="button"
+                            className="rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] text-slate-600 shadow-sm"
+                            onClick={() => {
+                              setBivarViewPreset('default');
+                              setBivarResetNonce((n) => n + 1);
+                            }}
+                          >
+                            視点リセット
+                          </button>
+                        </div>
+                      </div>
+                    </>
+                  ) : null}
                 </div>
 
                 <div>

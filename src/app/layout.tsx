@@ -9,6 +9,7 @@ import PageTransition from '@/components/PageTransition';
 import QueryLoadingOverlay from '@/components/QueryLoadingOverlay';
 import SessionSync from '@/components/SessionSync';
 import SiteFooter from '@/components/SiteFooter';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://all-in-math.com"),
@@ -76,6 +77,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const baseUrl = 'https://all-in-math.com';
+  const gaId = process.env.NEXT_PUBLIC_GA_ID ?? 'G-RGK5LV2H4G';
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
@@ -106,14 +108,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </head>
-      <body className="min-h-screen bg-white text-gray-900">
+      <body className="min-h-screen text-gray-900">
         <Suspense fallback={null}>
           <QueryLoadingOverlay />
         </Suspense>
         <SessionSync />
         <Navbar />
-        <main className="mx-auto max-w-5xl px-4 py-6"><PageTransition>{children}</PageTransition></main>
+        <main className="mx-auto max-w-6xl px-4 py-6"><PageTransition>{children}</PageTransition></main>
         <SiteFooter />
+        {gaId ? <GoogleAnalytics gaId={gaId} /> : null}
       </body>
     </html>
   );

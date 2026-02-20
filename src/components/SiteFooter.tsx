@@ -5,7 +5,7 @@ export default function SiteFooter() {
     <footer className="mt-12 border-t bg-white">
       <div className="max-w-6xl mx-auto px-4 py-6 space-y-4">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-          <div className="text-sm font-semibold">All in Mathematics</div>
+          <div className="text-sm font-semibold">All in Math</div>
           <div className="flex flex-wrap gap-3 text-xs text-slate-600">
             <Link href="/about" className="hover:underline">このサイトについて</Link>
             <Link href="/company" className="hover:underline">運営者情報</Link>
@@ -19,7 +19,7 @@ export default function SiteFooter() {
           </div>
         </div>
         <div className="text-[10px] text-slate-500">
-          © {new Date().getFullYear()} All in Mathematics. All rights reserved.
+          © {new Date().getFullYear()} All in Math. All rights reserved.
         </div>
       </div>
     </footer>

@@ -22,6 +22,7 @@ const staticRoutes = [
   "/threads",
   "/posts",
   "/posts/unanswered",
+  "/search",
   "/groups",
   "/graphs",
   "/learn",
