@@ -9,7 +9,6 @@ import PageTransition from '@/components/PageTransition';
 import QueryLoadingOverlay from '@/components/QueryLoadingOverlay';
 import SessionSync from '@/components/SessionSync';
 import SiteFooter from '@/components/SiteFooter';
-import { GoogleAnalytics } from '@next/third-parties/google';
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://all-in-math.com"),
@@ -116,7 +115,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Navbar />
         <main className="mx-auto max-w-6xl px-4 py-6"><PageTransition>{children}</PageTransition></main>
         <SiteFooter />
-        {gaId ? <GoogleAnalytics gaId={gaId} /> : null}
+
+        {gaId ? (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga4" strategy="afterInteractive">
+              {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${gaId}');`}
+            </Script>
+          </>
+        ) : null}
       </body>
     </html>
   );
